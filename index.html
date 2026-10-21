@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Factory Relay team workspace: research documents, project resources, sprint plans and the shared Scrum backlog.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Factory Relay · Team workspace</title>
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="#overview" aria-label="Factory Relay home">
+        <span class="brand-mark" aria-hidden="true">F<span>R</span></span>
+        <span class="brand-copy">Factory Relay<small>TEAM WORKSPACE</small></span>
+      </a>
+      <div class="workspace-tag"><span class="status-dot"></span> KIT · Problem Based Learning</div>
+      <nav id="navigation"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="eyebrow">OUR NEXT MILESTONE</span><strong>Build the research evidence.</strong><p>One focused study. Three contributors. A shared view of the work.</p></div>
+        <button class="sidebar-help" data-action="guide">Workspace guide <span aria-hidden="true">↗</span></button>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="topbar-left"><button class="icon-button mobile-menu" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">☰</button><span class="breadcrumb">Workspace <span>/</span> <strong id="page-name">Overview</strong></span></div>
+        <div class="topbar-actions"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="global-search" class="search-input" type="search" placeholder="Search the workspace…" aria-label="Search documents, stories and resources"><kbd>/</kbd></label><span class="team-avatar" title="Three-member research team">3</span></div>
+      </header>
+      <main class="content" id="main-content" tabindex="-1"><div class="empty-state"><p>Loading your workspace…</p></div></main>
+      <footer class="footer"><span>Factory Relay · Research, together.</span><span id="snapshot-label">Loading project snapshot</span></footer>
+    </div>
+  </div>
+  <dialog class="dialog" id="detail-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>This workspace needs JavaScript to display its document library and board. Downloadable files are in the documents folder.</noscript>
+</body>
+</html>

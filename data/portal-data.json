@@ -1,0 +1,2571 @@
+{
+  "schemaVersion": 1,
+  "project": "Factory Relay",
+  "asOf": "2026-10-21",
+  "snapshot": {
+    "title": "21 October 2026 team-plan baseline",
+    "sourceRevision": "9b1c115",
+    "applicationRevision": "6d7058425bf3485bf88dfab1760dbd8dc5e9ca5d",
+    "note": "This is a dated planning snapshot. Changes to a downloaded workbook or local board do not update teammates automatically. Shared issue state, when configured, is a separate source.",
+    "forecastNote": "Six proposed two-week sprints are a forecast, not a committed calendar. Reforecast against the actual course deadline and team capacity.",
+    "documentNote": "Curated course files are bundled here. Earlier proposal, presentation, report and manual cards explicitly identify historical status. Background chats and the wider research archive are not included."
+  },
+  "summary": {
+    "stories": 22,
+    "tasks": 83,
+    "baseline": 8,
+    "members": 3,
+    "proposedSprints": 6,
+    "readyStories": 3
+  },
+  "productGoal": "Deliver and evaluate a text-first Factory Relay extension that helps two players preserve operational meaning across one reviewed language/dialect pair. Keep personal corrections and adaptation data on each user’s supported device, offer a post-session learning choice, and demonstrate play over local Wi-Fi with internet disconnected.",
+  "resources": [
+    {
+      "id": "portal",
+      "title": "Team website repository",
+      "url": "https://github.com/toecm/factoryrelay-team",
+      "kind": "Website",
+      "visibility": "Public",
+      "note": "Hosts this portal and its selected documents on GitHub Pages. Task editing stays in the private project repository."
+    },
+    {
+      "id": "game",
+      "title": "Play Factory Relay",
+      "url": "https://factoryrelay.vercel.app/",
+      "kind": "Game",
+      "visibility": "Public",
+      "note": "Published standalone game. Translation and local learning are future research work."
+    },
+    {
+      "id": "github",
+      "title": "GitHub repository",
+      "url": "https://github.com/toecm/factoryrelay",
+      "kind": "Source",
+      "visibility": "Private",
+      "note": "Individual repository invitation is required. Use branches and reviewed pull requests."
+    },
+    {
+      "id": "space",
+      "title": "Hugging Face Space",
+      "url": "https://huggingface.co/spaces/toecm/FactoryRelay",
+      "kind": "Space",
+      "visibility": "Private",
+      "note": "Static game copy; access is separate from GitHub. Owner manages publication."
+    },
+    {
+      "id": "dataset",
+      "title": "Scenario dataset",
+      "url": "https://huggingface.co/datasets/toecm/factoryrelay",
+      "kind": "Dataset",
+      "visibility": "Public",
+      "note": "Six authored fictional English scenarios with answer keys. Not participant data, a dialect corpus or an independent benchmark."
+    },
+    {
+      "id": "issues",
+      "title": "GitHub issues",
+      "url": "https://github.com/toecm/factoryrelay/issues",
+      "kind": "Team work",
+      "visibility": "Private",
+      "note": "Use individual GitHub accounts for shared work and discussion."
+    },
+    {
+      "id": "actions",
+      "title": "Build and deployment checks",
+      "url": "https://github.com/toecm/factoryrelay/actions",
+      "kind": "CI",
+      "visibility": "Private",
+      "note": "Review CI outcomes for the source revision; Vercel uses the existing GitHub integration."
+    },
+    {
+      "id": "lan-guide",
+      "title": "Current local-network setup guide",
+      "url": "https://github.com/toecm/factoryrelay/blob/main/FACTORY_LAN.md",
+      "kind": "Guide",
+      "visibility": "Private",
+      "note": "Current standalone HTTPS host and two-device setup. Dependencies must be installed beforehand; host remains running."
+    },
+    {
+      "id": "deployment-guide",
+      "title": "Current deployment guide",
+      "url": "https://github.com/toecm/factoryrelay/blob/main/DEPLOYMENT.md",
+      "kind": "Guide",
+      "visibility": "Private",
+      "note": "Existing GitHub, Hugging Face and Vercel destinations and publication procedure."
+    }
+  ],
+  "baseline": [
+    {
+      "id": "BASE01",
+      "item": "Problem establishment for smart factory",
+      "status": "Complete (team-reported)",
+      "evidence": "User confirmed this course stage was completed.",
+      "limit": "Attach the approved problem sheet; no independent supervisor approval record is claimed."
+    },
+    {
+      "id": "BASE02",
+      "item": "Standalone communication game",
+      "status": "Implemented and checked",
+      "evidence": "Six fictional scenarios, Operator/Maintenance roles, typed messages, guided check-back, animations, pass-and-play, paired tabs and JSON export. 41 unit/integration tests and 114 live Vercel browser checks passed.",
+      "limit": "Software behavior is verified; no translation-quality or participant-effectiveness result is established."
+    },
+    {
+      "id": "BASE03",
+      "item": "Local-network multiplayer",
+      "status": "Implemented; physical acceptance pending",
+      "evidence": "Node HTTPS host and polling; earlier 32 LAN checks used two isolated browser contexts.",
+      "limit": "Physical devices, WAN-disconnected setup and target networks still need ENG2/ENG10 evidence. Host must remain running; no offline service worker."
+    },
+    {
+      "id": "BASE04",
+      "item": "Independent GitHub source and CI",
+      "status": "Published; private",
+      "evidence": "https://github.com/toecm/factoryrelay ; standalone source, tests, guides and passing GitHub checks.",
+      "limit": "One teammate invitation was reported completed. Acceptance and all three members' access/environment setup remain unverified (ENG0)."
+    },
+    {
+      "id": "BASE05",
+      "item": "Hugging Face Static Space",
+      "status": "Published; private",
+      "evidence": "https://huggingface.co/spaces/toecm/FactoryRelay ; runtime RUNNING and deployed assets verified on 21 October.",
+      "limit": "Personal-account private Space access is separate from GitHub access. Owner handles Space publication; no model runtime or internet room server is hosted."
+    },
+    {
+      "id": "BASE06",
+      "item": "Companion scenario dataset",
+      "status": "Published; public",
+      "evidence": "https://huggingface.co/datasets/toecm/factoryrelay ; six authored fictional English scenarios with schema, manifest and verified file hashes.",
+      "limit": "Contains answer keys and both roles' facts. Not a dialect corpus, participant dataset or independent benchmark; no automatic conversation upload."
+    },
+    {
+      "id": "BASE07",
+      "item": "Vercel production game",
+      "status": "Live; public",
+      "evidence": "https://factoryrelay.vercel.app/ ; existing GitHub integration deploys the project. 114 checks covered desktop/mobile layout, gameplay, export, paired tabs and animation; zero browser errors.",
+      "limit": "No local Vercel login is needed for the established Git deployment path. Review each deployment outcome; separate Vercel account access is not granted by a GitHub invitation."
+    },
+    {
+      "id": "BASE08",
+      "item": "Dedicated research folder",
+      "status": "Organized locally",
+      "evidence": "research/ contains proposals, presentations, background, reports/manual, team plan, screenshots and historical migration evidence. 159 files were moved with hash verification.",
+      "limit": "The original research archive remains local and excluded from application packages. This portal bundles selected course artifacts only. Historical report/manual describe 13 October, not the research extension."
+    }
+  ],
+  "remainingCapabilities": [
+    "All-member access and local setup confirmation (ENG0)",
+    "Physical two-device offline LAN acceptance (ENG2)",
+    "Reviewed language/dialect scope and local model/runtime feasibility (ENG1)",
+    "Consent-aware correction storage, model provisioning and translated gameplay (ENG3-ENG5)",
+    "Reviewed correction memory and optional compatible-device weight updates (ENG6-ENG8)",
+    "Research corpus, controlled comparisons, participant pilot and measured outcomes",
+    "Audio and real-machine integration only as separately gated stretch work"
+  ],
+  "stories": [
+    {
+      "id": "ENG0",
+      "title": "Confirm three-member access and standalone workflow",
+      "story": "As a teammate, I want my own account and a reproducible local setup so I can choose a task, contribute a reviewed change and verify its deployment.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "User story",
+      "points": 3,
+      "dependencies": [],
+      "gate": "One GitHub invitation was reported completed; invitation acceptance and all three local environments still need evidence.",
+      "acceptance": [
+        "Each member confirms access to toecm/factoryrelay through their own GitHub account and records a successful clone/install/test/build on their computer.",
+        "Use FactoryRelay as the project root. Confirm the research folder is local-only and agree an approved sharing location for course documents without participant data or credentials.",
+        "Agree branch and pull-request review conventions; record one reviewed change and check its GitHub CI and Vercel deployment result. Do not assume a GitHub invitation grants Vercel or private Space access.",
+        "Record who publishes the private personal-account Space and public fictional dataset. Keep present visibility and owner-managed publication; no new account-sharing or automatic data upload."
+      ],
+      "tasks": [
+        "Confirm all three members' GitHub invitation acceptance and individual repository access.",
+        "Clone the standalone repository on each member's computer; record Node version and install/test/build results.",
+        "Agree self-selected task, branch, pull-request and review workflow; verify CI and the deployment result of an approved change.",
+        "Document owner-managed HF publication and an approved way to share course documents; keep personal data and credentials out of repositories."
+      ],
+      "deliverable": "Three-member access/setup checklist; reviewed contribution evidence; project-path and publishing responsibilities note.",
+      "risk": "Private GitHub access does not grant private Space or Vercel access. Deployment restrictions and local setup differences can delay a new contributor.",
+      "order": 1,
+      "sprint": "S1",
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG0-T1",
+        "ENG0-T2",
+        "ENG0-T3",
+        "ENG0-T4"
+      ]
+    },
+    {
+      "id": "R01",
+      "title": "Build a traceable literature matrix",
+      "story": "As a student researcher, I want a reproducible search and critical evidence matrix so our design choices can be checked against previous work.",
+      "priority": "Core",
+      "criteria": [
+        "Literature"
+      ],
+      "type": "Research",
+      "points": 5,
+      "dependencies": [],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Search log records search date, databases/sites, exact queries, filters and inclusion/exclusion rules; screen peer-reviewed/primary technical work, including local translation/adaptation, retrieval/personalization, human clarification and industrial communication simulation.",
+        "Start from proposal citations but verify bibliographic fields and actual claimed findings against the original sources. Unverifiable citations stay flagged and are excluded from evidence claims.",
+        "By the end of Sprint 1, include at least eight directly relevant primary papers/systems with source, task/languages, data/split, baseline, method, metrics, limitations and availability/license. Continue refinement in R02 toward 12 screened items; if fewer qualify, document the search rather than add weak matches.",
+        "Second team member checks at least 4 included studies and every study used to justify the closest-work or novelty comparison."
+      ],
+      "tasks": [
+        "Agree three or four query families and source-selection rules.",
+        "Run searches and save citation records; remove duplicates.",
+        "Screen titles/abstracts/full texts with exclusion reasons.",
+        "Extract comparable evidence; mark missing data and non-comparable scores.",
+        "Peer-review a sample and correct the matrix."
+      ],
+      "deliverable": "Literature matrix CSV/XLSX\nSearch log and screening counts\nVerified bibliography",
+      "risk": "This is a scoped course review, not a claim that every paper or patent has been found. Do not compare raw scores across different datasets as if ranked on the same test.",
+      "order": 2,
+      "sprint": "S1",
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R01-T1",
+        "R01-T2",
+        "R01-T3",
+        "R01-T4",
+        "R01-T5"
+      ]
+    },
+    {
+      "id": "ENG1",
+      "title": "Choose one reviewed language scope and prove the local runtime path",
+      "story": "As a pilot participant, I want a declared source-to-target language or variety pair and a tested device profile so that supported translation is based on evidence rather than an unrestricted language selector.",
+      "priority": "Core",
+      "criteria": [
+        "Literature",
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "Spike",
+      "points": 5,
+      "dependencies": [],
+      "gate": "Ready for selection; synthetic data only until the research-data protocol is ready.",
+      "acceptance": [
+        "Record the first translation direction, task vocabulary, named reviewer role/availability and intended language-variety coverage. Distinguish speaker-reviewed regional usage from company jargon and code-switching.",
+        "Benchmark a small, predeclared development set on the actual initial devices; record checkpoint/runtime/license, peak memory, latency, loading time and example operational-field errors. Agree numerical latency/memory targets before the final acceptance run; do not invent a passed quality threshold.",
+        "Demonstrate one offline inference request through the proposed device-local companion connection, including the browser/HTTPS/CSP boundary, with outside-network requests blocked. Record one feasible local integration route or a clear failed feasibility gate.",
+        "Name at least one laptop eligible for a training experiment and the second device's supported inference mode. Record minimum reviewed-data requirements and resource checks for training; an unsupported phone has an explicit original-text/clarification path. Timebox the spike to eight team hours; attempt one tiny adapter update on synthetic data where compatible. Record actual changed-weight evidence or a failed gate, not a promised future capability."
+      ],
+      "tasks": [
+        "Produce a source-linked model/runtime decision record and review the selected pair with a competent bilingual or target-community reviewer.",
+        "Run the device/inference integration spike using synthetic or approved development examples.",
+        "Publish the supported-profile matrix, initial evaluation split and go/no-go decisions for the later training story."
+      ],
+      "deliverable": "Capability matrix, model/license record, benchmark CSV and one local-only request trace.",
+      "risk": "No available model handles the selected variety adequately, no reviewer is available, or local runtime/security constraints exceed device capacity. Narrow the declared pilot or change the measured device profile; do not silently relabel a different task as dialect support.",
+      "order": 3,
+      "sprint": "S1",
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG1-T1",
+        "ENG1-T2",
+        "ENG1-T3"
+      ]
+    },
+    {
+      "id": "ENG2",
+      "title": "Validate the existing LAN game on two physical devices",
+      "story": "As a classroom pair, I want the current room to work on our actual devices without internet so that the known browser prototype is ready to receive translation features.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness"
+      ],
+      "type": "Validation",
+      "points": 3,
+      "dependencies": [
+        "ENG0"
+      ],
+      "gate": "Now, when two devices and a router/hotspot are available",
+      "acceptance": [
+        "From the standalone FactoryRelay root, use the existing launcher on two physical devices to verify the host's local certificate, create/join a room, complete a round and export with the router WAN link disconnected; save device/browser/network details. The previous browser-context checks do not satisfy this acceptance condition.",
+        "Repeat the basic round on the intended hotspot with internet access disabled while local peer communication remains available. Record a hotspot's isolation restriction as a failed configuration, not as a passed offline test.",
+        "Interrupt one device, reconnect in its original tab and retry an uncertain action; verify no duplicate decision/message, no role takeover and correct held-versus-executed reporting.",
+        "Record host-stop and restart behavior accurately: shared actions pause, RAM rooms are lost on restart, and a separate loaded pass-and-play session does not restore the LAN room."
+      ],
+      "tasks": [
+        "Prepare a one-page physical rehearsal checklist and test the certificate/address workflow without automation trust bypasses.",
+        "Execute router and hotspot runs; capture screenshots, JSON exports and any network-policy failures.",
+        "Fix only observed compatibility defects and rerun the affected existing suites."
+      ],
+      "deliverable": "Signed physical-device checklist, configuration matrix, export files and defect/retest record.",
+      "risk": "Institutional Wi-Fi isolation, certificate restrictions or phone background suspension can prevent the demonstration despite passing simulated-browser checks.",
+      "order": 4,
+      "sprint": "S1",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG2-T1",
+        "ENG2-T2",
+        "ENG2-T3"
+      ]
+    },
+    {
+      "id": "R02",
+      "title": "Test the contribution against the closest work",
+      "story": "As the team, we want to identify the closest existing systems so our originality claim is specific, testable and appropriately limited.",
+      "priority": "Core",
+      "criteria": [
+        "Literature",
+        "Excellence / originality",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 3,
+      "dependencies": [
+        "R01"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Choose 3-5 closest prior systems using explicit criteria: task, human-review loop, adaptation mechanism, on-device execution and evaluation setting.",
+        "Feature/evidence table distinguishes already-known components from the proposed combination and any untested mechanism; absence of a feature in a paper is labeled 'not reported' unless verified.",
+        "Write one primary novelty hypothesis and one fallback contribution (e.g. a reproducible operational-semantics benchmark or local adaptation evaluation). Specify what experiment could refute each.",
+        "Log a bounded prior-art search over relevant patent databases using keywords and classifications; record dates, queries, identifiers/families, potentially overlapping technical features and search limitations.",
+        "Prepare a questions-and-evidence brief for supervisor/technology-transfer review. Do not label the idea patentable or claim exhaustive clearance. Include an inventory and dates of the already public game and fictional dataset so institutional reviewers can assess actual disclosure history; do not state that all material is still private.",
+        "Update the verified literature matrix toward 12 relevant items while checking all closest-work claims. Record database/search date and boundaries; this is not an exhaustive patent search."
+      ],
+      "tasks": [
+        "Rank closest works and extract exact supporting passages/page numbers.",
+        "Compare adaptation lifecycle, privacy boundaries and evaluation against our actual implementation.",
+        "Search potentially overlapping patent disclosures at a scoped level.",
+        "Draft falsifiable contribution and distinguish research originality from a patent opinion.",
+        "Ask supervisor to review the selected contribution and remaining uncertainties."
+      ],
+      "deliverable": "Closest-work comparison table\nOne-page contribution hypothesis\nPrior-art search log and institutional-review questions",
+      "risk": "A hypothesis could be: verified local retrieval reduces critical meaning errors versus the same frozen model on unseen factory-context variants at an acceptable local cost. This is an experimental hypothesis, not established novelty.",
+      "order": 5,
+      "sprint": "S2",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R02-T1",
+        "R02-T2",
+        "R02-T3",
+        "R02-T4",
+        "R02-T5"
+      ]
+    },
+    {
+      "id": "R03",
+      "title": "Freeze a text-first evaluation and data protocol",
+      "story": "As an evaluator, I want agreed conditions, labels and data boundaries before collecting results so the comparison is fair and repeatable.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness",
+        "Excellence / originality"
+      ],
+      "type": "Research",
+      "points": 5,
+      "dependencies": [
+        "R01",
+        "ENG1"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Protocol fixes one source/target variety pair, translation direction(s), primary operational task, model-selection criteria, intended devices and what counts as a critical error.",
+        "Predefine B0/B1/B2 and optional B3, the fixed guided/original-message UI condition, held-out split rules, adaptation timing, primary/secondary metrics and analysis unit.",
+        "Rubric covers equipment, action, negation, quantity/unit, condition and timing, plus unsupported additions. Include at least 12 labeled examples and source-uncertainty cases. Use development examples for rubric practice. Declare message-level any-critical-error rate primary and per-field errors diagnostic; keep the final test out of rubric tuning.",
+        "Document participant information/consent, recording choices, withdrawal/retention/deletion and host visibility; confirm whether the institution requires review before recruitment or research-data collection.",
+        "Both a workflow reviewer and a competent bilingual/target-variety reviewer approve the relevant parts; no unqualified reviewer is treated as language ground truth."
+      ],
+      "tasks": [
+        "Write research questions and success/failure interpretations without an assumed effect size.",
+        "Define critical slots and adjudication rules.",
+        "Specify split construction and prohibition on answer-key leakage.",
+        "Prepare consent/capture/retention materials.",
+        "Review and version-lock the protocol before the final test set is used."
+      ],
+      "deliverable": "Versioned evaluation protocol\nAnnotation rubric\nConsent and data-handling materials\nScope/readiness decision",
+      "risk": "Separate usability questions from efficacy questions. An inability to recruit reviewers is a gate to narrowing or postponing language-quality claims.",
+      "order": 6,
+      "sprint": "S2",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R03-T1",
+        "R03-T2",
+        "R03-T3",
+        "R03-T4",
+        "R03-T5"
+      ]
+    },
+    {
+      "id": "ENG4",
+      "title": "Install and verify an offline text model pack",
+      "story": "As a supported-device user, I want a verified local model pack and readiness status so that translation does not unexpectedly depend on internet access.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 8,
+      "dependencies": [
+        "ENG1"
+      ],
+      "gate": "After the runtime feasibility decision",
+      "acceptance": [
+        "A versioned manifest identifies the checkpoint, tokenizer, runtime, license, hashes, sizes and supported profile. The app distinguishes the quantized inference artifact from any later training checkpoint.",
+        "After one explicit provisioning step, verify/reuse local artifacts and run a fixed test translation with internet blocked. Readiness reports missing, corrupt or incompatible resources and offers setup guidance; it never silently calls a cloud model.",
+        "The device-local companion is reachable only through the approved local connection with scoped authorization/origin checks; the isolated LAN shell does not gain unrestricted external access.",
+        "Interruption or a bad checksum leaves the last usable pack intact, and the user can select or remove a pack without corrupting saved game records."
+      ],
+      "tasks": [
+        "Package the chosen runtime/tokenizer/inference files and their manifest; implement resumable or safely restartable provisioning.",
+        "Add local companion readiness/inference endpoints and the approved browser connection boundary.",
+        "Test cold local loading, corrupt/missing files, interruption and outside-network blocking."
+      ],
+      "deliverable": "Pack manifest, reproducible provision/start commands, request trace and measured resource log.",
+      "risk": "Large artifacts, incompatible quantization/runtime versions or browser-to-local-companion restrictions can consume the sprint. Split packaging/readiness from runtime integration if the team cannot deliver one usable profile within the sprint.",
+      "order": 7,
+      "sprint": "S2",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG4-T1",
+        "ENG4-T2",
+        "ENG4-T3"
+      ]
+    },
+    {
+      "id": "ENG3",
+      "title": "Offer per-device consent and a local text-capture vault",
+      "story": "As a player, I want to choose whether my own device retains examples for review or training so that playing the game does not automatically create a personal training corpus.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 5,
+      "dependencies": [
+        "ENG1",
+        "R03"
+      ],
+      "gate": "After the retention and device decisions in ENG1",
+      "acceptance": [
+        "Before optional persistent capture, show separate choices for gameplay sharing, local example retention and later training. Refusal still permits ordinary play. Explain that the host and recipient already receive shared chat; local deletion cannot revoke their copies or exports.",
+        "On each supported device, store only explicitly retained text records in its local vault with source wording, consent/provenance and review status. Capture defaults off; user-private examples are excluded from room messages and shared exports.",
+        "Provide inspect, keep/delete and bulk-delete controls. For the supported laptop vault, use the chosen OS-backed key storage/encryption path and verify locked/unavailable-key behavior without exposing plaintext in logs.",
+        "Test that restarting the room host neither uploads nor merges the players' private corpora and that unretained examples are not added to the training queue."
+      ],
+      "tasks": [
+        "Agree a minimal retention/consent schema and data-flow diagram for shared chat versus private examples.",
+        "Implement the smallest local text-vault API and consent/review controls in the existing UI.",
+        "Exercise refusal, deletion, reload and network/log inspection with two isolated device profiles."
+      ],
+      "deliverable": "Consent screenshots, storage/data-flow checklist and deletion/refusal regression results.",
+      "risk": "The current room/browser state already contains shared text; misleading local-only claims would obscure those copies. OS key-storage behavior also differs across device profiles.",
+      "order": 8,
+      "sprint": "S2",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG3-T1",
+        "ENG3-T2",
+        "ENG3-T3"
+      ]
+    },
+    {
+      "id": "R04",
+      "title": "Create a bounded reviewed corpus with protected splits",
+      "story": "As an evaluator, I want reviewed operational messages and matched unseen variants so adaptation is measured on new material rather than memorized answers.",
+      "priority": "Core",
+      "criteria": [
+        "Literature",
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 8,
+      "dependencies": [
+        "R03"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Planning target is 120 short operational utterances across three selected risks: negation, quantity/unit and conditional sequence. Use independent base-case families with reviewed variants; retain all six game scenarios but restrict new linguistic annotation to these three risks. Team confirms workload in Sprint 1 and documents any reduction before testing.",
+        "Target split is 60 adaptation/training, 20 development and 40 final-test records. Assign whole base-case families, paraphrase/translation clusters and author/session groups before adaptation; do not split a base case between training and test. Exact counts may be adjusted to preserve groups, with the manifest explaining the change.",
+        "Every record has provenance, consent/license status, source/target variety, scenario-family/session ID, original text, speaker-confirmed intended meaning, reviewed target rendering and applicable slot labels.",
+        "At least all final-test records receive independent second review followed by adjudication; record agreement and disagreements instead of silently replacing labels.",
+        "Keep the final test hidden from model developers until the protocol/harness is frozen. Future game-session corrections are not ingested before their held-out evaluation."
+      ],
+      "tasks": [
+        "Draft realistic variants from completed problem scope; do not reuse only the six public answer fixtures.",
+        "Obtain source-speaker wording and competent target-rendering review.",
+        "Assign group IDs and precommitted splits; run duplicate/paraphrase checks.",
+        "Annotate and adjudicate critical fields.",
+        "Create local data manifest and access/export controls."
+      ],
+      "deliverable": "Locally stored reviewed corpus\nSplit/provenance manifest\nAnnotation agreement and adjudication record",
+      "risk": "These small split sizes are for feasibility and exploratory comparisons; report counts and grouping, not a broad population guarantee. Synthetic prompts must be labeled and cannot substitute for dialect-speaker validation. For personal within-author adaptation, use earlier sessions for training and later held-out sessions for testing; explicitly state that authors overlap and do not claim unseen-speaker generalization. An unseen-speaker claim requires disjoint author/speaker groups in a separately feasible test. The current six-record public dataset is already published; this story creates a separate reviewed corpus. Publication of any new participant-derived records is a separate, consented decision and is not a task acceptance requirement.",
+      "order": 9,
+      "sprint": "S3",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R04-T1",
+        "R04-T2",
+        "R04-T3",
+        "R04-T4",
+        "R04-T5"
+      ]
+    },
+    {
+      "id": "ENG5",
+      "title": "Display original and locally translated text during one game round",
+      "story": "As a player receiving an unfamiliar message, I want the original and a clearly labelled local translation together so that I can verify details and ask for clarification before deciding.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 5,
+      "dependencies": [
+        "ENG3",
+        "ENG4"
+      ],
+      "gate": "After local capture controls and one working model pack",
+      "acceptance": [
+        "In one complete existing scenario, the receiving device translates a sent message for the selected, tested source-to-target pair and displays unchanged original text, generated rendering and its status/model identity.",
+        "The translation uses only the message and context visible to that participant; scenario answer IDs, hidden partner facts and scoring explanations are excluded from its request. Test this boundary directly.",
+        "Cancel, timeout, missing-pack and unsupported-profile cases keep the original available with clarification controls. Low certainty is presented as an explicit limitation or clarification prompt, not an uncalibrated accuracy percentage.",
+        "The scene, shared message ordering and deterministic decision scoring remain intact on both devices; measure the agreed latency/resource targets on the supported profile and retain failures in the report."
+      ],
+      "tasks": [
+        "Define the translation record/status schema and source/target selection limited to tested profiles.",
+        "Connect the receiving device's local inference service to an original-plus-rendering message component.",
+        "Run a bilingual-reviewed end-to-end round and failure/role-context regression checks."
+      ],
+      "deliverable": "Two-device round recording, bilingual example review, prompt-boundary test and latency/resource measurements.",
+      "risk": "Fluent but incorrect output may obscure identifiers or negation. Both-visible text and clarification reduce overreliance but do not establish translation quality.",
+      "order": 10,
+      "sprint": "S3",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG5-T1",
+        "ENG5-T2",
+        "ENG5-T3"
+      ]
+    },
+    {
+      "id": "ENG9",
+      "title": "Create analysis-ready exports and matched evaluation fixtures",
+      "story": "As a researcher, I want exports to identify the condition, transport and artifact versions so the frozen, glossary, memory and eligible adapter conditions can be compared reproducibly.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "User story",
+      "points": 5,
+      "dependencies": [
+        "ENG1",
+        "ENG2",
+        "R03",
+        "R04"
+      ],
+      "gate": "After language scope and physical baseline validation; does not wait for training",
+      "acceptance": [
+        "Version the export schema and explicitly record transport kind, build/scenario version, pseudonymous session/device profile, selected language direction, model/runtime/pack version, memory/adapter version, inference location and test condition. Exclude bearer tokens and private training corpora by default.",
+        "Implement scenario-variant IDs and the split manifest specified by R03/R04. Validate that near-duplicates and answer keys cannot enter evaluation prompts. Retain the existing six teaching rounds as regression fixtures; R04 owns corpus annotation.",
+        "Record original output and reviewer-coded critical-field errors, unsupported additions, decision outcomes, clarification/resolution timing, inference latency and resource measures with definitions. Keep attempted wrong actions distinct from simulator blocks; describe elapsed-time interruption handling.",
+        "Implement and validate logging for B0 frozen, B1 fixed approved glossary, B2 retrieved reviewed memory and optional B3 memory plus adapter. A repeatable script validates the exports; R03 owns the protocol and R06 owns final comparison."
+      ],
+      "tasks": [
+        "Extend export/provenance metadata and write an analysis schema/validator with privacy defaults.",
+        "Implement variant/split identifiers and an annotation-file interface from R03/R04; avoid duplicating the corpus-authoring work.",
+        "Provide a schema-validation and summary smoke script; hand final ablation analysis to R06/R09."
+      ],
+      "deliverable": "Schema contract, split manifest, approved variants, frozen protocol and reproducible summary output.",
+      "risk": "Repeated fixed scenarios, unequal context or reused correction examples can create apparent gains unrelated to better translation. Data collection also depends on reviewer/participant availability.",
+      "order": 11,
+      "sprint": "S3",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG9-T1",
+        "ENG9-T2",
+        "ENG9-T3"
+      ]
+    },
+    {
+      "id": "ENG6",
+      "title": "Review corrections and retrieve approved local examples",
+      "story": "As a speaker, I want to review wording and add approved examples to my own local memory so that later translations can use verified terminology without claiming that the model was retrained.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 5,
+      "dependencies": [
+        "ENG5"
+      ],
+      "gate": "After the first translation slice",
+      "acceptance": [
+        "After a session, selected retained examples can be kept, corrected, approved or deleted. The record separates original text, intended operational meaning and target rendering, with reviewer/provenance and selected language profile.",
+        "Only approved, consented examples enter the local retrieval index. Duplicate, withdrawn and unreviewed records are excluded; removing an example removes its retrieval availability.",
+        "A later translation can show the retrieved terminology/example provenance. The same frozen model can run with memory disabled or enabled for comparison; base/adapter weight hashes remain unchanged after memory-only updates.",
+        "Evaluation holdouts and simulator answer keys cannot enter the approved-memory source. Profiles reflect user selection and speaker review, not inferred demographic stereotypes."
+      ],
+      "tasks": [
+        "Build the post-session correction/reviewer workflow on the local vault.",
+        "Implement a small, auditable retrieval index and an inference toggle using the same base model.",
+        "Check provenance, withdrawal and held-out contamination with reviewed development cases."
+      ],
+      "deliverable": "Reviewed example cards, memory-on/off prompt traces, index deletion tests and unchanged model-weight hashes.",
+      "risk": "Reviewers can disagree or encode a wrong operational interpretation. Retrieval may propagate a bad correction; approval, provenance and easy deletion are required.",
+      "order": 12,
+      "sprint": "S4",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG6-T1",
+        "ENG6-T2",
+        "ENG6-T3"
+      ]
+    },
+    {
+      "id": "ENG7",
+      "title": "Run opt-in post-session LoRA training on one eligible laptop",
+      "story": "As an eligible-laptop user, I want a genuine optional adapter-training job after review so that I can experiment with personal adaptation while ordinary play remains available without training.",
+      "priority": "Conditional",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 8,
+      "dependencies": [
+        "ENG1",
+        "ENG4",
+        "ENG6",
+        "R04"
+      ],
+      "gate": "After reviewed examples and a verified training-capable profile",
+      "acceptance": [
+        "After each session, offer keep/delete, memory-only update, queue for later, or train only when the documented local capability/data gate passes. Training is opt-in, uses reviewed selected records and does not run during a live game.",
+        "On the one named eligible laptop, complete a local LoRA/PEFT job using the verified training checkpoint. Save configuration, dataset manifest, loss/run log and an adapter artifact; verify adapter weights actually changed while the frozen base remains unchanged.",
+        "Ineligible hardware, insufficient reviewed examples, power/storage limits or missing training files leave data queued with a clear reason. No phone-training claim is made without its own successful validation.",
+        "Cancellation, resource failure or host/network loss does not replace the active adapter or destroy the last validated model. The training job makes no outside-network request after provisioning."
+      ],
+      "tasks": [
+        "Implement and display the data/hardware readiness gate plus explicit post-session training consent.",
+        "Add a reproducible local adapter-training command/job runner with cancellation and checkpoint metadata.",
+        "Exercise one successful training run and insufficient-data/resource/interruption paths on the measured laptop."
+      ],
+      "deliverable": "Eligibility report, approved-data manifest, changed-adapter/unchanged-base hashes, completed run log and failure-recovery checks.",
+      "risk": "Small personal corpora may not support beneficial training, and the candidate model/runtime may exceed memory. Queueing is an honest supported result, but it must not be reported as successful retraining.",
+      "order": 13,
+      "sprint": "S4",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG7-T1",
+        "ENG7-T2",
+        "ENG7-T3"
+      ]
+    },
+    {
+      "id": "ENG8",
+      "title": "Evaluate an adapter before activation and support rollback",
+      "story": "As a user, I want a candidate adapter evaluated against the current configuration before activation so that a training job cannot silently worsen my operational translations.",
+      "priority": "Conditional",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 5,
+      "dependencies": [
+        "ENG7",
+        "R03",
+        "R04"
+      ],
+      "gate": "After an actual adapter artifact exists",
+      "acceptance": [
+        "Compare the candidate with the same base, prompts and reviewed memory on development/promotion cases and a separate retention set. Check equipment ID, action, negation, quantity/unit and sequence. Keep the final research test untouched until R06; do not use final-test results to promote or tune an adapter.",
+        "Use an acceptance rule written before viewing candidate results, with a retention check on earlier skills. If the gate fails or evidence is insufficient, keep the previous configuration and explain the result.",
+        "An explicit user action can activate a passed candidate only between sessions. Reload its checkpoint after restart and verify adapter/base compatibility and recorded version IDs.",
+        "Rollback and delete controls restore the previous validated configuration, with a visible selection and audit record. Successful training is never equated with demonstrated improvement."
+      ],
+      "tasks": [
+        "Build the development/retention comparison runner and review sheet; keep these cases out of training/retrieval and keep the final research test separate.",
+        "Implement candidate/active/previous adapter states, atomic promotion and compatibility checks.",
+        "Demonstrate one reject path, checkpoint reload and rollback even if no candidate improves."
+      ],
+      "deliverable": "Locked evaluation protocol, paired results, review decisions and activate/reload/rollback demonstration.",
+      "risk": "A tiny or contaminated holdout may falsely favor the adapter. Keep claims at pilot scale and report uncertainty, contamination controls and reviewer disagreements.",
+      "order": 14,
+      "sprint": "S5",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG8-T1",
+        "ENG8-T2",
+        "ENG8-T3"
+      ]
+    },
+    {
+      "id": "R06",
+      "title": "Compare frozen, glossary and local-memory conditions",
+      "story": "As a researcher, I want controlled ablations of the same model so any difference can be attributed to reviewed local information rather than changed models or hidden hints.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness",
+        "Excellence / originality",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 8,
+      "dependencies": [
+        "R03",
+        "R04",
+        "ENG6",
+        "ENG9"
+      ],
+      "gate": "Core evaluation does not depend on training. If B3 is included, ENG8 must finish before final-test configuration freeze.",
+      "acceptance": [
+        "One script reproduces B0 frozen/no local adaptation, B1 same model+approved fixed glossary and B2 same model+retrieved reviewed examples using a pinned configuration and identical source/context.",
+        "Use development data to fix prompt/retrieval parameters; log retrieved example IDs and verify no final-test family, answer key or future session appears in the context.",
+        "Evaluate the final test only after configuration freeze. Randomize/blind condition labels for bilingual reviewers; retain raw outputs, settings, timings and adjudicated labels.",
+        "Primary text measure: messages with any wrong/omitted required critical field or unsupported critical addition divided by evaluated messages. Also report per-field wrong/omitted counts and denominators, additions, adequacy, clarification behavior and resource cost; use the R03 criticality rubric.",
+        "If B2 is no better or worse, preserve that result and error analysis; do not select only successful examples or quietly retune on final-test outputs.",
+        "Include B3 only if ENG7/ENG8 have produced a compatible validated adapter before the final condition freeze. Record training configuration, duration, resources and retention; otherwise report B3 as not run. Never convert memory updates into a training result."
+      ],
+      "tasks": [
+        "Implement evaluation runner/interface against engineering endpoints.",
+        "Create identical-context condition templates and retrieval audit.",
+        "Use dev set to freeze settings and latency targets.",
+        "Generate blinded final-test batches for review.",
+        "Compute initial condition comparison and failure examples."
+      ],
+      "deliverable": "Versioned evaluation runner/config\nBlinded outputs and reviewer labels\nCore ablation table and retrieval-leakage audit",
+      "risk": "Keep guided check-back UI fixed while testing language support. Testing guided versus original UI simultaneously would confound the primary comparison unless explicitly designed as a separate factor.",
+      "order": 15,
+      "sprint": "S5",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R06-T1",
+        "R06-T2",
+        "R06-T3",
+        "R06-T4",
+        "R06-T5"
+      ]
+    },
+    {
+      "id": "R08",
+      "title": "Run a consented exploratory UX and task pilot",
+      "story": "As the team, we want observation from actual users so we can identify misunderstandings and usability barriers that software checks cannot reveal.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 8,
+      "dependencies": [
+        "R03",
+        "ENG2",
+        "ENG5",
+        "ENG6",
+        "ENG9"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Target four consenting pairs (eight adults) suitable for the chosen language task; adjust the pilot size before recruitment if capacity changes. Record language familiarity and experience without unnecessary demographic inference. This is exploratory, not a powered efficacy trial.",
+        "Use 1-2 separate dry-run pairs or sessions to fix instructions before the pilot; exclude them from the frozen comparison and document changes.",
+        "Compare at most two stable conditions in this small pilot (e.g. B0 versus preselected B2) using matched, unseen scenario variants and balanced AB/BA order across pairs. Do not show the same answer fixture twice to a pair.",
+        "Collect task decision correctness, attempted wrong choices/held choices, tagged clarifications, completion times, assistance needed and a short comprehension/usability interview; record failures and withdrawals.",
+        "Analyze pair/session-level descriptive evidence and sequence effects. Do not present multiple messages from one pair as independent participants, or claim statistical efficacy from this small convenience sample."
+      ],
+      "tasks": [
+        "Recruit with approved information/consent materials.",
+        "Prepare matched task sets and counterbalanced condition schedule.",
+        "Rehearse exact instructions and device setup.",
+        "Run monitored sessions with agreed local capture/export.",
+        "Summarize usability issues and participant explanations without identifying details."
+      ],
+      "deliverable": "Pilot protocol/schedule\nConsented local session records\nUsability findings and task summary",
+      "risk": "Do not use pilot participants' held-out session corrections to improve the condition being evaluated during that same comparison. Subsequent voluntary learning belongs to a later documented adaptation cycle.",
+      "order": 16,
+      "sprint": "S5",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R08-T1",
+        "R08-T2",
+        "R08-T3",
+        "R08-T4",
+        "R08-T5"
+      ]
+    },
+    {
+      "id": "R09",
+      "title": "Produce reproducible effectiveness and limitations analysis",
+      "story": "As a reviewer, I want transparent results and failure analysis so I can judge what the prototype demonstrates and what remains uncertain.",
+      "priority": "Core",
+      "criteria": [
+        "Effectiveness",
+        "Excellence / originality",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 5,
+      "dependencies": [
+        "R06",
+        "R08"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Analysis script regenerates all tables/figures from versioned consented or shareable records; checks denominators, missing data, duplicate events and condition/build/transport labels.",
+        "Report core outcomes by condition and scenario skill, with raw counts and effect estimates; uncertainty calculations, if used, respect grouped families/pairs rather than treating correlated messages as independent.",
+        "Separate automated semantic corpus results, human task/usability observations, device feasibility and existing regression checks into distinct evidence tables.",
+        "Include disagreement/adjudication results, counterexamples, negative findings, retention if trained, recruitment/split limitations and any unmet planned milestone.",
+        "A second team member reproduces key numbers from the manifest and confirms every paper claim is supported by an artifact."
+      ],
+      "tasks": [
+        "Clean/validate export schema and create data dictionary.",
+        "Compute condition/skill/pair summaries with appropriate grouping.",
+        "Review high-impact error cases and counterbalanced-order effects.",
+        "Write limitations and threat-to-validity section.",
+        "Run independent reproduction and resolve discrepancies."
+      ],
+      "deliverable": "Analysis scripts and generated figures\nResults/limitations tables\nPeer reproduction checklist",
+      "risk": "A positive exploratory result motivates a larger study; it does not establish universal dialect coverage, industrial safety gains or publication acceptance.",
+      "order": 17,
+      "sprint": "S6",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R09-T1",
+        "R09-T2",
+        "R09-T3",
+        "R09-T4",
+        "R09-T5"
+      ]
+    },
+    {
+      "id": "ENG10",
+      "title": "Demonstrate the integrated workflow with internet disabled",
+      "story": "As a professor reviewing the project, I want a physical-device demonstration and evidence package showing which offline features actually work so that effectiveness claims match the implementation.",
+      "priority": "Core",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "Validation",
+      "points": 5,
+      "dependencies": [
+        "ENG2",
+        "ENG5",
+        "ENG6",
+        "ENG9"
+      ],
+      "gate": "After text/memory integration and evaluation exports; the training segment additionally needs ENG7 and ENG8",
+      "acceptance": [
+        "After provisioning, cold-start the local host, local companions and browsers from installed files with WAN/internet disabled; complete a translated round on the two declared supported devices and export. Repeat the declared router/hotspot acceptance checks without relying on cached cloud responses.",
+        "Review a consented correction, update only its device's memory and show a subsequent retrieval-assisted translation. Verify the partner's private vault is not uploaded or merged.",
+        "If the training gate passed, complete the opt-in local training/evaluation/reload/rollback segment on the eligible laptop with internet disabled. Otherwise explicitly mark that milestone unmet and demonstrate queueing with the recorded reason; do not count it as passed training acceptance.",
+        "Publish screenshots/video, outside-network audit, device/resource measurements, regression results and a passed/failed/not-tested feature matrix. Updated manual/report and the paper-ready methods/results distinguish software behavior from measured language or participant benefit."
+      ],
+      "tasks": [
+        "Run the integrated physical rehearsal and network/data-retention audit from a written checklist.",
+        "Fix acceptance-blocking integration defects and rerun only affected plus required regression checks.",
+        "Package versioned FactoryRelay demo instructions, limitations, data/analysis artifacts and a contribution-evidence table under research/ for the final presentation; separately identify which approved materials may be published."
+      ],
+      "deliverable": "Physical offline acceptance pack, feature matrix, demonstration recording and updated technical/user documents.",
+      "risk": "A polished demo can conceal unsupported devices or unmeasured language quality. Retain failure evidence and a declared support matrix; keep the host-running requirement visible.",
+      "order": 18,
+      "sprint": "S6",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG10-T1",
+        "ENG10-T2",
+        "ENG10-T3"
+      ]
+    },
+    {
+      "id": "R10",
+      "title": "Deliver a paper-ready artifact and invention-review package",
+      "story": "As the project team, we want a complete, reviewable outcome package so the professor can assess literature, originality, effectiveness and research outputs.",
+      "priority": "Core",
+      "criteria": [
+        "Literature",
+        "Excellence / originality",
+        "Effectiveness",
+        "Outcomes"
+      ],
+      "type": "Documentation",
+      "points": 5,
+      "dependencies": [
+        "R01",
+        "R02",
+        "R09",
+        "ENG10"
+      ],
+      "gate": "Confirm reviewer/data access where required.",
+      "acceptance": [
+        "Deliver a supervisor-reviewable manuscript with research question, verified related work, implemented method, dataset/consent boundaries, experiments, results, limitations and contributor statement.",
+        "Provide a versioned reproducibility pack: source/build/model hashes, dependencies/configs, run instructions, analysis code, synthetic/shareable sample data and an access statement for private data. Never publish private participant records by default.",
+        "Update the FactoryRelay proposal/report and standalone manual under research/ so the published simulator and implemented LAN transport are clearly distinguished from local AI/hardware plans; align abstract, slides and demo with measured capabilities.",
+        "Link the R11 disclosure decision when applicable. Distinguish manuscript draft, submitted paper, accepted paper, disclosure, application and granted patent. No external submission or disclosure is authorized by completing this planning item.",
+        "Professor receives an evidence-to-criterion index, final demo recording/screenshots, team contribution log and an explicit submission-ready versus actually submitted/published status."
+      ],
+      "tasks": [
+        "Draft paper from frozen evidence and verified literature matrix.",
+        "Package/reproduce artifacts and remove private data/credentials.",
+        "Link the contribution/prior-art decision from R02/R11 and check submission versus publication wording.",
+        "Peer-review manuscript and demonstration against actual build.",
+        "Present outcomes and a clearly prioritized next-study plan."
+      ],
+      "deliverable": "Manuscript draft; reproducibility package; final slides/demo; criterion-to-evidence index; contributor record.",
+      "risk": "A paper draft, submitted paper, accepted paper, disclosure, patent application and granted patent are distinct outcomes; label only what has occurred. No submission or external disclosure is implied by this planning story. Public browser code and the fictional dataset already exist even though the GitHub repository and personal Space are private. Record release dates/content for any invention review; do not infer patent eligibility, loss of rights or permission to disclose further material.",
+      "order": 19,
+      "sprint": "S6",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R10-T1",
+        "R10-T2",
+        "R10-T3",
+        "R10-T4",
+        "R10-T5"
+      ]
+    },
+    {
+      "id": "R11",
+      "title": "Prepare an invention-review brief if the evidence supports one",
+      "story": "As the team, I want a specific technical mechanism and its closest overlaps reviewed so any patent route is based on evidence and compatible with publication plans.",
+      "priority": "Conditional",
+      "criteria": [
+        "Excellence / originality",
+        "Outcomes"
+      ],
+      "type": "Research",
+      "points": 3,
+      "dependencies": [
+        "R02"
+      ],
+      "gate": "Only if the team wants the patent route and R02 identifies a concrete candidate mechanism. The game and scenario dataset are already public; document that disclosure before seeking qualified review of a future contribution.",
+      "acceptance": [
+        "Document the mechanism, technical effect to test, closest paper/patent overlaps, contributors, dated design evidence and unresolved questions.",
+        "Prepare a factual invention disclosure or a recorded decision that the current evidence supports a research/artifact contribution rather than a patent claim.",
+        "Identify the university technology-transfer contact and request route; record the already-public game/dataset, dated versions and any proposed new disclosure for qualified review. No filing, grant or legal conclusion is promised."
+      ],
+      "tasks": [
+        "Extract a mechanism-specific feature comparison from R02.",
+        "Collect dated design/experiment evidence and contributor records.",
+        "Prepare the institutional-review brief and disclosure-timing questions; record the resulting decision when obtained."
+      ],
+      "deliverable": "Invention-review brief or documented no-disclosure rationale; institutional-review questions.",
+      "risk": "A combination of established methods may not be novel or patentable. A student search is bounded and cannot establish legal freedom to operate.",
+      "order": 20,
+      "sprint": "S2",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "R11-T1",
+        "R11-T2",
+        "R11-T3"
+      ]
+    },
+    {
+      "id": "ENG11",
+      "title": "Add a bounded local voice input experiment",
+      "story": "As a consenting speaker on a supported device, I want a locally transcribed audio draft that I can correct before sharing so that voice can be tested without treating an ASR guess as the original message.",
+      "priority": "Stretch",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 8,
+      "dependencies": [
+        "ENG3",
+        "ENG4",
+        "ENG5",
+        "ENG9"
+      ],
+      "gate": "Only after core text delivery, selected speech-model feasibility and explicit microphone/privacy review",
+      "acceptance": [
+        "On one declared device, explicit microphone consent enables local recording and offline ASR; preserve raw audio, ASR draft and user-corrected transcript as distinct consented records. Only the reviewed selected message is shared by default.",
+        "Extend the current LAN microphone/CSP restriction only through a deliberate narrow design; test permission refusal, recording stop, deletion and no outside-network audio transfer.",
+        "Use speaker-reviewed dialect-faithful references to report WER/CER plus critical operational-field errors and latency on the small declared set. Any synthetic noise trial is labelled separately from real factory recordings.",
+        "If the speech model, consent or device gate fails, retain typed communication and report the voice experiment as not implemented or not validated. No speech-training or every-phone support claim follows from text LoRA."
+      ],
+      "tasks": [
+        "Benchmark and provision a licensed local ASR pack for the selected language profile.",
+        "Implement record/review/correct controls and permission/retention checks.",
+        "Run the declared speech evaluation and document scope separately from text results."
+      ],
+      "deliverable": "Voice capability record, consent/deletion tests and separate speech evaluation report.",
+      "risk": "Audio increases privacy, storage, latency and dialect-evaluation demands; current LAN permissions intentionally disable microphones.",
+      "order": 21,
+      "sprint": "Stretch",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG11-T1",
+        "ENG11-T2",
+        "ENG11-T3"
+      ]
+    },
+    {
+      "id": "ENG12",
+      "title": "Demonstrate a guarded laboratory action if hardware is approved",
+      "story": "As a laboratory supervisor, I want a tightly restricted, human-confirmed action demonstration so that any physical extension remains separate from free-form model output and from claims of industrial deployment.",
+      "priority": "Stretch",
+      "criteria": [
+        "Excellence / originality",
+        "Effectiveness"
+      ],
+      "type": "User story",
+      "points": 8,
+      "dependencies": [
+        "ENG2",
+        "ENG5",
+        "ENG9"
+      ],
+      "gate": "Only with available test hardware, laboratory-supervisor authorization and an approved test procedure",
+      "acceptance": [
+        "Start with a mock or de-energized gateway for one allowlisted action. Model text remains a proposal; a human confirms a structured command and deterministic permissions/fresh-state checks authorize only that bounded action.",
+        "Before any energized rig demonstration, the laboratory supervisor approves the independent stop/interlock arrangement and test procedure. Verify rejection of wrong identifiers, stale state, duplicate requests, missing confirmation and network loss under that procedure.",
+        "Record attempted, rejected and executed actions separately. The controller's independent protections do not depend on translation correctness, the browser or a language model.",
+        "If hardware access or approval is unavailable, deliver the gateway/mock test evidence and explicitly retain the physical demonstration as unachieved. Do not describe OPC UA connectivity or passing mock tests as certified machine safety."
+      ],
+      "tasks": [
+        "Write the one-action boundary, device permissions and lab test/approval checklist.",
+        "Implement and exercise a restricted mock gateway before connecting any approved rig.",
+        "Run the supervised conditional demonstration or document the blocked prerequisite and simulator-only result."
+      ],
+      "deliverable": "Approved boundary/test sheet, mock gateway results and conditional supervised laboratory record.",
+      "risk": "Hardware access, wiring, independent protective controls and approval can dominate the schedule; this milestone must not compromise completion of the reproducible text study.",
+      "order": 22,
+      "sprint": "Stretch",
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "taskIds": [
+        "ENG12-T1",
+        "ENG12-T2",
+        "ENG12-T3"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ENG0-T1",
+      "storyId": "ENG0",
+      "title": "Confirm all three members' GitHub invitation acceptance and individual repository access.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG0-T2",
+      "storyId": "ENG0",
+      "title": "Clone the standalone repository on each member's computer; record Node version and install/test/build results.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG0-T3",
+      "storyId": "ENG0",
+      "title": "Agree self-selected task, branch, pull-request and review workflow; verify CI and the deployment result of an approved change.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG0-T4",
+      "storyId": "ENG0",
+      "title": "Document owner-managed HF publication and an approved way to share course documents; keep personal data and credentials out of repositories.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R01-T1",
+      "storyId": "R01",
+      "title": "Agree three or four query families and source-selection rules.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R01-T2",
+      "storyId": "R01",
+      "title": "Run searches and save citation records; remove duplicates.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R01-T3",
+      "storyId": "R01",
+      "title": "Screen titles/abstracts/full texts with exclusion reasons.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R01-T4",
+      "storyId": "R01",
+      "title": "Extract comparable evidence; mark missing data and non-comparable scores.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R01-T5",
+      "storyId": "R01",
+      "title": "Peer-review a sample and correct the matrix.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG1-T1",
+      "storyId": "ENG1",
+      "title": "Produce a source-linked model/runtime decision record and review the selected pair with a competent bilingual or target-community reviewer.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG1-T2",
+      "storyId": "ENG1",
+      "title": "Run the device/inference integration spike using synthetic or approved development examples.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG1-T3",
+      "storyId": "ENG1",
+      "title": "Publish the supported-profile matrix, initial evaluation split and go/no-go decisions for the later training story.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Ready",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG2-T1",
+      "storyId": "ENG2",
+      "title": "Prepare a one-page physical rehearsal checklist and test the certificate/address workflow without automation trust bypasses.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG2-T2",
+      "storyId": "ENG2",
+      "title": "Execute router and hotspot runs; capture screenshots, JSON exports and any network-policy failures.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG2-T3",
+      "storyId": "ENG2",
+      "title": "Fix only observed compatibility defects and rerun the affected existing suites.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R02-T1",
+      "storyId": "R02",
+      "title": "Rank closest works and extract exact supporting passages/page numbers.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R02-T2",
+      "storyId": "R02",
+      "title": "Compare adaptation lifecycle, privacy boundaries and evaluation against our actual implementation.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R02-T3",
+      "storyId": "R02",
+      "title": "Search potentially overlapping patent disclosures at a scoped level.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R02-T4",
+      "storyId": "R02",
+      "title": "Draft falsifiable contribution and distinguish research originality from a patent opinion.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R02-T5",
+      "storyId": "R02",
+      "title": "Ask supervisor to review the selected contribution and remaining uncertainties.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R03-T1",
+      "storyId": "R03",
+      "title": "Write research questions and success/failure interpretations without an assumed effect size.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R03-T2",
+      "storyId": "R03",
+      "title": "Define critical slots and adjudication rules.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R03-T3",
+      "storyId": "R03",
+      "title": "Specify split construction and prohibition on answer-key leakage.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R03-T4",
+      "storyId": "R03",
+      "title": "Prepare consent/capture/retention materials.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R03-T5",
+      "storyId": "R03",
+      "title": "Review and version-lock the protocol before the final test set is used.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG4-T1",
+      "storyId": "ENG4",
+      "title": "Package the chosen runtime/tokenizer/inference files and their manifest; implement resumable or safely restartable provisioning.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG4-T2",
+      "storyId": "ENG4",
+      "title": "Add local companion readiness/inference endpoints and the approved browser connection boundary.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG4-T3",
+      "storyId": "ENG4",
+      "title": "Test cold local loading, corrupt/missing files, interruption and outside-network blocking.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG3-T1",
+      "storyId": "ENG3",
+      "title": "Agree a minimal retention/consent schema and data-flow diagram for shared chat versus private examples.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG3-T2",
+      "storyId": "ENG3",
+      "title": "Implement the smallest local text-vault API and consent/review controls in the existing UI.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG3-T3",
+      "storyId": "ENG3",
+      "title": "Exercise refusal, deletion, reload and network/log inspection with two isolated device profiles.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R04-T1",
+      "storyId": "R04",
+      "title": "Draft realistic variants from completed problem scope; do not reuse only the six public answer fixtures.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R04-T2",
+      "storyId": "R04",
+      "title": "Obtain source-speaker wording and competent target-rendering review.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R04-T3",
+      "storyId": "R04",
+      "title": "Assign group IDs and precommitted splits; run duplicate/paraphrase checks.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R04-T4",
+      "storyId": "R04",
+      "title": "Annotate and adjudicate critical fields.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R04-T5",
+      "storyId": "R04",
+      "title": "Create local data manifest and access/export controls.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG5-T1",
+      "storyId": "ENG5",
+      "title": "Define the translation record/status schema and source/target selection limited to tested profiles.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG5-T2",
+      "storyId": "ENG5",
+      "title": "Connect the receiving device's local inference service to an original-plus-rendering message component.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG5-T3",
+      "storyId": "ENG5",
+      "title": "Run a bilingual-reviewed end-to-end round and failure/role-context regression checks.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG9-T1",
+      "storyId": "ENG9",
+      "title": "Extend export/provenance metadata and write an analysis schema/validator with privacy defaults.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG9-T2",
+      "storyId": "ENG9",
+      "title": "Implement variant/split identifiers and an annotation-file interface from R03/R04; avoid duplicating the corpus-authoring work.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG9-T3",
+      "storyId": "ENG9",
+      "title": "Provide a schema-validation and summary smoke script; hand final ablation analysis to R06/R09.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG6-T1",
+      "storyId": "ENG6",
+      "title": "Build the post-session correction/reviewer workflow on the local vault.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG6-T2",
+      "storyId": "ENG6",
+      "title": "Implement a small, auditable retrieval index and an inference toggle using the same base model.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG6-T3",
+      "storyId": "ENG6",
+      "title": "Check provenance, withdrawal and held-out contamination with reviewed development cases.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG7-T1",
+      "storyId": "ENG7",
+      "title": "Implement and display the data/hardware readiness gate plus explicit post-session training consent.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG7-T2",
+      "storyId": "ENG7",
+      "title": "Add a reproducible local adapter-training command/job runner with cancellation and checkpoint metadata.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG7-T3",
+      "storyId": "ENG7",
+      "title": "Exercise one successful training run and insufficient-data/resource/interruption paths on the measured laptop.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG8-T1",
+      "storyId": "ENG8",
+      "title": "Build the development/retention comparison runner and review sheet; keep these cases out of training/retrieval and keep the final research test separate.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG8-T2",
+      "storyId": "ENG8",
+      "title": "Implement candidate/active/previous adapter states, atomic promotion and compatibility checks.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG8-T3",
+      "storyId": "ENG8",
+      "title": "Demonstrate one reject path, checkpoint reload and rollback even if no candidate improves.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R06-T1",
+      "storyId": "R06",
+      "title": "Implement evaluation runner/interface against engineering endpoints.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R06-T2",
+      "storyId": "R06",
+      "title": "Create identical-context condition templates and retrieval audit.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R06-T3",
+      "storyId": "R06",
+      "title": "Use dev set to freeze settings and latency targets.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R06-T4",
+      "storyId": "R06",
+      "title": "Generate blinded final-test batches for review.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R06-T5",
+      "storyId": "R06",
+      "title": "Compute initial condition comparison and failure examples.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R08-T1",
+      "storyId": "R08",
+      "title": "Recruit with approved information/consent materials.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R08-T2",
+      "storyId": "R08",
+      "title": "Prepare matched task sets and counterbalanced condition schedule.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R08-T3",
+      "storyId": "R08",
+      "title": "Rehearse exact instructions and device setup.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R08-T4",
+      "storyId": "R08",
+      "title": "Run monitored sessions with agreed local capture/export.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R08-T5",
+      "storyId": "R08",
+      "title": "Summarize usability issues and participant explanations without identifying details.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R09-T1",
+      "storyId": "R09",
+      "title": "Clean/validate export schema and create data dictionary.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R09-T2",
+      "storyId": "R09",
+      "title": "Compute condition/skill/pair summaries with appropriate grouping.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R09-T3",
+      "storyId": "R09",
+      "title": "Review high-impact error cases and counterbalanced-order effects.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R09-T4",
+      "storyId": "R09",
+      "title": "Write limitations and threat-to-validity section.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R09-T5",
+      "storyId": "R09",
+      "title": "Run independent reproduction and resolve discrepancies.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG10-T1",
+      "storyId": "ENG10",
+      "title": "Run the integrated physical rehearsal and network/data-retention audit from a written checklist.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG10-T2",
+      "storyId": "ENG10",
+      "title": "Fix acceptance-blocking integration defects and rerun only affected plus required regression checks.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG10-T3",
+      "storyId": "ENG10",
+      "title": "Package versioned FactoryRelay demo instructions, limitations, data/analysis artifacts and a contribution-evidence table under research/ for the final presentation; separately identify which approved materials may be published.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R10-T1",
+      "storyId": "R10",
+      "title": "Draft paper from frozen evidence and verified literature matrix.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R10-T2",
+      "storyId": "R10",
+      "title": "Package/reproduce artifacts and remove private data/credentials.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R10-T3",
+      "storyId": "R10",
+      "title": "Link the contribution/prior-art decision from R02/R11 and check submission versus publication wording.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R10-T4",
+      "storyId": "R10",
+      "title": "Peer-review manuscript and demonstration against actual build.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R10-T5",
+      "storyId": "R10",
+      "title": "Present outcomes and a clearly prioritized next-study plan.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R11-T1",
+      "storyId": "R11",
+      "title": "Extract a mechanism-specific feature comparison from R02.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R11-T2",
+      "storyId": "R11",
+      "title": "Collect dated design/experiment evidence and contributor records.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "R11-T3",
+      "storyId": "R11",
+      "title": "Prepare the institutional-review brief and disclosure-timing questions; record the resulting decision when obtained.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG11-T1",
+      "storyId": "ENG11",
+      "title": "Benchmark and provision a licensed local ASR pack for the selected language profile.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG11-T2",
+      "storyId": "ENG11",
+      "title": "Implement record/review/correct controls and permission/retention checks.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG11-T3",
+      "storyId": "ENG11",
+      "title": "Run the declared speech evaluation and document scope separately from text results.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG12-T1",
+      "storyId": "ENG12",
+      "title": "Write the one-action boundary, device permissions and lab test/approval checklist.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG12-T2",
+      "storyId": "ENG12",
+      "title": "Implement and exercise a restricted mock gateway before connecting any approved rig.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    },
+    {
+      "id": "ENG12-T3",
+      "storyId": "ENG12",
+      "title": "Run the supervised conditional demonstration or document the blocked prerequisite and simulator-only result.",
+      "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
+      "estimatedHours": null,
+      "status": "Backlog",
+      "owner": "",
+      "reviewer": "",
+      "evidence": "",
+      "blocker": ""
+    }
+  ],
+  "sprints": [
+    {
+      "id": "S1",
+      "title": "Access, literature and feasibility",
+      "weeks": "Weeks 1–2",
+      "goal": "Confirm team access, language/device feasibility and physical acceptance of the existing LAN host.",
+      "storyIds": [
+        "ENG0",
+        "R01",
+        "ENG1",
+        "ENG2"
+      ],
+      "demo": "Show individual setup evidence, literature map and a measured local-inference request; two actual devices complete a WAN-disconnected round.",
+      "gate": "Pull only tasks fitting capacity. Name supported devices, review scope and training feasibility; re-estimate the backlog."
+    },
+    {
+      "id": "S2",
+      "title": "Translation preview and study design",
+      "weeks": "Weeks 3–4",
+      "goal": "Deliver one locally provisioned translation preview with consent and a frozen study design.",
+      "storyIds": [
+        "R02",
+        "R03",
+        "ENG4",
+        "ENG3"
+      ],
+      "demo": "Load a verified local pack, translate a synthetic message and demonstrate retain/delete choices. Present first-month review.",
+      "gate": "Select only work fitting capacity. Companion integration is the first risk to split; do not promise a full UI yet. R11 is an optional invention-review slot outside this core candidate list."
+    },
+    {
+      "id": "S3",
+      "title": "Translated gameplay and reviewed corpus",
+      "weeks": "Weeks 5–6",
+      "goal": "Use original-plus-translated text in a real game round with analysis-ready records.",
+      "storyIds": [
+        "ENG5",
+        "ENG9",
+        "R04"
+      ],
+      "demo": "Two players complete a translated round; show export versions and reviewed grouped corpus splits.",
+      "gate": "Keep final test sealed; unsupported directions/devices remain explicit."
+    },
+    {
+      "id": "S4",
+      "title": "Reviewed local corrections",
+      "weeks": "Weeks 7–8",
+      "goal": "Let a player review a session and reuse approved local corrections.",
+      "storyIds": [
+        "ENG6",
+        "ENG7"
+      ],
+      "demo": "Review → keep/delete → update memory → translate another example. If eligible, show a real local adapter artifact.",
+      "gate": "ENG7 is conditional; genuine training must change weights. Queueing is not successful training."
+    },
+    {
+      "id": "S5",
+      "title": "Controlled evaluation and pilot",
+      "weeks": "Weeks 9–10",
+      "goal": "Evaluate stable conditions and collect a small exploratory user pilot.",
+      "storyIds": [
+        "R06",
+        "R08",
+        "ENG8"
+      ],
+      "demo": "Blinded condition results, pilot observations and physical device behavior; adapter promotion/rollback only if ready.",
+      "gate": "ENG8 must complete before including B3 at final freeze; core B0/B1/B2 continue without it."
+    },
+    {
+      "id": "S6",
+      "title": "Evidence and final delivery",
+      "weeks": "Weeks 11–12",
+      "goal": "Deliver a reproducible research extension and a defensible course evidence package.",
+      "storyIds": [
+        "R09",
+        "ENG10",
+        "R10"
+      ],
+      "demo": "Offline end-to-end extension demo, measured tables, updated report/slides, manuscript and achieved/deferred feature matrix.",
+      "gate": "Existing game publication is complete. R11 concerns a future evidenced mechanism and must record earlier public disclosures."
+    }
+  ],
+  "courseCriteria": [
+    {
+      "id": "problem",
+      "title": "Problem establishment wrt smart factory",
+      "status": "Completed — team reported",
+      "storyIds": [],
+      "baselineIds": [
+        "BASE01"
+      ],
+      "deliverables": [
+        "Existing approved problem sheet and agreed scope"
+      ],
+      "note": "The team reports this stage completed. Attach the approved evidence; no independent supervisor approval record is claimed."
+    },
+    {
+      "id": "literature",
+      "title": "Literature survey wrt problem",
+      "status": "Remaining",
+      "storyIds": [
+        "R01",
+        "R02"
+      ],
+      "baselineIds": [],
+      "deliverables": [
+        "Traceable search log",
+        "Verified literature matrix",
+        "Closest-work synthesis"
+      ],
+      "note": "Starting references are available; the scoped literature survey is not complete."
+    },
+    {
+      "id": "originality",
+      "title": "Excellence and originality of the proposed solution",
+      "status": "Baseline built; research pending",
+      "storyIds": [
+        "R02",
+        "ENG1",
+        "ENG3",
+        "ENG4",
+        "ENG5",
+        "ENG6",
+        "ENG7",
+        "ENG8"
+      ],
+      "baselineIds": [
+        "BASE02"
+      ],
+      "deliverables": [
+        "Evaluated extension",
+        "Design alternatives",
+        "Qualified contribution hypothesis"
+      ],
+      "note": "A published game does not establish research novelty. Conditional training needs a real compatible-device result."
+    },
+    {
+      "id": "effectiveness",
+      "title": "Effectiveness of the proposed solution",
+      "status": "Software checked; study pending",
+      "storyIds": [
+        "ENG0",
+        "R03",
+        "R04",
+        "ENG2",
+        "ENG9",
+        "R06",
+        "R08",
+        "R09",
+        "ENG10"
+      ],
+      "baselineIds": [
+        "BASE02",
+        "BASE03"
+      ],
+      "deliverables": [
+        "Controlled comparisons",
+        "Physical two-device offline evidence",
+        "Reproducible results and limitations"
+      ],
+      "note": "41 unit/integration and 114 hosted browser checks verify software behavior; they do not establish translation quality or participant benefit."
+    },
+    {
+      "id": "outcomes",
+      "title": "Expected outcomes: papers, patents and artifacts",
+      "status": "Prototype published; research outputs pending",
+      "storyIds": [
+        "R10",
+        "R11"
+      ],
+      "baselineIds": [
+        "BASE04",
+        "BASE05",
+        "BASE06",
+        "BASE07"
+      ],
+      "deliverables": [
+        "Research demonstrator and reproducibility package",
+        "Evaluation report and presentation",
+        "Manuscript draft",
+        "Conditional invention-review brief"
+      ],
+      "note": "No paper submission or acceptance, patent filing or grant is claimed. R11 is conditional on an evidenced contribution and review of prior public disclosure."
+    }
+  ],
+  "checklists": [
+    {
+      "title": "Ready to pull",
+      "items": [
+        "Clear value, acceptance criteria and deliverable.",
+        "Dependencies, device/data access and reviewer availability confirmed.",
+        "Task fits one member workday or is split further.",
+        "Volunteer owner, different reviewer and Sprint Goal fit confirmed."
+      ]
+    },
+    {
+      "title": "Sprint planning",
+      "items": [
+        "Confirm one Sprint Goal.",
+        "Enter each member’s available hours and leave uncertainty reserve.",
+        "Re-estimate selected stories; verify dependencies and access.",
+        "Members choose tasks; name a different reviewer.",
+        "Keep only work that can finish this sprint."
+      ]
+    },
+    {
+      "title": "Definition of Done",
+      "items": [
+        "All acceptance criteria have linked evidence.",
+        "A different member reviewed and reproduced the essential result.",
+        "Applicable checks pass and unresolved limits are explicit.",
+        "Data, model versions and citations are traceable.",
+        "Integrated increment works; documents and board are updated."
+      ]
+    },
+    {
+      "title": "Sprint review",
+      "items": [
+        "Demonstrate the actual increment, not slides alone.",
+        "Show measured results, failed gates and open defects.",
+        "Map evidence to professor criteria.",
+        "Record supervisor feedback and reorder the backlog."
+      ]
+    },
+    {
+      "title": "Retrospective",
+      "items": [
+        "Name one thing to keep and one thing to change.",
+        "Check work in progress, review delays and workload fairness.",
+        "Choose one improvement, volunteer owner and next-sprint check."
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "implementation-plan",
+      "title": "Team implementation plan",
+      "category": "Team plan",
+      "date": "2026-10-21",
+      "status": "Current",
+      "description": "Nine-page plan for the three-member team: current baseline, self-selected work, sprint forecast, evaluation, deliverables and risks.",
+      "files": [
+        {
+          "label": "PDF",
+          "href": "documents/Factory_Relay_Team_Implementation_Plan.pdf",
+          "format": "PDF",
+          "bytes": 1183720,
+          "sha256": "1c52069d11dab40f0543879fb7635e2acd5398d3123baa0622b32b2bf6a7ea24"
+        },
+        {
+          "label": "Word",
+          "href": "documents/Factory_Relay_Team_Implementation_Plan.docx",
+          "format": "DOCX",
+          "bytes": 49838,
+          "sha256": "8251a5a9ed62a5b5e20b0fa6d9e0e28c4935b9f807fad7e3d378dd2ba9877ddd"
+        }
+      ]
+    },
+    {
+      "id": "scrum-workbook",
+      "title": "Scrum workbook",
+      "category": "Team plan",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Fourteen sheets with 22 stories, 83 tasks, eight baseline records, course evidence and research trackers. Downloaded copies do not synchronize automatically.",
+      "files": [
+        {
+          "label": "Excel",
+          "href": "documents/Factory_Relay_Scrum_Backlog.xlsx",
+          "format": "XLSX",
+          "bytes": 53406,
+          "sha256": "55e47326411e47e44cd9ea8af325ba2adec72a9b4bbbf0321971d118e4bc67a7"
+        }
+      ]
+    },
+    {
+      "id": "backlog-csv",
+      "title": "User stories — CSV",
+      "category": "Team plan",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "The 22 remaining stories with acceptance criteria, dependencies, priorities and deliverables. Completed baseline work is recorded separately.",
+      "files": [
+        {
+          "label": "CSV",
+          "href": "documents/Factory_Relay_Backlog.csv",
+          "format": "CSV",
+          "bytes": 30515,
+          "sha256": "fcd806149769a543fff1fdc33846576baff973017c3113b03eaf4aa94d54c452"
+        }
+      ]
+    },
+    {
+      "id": "tasks-csv",
+      "title": "Task list — CSV",
+      "category": "Team plan",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Eighty-three tasks ready for members to select. Owners and reviewers are intentionally unassigned in the initial plan.",
+      "files": [
+        {
+          "label": "CSV",
+          "href": "documents/Factory_Relay_Tasks.csv",
+          "format": "CSV",
+          "bytes": 14230,
+          "sha256": "3b20eb3259d24d7e9bc51548c14e25f1900660f18c5c28bcceda96120e6f7a42"
+        }
+      ]
+    },
+    {
+      "id": "status-csv",
+      "title": "Existing implementation status — CSV",
+      "category": "Team plan",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Eight baseline records distinguish implemented software and publication evidence from remaining research work.",
+      "files": [
+        {
+          "label": "CSV",
+          "href": "documents/Factory_Relay_Current_Status.csv",
+          "format": "CSV",
+          "bytes": 2714,
+          "sha256": "c42eef7c3bbf1027bb31c22fbf932d93dbb703e874f1648eaf83d6618da96c54"
+        }
+      ]
+    },
+    {
+      "id": "proposal",
+      "title": "Smart-factory proposal: two-device offline extension",
+      "category": "Proposal",
+      "date": "2026-10-08",
+      "status": "Earlier proposal",
+      "description": "Latest existing proposal revision, with an 8 October baseline. Translation, adaptation and hardware integration describe intended work. Its WebRTC/offline assumptions and PurePolyglot references are historical; use the 21 October team plan for current implementation status.",
+      "files": [
+        {
+          "label": "PDF",
+          "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.pdf",
+          "format": "PDF",
+          "bytes": 1168755,
+          "sha256": "846717a1fe9e3e0204e10845e11a64ac38d292d871b0ff42a46d490c6bb5f63f"
+        },
+        {
+          "label": "Word",
+          "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.docx",
+          "format": "DOCX",
+          "bytes": 36357,
+          "sha256": "b697be6e1f60dd6e4e2ba1ae5b64587698efa299c078a14470588c26c065cc6d"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "title": "Adaptive-edge research presentation",
+      "category": "Presentation",
+      "date": null,
+      "dateLabel": "Earlier proposal deck",
+      "status": "Earlier proposal",
+      "description": "Eight-slide proposal deck. It describes planned research, not delivered translation or learning. Its milestone schedule predates the current six-sprint forecast; the document itself has no verified date.",
+      "files": [
+        {
+          "label": "PDF",
+          "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pdf",
+          "format": "PDF",
+          "bytes": 1174274,
+          "sha256": "1df576734644e088f568ed1b3fee7e233b98bec596a63075e623984e6f11e2b8"
+        },
+        {
+          "label": "PowerPoint",
+          "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pptx",
+          "format": "PPTX",
+          "bytes": 60583,
+          "sha256": "3b79f25b40fc5de2ee2e0d22222c51593cbaa8d3b663413e9666cc77cacc3ac3"
+        }
+      ]
+    },
+    {
+      "id": "technical-report",
+      "title": "Technical report — historical baseline",
+      "category": "Reference",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Implementation report and game screenshots from the 13 October PurePolyglot baseline. Earlier paths, branding, test totals and setup details are preserved as history. Use the current repository and LAN guide for the standalone release.",
+      "files": [
+        {
+          "label": "PDF",
+          "href": "documents/Factory_Relay_Technical_Report.pdf",
+          "format": "PDF",
+          "bytes": 1480306,
+          "sha256": "eaefee178a44ffdc1c54891f89a64608c4d79b0b834c1249697e21844b9e09a8"
+        },
+        {
+          "label": "Word",
+          "href": "documents/Factory_Relay_Technical_Report.docx",
+          "format": "DOCX",
+          "bytes": 367733,
+          "sha256": "2499479ffe25254f519c465ad1f379d39907784482d4866a64868755c871c805"
+        }
+      ]
+    },
+    {
+      "id": "user-manual",
+      "title": "User manual — historical baseline",
+      "category": "Reference",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Player and facilitator guide from the 13 October PurePolyglot baseline. Screenshots and terminology predate the standalone project. Consult the current repository LAN guide for present setup instructions.",
+      "files": [
+        {
+          "label": "PDF",
+          "href": "documents/Factory_Relay_User_Manual.pdf",
+          "format": "PDF",
+          "bytes": 1451020,
+          "sha256": "643dfa99b2340df87867104c188202ef45538969825f3f272804933a757a4600"
+        },
+        {
+          "label": "Word",
+          "href": "documents/Factory_Relay_User_Manual.docx",
+          "format": "DOCX",
+          "bytes": 399404,
+          "sha256": "2f0c8ebcb2f1862b0ad633ea6e2cad86ced4ada11497aa95b41c44f9b07d3e31"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "REF1",
+      "title": "Schwaber, K. and Sutherland, J. The Scrum Guide (November 2020). Official framework. Accessed 21 October 2026.",
+      "url": "https://scrumguides.org/scrum-guide.html"
+    },
+    {
+      "id": "REF2",
+      "title": "Hugging Face. Transformers installation: offline mode. Cached artifacts and local-only loading. Accessed 21 October 2026.",
+      "url": "https://huggingface.co/docs/transformers/installation#offline-mode"
+    },
+    {
+      "id": "REF3",
+      "title": "Hu et al. LoRA: Low-Rank Adaptation of Large Language Models (2021).",
+      "url": "https://arxiv.org/abs/2106.09685"
+    },
+    {
+      "id": "REF4",
+      "title": "Lewis et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (NeurIPS 2020).",
+      "url": "https://arxiv.org/abs/2005.11401"
+    },
+    {
+      "id": "REF5",
+      "title": "WIPO. How to Protect Inventions through Patents: conditions for patentability. Accessed 21 October 2026.",
+      "url": "https://www.wipo.int/en/web/patents/protection"
+    },
+    {
+      "id": "REF6",
+      "title": "WIPO. Frequently Asked Questions: Patents, confidentiality and disclosure. Accessed 21 October 2026.",
+      "url": "https://www.wipo.int/en/web/patents/faq_patents"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "project": "Factory Relay",
+  "asOf": "2026-10-21",
+  "purpose": "Explicitly curated course artifacts for the static team portal. Hashes verify copies, not research claims.",
+  "excluded": [
+    "Company chat screenshots and background cases",
+    "Participant/session data",
+    "Credentials and private deployment receipts",
+    "Unselected research archive"
+  ],
+  "files": [
+    {
+      "documentId": "implementation-plan",
+      "label": "PDF",
+      "href": "documents/Factory_Relay_Team_Implementation_Plan.pdf",
+      "format": "PDF",
+      "bytes": 1183720,
+      "sha256": "1c52069d11dab40f0543879fb7635e2acd5398d3123baa0622b32b2bf6a7ea24",
+      "source": "research/team-plan/Factory_Relay_Team_Implementation_Plan.pdf",
+      "date": "2026-10-21",
+      "status": "Current",
+      "description": "Nine-page plan for the three-member team: current baseline, self-selected work, sprint forecast, evaluation, deliverables and risks."
+    },
+    {
+      "documentId": "implementation-plan",
+      "label": "Word",
+      "href": "documents/Factory_Relay_Team_Implementation_Plan.docx",
+      "format": "DOCX",
+      "bytes": 49838,
+      "sha256": "8251a5a9ed62a5b5e20b0fa6d9e0e28c4935b9f807fad7e3d378dd2ba9877ddd",
+      "source": "research/team-plan/Factory_Relay_Team_Implementation_Plan.docx",
+      "date": "2026-10-21",
+      "status": "Current",
+      "description": "Nine-page plan for the three-member team: current baseline, self-selected work, sprint forecast, evaluation, deliverables and risks."
+    },
+    {
+      "documentId": "scrum-workbook",
+      "label": "Excel",
+      "href": "documents/Factory_Relay_Scrum_Backlog.xlsx",
+      "format": "XLSX",
+      "bytes": 53406,
+      "sha256": "55e47326411e47e44cd9ea8af325ba2adec72a9b4bbbf0321971d118e4bc67a7",
+      "source": "research/team-plan/Factory_Relay_Scrum_Backlog.xlsx",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Fourteen sheets with 22 stories, 83 tasks, eight baseline records, course evidence and research trackers. Downloaded copies do not synchronize automatically."
+    },
+    {
+      "documentId": "backlog-csv",
+      "label": "CSV",
+      "href": "documents/Factory_Relay_Backlog.csv",
+      "format": "CSV",
+      "bytes": 30515,
+      "sha256": "fcd806149769a543fff1fdc33846576baff973017c3113b03eaf4aa94d54c452",
+      "source": "research/team-plan/Factory_Relay_Backlog.csv",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "The 22 remaining stories with acceptance criteria, dependencies, priorities and deliverables. Completed baseline work is recorded separately."
+    },
+    {
+      "documentId": "tasks-csv",
+      "label": "CSV",
+      "href": "documents/Factory_Relay_Tasks.csv",
+      "format": "CSV",
+      "bytes": 14230,
+      "sha256": "3b20eb3259d24d7e9bc51548c14e25f1900660f18c5c28bcceda96120e6f7a42",
+      "source": "research/team-plan/Factory_Relay_Tasks.csv",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Eighty-three tasks ready for members to select. Owners and reviewers are intentionally unassigned in the initial plan."
+    },
+    {
+      "documentId": "status-csv",
+      "label": "CSV",
+      "href": "documents/Factory_Relay_Current_Status.csv",
+      "format": "CSV",
+      "bytes": 2714,
+      "sha256": "c42eef7c3bbf1027bb31c22fbf932d93dbb703e874f1648eaf83d6618da96c54",
+      "source": "research/team-plan/Factory_Relay_Current_Status.csv",
+      "date": "2026-10-21",
+      "status": "Current snapshot",
+      "description": "Eight baseline records distinguish implemented software and publication evidence from remaining research work."
+    },
+    {
+      "documentId": "proposal",
+      "label": "PDF",
+      "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.pdf",
+      "format": "PDF",
+      "bytes": 1168755,
+      "sha256": "846717a1fe9e3e0204e10845e11a64ac38d292d871b0ff42a46d490c6bb5f63f",
+      "source": "research/proposals/Factory_Relay_Proposal_Two_Device_Offline.pdf",
+      "date": "2026-10-08",
+      "status": "Earlier proposal",
+      "description": "Latest existing proposal revision, with an 8 October baseline. Translation, adaptation and hardware integration describe intended work. Its WebRTC/offline assumptions and PurePolyglot references are historical; use the 21 October team plan for current implementation status."
+    },
+    {
+      "documentId": "proposal",
+      "label": "Word",
+      "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.docx",
+      "format": "DOCX",
+      "bytes": 36357,
+      "sha256": "b697be6e1f60dd6e4e2ba1ae5b64587698efa299c078a14470588c26c065cc6d",
+      "source": "research/proposals/Factory_Relay_Proposal_Two_Device_Offline.docx",
+      "date": "2026-10-08",
+      "status": "Earlier proposal",
+      "description": "Latest existing proposal revision, with an 8 October baseline. Translation, adaptation and hardware integration describe intended work. Its WebRTC/offline assumptions and PurePolyglot references are historical; use the 21 October team plan for current implementation status."
+    },
+    {
+      "documentId": "presentation",
+      "label": "PDF",
+      "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pdf",
+      "format": "PDF",
+      "bytes": 1174274,
+      "sha256": "1df576734644e088f568ed1b3fee7e233b98bec596a63075e623984e6f11e2b8",
+      "source": "research/presentations/Factory_Relay_Adaptive_Edge_Presentation.pdf",
+      "date": null,
+      "status": "Earlier proposal",
+      "description": "Eight-slide proposal deck. It describes planned research, not delivered translation or learning. Its milestone schedule predates the current six-sprint forecast; the document itself has no verified date."
+    },
+    {
+      "documentId": "presentation",
+      "label": "PowerPoint",
+      "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pptx",
+      "format": "PPTX",
+      "bytes": 60583,
+      "sha256": "3b79f25b40fc5de2ee2e0d22222c51593cbaa8d3b663413e9666cc77cacc3ac3",
+      "source": "research/presentations/Factory_Relay_Adaptive_Edge_Presentation.pptx",
+      "date": null,
+      "status": "Earlier proposal",
+      "description": "Eight-slide proposal deck. It describes planned research, not delivered translation or learning. Its milestone schedule predates the current six-sprint forecast; the document itself has no verified date."
+    },
+    {
+      "documentId": "technical-report",
+      "label": "PDF",
+      "href": "documents/Factory_Relay_Technical_Report.pdf",
+      "format": "PDF",
+      "bytes": 1480306,
+      "sha256": "eaefee178a44ffdc1c54891f89a64608c4d79b0b834c1249697e21844b9e09a8",
+      "source": "research/documentation/Factory_Relay_Technical_Report.pdf",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Implementation report and game screenshots from the 13 October PurePolyglot baseline. Earlier paths, branding, test totals and setup details are preserved as history. Use the current repository and LAN guide for the standalone release."
+    },
+    {
+      "documentId": "technical-report",
+      "label": "Word",
+      "href": "documents/Factory_Relay_Technical_Report.docx",
+      "format": "DOCX",
+      "bytes": 367733,
+      "sha256": "2499479ffe25254f519c465ad1f379d39907784482d4866a64868755c871c805",
+      "source": "research/documentation/Factory_Relay_Technical_Report.docx",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Implementation report and game screenshots from the 13 October PurePolyglot baseline. Earlier paths, branding, test totals and setup details are preserved as history. Use the current repository and LAN guide for the standalone release."
+    },
+    {
+      "documentId": "user-manual",
+      "label": "PDF",
+      "href": "documents/Factory_Relay_User_Manual.pdf",
+      "format": "PDF",
+      "bytes": 1451020,
+      "sha256": "643dfa99b2340df87867104c188202ef45538969825f3f272804933a757a4600",
+      "source": "research/documentation/Factory_Relay_User_Manual.pdf",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Player and facilitator guide from the 13 October PurePolyglot baseline. Screenshots and terminology predate the standalone project. Consult the current repository LAN guide for present setup instructions."
+    },
+    {
+      "documentId": "user-manual",
+      "label": "Word",
+      "href": "documents/Factory_Relay_User_Manual.docx",
+      "format": "DOCX",
+      "bytes": 399404,
+      "sha256": "2f0c8ebcb2f1862b0ad633ea6e2cad86ced4ada11497aa95b41c44f9b07d3e31",
+      "source": "research/documentation/Factory_Relay_User_Manual.docx",
+      "date": "2026-10-13",
+      "status": "Historical",
+      "description": "Player and facilitator guide from the 13 October PurePolyglot baseline. Screenshots and terminology predate the standalone project. Consult the current repository LAN guide for present setup instructions."
+    }
+  ]
+}
