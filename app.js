@@ -97,18 +97,18 @@ function renderBoard() {
   bindTextFilter('board-search', value => {boardSearch=value; renderBoard();});
   for (const [id, setter] of [['sprint-filter',v=>sprintFilter=v],['priority-filter',v=>priorityFilter=v],['status-filter',v=>statusFilter=v]]) document.getElementById(id).addEventListener('change', event=>{setter(event.target.value);renderBoard();});
 }
-function fileLink(file) {
-  return `<a class="btn secondary small" href="${safeUrl(file.href)}" target="_blank" rel="noopener" ${/pdf/i.test(file.format) ? '' : 'download'}>${esc(file.label || file.format.toUpperCase())}${icon(/pdf/i.test(file.format) ? 'external' : 'document')}</a>`;
+function documentLink(link) {
+  return `<a class="btn secondary small" href="${safeUrl(link.href)}" target="_blank" rel="noopener">${esc(link.label)}${icon('external')}</a>`;
 }
 function documentCard(doc) {
   const historical = /historical|archive|earlier/i.test(doc.status);
-  return `<article class="document-card"><div class="document-top"><span class="document-icon">${icon('document')}</span>${tag(historical ? 'Earlier baseline' : doc.status || 'Current', historical ? 'amber' : 'teal')}</div><span class="eyebrow">${esc(doc.category)}</span><h2>${esc(doc.title)}</h2><p>${esc(doc.description)}</p><div class="card-meta"><span>${esc(doc.date ? prettyDate(doc.date) : doc.dateLabel || 'Date not verified')}</span><span>${doc.files.length} ${doc.files.length === 1 ? 'format' : 'formats'}</span></div><div class="document-actions">${doc.files.map(fileLink).join('')}</div></article>`;
+  return `<article class="document-card"><div class="document-top"><span class="document-icon">${icon('document')}</span>${tag(historical ? 'Earlier baseline' : doc.status || 'Current', historical ? 'amber' : 'teal')}</div><span class="eyebrow">${esc(doc.category)}</span><h2>${esc(doc.title)}</h2><p>${esc(doc.description)}</p><div class="card-meta"><span>${esc(doc.date ? prettyDate(doc.date) : doc.dateLabel || 'Date not verified')}</span><span>${esc(doc.link.provider)}</span></div><div class="document-actions">${documentLink(doc.link)}</div></article>`;
 }
 function renderDocuments() {
   const categories = [...new Set(data.documents.map(d=>d.category))];
   const q = docSearch.toLowerCase();
   const docs = data.documents.filter(d=>(!docCategory || d.category === docCategory) && `${d.title} ${d.description} ${d.category}`.toLowerCase().includes(q));
-  main.innerHTML = heading('THE DOCUMENT LIBRARY', 'Find it. Read it. Use it.', 'The working plan and selected course documents, with their dates and scope kept visible.') +
+  main.innerHTML = heading('THE DOCUMENT LIBRARY', 'Find it. Read it. Use it.', 'Open the team’s shared Google Drive files in a new tab. Access follows each file’s sharing settings.') +
     `<div class="toolbar"><div class="filter-group"><label class="sr-only" for="doc-search">Search documents</label><input type="search" id="doc-search" value="${esc(docSearch)}" placeholder="Search the library…"><label class="sr-only" for="doc-category">Document category</label><select id="doc-category">${options(categories,docCategory,'All documents')}</select></div><span class="muted">${docs.length} document groups</span></div><div class="document-grid">${docs.map(documentCard).join('') || '<div class="empty-state">No documents match. Try a different title or category.</div>'}</div><div class="notice">${icon('document')}<div><strong>Use the current team plan for delivery status.</strong><span>Earlier proposals describe intended features. The historical report and manual describe the 13 October baseline. Translation and local learning remain planned work.</span></div></div>`;
   bindTextFilter('doc-search',value=>{docSearch=value;renderDocuments();});
   document.getElementById('doc-category').addEventListener('change',e=>{docCategory=e.target.value;renderDocuments();});
@@ -174,7 +174,7 @@ function showGuide() {
       <li>Keep one status label: Backlog, Ready, In progress, Review, Blocked or Deferred. Close the story after its acceptance criteria and review are complete.</li>
       <li>Refresh the portal after synchronization and deployment finish. The board is a published snapshot, so changes are not instant.</li>
     </ol>
-    <p>The portal and its downloads are public. Updating private Issues requires your team invitation; a private link may show 404 if you are signed out or lack access. Individual task owners and reviewers stay in the issue discussion.</p>
+    <p>The portal is public. Documents open in Google Drive with their own sharing settings. Updating private Issues requires your team invitation; a private link may show 404 if you are signed out or lack access. Individual task owners and reviewers stay in the issue discussion.</p>
     <h3>For the project owner</h3>
     <p>The shared board has <strong>22 story issues and 83 task checkboxes</strong>. Members choose their work; creating the board did not assign anyone.</p>
     <p>Issue changes run <strong>Sync Factory Relay board to public portal</strong> in the ${external(`${REPO}/actions`, 'private repository')}. The resulting board snapshot triggers <strong>Deploy Factory Relay team portal</strong> in the public <strong>factoryrelay-team</strong> repository. If updates stop appearing, check both workflow runs.</p>

@@ -6,9 +6,9 @@
     "title": "21 October 2026 team-plan baseline",
     "sourceRevision": "9b1c115",
     "applicationRevision": "6d7058425bf3485bf88dfab1760dbd8dc5e9ca5d",
-    "note": "This is a dated planning snapshot. Changes to a downloaded workbook or local board do not update teammates automatically. Shared issue state, when configured, is a separate source.",
+    "note": "This is a dated planning snapshot. Editing the linked Google Drive files does not automatically update this snapshot or GitHub Issues. Shared issue state is a separate source.",
     "forecastNote": "Six proposed two-week sprints are a forecast, not a committed calendar. Reforecast against the actual course deadline and team capacity.",
-    "documentNote": "Curated course files are bundled here. Earlier proposal, presentation, report and manual cards explicitly identify historical status. Background chats and the wider research archive are not included."
+    "documentNote": "Selected course documents open in Google Drive. Access follows each file's Google sharing settings. Earlier proposal, presentation, report and manual cards explicitly identify historical status. Document files are not bundled with this website."
   },
   "summary": {
     "stories": 22,
@@ -26,7 +26,7 @@
       "url": "https://github.com/toecm/factoryrelay-team",
       "kind": "Website",
       "visibility": "Public",
-      "note": "Hosts this portal and its selected documents on GitHub Pages. Task editing stays in the private project repository."
+      "note": "Hosts this portal on GitHub Pages with links to the selected Google Drive documents. Task editing stays in the private project repository."
     },
     {
       "id": "game",
@@ -148,7 +148,7 @@
       "item": "Dedicated research folder",
       "status": "Organized locally",
       "evidence": "research/ contains proposals, presentations, background, reports/manual, team plan, screenshots and historical migration evidence. 159 files were moved with hash verification.",
-      "limit": "The original research archive remains local and excluded from application packages. This portal bundles selected course artifacts only. Historical report/manual describe 13 October, not the research extension."
+      "limit": "The original research archive remains local and excluded from application packages. This portal links to selected course documents in Google Drive. Historical report/manual describe 13 October, not the research extension."
     }
   ],
   "remainingCapabilities": [
@@ -2353,22 +2353,11 @@
       "date": "2026-10-21",
       "status": "Current",
       "description": "Nine-page plan for the three-member team: current baseline, self-selected work, sprint forecast, evaluation, deliverables and risks.",
-      "files": [
-        {
-          "label": "PDF",
-          "href": "documents/Factory_Relay_Team_Implementation_Plan.pdf",
-          "format": "PDF",
-          "bytes": 1183720,
-          "sha256": "1c52069d11dab40f0543879fb7635e2acd5398d3123baa0622b32b2bf6a7ea24"
-        },
-        {
-          "label": "Word",
-          "href": "documents/Factory_Relay_Team_Implementation_Plan.docx",
-          "format": "DOCX",
-          "bytes": 49838,
-          "sha256": "8251a5a9ed62a5b5e20b0fa6d9e0e28c4935b9f807fad7e3d378dd2ba9877ddd"
-        }
-      ]
+      "link": {
+        "href": "https://docs.google.com/document/d/1KwRlp7MBw390ATHdlGqkU0L454Nrg9ME/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Docs",
+        "provider": "Google Docs"
+      }
     },
     {
       "id": "scrum-workbook",
@@ -2376,16 +2365,12 @@
       "category": "Team plan",
       "date": "2026-10-21",
       "status": "Current snapshot",
-      "description": "Fourteen sheets with 22 stories, 83 tasks, eight baseline records, course evidence and research trackers. Downloaded copies do not synchronize automatically.",
-      "files": [
-        {
-          "label": "Excel",
-          "href": "documents/Factory_Relay_Scrum_Backlog.xlsx",
-          "format": "XLSX",
-          "bytes": 53406,
-          "sha256": "55e47326411e47e44cd9ea8af325ba2adec72a9b4bbbf0321971d118e4bc67a7"
-        }
-      ]
+      "description": "Fourteen sheets with 22 stories, 83 tasks, eight baseline records, course evidence and research trackers. Changes in Google Sheets do not automatically update this portal or GitHub Issues.",
+      "link": {
+        "href": "https://docs.google.com/spreadsheets/d/1Aq7vdfQrljMN5djOaWuvP0G82mTyYGhX/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Sheets",
+        "provider": "Google Sheets"
+      }
     },
     {
       "id": "backlog-csv",
@@ -2394,15 +2379,11 @@
       "date": "2026-10-21",
       "status": "Current snapshot",
       "description": "The 22 remaining stories with acceptance criteria, dependencies, priorities and deliverables. Completed baseline work is recorded separately.",
-      "files": [
-        {
-          "label": "CSV",
-          "href": "documents/Factory_Relay_Backlog.csv",
-          "format": "CSV",
-          "bytes": 30515,
-          "sha256": "fcd806149769a543fff1fdc33846576baff973017c3113b03eaf4aa94d54c452"
-        }
-      ]
+      "link": {
+        "href": "https://drive.google.com/file/d/1KFUzt4Qjd6RabX3z2ZMUJ-Cek3ydfWZ9/view?usp=sharing",
+        "label": "Open in Google Drive",
+        "provider": "Google Drive"
+      }
     },
     {
       "id": "tasks-csv",
@@ -2411,15 +2392,11 @@
       "date": "2026-10-21",
       "status": "Current snapshot",
       "description": "Eighty-three tasks ready for members to select. Owners and reviewers are intentionally unassigned in the initial plan.",
-      "files": [
-        {
-          "label": "CSV",
-          "href": "documents/Factory_Relay_Tasks.csv",
-          "format": "CSV",
-          "bytes": 14230,
-          "sha256": "3b20eb3259d24d7e9bc51548c14e25f1900660f18c5c28bcceda96120e6f7a42"
-        }
-      ]
+      "link": {
+        "href": "https://drive.google.com/file/d/12TvNuVaHL7pKnKosOFWgexfls0sLnFcs/view?usp=sharing",
+        "label": "Open in Google Drive",
+        "provider": "Google Drive"
+      }
     },
     {
       "id": "status-csv",
@@ -2428,15 +2405,11 @@
       "date": "2026-10-21",
       "status": "Current snapshot",
       "description": "Eight baseline records distinguish implemented software and publication evidence from remaining research work.",
-      "files": [
-        {
-          "label": "CSV",
-          "href": "documents/Factory_Relay_Current_Status.csv",
-          "format": "CSV",
-          "bytes": 2714,
-          "sha256": "c42eef7c3bbf1027bb31c22fbf932d93dbb703e874f1648eaf83d6618da96c54"
-        }
-      ]
+      "link": {
+        "href": "https://drive.google.com/file/d/1Ri-SIZiMs7aDuOwmDziDRtsfMPQbv7zf/view?usp=sharing",
+        "label": "Open in Google Drive",
+        "provider": "Google Drive"
+      }
     },
     {
       "id": "proposal",
@@ -2445,22 +2418,11 @@
       "date": "2026-10-08",
       "status": "Earlier proposal",
       "description": "Latest existing proposal revision, with an 8 October baseline. Translation, adaptation and hardware integration describe intended work. Its WebRTC/offline assumptions and PurePolyglot references are historical; use the 21 October team plan for current implementation status.",
-      "files": [
-        {
-          "label": "PDF",
-          "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.pdf",
-          "format": "PDF",
-          "bytes": 1168755,
-          "sha256": "846717a1fe9e3e0204e10845e11a64ac38d292d871b0ff42a46d490c6bb5f63f"
-        },
-        {
-          "label": "Word",
-          "href": "documents/Factory_Relay_Proposal_Two_Device_Offline.docx",
-          "format": "DOCX",
-          "bytes": 36357,
-          "sha256": "b697be6e1f60dd6e4e2ba1ae5b64587698efa299c078a14470588c26c065cc6d"
-        }
-      ]
+      "link": {
+        "href": "https://docs.google.com/document/d/1aJPB2wxe3SFyAleRqN7H5LlV0ds-lD6x/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Docs",
+        "provider": "Google Docs"
+      }
     },
     {
       "id": "presentation",
@@ -2470,22 +2432,11 @@
       "dateLabel": "Earlier proposal deck",
       "status": "Earlier proposal",
       "description": "Eight-slide proposal deck. It describes planned research, not delivered translation or learning. Its milestone schedule predates the current six-sprint forecast; the document itself has no verified date.",
-      "files": [
-        {
-          "label": "PDF",
-          "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pdf",
-          "format": "PDF",
-          "bytes": 1174274,
-          "sha256": "1df576734644e088f568ed1b3fee7e233b98bec596a63075e623984e6f11e2b8"
-        },
-        {
-          "label": "PowerPoint",
-          "href": "documents/Factory_Relay_Adaptive_Edge_Presentation.pptx",
-          "format": "PPTX",
-          "bytes": 60583,
-          "sha256": "3b79f25b40fc5de2ee2e0d22222c51593cbaa8d3b663413e9666cc77cacc3ac3"
-        }
-      ]
+      "link": {
+        "href": "https://docs.google.com/presentation/d/16UotXSiFlptzerqvwhXhckyWHuJqB04CMS5qMHlZi1g/edit?usp=sharing",
+        "label": "Open in Google Slides",
+        "provider": "Google Slides"
+      }
     },
     {
       "id": "technical-report",
@@ -2494,22 +2445,11 @@
       "date": "2026-10-13",
       "status": "Historical",
       "description": "Implementation report and game screenshots from the 13 October PurePolyglot baseline. Earlier paths, branding, test totals and setup details are preserved as history. Use the current repository and LAN guide for the standalone release.",
-      "files": [
-        {
-          "label": "PDF",
-          "href": "documents/Factory_Relay_Technical_Report.pdf",
-          "format": "PDF",
-          "bytes": 1480306,
-          "sha256": "eaefee178a44ffdc1c54891f89a64608c4d79b0b834c1249697e21844b9e09a8"
-        },
-        {
-          "label": "Word",
-          "href": "documents/Factory_Relay_Technical_Report.docx",
-          "format": "DOCX",
-          "bytes": 367733,
-          "sha256": "2499479ffe25254f519c465ad1f379d39907784482d4866a64868755c871c805"
-        }
-      ]
+      "link": {
+        "href": "https://docs.google.com/document/d/1Oa0uHe8665uH8g95tJ9dXdCLFuepzDeH/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Docs",
+        "provider": "Google Docs"
+      }
     },
     {
       "id": "user-manual",
@@ -2518,22 +2458,11 @@
       "date": "2026-10-13",
       "status": "Historical",
       "description": "Player and facilitator guide from the 13 October PurePolyglot baseline. Screenshots and terminology predate the standalone project. Consult the current repository LAN guide for present setup instructions.",
-      "files": [
-        {
-          "label": "PDF",
-          "href": "documents/Factory_Relay_User_Manual.pdf",
-          "format": "PDF",
-          "bytes": 1451020,
-          "sha256": "643dfa99b2340df87867104c188202ef45538969825f3f272804933a757a4600"
-        },
-        {
-          "label": "Word",
-          "href": "documents/Factory_Relay_User_Manual.docx",
-          "format": "DOCX",
-          "bytes": 399404,
-          "sha256": "2f0c8ebcb2f1862b0ad633ea6e2cad86ced4ada11497aa95b41c44f9b07d3e31"
-        }
-      ]
+      "link": {
+        "href": "https://docs.google.com/document/d/1sQNovE9HbFqJwqayxxJbug-Owsx_9v51/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Docs",
+        "provider": "Google Docs"
+      }
     }
   ],
   "references": [

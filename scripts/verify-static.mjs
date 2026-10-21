@@ -1,26 +1,26 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { copyFile, lstat, mkdir, readFile, readdir, realpath, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DOCUMENTS = Object.freeze([
-  'Factory_Relay_Adaptive_Edge_Presentation.pdf', 'Factory_Relay_Adaptive_Edge_Presentation.pptx',
-  'Factory_Relay_Backlog.csv', 'Factory_Relay_Current_Status.csv',
-  'Factory_Relay_Proposal_Two_Device_Offline.docx', 'Factory_Relay_Proposal_Two_Device_Offline.pdf',
-  'Factory_Relay_Scrum_Backlog.xlsx', 'Factory_Relay_Tasks.csv',
-  'Factory_Relay_Team_Implementation_Plan.docx', 'Factory_Relay_Team_Implementation_Plan.pdf',
-  'Factory_Relay_Technical_Report.docx', 'Factory_Relay_Technical_Report.pdf',
-  'Factory_Relay_User_Manual.docx', 'Factory_Relay_User_Manual.pdf',
-].map(name => `documents/${name}`));
+const DOCUMENT_LINKS = Object.freeze({
+  'implementation-plan': 'https://docs.google.com/document/d/1KwRlp7MBw390ATHdlGqkU0L454Nrg9ME/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+  'scrum-workbook': 'https://docs.google.com/spreadsheets/d/1Aq7vdfQrljMN5djOaWuvP0G82mTyYGhX/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+  'backlog-csv': 'https://drive.google.com/file/d/1KFUzt4Qjd6RabX3z2ZMUJ-Cek3ydfWZ9/view?usp=sharing',
+  'tasks-csv': 'https://drive.google.com/file/d/12TvNuVaHL7pKnKosOFWgexfls0sLnFcs/view?usp=sharing',
+  'status-csv': 'https://drive.google.com/file/d/1Ri-SIZiMs7aDuOwmDziDRtsfMPQbv7zf/view?usp=sharing',
+  proposal: 'https://docs.google.com/document/d/1aJPB2wxe3SFyAleRqN7H5LlV0ds-lD6x/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+  presentation: 'https://docs.google.com/presentation/d/16UotXSiFlptzerqvwhXhckyWHuJqB04CMS5qMHlZi1g/edit?usp=sharing',
+  'technical-report': 'https://docs.google.com/document/d/1Oa0uHe8665uH8g95tJ9dXdCLFuepzDeH/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+  'user-manual': 'https://docs.google.com/document/d/1sQNovE9HbFqJwqayxxJbug-Owsx_9v51/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+});
 export const WEBSITE_FILES = Object.freeze([
   '.nojekyll', 'README.md', 'index.html', 'app.js', 'styles.css', 'assets/logo.svg',
-  'data/documents-manifest.json', 'data/portal-data.json', 'data/github-board.json', ...DOCUMENTS,
+  'data/documents-manifest.json', 'data/portal-data.json', 'data/github-board.json',
 ]);
 
 const readJson = async file => JSON.parse((await readFile(file, 'utf8')).replace(/^\uFEFF/, ''));
-const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const isoDate = value => typeof value === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(value) && !Number.isNaN(Date.parse(value));
 
 function exactKeys(object, keys) {
@@ -58,6 +58,8 @@ function validateBoard(board, stories) {
 
 export async function verify(rootPath = ROOT) {
   const root = await realpath(rootPath);
+  const documentsPath = await lstat(path.join(root, 'documents')).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+  assert.equal(documentsPath, null, 'Remove documents/ before publishing; the library uses external Google Drive links');
   // Reject symlinks at every website path component, including its directories.
   for (const name of WEBSITE_FILES) {
     let current = root;
@@ -70,7 +72,7 @@ export async function verify(rootPath = ROOT) {
     assert.equal(await realpath(current), current, `Asset escapes website root: ${name}`);
   }
   // Website subdirectories must contain only the allowlisted files.
-  for (const directory of ['assets', 'data', 'documents']) {
+  for (const directory of ['assets', 'data']) {
     const expected = WEBSITE_FILES.filter(name => name.startsWith(`${directory}/`)).map(name => name.slice(directory.length + 1)).sort();
     assert.deepEqual((await readdir(path.join(root, directory))).sort(), expected, `Unexpected files in ${directory}/`);
   }
@@ -102,21 +104,30 @@ export async function verify(rootPath = ROOT) {
   for (const resource of data.resources) assert.equal(new URL(resource.url).protocol, 'https:');
   assert(!/\b[A-Z]:[\\/]|\.release[\\/]/i.test(JSON.stringify(data)), 'Local/private evidence path in public data');
   validateBoard(board, data.stories);
-  assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.files.length, 14);
-  const declared = data.documents.flatMap(document => document.files);
-  assert.deepEqual(declared.map(file => file.href).sort(), [...DOCUMENTS].sort());
-  assert.deepEqual(manifest.files.map(file => file.href).sort(), [...DOCUMENTS].sort());
-  for (const file of manifest.files) {
-    assert(/^[a-f0-9]{64}$/.test(file.sha256));
-    const bytes = await readFile(path.join(root, file.href));
-    assert.equal(bytes.length, file.bytes, `Document size differs: ${file.href}`);
-    assert.equal(sha256(bytes), file.sha256, `Document hash differs: ${file.href}`);
-    const declaration = declared.find(item => item.href === file.href);
-    assert.equal(declaration.sha256, file.sha256);
-    assert.equal(declaration.bytes, file.bytes);
+  assert.equal(manifest.schemaVersion, 2);
+  assert.equal(manifest.mode, 'external-links');
+  assert.equal(Object.hasOwn(manifest, 'files'), false, 'Manifest retains downloadable files');
+  assert.equal(manifest.documents.length, 9);
+  assert.equal(data.documents.length, 9);
+  assert.deepEqual(data.documents.map(document => document.id).sort(), Object.keys(DOCUMENT_LINKS).sort());
+  const declared = [];
+  for (const document of data.documents) {
+    assert.equal(Object.hasOwn(document, 'files'), false, `${document.id} retains downloadable files`);
+    exactKeys(document.link, ['href', 'label', 'provider']);
+    assert.equal(document.link.href, DOCUMENT_LINKS[document.id], `Incorrect Google Drive destination: ${document.id}`);
+    const url = new URL(document.link.href);
+    assert.equal(url.protocol, 'https:');
+    assert(['docs.google.com', 'drive.google.com'].includes(url.hostname));
+    const provider = url.hostname === 'drive.google.com' ? 'Google Drive'
+      : url.pathname.startsWith('/spreadsheets/') ? 'Google Sheets'
+      : url.pathname.startsWith('/presentation/') ? 'Google Slides' : 'Google Docs';
+    assert.equal(document.link.provider, provider);
+    assert.equal(document.link.label, `Open in ${provider}`);
+    declared.push({ id: document.id, ...document.link });
   }
-  return { root, files: WEBSITE_FILES.length, documents: manifest.files.length, stories: data.stories.length, tasks: data.tasks.length, boardItems: board.items.length };
+  for (const document of manifest.documents) exactKeys(document, ['id', 'href', 'label', 'provider']);
+  assert.deepEqual(manifest.documents, declared, 'Document manifest differs from portal links');
+  return { root, files: WEBSITE_FILES.length, documents: manifest.documents.length, stories: data.stories.length, tasks: data.tasks.length, boardItems: board.items.length };
 }
 
 export async function stage(rootPath = ROOT) {

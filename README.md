@@ -2,8 +2,8 @@
 
 The three-member PBL team's document library, Scrum board, project links,
 six-sprint forecast and course-evidence dashboard. The planning baseline is
-**21 October 2026: 22 stories, 83 tasks, 8 baseline records and 14 downloadable
-document files**. Earlier proposals, reports and manuals are labeled with their
+**21 October 2026: 22 stories, 83 tasks and 8 baseline records**. The document
+library links to nine shared Google Drive files. Earlier proposals, reports and manuals are labeled with their
 historical scope.
 
 The configured GitHub Pages address is
@@ -15,7 +15,7 @@ new installation as live.
 
 | Location | Visibility | Purpose |
 | --- | --- | --- |
-| [factoryrelay-team](https://github.com/toecm/factoryrelay-team) | Public | Static website, selected documents and public board snapshot. |
+| [factoryrelay-team](https://github.com/toecm/factoryrelay-team) | Public | Static website, Google Drive document links and public board snapshot. |
 | [factoryrelay](https://github.com/toecm/factoryrelay) | Private | Game source, portal source, publishing tools and shared Issues. |
 | [Factory Relay game](https://factoryrelay.vercel.app/) | Public | Play the separately deployed game. |
 
@@ -27,15 +27,18 @@ hosting from the private repository. See
 The canonical local source is `FactoryRelay/team-portal/`, inside the private
 Factory Relay project. The public repository contains a reviewed static copy at
 its root, plus its static verifier and Pages workflow. The website package has
-23 files, including the 14 selected documents. Only the explicit website files
+9 files, including the document-link manifest. Document binaries are not bundled.
+Only the explicit website files
 are uploaded as the Pages artifact; repository internals and deployment tools
 are excluded.
 
 ## Use the workspace from home or the lab
 
 Open the Pages URL in any browser with internet access. No local server,
-installation or GitHub login is needed to browse the public website and its
-downloads. The owner's computer does not need to remain running.
+installation or GitHub login is needed to browse the public website. Document
+buttons open Google Docs, Sheets, Slides or Drive in a new tab. Each file's
+Google Drive sharing settings control access; the owner must share it with the
+intended teammates. The owner's computer does not need to remain running.
 
 To update work, open a story's **Open / update on GitHub** link and sign in with
 your own account invited to the private `factoryrelay` repository. Accept that
@@ -44,8 +47,9 @@ access. The public website does not grant private-repository or Hugging Face
 Space access; those permissions remain separate.
 
 Everything in the public repository and deployed website is publicly readable,
-including the selected course documents, plan and exported board fields. The
-browser never requests or stores a GitHub token.
+including document titles and links, the planning snapshot and exported board
+fields. Linked documents retain their own Google Drive permissions. The browser
+never requests or stores a GitHub token.
 
 ## Update the shared Scrum board
 
@@ -79,7 +83,8 @@ finish.
 An unchecked task follows its open parent story's status; a checked task displays
 Done. If its parent is closed while that task remains unchecked, the task stays
 Backlog. Sprint, priority, reviewer and acceptance text come from the versioned
-plan. Editing a downloaded CSV or workbook does not update GitHub.
+plan. Editing a linked Google Drive file or workbook does not update GitHub or
+the portal's versioned planning snapshot.
 
 ## How the two-repository synchronization works
 
@@ -97,8 +102,8 @@ plan. Editing a downloaded CSV or workbook does not update GitHub.
 
 The exported fields are managed story IDs, status, GitHub login assignees, task
 checkbox states, issue numbers/links and update timestamps. Issue bodies,
-comments, evidence attachments and emails are not exported. The selected plan
-and course documents are already part of the public website.
+comments, evidence attachments and emails are not exported. The portal publishes
+the selected document links; Google Drive serves the document contents.
 
 This is not instant editing or live chat. If either workflow fails, the last
 successfully published snapshot remains visible. Check Actions in both
@@ -114,7 +119,7 @@ do not need credentials or deployment permissions to use the board.
 ### Public repository: `toecm/factoryrelay-team`
 
 1. Keep `index.html`, `app.js`, `styles.css`, `README.md`, `.nojekyll`, `assets/`,
-   `data/` and the curated `documents/` at the repository root. Keep the provided
+   and `data/` at the repository root. Keep the provided
    `scripts/verify-static.mjs` and Pages workflow in their respective folders.
 2. In **Settings → Pages**, select **GitHub Actions** as the publishing source.
 3. Under **Settings → Secrets and variables → Actions → Variables**, set
@@ -190,28 +195,34 @@ the browser needs HTTP to load the JSON files. Relative asset paths support the
 Update the canonical source under the private project's `team-portal/` folder.
 `data/portal-data.json` contains the planning baseline. Automatic Issue
 synchronization updates only the public `data/github-board.json`; it does not
-publish changed documents, page code or new story definitions.
+publish changed page code, document links or new story definitions. Edits to a
+Google Drive file are visible when opening that same link; changing its URL
+requires a portal update.
 
-The owner's workspace can refresh the selected research documents and plan:
+The owner's workspace can refresh the document links and planning snapshot:
 
 ```powershell
 npm run portal:prepare
 npm run portal:verify
 ```
 
-`research/` remains ignored by Git. The prepare script copies only explicitly
-listed documents. Verification checks their hashes against
-`data/documents-manifest.json` and rejects unlisted document files. Company chat
-screenshots, participant/session data, credentials, private deployment receipts
-and the unselected research archive are excluded.
+`research/` remains ignored by Git and retains the original local research files.
+The prepare script reads the planning records and writes the nine explicit
+Google Drive links in `scripts/prepare-team-portal.mjs`. Verification compares
+each link, label and provider with `data/documents-manifest.json` (schema 2,
+`external-links`). It does not fetch document contents or change Drive sharing.
+No PDF, Office or CSV document copies are included in the website package.
+The public verifier rejects a leftover `documents/` directory.
 
 Review changes, commit the source in the private repository, then update the
 corresponding website files in the public repository. Preserve its latest
 `data/github-board.json` instead of replacing it with an older local snapshot.
 Keep its verifier and Pages workflow in place. When story definitions change,
 update `data/portal-data.json` in both repositories before running seeding and
-synchronization. New document selections must be added explicitly to the
-manifest and packaging rules.
+synchronization. To change a document destination, update its entry in
+`scripts/prepare-team-portal.mjs`, regenerate the JSON, and update the expected
+link mapping in the browser checks and public static verifier. Review sharing
+in Google Drive separately; publishing a link does not grant access to its file.
 
 In the private project, validate with:
 
@@ -230,7 +241,7 @@ node scripts/verify-static.mjs
 ```
 
 Browser checks cover desktop/mobile layouts, navigation, board filters,
-story/task details, search, downloads and the project-site path. Local checks
+story/task details, search, Google Drive link destinations and the project-site path. Local checks
 alone do not establish that the remote website is live; inspect the successful
 Pages deployment and its served files as well.
 
