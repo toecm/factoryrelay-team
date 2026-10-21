@@ -36,7 +36,8 @@ are excluded.
 
 Open the Pages URL in any browser with internet access. No local server,
 installation or GitHub login is needed to browse the public website. Document
-buttons open Google Docs, Sheets, Slides or Drive in a new tab. Each file's
+cards offer **Preview** in an embedded window and a Google Docs, Sheets, Slides
+or Drive button for opening the file in a new tab. Each file's
 Google Drive sharing settings control access; the owner must share it with the
 intended teammates. The owner's computer does not need to remain running.
 
@@ -50,6 +51,29 @@ Everything in the public repository and deployed website is publicly readable,
 including document titles and links, the planning snapshot and exported board
 fields. Linked documents retain their own Google Drive permissions. The browser
 never requests or stores a GitHub token.
+
+## Preview a document
+
+1. Open **Document library** and select **Preview** on a card or search result.
+2. Read or scroll the Google viewer inside the window. The portal remains on the
+   same page with its search and category filters preserved.
+3. Select **Close** to return. Escape closes the window when keyboard focus is
+   outside Google's embedded viewer; the Close button remains available while
+   focus is inside it. Closing removes the iframe and returns focus to Preview.
+4. If the viewer is blank, unavailable or requests access, use **Open in Google
+   Docs/Sheets/Slides/Drive** to sign in or request permission in a separate tab.
+
+The iframe is created only after Preview is selected. Viewing requires internet
+access and contacts Google directly; no document bytes or account credentials
+are proxied through GitHub Pages. File sharing and browser cookie restrictions
+can affect embedded viewing. A frame load event does not prove that its contents
+are accessible. Preview does not change sharing permissions or enable offline
+document viewing. The game's local LAN mode is a separate feature.
+
+Viewer URLs are derived from the nine allowlisted file IDs, using Drive's
+`/file/d/ID/preview` viewer for uploaded files and the Slides `/preview` endpoint
+for the presentation. The page CSP permits frames only from `drive.google.com`
+and `docs.google.com`. Editing uses the original Google button.
 
 ## Update the shared Scrum board
 
@@ -241,7 +265,9 @@ node scripts/verify-static.mjs
 ```
 
 Browser checks cover desktop/mobile layouts, navigation, board filters,
-story/task details, search, Google Drive link destinations and the project-site path. Local checks
+story/task details, search, Google Drive link destinations, on-demand preview
+loading, close/focus behavior and the project-site path. Local iframe tests use
+a clearly labeled fixture and do not prove access to the real Google viewer. Local checks
 alone do not establish that the remote website is live; inspect the successful
 Pages deployment and its served files as well.
 

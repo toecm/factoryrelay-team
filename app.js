@@ -39,6 +39,8 @@ let data, snapshot = {enabled:false, items:[]};
 let route = 'overview', boardKind = 'stories', boardSearch = '', sprintFilter = '', priorityFilter = '', statusFilter = '', docCategory = '', docSearch = '', globalQuery = '';
 const main = document.getElementById('main-content');
 const dialog = document.getElementById('detail-dialog');
+const previewDialog = document.getElementById('document-preview-dialog');
+let previewTrigger = null;
 
 function githubRecord(id) { return snapshot.items.find(item => item.id === id); }
 function storyState(story) {
@@ -100,16 +102,50 @@ function renderBoard() {
 function documentLink(link) {
   return `<a class="btn secondary small" href="${safeUrl(link.href)}" target="_blank" rel="noopener">${esc(link.label)}${icon('external')}</a>`;
 }
+function documentPreviewUrl(link) {
+  // Build a viewer URL from an allowed Google file path, never an arbitrary embed URL.
+  try {
+    const url = new URL(link.href);
+    if (url.protocol !== 'https:' || url.port || url.username || url.password) return null;
+    const pattern = url.hostname === 'drive.google.com' ? /^\/file\/d\/([A-Za-z0-9_-]+)(?:\/|$)/ : url.hostname === 'docs.google.com' ? /^\/(document|spreadsheets|presentation)\/d\/([A-Za-z0-9_-]+)(?:\/|$)/ : null;
+    const match = pattern && url.pathname.match(pattern);
+    if (!match) return null;
+    const id = url.hostname === 'drive.google.com' ? match[1] : match[2];
+    return match[1] === 'presentation' && url.hostname === 'docs.google.com'
+      ? `https://docs.google.com/presentation/d/${id}/preview`
+      : `https://drive.google.com/file/d/${id}/preview`;
+  } catch { return null; }
+}
+function showDocumentPreview(id, trigger) {
+  const doc = data.documents.find(item => item.id === id);
+  const url = doc && documentPreviewUrl(doc.link);
+  if (!url) return toast('A preview is not available. Use the document’s Google Drive button.');
+  previewTrigger = trigger;
+  document.getElementById('document-preview-title').textContent = doc.title;
+  const openLink = document.getElementById('document-preview-open');
+  openLink.href = doc.link.href;
+  openLink.textContent = doc.link.label;
+  const frame = document.createElement('iframe');
+  frame.title = `Google document preview: ${doc.title}`;
+  frame.referrerPolicy = 'no-referrer';
+  frame.loading = 'lazy';
+  frame.src = url;
+  // The iframe is created only after an explicit click and removed when closed.
+  // Cross-origin load events cannot establish whether a file is readable.
+  document.getElementById('document-preview-frame').replaceChildren(frame);
+  document.documentElement.classList.add('has-document-preview');
+  previewDialog.showModal();
+}
 function documentCard(doc) {
   const historical = /historical|archive|earlier/i.test(doc.status);
-  return `<article class="document-card"><div class="document-top"><span class="document-icon">${icon('document')}</span>${tag(historical ? 'Earlier baseline' : doc.status || 'Current', historical ? 'amber' : 'teal')}</div><span class="eyebrow">${esc(doc.category)}</span><h2>${esc(doc.title)}</h2><p>${esc(doc.description)}</p><div class="card-meta"><span>${esc(doc.date ? prettyDate(doc.date) : doc.dateLabel || 'Date not verified')}</span><span>${esc(doc.link.provider)}</span></div><div class="document-actions">${documentLink(doc.link)}</div></article>`;
+  return `<article class="document-card"><div class="document-top"><span class="document-icon">${icon('document')}</span>${tag(historical ? 'Earlier baseline' : doc.status || 'Current', historical ? 'amber' : 'teal')}</div><span class="eyebrow">${esc(doc.category)}</span><h2>${esc(doc.title)}</h2><p>${esc(doc.description)}</p><div class="card-meta"><span>${esc(doc.date ? prettyDate(doc.date) : doc.dateLabel || 'Date not verified')}</span><span>${esc(doc.link.provider)}</span></div><div class="document-actions">${documentPreviewUrl(doc.link) ? `<button class="btn secondary small" data-preview="${esc(doc.id)}" aria-label="Preview ${esc(doc.title)}" aria-haspopup="dialog">Preview ${icon('document')}</button>` : ''}${documentLink(doc.link)}</div></article>`;
 }
 function renderDocuments() {
   const categories = [...new Set(data.documents.map(d=>d.category))];
   const q = docSearch.toLowerCase();
   const docs = data.documents.filter(d=>(!docCategory || d.category === docCategory) && `${d.title} ${d.description} ${d.category}`.toLowerCase().includes(q));
-  main.innerHTML = heading('THE DOCUMENT LIBRARY', 'Find it. Read it. Use it.', 'Open the team’s shared Google Drive files in a new tab. Access follows each file’s sharing settings.') +
-    `<div class="toolbar"><div class="filter-group"><label class="sr-only" for="doc-search">Search documents</label><input type="search" id="doc-search" value="${esc(docSearch)}" placeholder="Search the library…"><label class="sr-only" for="doc-category">Document category</label><select id="doc-category">${options(categories,docCategory,'All documents')}</select></div><span class="muted">${docs.length} document groups</span></div><div class="document-grid">${docs.map(documentCard).join('') || '<div class="empty-state">No documents match. Try a different title or category.</div>'}</div><div class="notice">${icon('document')}<div><strong>Use the current team plan for delivery status.</strong><span>Earlier proposals describe intended features. The historical report and manual describe the 13 October baseline. Translation and local learning remain planned work.</span></div></div>`;
+  main.innerHTML = heading('THE DOCUMENT LIBRARY', 'Find it. Read it. Use it.', 'Preview a document here or open its shared Google Drive file in a new tab. Access follows each file’s sharing settings.') +
+    `<div class="toolbar"><div class="filter-group"><label class="sr-only" for="doc-search">Search documents</label><input type="search" id="doc-search" value="${esc(docSearch)}" placeholder="Search the library…"><label class="sr-only" for="doc-category">Document category</label><select id="doc-category">${options(categories,docCategory,'All documents')}</select></div><span class="muted">${docs.length} document groups</span></div><div class="document-grid">${docs.map(documentCard).join('') || '<div class="empty-state">No documents match. Try a different title or category.</div>'}</div><div class="notice">${icon('document')}<div><strong>Use the current team plan for delivery status.</strong><span>Earlier proposals describe intended features. Check each document’s date and scope against the current standalone release. Translation and local learning remain planned work.</span></div></div>`;
   bindTextFilter('doc-search',value=>{docSearch=value;renderDocuments();});
   document.getElementById('doc-category').addEventListener('change',e=>{docCategory=e.target.value;renderDocuments();});
 }
@@ -174,7 +210,7 @@ function showGuide() {
       <li>Keep one status label: Backlog, Ready, In progress, Review, Blocked or Deferred. Close the story after its acceptance criteria and review are complete.</li>
       <li>Refresh the portal after synchronization and deployment finish. The board is a published snapshot, so changes are not instant.</li>
     </ol>
-    <p>The portal is public. Documents open in Google Drive with their own sharing settings. Updating private Issues requires your team invitation; a private link may show 404 if you are signed out or lack access. Individual task owners and reviewers stay in the issue discussion.</p>
+    <p>The portal is public. Use <strong>Preview</strong> to read a document in an embedded Google viewer, or open it in Google Drive. Previews load only when selected and follow the file’s sharing settings; use the Google button if sign-in or browser restrictions prevent the preview. Updating private Issues requires your team invitation; a private link may show 404 if you are signed out or lack access. Individual task owners and reviewers stay in the issue discussion.</p>
     <h3>For the project owner</h3>
     <p>The shared board has <strong>22 story issues and 83 task checkboxes</strong>. Members choose their work; creating the board did not assign anyone.</p>
     <p>Issue changes run <strong>Sync Factory Relay board to public portal</strong> in the ${external(`${REPO}/actions`, 'private repository')}. The resulting board snapshot triggers <strong>Deploy Factory Relay team portal</strong> in the public <strong>factoryrelay-team</strong> repository. If updates stop appearing, check both workflow runs.</p>
@@ -203,6 +239,7 @@ function exportBoard() {
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Factory_Relay_Portal_Board.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Board snapshot exported. Shared updates stay in GitHub.');
 }
 function updateRoute() {
+  if(previewDialog.open)previewDialog.close();
   const [requested, id] = location.hash.slice(1).split('/');
   route=NAV.some(n=>n[0]===requested)?requested:'overview';
   globalQuery='';document.getElementById('global-search').value='';
@@ -224,18 +261,27 @@ document.addEventListener('click', async event=>{
     sidebar.classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');event.preventDefault();return;
   }
   const story=event.target.closest('[data-story]');if(story) return showStory(story.dataset.story);
+  const preview=event.target.closest('[data-preview]');if(preview) return showDocumentPreview(preview.dataset.preview,preview);
   const task=event.target.closest('[data-task]');if(task){const t=data.tasks.find(t=>t.id===task.dataset.task);return showStory(t.storyId,t.id);}
   const kind=event.target.closest('[data-kind]');if(kind){boardKind=kind.dataset.kind;return renderBoard();}
   const copy=event.target.closest('[data-copy]');if(copy){const url=new URL(location.href);url.hash=`story/${copy.dataset.copy}`;try{await navigator.clipboard.writeText(url.href);toast('Story link copied.');}catch{toast('Copy the story ID: '+copy.dataset.copy);}return;}
   const action=event.target.closest('[data-action]')?.dataset.action;
-  if(action==='guide')showGuide();if(action==='close')dialog.close();if(action==='export')exportBoard();
+  if(action==='guide')showGuide();if(action==='close')dialog.close();if(action==='close-preview')previewDialog.close();if(action==='export')exportBoard();
 });
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+previewDialog.addEventListener('click',event=>{if(event.target===previewDialog){const bounds=previewDialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)previewDialog.close();}});
+previewDialog.addEventListener('close',()=>{
+  document.getElementById('document-preview-frame').replaceChildren();
+  document.getElementById('document-preview-open').removeAttribute('href');
+  document.documentElement.classList.remove('has-document-preview');
+  if(previewTrigger?.isConnected)previewTrigger.focus({preventScroll:true});
+  previewTrigger=null;
+});
 document.getElementById('menu-toggle').addEventListener('click',()=>{const open=document.getElementById('sidebar').classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open));});
 document.getElementById('global-search').addEventListener('input',e=>{if(!data)return;globalQuery=e.target.value;render();});
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&document.getElementById('sidebar').classList.contains('open')){document.getElementById('sidebar').classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');document.getElementById('menu-toggle').focus();}
-  if(e.key==='/'&&!dialog.open&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();document.getElementById('global-search').focus();}
+  if(e.key==='/'&&!dialog.open&&!previewDialog.open&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();document.getElementById('global-search').focus();}
 });
 window.addEventListener('hashchange',()=>{if(data)updateRoute();});
 async function start(){

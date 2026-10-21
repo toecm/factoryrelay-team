@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Factory Relay team workspace: research documents, project resources, sprint plans and the shared Scrum backlog.">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://drive.google.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>Factory Relay · Team workspace</title>
   <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -36,7 +36,12 @@
     </div>
   </div>
   <dialog class="dialog" id="detail-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <dialog class="dialog preview-dialog" id="document-preview-dialog" aria-labelledby="document-preview-title" aria-describedby="document-preview-note">
+    <div class="dialog-head preview-head"><div><span class="eyebrow">DOCUMENT PREVIEW</span><h2 id="document-preview-title"></h2></div><button class="btn secondary small" data-action="close-preview" autofocus>Close</button></div>
+    <div class="preview-toolbar"><p id="document-preview-note">Google hosts this preview. If it is blank or asks for access, open the file in Google Drive to sign in or request access. Sharing settings and browser cookie restrictions can affect previews.</p><a class="btn secondary small" id="document-preview-open" target="_blank" rel="noopener noreferrer">Open in Google Drive</a></div>
+    <div class="preview-frame-host" id="document-preview-frame"></div>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <noscript>This workspace needs JavaScript to display its document library and board. Downloadable files are in the documents folder.</noscript>
+  <noscript>This workspace needs JavaScript to display its document library and board. Documents are hosted in Google Drive; no downloadable document copies are bundled with this site.</noscript>
 </body>
 </html>
