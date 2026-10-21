@@ -1,6 +1,310 @@
 {
-  "enabled": false,
-  "syncedAt": null,
+  "enabled": true,
+  "syncedAt": "2026-10-21T06:37:40.221Z",
   "repo": "toecm/factoryrelay",
-  "items": []
+  "items": [
+    {
+      "id": "ENG0",
+      "number": 1,
+      "url": "https://github.com/toecm/factoryrelay/issues/1",
+      "status": "Ready",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:28Z",
+      "taskStatus": {
+        "ENG0-T1": false,
+        "ENG0-T2": false,
+        "ENG0-T3": false,
+        "ENG0-T4": false
+      }
+    },
+    {
+      "id": "R01",
+      "number": 2,
+      "url": "https://github.com/toecm/factoryrelay/issues/2",
+      "status": "Ready",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:29Z",
+      "taskStatus": {
+        "R01-T1": false,
+        "R01-T2": false,
+        "R01-T3": false,
+        "R01-T4": false,
+        "R01-T5": false
+      }
+    },
+    {
+      "id": "ENG1",
+      "number": 3,
+      "url": "https://github.com/toecm/factoryrelay/issues/3",
+      "status": "Ready",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:30Z",
+      "taskStatus": {
+        "ENG1-T1": false,
+        "ENG1-T2": false,
+        "ENG1-T3": false
+      }
+    },
+    {
+      "id": "ENG2",
+      "number": 4,
+      "url": "https://github.com/toecm/factoryrelay/issues/4",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:30Z",
+      "taskStatus": {
+        "ENG2-T1": false,
+        "ENG2-T2": false,
+        "ENG2-T3": false
+      }
+    },
+    {
+      "id": "R02",
+      "number": 5,
+      "url": "https://github.com/toecm/factoryrelay/issues/5",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:31Z",
+      "taskStatus": {
+        "R02-T1": false,
+        "R02-T2": false,
+        "R02-T3": false,
+        "R02-T4": false,
+        "R02-T5": false
+      }
+    },
+    {
+      "id": "R03",
+      "number": 6,
+      "url": "https://github.com/toecm/factoryrelay/issues/6",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:32Z",
+      "taskStatus": {
+        "R03-T1": false,
+        "R03-T2": false,
+        "R03-T3": false,
+        "R03-T4": false,
+        "R03-T5": false
+      }
+    },
+    {
+      "id": "ENG4",
+      "number": 7,
+      "url": "https://github.com/toecm/factoryrelay/issues/7",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:32Z",
+      "taskStatus": {
+        "ENG4-T1": false,
+        "ENG4-T2": false,
+        "ENG4-T3": false
+      }
+    },
+    {
+      "id": "ENG3",
+      "number": 8,
+      "url": "https://github.com/toecm/factoryrelay/issues/8",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:33Z",
+      "taskStatus": {
+        "ENG3-T1": false,
+        "ENG3-T2": false,
+        "ENG3-T3": false
+      }
+    },
+    {
+      "id": "R04",
+      "number": 9,
+      "url": "https://github.com/toecm/factoryrelay/issues/9",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:34Z",
+      "taskStatus": {
+        "R04-T1": false,
+        "R04-T2": false,
+        "R04-T3": false,
+        "R04-T4": false,
+        "R04-T5": false
+      }
+    },
+    {
+      "id": "ENG5",
+      "number": 10,
+      "url": "https://github.com/toecm/factoryrelay/issues/10",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:34Z",
+      "taskStatus": {
+        "ENG5-T1": false,
+        "ENG5-T2": false,
+        "ENG5-T3": false
+      }
+    },
+    {
+      "id": "ENG9",
+      "number": 11,
+      "url": "https://github.com/toecm/factoryrelay/issues/11",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:35Z",
+      "taskStatus": {
+        "ENG9-T1": false,
+        "ENG9-T2": false,
+        "ENG9-T3": false
+      }
+    },
+    {
+      "id": "ENG6",
+      "number": 12,
+      "url": "https://github.com/toecm/factoryrelay/issues/12",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:35Z",
+      "taskStatus": {
+        "ENG6-T1": false,
+        "ENG6-T2": false,
+        "ENG6-T3": false
+      }
+    },
+    {
+      "id": "ENG7",
+      "number": 13,
+      "url": "https://github.com/toecm/factoryrelay/issues/13",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:36Z",
+      "taskStatus": {
+        "ENG7-T1": false,
+        "ENG7-T2": false,
+        "ENG7-T3": false
+      }
+    },
+    {
+      "id": "ENG8",
+      "number": 14,
+      "url": "https://github.com/toecm/factoryrelay/issues/14",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:37Z",
+      "taskStatus": {
+        "ENG8-T1": false,
+        "ENG8-T2": false,
+        "ENG8-T3": false
+      }
+    },
+    {
+      "id": "R06",
+      "number": 15,
+      "url": "https://github.com/toecm/factoryrelay/issues/15",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:37Z",
+      "taskStatus": {
+        "R06-T1": false,
+        "R06-T2": false,
+        "R06-T3": false,
+        "R06-T4": false,
+        "R06-T5": false
+      }
+    },
+    {
+      "id": "R08",
+      "number": 16,
+      "url": "https://github.com/toecm/factoryrelay/issues/16",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:38Z",
+      "taskStatus": {
+        "R08-T1": false,
+        "R08-T2": false,
+        "R08-T3": false,
+        "R08-T4": false,
+        "R08-T5": false
+      }
+    },
+    {
+      "id": "R09",
+      "number": 17,
+      "url": "https://github.com/toecm/factoryrelay/issues/17",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:38Z",
+      "taskStatus": {
+        "R09-T1": false,
+        "R09-T2": false,
+        "R09-T3": false,
+        "R09-T4": false,
+        "R09-T5": false
+      }
+    },
+    {
+      "id": "ENG10",
+      "number": 18,
+      "url": "https://github.com/toecm/factoryrelay/issues/18",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:39Z",
+      "taskStatus": {
+        "ENG10-T1": false,
+        "ENG10-T2": false,
+        "ENG10-T3": false
+      }
+    },
+    {
+      "id": "R10",
+      "number": 19,
+      "url": "https://github.com/toecm/factoryrelay/issues/19",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:40Z",
+      "taskStatus": {
+        "R10-T1": false,
+        "R10-T2": false,
+        "R10-T3": false,
+        "R10-T4": false,
+        "R10-T5": false
+      }
+    },
+    {
+      "id": "R11",
+      "number": 20,
+      "url": "https://github.com/toecm/factoryrelay/issues/20",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:40Z",
+      "taskStatus": {
+        "R11-T1": false,
+        "R11-T2": false,
+        "R11-T3": false
+      }
+    },
+    {
+      "id": "ENG11",
+      "number": 21,
+      "url": "https://github.com/toecm/factoryrelay/issues/21",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:41Z",
+      "taskStatus": {
+        "ENG11-T1": false,
+        "ENG11-T2": false,
+        "ENG11-T3": false
+      }
+    },
+    {
+      "id": "ENG12",
+      "number": 22,
+      "url": "https://github.com/toecm/factoryrelay/issues/22",
+      "status": "Backlog",
+      "assignees": [],
+      "updatedAt": "2026-10-21T06:32:41Z",
+      "taskStatus": {
+        "ENG12-T1": false,
+        "ENG12-T2": false,
+        "ENG12-T3": false
+      }
+    }
+  ]
 }
