@@ -8,7 +8,7 @@
     "applicationRevision": "6d7058425bf3485bf88dfab1760dbd8dc5e9ca5d",
     "note": "This is a dated planning snapshot. Editing the linked Google Drive files does not automatically update this snapshot or GitHub Issues. Shared issue state is a separate source.",
     "forecastNote": "Six proposed two-week sprints are a forecast, not a committed calendar. Reforecast against the actual course deadline and team capacity.",
-    "documentNote": "Selected course documents open in Google Drive. Access follows each file's Google sharing settings. Earlier proposal, presentation, report and manual cards explicitly identify historical status. Document files are not bundled with this website."
+    "documentNote": "Preview selected course documents here or open them in Google Drive. Access follows each file's Google sharing settings. Earlier proposals are dated; the updated report and manual retain historical game appendices. Document files are not bundled with this website."
   },
   "summary": {
     "stories": 22,
@@ -148,7 +148,7 @@
       "item": "Dedicated research folder",
       "status": "Organized locally",
       "evidence": "research/ contains proposals, presentations, background, reports/manual, team plan, screenshots and historical migration evidence. 159 files were moved with hash verification.",
-      "limit": "The original research archive remains local and excluded from application packages. This portal links to selected course documents in Google Drive. Historical report/manual describe 13 October, not the research extension."
+      "limit": "The original research archive remains local and excluded from application packages. Google Drive holds the selected documents. The report/manual now include a 21 October portal update and retain their 13 October game appendices; they do not establish research-extension effectiveness."
     }
   ],
   "remainingCapabilities": [
@@ -2440,11 +2440,11 @@
     },
     {
       "id": "technical-report",
-      "title": "Technical report — historical baseline",
+      "title": "Technical report",
       "category": "Reference",
-      "date": "2026-10-13",
-      "status": "Historical",
-      "description": "Implementation report and game screenshots from the 13 October PurePolyglot baseline. Earlier paths, branding, test totals and setup details are preserved as history. Use the current repository and LAN guide for the standalone release.",
+      "date": "2026-10-21",
+      "status": "Updated",
+      "description": "21 October update covering the standalone project, team portal, embedded Google Drive previews, access boundaries and verification. Includes a live preview screenshot and the original 13 October game report as a dated historical appendix.",
       "link": {
         "href": "https://docs.google.com/document/d/1Oa0uHe8665uH8g95tJ9dXdCLFuepzDeH/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
         "label": "Open in Google Docs",
@@ -2453,11 +2453,11 @@
     },
     {
       "id": "user-manual",
-      "title": "User manual — historical baseline",
+      "title": "User manual",
       "category": "Reference",
-      "date": "2026-10-13",
-      "status": "Historical",
-      "description": "Player and facilitator guide from the 13 October PurePolyglot baseline. Screenshots and terminology predate the standalone project. Consult the current repository LAN guide for present setup instructions.",
+      "date": "2026-10-21",
+      "status": "Updated",
+      "description": "Current steps for Preview, Close, Google Drive access, shared tasks and standalone game setup, with a live preview screenshot. Includes access and mobile troubleshooting; the original 13 October game guide remains as a dated historical appendix.",
       "link": {
         "href": "https://docs.google.com/document/d/1sQNovE9HbFqJwqayxxJbug-Owsx_9v51/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
         "label": "Open in Google Docs",

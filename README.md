@@ -3,8 +3,9 @@
 The three-member PBL team's document library, Scrum board, project links,
 six-sprint forecast and course-evidence dashboard. The planning baseline is
 **21 October 2026: 22 stories, 83 tasks and 8 baseline records**. The document
-library links to nine shared Google Drive files. Earlier proposals, reports and manuals are labeled with their
-historical scope.
+library links to nine shared Google Drive files. Earlier proposals are labeled
+with their historical scope. The report and manual include a 21 October preview
+update and retain their original 13 October game documentation as an appendix.
 
 The configured GitHub Pages address is
 **https://toecm.github.io/factoryrelay-team/**. Confirm a successful **Deploy
