@@ -116,9 +116,10 @@ capacity; the portal does not allocate work automatically.
 6. Enable **Fit all columns to screen** to remove horizontal board scrolling.
    Columns use the available width and wrap into readable rows on narrow
    screens. This does not eliminate vertical scrolling through all tickets.
-7. The board's Google button and **Preview** open the shared Scrum workbook.
-   The workbook is a separate planning document: edits there are not imported
-   into GitHub automatically.
+7. The board's **Open in Google Docs** and **Preview** buttons open the team
+   implementation plan. The Scrum workbook remains in the Document library.
+   These are separate planning documents: edits there are not imported into
+   GitHub automatically.
 
 Open story statuses map to one controlled GitHub label:
 
@@ -255,6 +256,18 @@ can be used. Publishing the frontend alone does not complete it.
    `/api/portal/config` endpoint reports `configured: true`. Then sign in through
    the portal using an invited account, verify a deliberate team-approved
    edit on GitHub, and verify the public snapshot after its workflows finish.
+
+The optional owner helper is `scripts/setup-team-portal-app.mjs` in the private
+project. Running it without arguments only explains the setup. After the owner
+authorizes registration and configuration, and Vercel is already signed in and
+linked to the existing `factoryrelay` project, run
+`node scripts/setup-team-portal-app.mjs --run-authorized`. Its local review page
+guides GitHub registration and installation, then sends the three settings to
+Vercel through CLI input. It never signs in, links a project or deploys. Secrets
+stay in memory; only a receipt without credentials is saved under `.release/`.
+If interrupted after App creation, recover that App in GitHub settings instead
+of registering another. Manual configuration through the two dashboards remains
+available. After either method, redeploy and complete step 6 above.
 
 The Vercel handler accepts the exact portal/API origins, restricts writes to
 `toecm/factoryrelay`, checks repository access every time and disables response
