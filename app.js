@@ -39,7 +39,7 @@ function safeUrl(value) {
 }
 let data, snapshot = {enabled:false, items:[]};
 let client = null, boardFit = true, saving = false, loginPending = false, draggedItem = null, editorContext = null;
-let boardMessage = '', boardError = false;
+let boardMessage = '', boardError = false, loginFailure = '';
 let route = 'overview', boardKind = 'stories', boardSearch = '', sprintFilter = '', priorityFilter = '', statusFilter = '', docCategory = '', docSearch = '', globalQuery = '';
 const main = document.getElementById('main-content');
 const dialog = document.getElementById('detail-dialog');
@@ -72,7 +72,7 @@ function heading(eyebrow, title, text, action='') {
 function boardNotice() {
   const connected = snapshot.enabled && snapshot.items.length > 0;
   const note = canEdit() ? `Signed in as ${client.session.login}. Changes save to GitHub. The team view refreshes automatically while signed in.` : connected ? `Public snapshot updated ${prettyDate(snapshot.syncedAt)}. Sign in with your invited GitHub account to plan sprints and update work here.` : 'The planning baseline is available. Sign in with your invited GitHub account to load shared work.';
-  return `<div class="notice board-notice">${icon(canEdit() ? 'check' : 'github')}<div><strong>${canEdit() ? 'Shared work, saved to GitHub' : 'Plan together. Keep GitHub in sync.'}</strong><span>${esc(note)}</span>${client?.configured === false ? '<span class="configuration-note">Portal editing needs the project owner’s one-time GitHub connection setup. You can still read the board and use the GitHub links.</span>' : ''}</div><div class="board-auth-actions">${canEdit() ? `<button class="btn secondary small" data-action="refresh" ${saving ? 'disabled' : ''}>Refresh</button><button class="btn secondary small" data-action="logout" ${saving ? 'disabled' : ''}>Sign out</button>` : `<button class="btn primary small" data-action="login" ${loginPending ? 'disabled' : ''}>${icon('github')} ${loginPending ? 'Signing in…' : 'Sign in with GitHub'}</button>`}<button class="btn ghost small" data-action="guide">How it works ${icon('arrow')}</button></div></div><p class="board-message ${boardError ? 'form-error' : ''}" role="status" aria-live="polite">${esc(boardMessage || (saving ? 'Saving to GitHub…' : ''))}</p>`;
+  return `<div class="notice board-notice">${icon(canEdit() ? 'check' : 'github')}<div><strong>${canEdit() ? 'Shared work, saved to GitHub' : 'Plan together. Keep GitHub in sync.'}</strong><span>${esc(note)}</span>${client?.configured === false ? '<span class="configuration-note">Portal editing needs the project owner’s one-time GitHub connection setup. You can still read the board and use the GitHub links.</span>' : ''}</div><div class="board-auth-actions">${canEdit() ? `<button class="btn secondary small" data-action="refresh" ${saving ? 'disabled' : ''}>Refresh</button><button class="btn secondary small" data-action="logout" ${saving ? 'disabled' : ''}>Sign out</button>` : `<button class="btn primary small" data-action="login" ${loginPending ? 'disabled' : ''}>${icon('github')} ${loginPending ? 'Signing in…' : 'Sign in with GitHub'}</button>`}${loginFailure ? '<button class="btn secondary small" data-action="view-login-error">View sign-in error</button>' : ''}<button class="btn ghost small" data-action="guide">How it works ${icon('arrow')}</button></div></div><p class="board-message ${boardError ? 'form-error' : ''}" role="status" aria-live="polite">${esc(boardMessage || (saving ? 'Saving to GitHub…' : ''))}</p>`;
 }
 function resourceCard(resource) {
   const key = /dataset/i.test(resource.id + resource.title) ? 'database' : /space/i.test(resource.id + resource.title) ? 'cloud' : /guide/i.test(resource.id + resource.title) ? 'document' : /github|repo|issues|actions/i.test(resource.id + resource.title) ? 'github' : 'play';
@@ -253,15 +253,16 @@ async function saveEditor(form) {
 }
 async function beginLogin() {
   if(loginPending || saving) return;
-  loginPending=true;boardMessage='Complete sign-in in the GitHub window. Return here when finished.';boardError=false;
+  loginPending=true;loginFailure='';boardMessage='Complete sign-in in the GitHub window. Return here when finished.';boardError=false;
   try {
     const signingIn=client.startLogin(); // Open the secure popup during the click gesture.
     render();
     if(dialog.open) dialog.close();
     await signingIn;
     boardMessage=`Connected as ${client.session?.login || 'your GitHub account'}. You can now edit shared work.`;toast(boardMessage);
-  } catch(error) {boardMessage=error.message || 'Sign-in did not finish. Please try again.';boardError=true;}
+  } catch(error) {loginFailure=error.message || 'Sign-in did not finish. Please try again.';boardMessage=loginFailure;boardError=true;}
   finally {loginPending=false;render();}
+  if(loginFailure)showLoginError();
 }
 async function reloadEditor() {
   if(saving || !editorContext) return;
@@ -285,6 +286,22 @@ function showDialog(html) {
   if (!dialog.open) dialog.showModal();
   if(wasOpen)dialog.querySelector('[data-action="close"]')?.focus();
   dialog.querySelector('.dialog-body')?.scrollTo(0,0);
+}
+function showLoginError() {
+  if(!loginFailure)return;
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">GITHUB SIGN-IN</span><h2 id="dialog-title">Sign-in could not finish</h2></div><button class="icon-button" data-action="close" aria-label="Close sign-in error">&times;</button></div><div class="dialog-body"><p>This message stays here until you close it. You can reopen it with <strong>View sign-in error</strong> on the board.</p><label class="form-field" for="login-error-text"><span>Error details</span><textarea id="login-error-text" rows="5" readonly spellcheck="false">${esc(loginFailure)}</textarea></label><p>Use <strong>Copy error</strong> to share these details, including any bracketed reference. The callback address is not needed.</p><p id="login-error-feedback" role="status" aria-live="polite"></p></div><div class="dialog-actions"><button class="btn secondary" data-action="close">Close</button><button class="btn primary" data-action="copy-login-error">Copy error</button></div>`);
+}
+async function copyLoginError() {
+  if(!loginFailure)return;
+  const feedback=document.getElementById('login-error-feedback');
+  try {
+    await navigator.clipboard.writeText(loginFailure);
+    if(feedback)feedback.textContent='Error copied. You can paste it into your support conversation.';
+  } catch {
+    const field=document.getElementById('login-error-text');
+    field?.focus();field?.select();
+    if(feedback)feedback.textContent='Select Copy from your device’s menu, or press Ctrl+C (Command+C on Mac), to copy the selected error.';
+  }
 }
 function showGuide() {
   showDialog(`<div class="dialog-head"><div><span class="eyebrow">WORKSPACE GUIDE</span><h2 id="dialog-title">One plan. Shared through GitHub.</h2></div><button class="icon-button" data-action="close" aria-label="Close guide">&times;</button></div><div class="dialog-body"><h3>Plan, assign and move work</h3><ol class="checklist"><li>Use <strong>Sign in with GitHub</strong> and complete sign-in in GitHub's separate window. Use your account invited to the private Factory Relay repository.</li><li>Open <strong>Sprint roadmap</strong> to create a sprint or edit its dates and goal. Sprints save as GitHub milestones.</li><li>Open a story or task to choose assignees, a sprint and a status. Clear the assignee choices to unassign. Use <strong>Save to GitHub</strong> and wait for confirmation.</li><li>On the board, drag a ticket into a status column, or use its editor to move it with a keyboard or touch screen. Task completion and assignment can be managed independently of the parent story.</li><li>Use <strong>Fit all columns to screen</strong> to remove horizontal board scrolling. Smaller screens wrap columns into rows.</li></ol><h3>Shared saving and access</h3><p>Signed-in views refresh periodically. Signed-out visitors see the published snapshot, which updates after GitHub synchronization and deployment. Private issue comments and attachments remain in GitHub.</p><p>The browser retains a protected portal session for up to a day, limited by GitHub's authorization expiry. Your GitHub password and GitHub access token are not stored by this page. Sign out on a shared device. Editing requires the owner's one-time GitHub application setup and repository access.</p><p>If someone changes a record while you edit, the save is rejected instead of overwriting their work. Your form stays open; use <strong>Reload latest</strong> to inspect the current record before applying your change again.</p><h3>Documents</h3><p>The board's <strong>Open in Google Docs</strong> and <strong>Preview</strong> buttons open the shared team implementation plan. The Document library also includes the Scrum workbook. Google previews load only when selected and follow each file's sharing settings.</p><p>More setup and maintenance details are in <a href="./README.md" target="_blank" rel="noopener">the portal README</a>.</p></div><div class="dialog-actions">${external(`${REPO}/issues`,'Open team Issues '+icon('external'),'btn secondary')}${external(`${PORTAL_REPO}/actions`,'Public deployments '+icon('external'),'btn secondary')}<button class="btn primary" data-action="close">Got it</button></div>`);
@@ -343,6 +360,8 @@ document.addEventListener('click', async event=>{
   if(action==='close'){if(saving)toast('Please wait for the save to finish.');else dialog.close();}
   if(action==='close-preview')previewDialog.close();
   if(action==='login')return beginLogin();
+  if(action==='view-login-error')return showLoginError();
+  if(action==='copy-login-error')return copyLoginError();
   if(action==='new-sprint')return showSprintEditor();
   if(action==='reload-editor')return reloadEditor();
   if(action==='logout'){try{await client.logout();boardMessage='Signed out. The board is read-only.';boardError=false;}catch(error){boardMessage=`Signed out in this browser. ${error.message}`;boardError=true;}render();if(dialog.open)dialog.close();}

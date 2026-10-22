@@ -5,7 +5,7 @@ const SESSION_KEY = 'factory-relay-editor-session-v1';
 const MAX_SESSION_MS = 24 * 60 * 60 * 1000;
 
 export function createPortalClient({data, onChange = () => {}, onAuthChange = () => {}, onError = () => {}, fetchImpl = fetch} = {}) {
-  let sealed = '', session = null, popup = null, cancelPending = null, timer = null, refreshing = null;
+  let sealed = '', session = null, popup = null, failedPopup = null, cancelPending = null, timer = null, refreshing = null;
   let configured = false, authError = '', snapshot = null, assignees = [], generation = 0, mutation = null;
   const storage = () => { try { return window.sessionStorage; } catch { return null; } };
   function clear() {
@@ -56,9 +56,13 @@ export function createPortalClient({data, onChange = () => {}, onAuthChange = ()
     mutation = request('mutate', body).then(result => before === generation && session ? accept(result) : snapshot).finally(() => {mutation = null;});
     return mutation;
   }
-  function cancelLogin() { cancelPending?.(); }
+  function cancelLogin() {
+    cancelPending?.();
+    if (failedPopup && !failedPopup.closed) failedPopup.close();
+    failedPopup = null;
+  }
   function startLogin() {
-    if (cancelPending) cancelLogin();
+    cancelLogin();
     // Open synchronously from the click so ordinary popup blockers allow it.
     popup = window.open('about:blank', 'factory-relay-github-sign-in', 'popup,width=640,height=740');
     if (!popup) return Promise.reject(new Error('Allow the GitHub sign-in window, then try again.'));
@@ -69,10 +73,17 @@ export function createPortalClient({data, onChange = () => {}, onAuthChange = ()
     return new Promise((resolve, reject) => {
       let finished = false;
       function cleanup() { window.removeEventListener('message', receive); clearInterval(closedTimer); clearTimeout(timeout); cancelPending = null; popup = null; }
-      function end(error) { if (finished) return; finished = true; cleanup(); targetWindow.close(); if (error) reject(error); }
+      function end(error, closeWindow = true) {
+        if (finished) return;
+        finished = true; cleanup();
+        if (closeWindow) targetWindow.close();
+        else failedPopup = targetWindow;
+        if (error) reject(error);
+      }
       async function receive(event) {
         if (event.origin !== API_ORIGIN || event.source !== targetWindow || event.data?.type !== 'factory-relay-auth' || event.data?.nonce !== nonce || finished) return;
-        if (event.data.error) return end(new Error(event.data.error));
+        // Keep the trusted callback's explanation visible until the user closes it or retries.
+        if (event.data.error) return end(new Error(event.data.error), false);
         try {
           keep(event.data);
           finished = true; cleanup(); targetWindow.close();

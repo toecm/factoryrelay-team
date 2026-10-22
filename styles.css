@@ -596,7 +596,13 @@ a.resource-card { color: inherit; text-decoration: none; }
 .board-document-actions, .board-auth-actions, .board-controls, .edit-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .board-document-actions { flex-shrink: 0; }
 .board-auth-actions { justify-content: flex-end; }
-.board-notice > .board-auth-actions { flex: 0 1 auto; }
+/* Keep the message readable independently of the authentication controls.
+   Previously the controls had flex-basis:100% below 768px, while the notice
+   stayed nowrap until 639px. At 640–767px this reduced the copy to zero width. */
+.board-notice { display: grid; grid-template-columns: 19px minmax(0, 1fr); }
+.board-notice > .icon { grid-column: 1; grid-row: 1; }
+.board-notice > div:not(.board-auth-actions) { grid-column: 2; grid-row: 1; min-width: 0; }
+.board-notice > .board-auth-actions { grid-column: 2; grid-row: 2; min-width: 0; justify-content: flex-start; }
 .board-message { min-height: 1.5em; margin: -7px 0 12px; font-size: 12px; color: #456529; overflow-wrap: anywhere; }
 .board-controls { margin: 0 0 14px; }
 .board-controls > .muted { margin-right: auto; font-size: 11px; }
@@ -646,8 +652,11 @@ a.resource-card { color: inherit; text-decoration: none; }
 }
 @media (max-width: 767px) {
   .fit-columns .kanban-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .board-notice > .board-auth-actions { flex-basis: 100%; justify-content: flex-start; }
   .board-document-actions { flex-shrink: 1; }
+}
+@media (min-width: 1200px) {
+  .board-notice { grid-template-columns: 19px minmax(0, 1fr) auto; }
+  .board-notice > .board-auth-actions { grid-column: 3; grid-row: 1; justify-content: flex-end; }
 }
 @media (max-width: 479px) {
   .fit-columns .kanban-board { grid-template-columns: minmax(0, 1fr); }

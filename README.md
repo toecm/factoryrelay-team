@@ -306,9 +306,14 @@ opening its callback URL directly or reloading an old callback does not create
 a fresh portal sign-in. Close the old window and retry from the portal after
 changing settings or redeploying.
 
-Sign-in failures show a safe reference in brackets. Report only that reference
-and its displayed message, for example `[repo_access]`; **do not share the
-callback URL**, authorization code, state value, browser session or credentials.
+Sign-in failures show a safe reference in brackets. The failed callback window
+stays open, and the portal displays a persistent error dialog with **Copy error**.
+If you close that dialog, use **View sign-in error** on the board to reopen it.
+Starting another sign-in closes the previous failed popup and clears its message.
+Report only the copied message and reference, for example `[repo_access]`;
+**do not share the callback URL**, authorization code, state value, browser
+session or credentials. If clipboard access is unavailable, the dialog selects
+the text for manual copying.
 
 | Reference | Next step |
 | --- | --- |
