@@ -223,7 +223,8 @@ can be used. Publishing the frontend alone does not complete it.
 
 1. Register a GitHub App under the project owner's account, using a distinctive
    Factory Relay name. Set the homepage to
-   `https://toecm.github.io/factoryrelay-team/` and the exact callback URL to
+   `https://toecm.github.io/factoryrelay-team/` and the exact **Callback URL**
+   (called **Redirect URI** in the newer GitHub settings interface) to
    **`https://factoryrelay.vercel.app/api/portal/callback`**. Select public App
    visibility (**Any account**) so teammates outside the owner's personal
    account can authorize it. This makes the App registration public; it does
@@ -233,11 +234,19 @@ can be used. Publishing the frontend alone does not complete it.
    or account permissions are needed. Keep expiring user authorization tokens
    enabled. Do not enable device flow. Webhooks may remain inactive because the
    repository's existing Actions workflow publishes the snapshot.
-3. Install the App on the owner's account for **Only select repositories →
+3. If GitHub displays a banner requiring a key before installation, open
+   **Credentials → Key pairs → New key** and follow GitHub's key-generation
+   steps first. Keep any downloaded private key secure. This keypair is
+   separate from the OAuth client secret and is not used by the portal's
+   runtime; do not upload it to Vercel or paste it into a client-secret field.
+   Then install the App on the owner's account for **Only select repositories →
    `factoryrelay`**. Members must separately accept their repository invitations
    and authorize the App when signing in; installation does not grant them
    access to other repositories.
-4. Generate the App's client secret and configure the existing Factory Relay
+4. Find the App's **Client ID** and generate a separate **client secret** in
+   its credentials settings. The numeric **App ID**, Client ID, client secret
+   and downloaded private key are different values and are not interchangeable.
+   Configure the existing Factory Relay
    Vercel project with these server-only Production environment variables:
 
    | Environment variable | Value |
@@ -254,9 +263,10 @@ can be used. Publishing the frontend alone does not complete it.
    ```
 
 5. Keep those values out of Git, browser code, screenshots, terminal output and
-   chat. Do not add a `VITE_` prefix or expose them as frontend variables. No
-   App private key or shared personal access token is required for this user
-   authorization flow. Use the owner's local setup helper or Vercel's
+   chat. Do not add a `VITE_` prefix or expose them as frontend variables. The
+   portal uses no App private key or shared personal access token for this user
+   authorization flow, even if GitHub required creation of a keypair before
+   installation. Use the owner's local setup helper or Vercel's
    environment-variable settings to enter secrets.
 6. Redeploy the Vercel project from the updated private repository so it includes
    `/api/portal/` functions and the new environment settings. Confirm the
@@ -288,6 +298,33 @@ See [registering a GitHub App](https://docs.github.com/en/apps/creating-github-a
 [App visibility and authorization](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/making-a-github-app-public-or-private),
 [user authorization and PKCE](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app),
 and [expiring user tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/refreshing-user-access-tokens).
+
+### Troubleshoot sign-in
+
+Always start with **Sign in with GitHub** on the portal. Installing the App,
+opening its callback URL directly or reloading an old callback does not create
+a fresh portal sign-in. Close the old window and retry from the portal after
+changing settings or redeploying.
+
+Sign-in failures show a safe reference in brackets. Report only that reference
+and its displayed message, for example `[repo_access]`; **do not share the
+callback URL**, authorization code, state value, browser session or credentials.
+
+| Reference | Next step |
+| --- | --- |
+| `[state_invalid]`, `[invalid_code]`, `[oauth_code]` | Start a new portal sign-in and finish within ten minutes. Do not reload a previous callback. |
+| `[oauth_credentials]` | Check the App Client ID and separate client secret in Vercel Production, then redeploy. |
+| `[oauth_redirect]` | Match the App's Redirect URI/Callback URL exactly to `https://factoryrelay.vercel.app/api/portal/callback`. |
+| `[account_unverified]`, `[account_access]` | Verify the GitHub account's primary email and active App authorization, as directed by the message. |
+| `[repo_access]` | Confirm the App installation includes `toecm/factoryrelay` and the account accepted its repository invitation. |
+| `[repo_write]` | Ask the owner to verify the account's repository write role. |
+| `[setup_required]` | Complete the three Production environment settings and redeploy the Vercel project. |
+| `[github_unavailable]` | Retry after the temporary connection problem. |
+| `[oauth_exchange]`, `[token_response]` | Start a fresh sign-in; if it repeats, send the reference and displayed message to the maintainer. |
+
+These references distinguish the failing stage without exposing GitHub's raw
+response. Successful configuration alone does not prove that an invited member
+has completed authorization and saved a real board change; validate both.
 
 ### Public repository: `toecm/factoryrelay-team`
 
