@@ -1,11 +1,19 @@
 ﻿# Factory Relay team workspace
 
 The three-member PBL team's document library, Scrum board, project links,
-six-sprint forecast and course-evidence dashboard. The planning baseline is
+adjustable sprint roadmap and course-evidence dashboard. The planning baseline is
 **21 October 2026: 22 stories, 83 tasks and 8 baseline records**. The document
 library links to nine shared Google Drive files. Earlier proposals are labeled
 with their historical scope. The report and manual include a 21 October preview
 update and retain their original 13 October game documentation as an appendix.
+
+The **22 October editor revision** adds sprint planning, independent task
+assignments, status changes and drag-and-drop, backed by the private GitHub
+repository. Production sign-in requires the owner's one-time GitHub App and
+Vercel configuration described below. Until that setup is complete, the public
+board, document previews and fit-to-screen layout remain available; editing
+controls cannot save changes. Local tests do not establish a completed live
+OAuth sign-in or production edit.
 
 The configured GitHub Pages address is
 **https://toecm.github.io/factoryrelay-team/**. Confirm a successful **Deploy
@@ -18,7 +26,7 @@ new installation as live.
 | --- | --- | --- |
 | [factoryrelay-team](https://github.com/toecm/factoryrelay-team) | Public | Static website, Google Drive document links and public board snapshot. |
 | [factoryrelay](https://github.com/toecm/factoryrelay) | Private | Game source, portal source, publishing tools and shared Issues. |
-| [Factory Relay game](https://factoryrelay.vercel.app/) | Public | Play the separately deployed game. |
+| [Factory Relay game and editor API](https://factoryrelay.vercel.app/) | Public game; authenticated editor API | Game at the root; server-only GitHub authorization and board endpoints under `/api/portal/`. |
 
 GitHub Pages serves the public repository's `main` branch through its deployment
 workflow. This arrangement works with GitHub Free; it does not require Pages
@@ -28,7 +36,8 @@ hosting from the private repository. See
 The canonical local source is `FactoryRelay/team-portal/`, inside the private
 Factory Relay project. The public repository contains a reviewed static copy at
 its root, plus its static verifier and Pages workflow. The website package has
-9 files, including the document-link manifest. Document binaries are not bundled.
+11 files, including the document-link manifest, board model and editor client.
+Document binaries and server authentication code are not bundled.
 Only the explicit website files
 are uploaded as the Pages artifact; repository internals and deployment tools
 are excluded.
@@ -42,16 +51,20 @@ or Drive button for opening the file in a new tab. Each file's
 Google Drive sharing settings control access; the owner must share it with the
 intended teammates. The owner's computer does not need to remain running.
 
-To update work, open a story's **Open / update on GitHub** link and sign in with
-your own account invited to the private `factoryrelay` repository. Accept that
-invitation first. A private link may show a 404 when you are signed out or lack
-access. The public website does not grant private-repository or Hugging Face
-Space access; those permissions remain separate.
+To update work after owner setup, select **Sign in with GitHub** and authorize
+the Factory Relay GitHub App in its separate GitHub window. Use your own account
+invited to the private `factoryrelay` repository and accept that invitation
+first. GitHub credentials are entered only on GitHub. The **Open / update on
+GitHub** links remain available for direct editing. A private link may show a
+404 when you are signed out or lack access. The public website does not grant
+private-repository or Hugging Face access; those permissions remain separate.
 
 Everything in the public repository and deployed website is publicly readable,
-including document titles and links, the planning snapshot and exported board
-fields. Linked documents retain their own Google Drive permissions. The browser
-never requests or stores a GitHub token.
+including document titles and links, the planning snapshot, sprint titles,
+goals and dates, assignees and task progress. Keep information entered in those
+public board fields appropriate for public viewing. Linked documents retain
+their own Google Drive permissions. The browser stores an encrypted, expiring
+portal session, not a readable GitHub access token or client secret.
 
 ## Preview a document
 
@@ -78,42 +91,101 @@ and `docs.google.com`. Editing uses the original Google button.
 
 ## Update the shared Scrum board
 
-GitHub Issues in the private repository is the editing surface. The website is a
-searchable snapshot of those stories, updated after the publishing workflows
-finish.
+The portal saves authorized edits to GitHub Issues and milestones. All three
+members use their own invited accounts. Members choose work after agreeing
+capacity; the portal does not allocate work automatically.
 
-1. Find a story in the portal and open its GitHub issue.
-2. Self-assign after agreeing the sprint's capacity. In the issue discussion,
-   record who takes each task and who reviews it. The reviewer should be a
-   different member; the portal displays story assignees, not individual task
-   owners or reviewers from comments.
-3. Tick task checkboxes when their evidence is complete. Preserve task IDs such
-   as `ENG0-T1` and the managed story marker in the issue body.
-4. Keep exactly one controlled status label on each open story:
+1. Select **Sign in with GitHub**, finish authorization in GitHub, and return to
+   the portal. If sign-in says owner setup is required, use the GitHub issue
+   links until that setup is complete.
+2. On **Scrum board**, choose **Stories** or **Tasks**, then open a ticket. Set
+   its status, sprint and assignees, and select **Save to GitHub**. Task owners
+   can differ from their story's owners. Agree a different reviewer in the
+   issue discussion; the portal does not parse reviewer assignments from comments.
+3. Move a ticket between status columns by dragging it onto the destination
+   column. Keyboard and touch users can make the same change through the
+   ticket's status selector. Wait for confirmation: a failed request does not
+   count as a saved move.
+4. Use **Create sprint** or open **Sprint roadmap → Edit dates and goal**. Set
+   the sprint ID, title, goal and optional dates, then save. Move a ticket into
+   that sprint using its detail window. Moving a task can give it a different
+   sprint from its parent story.
+5. Mark **Task complete** only when its evidence is ready. Completing a task
+   updates its original GitHub checklist. It does not close the story. Setting
+   a story to Done closes its issue; other statuses reopen it if necessary.
+6. Enable **Fit all columns to screen** to remove horizontal board scrolling.
+   Columns use the available width and wrap into readable rows on narrow
+   screens. This does not eliminate vertical scrolling through all tickets.
+7. The board's Google button and **Preview** open the shared Scrum workbook.
+   The workbook is a separate planning document: edits there are not imported
+   into GitHub automatically.
 
-   | GitHub label | Portal column |
-   | --- | --- |
-   | `factory:backlog` | Backlog |
-   | `factory:ready` | Ready |
-   | `factory:in-progress` | In progress |
-   | `factory:review` | Review |
-   | `factory:blocked` | Blocked |
-   | `factory:deferred` | Deferred |
+Open story statuses map to one controlled GitHub label:
 
-5. Close a story only after its acceptance criteria and review are complete.
-   Closed stories display Done. Closing does not check unfinished tasks.
-6. Allow the private synchronization and public Pages workflows to finish, then
-   refresh the portal. Check the board snapshot date in the page footer.
+| GitHub label | Portal column |
+| --- | --- |
+| `factory:backlog` | Backlog |
+| `factory:ready` | Ready |
+| `factory:in-progress` | In progress |
+| `factory:review` | Review |
+| `factory:blocked` | Blocked |
+| `factory:deferred` | Deferred |
 
-An unchecked task follows its open parent story's status; a checked task displays
-Done. If its parent is closed while that task remains unchecked, the task stays
-Backlog. Sprint, priority, reviewer and acceptance text come from the versioned
-plan. Editing a linked Google Drive file or workbook does not update GitHub or
-the portal's versioned planning snapshot.
+Close stories only after their acceptance criteria and review are complete.
+Closing a story does not check unfinished tasks. Existing tasks inherit the
+story's status, sprint and assignees until individual values are saved. A checked
+task displays Done; an unchecked task without its own status displays Backlog
+when its parent is closed. Priority and acceptance criteria still come from
+the versioned plan.
+
+The editor re-reads GitHub before saving and rejects a stale version. If a
+conflict is reported, choose **Reload latest**, review the new values, and save
+again. This is a best-effort conflict check, **not an atomic transaction**:
+an external edit in the final read/write interval can still race with the save.
+
+### How board fields are stored
+
+| Portal data | GitHub backend |
+| --- | --- |
+| Story | Existing managed Issue with its story marker. |
+| Story status and owners | Issue state, one `factory:*` label, native assignees. |
+| Story sprint | Issue milestone; explicit Unscheduled state is recorded in managed metadata. |
+| Sprint | Managed milestone; title and due date are native fields, start date and goal are in its marked description block. |
+| Task completion | Original checkbox in the parent issue. |
+| Independent task status, owners and sprint | Validated `factory-relay-board:v1` metadata in the parent issue body. These are task-level records, not separate GitHub issues or native task assignees. |
+
+Preserve managed markers, metadata and task IDs such as `ENG0-T1` when editing
+directly on GitHub. The editor preserves unrelated prose, labels and discussion.
+Only milestones with the Factory Relay marker are included as managed sprints.
+The six initial sprint forecasts become milestones when saved or first used by
+an edited ticket. Creating a sprint does not create or assign new stories.
+
+### Sign-in session and shared updates
+
+GitHub authorization uses its web flow with PKCE. Vercel verifies repository
+write access and keeps the GitHub token inside an AES-GCM encrypted bearer
+session. The browser holds that sealed session in `sessionStorage` (or memory
+if storage is unavailable), and sends it only to the editor API. Refresh tokens
+are discarded. Sessions last at most 24 hours and never exceed the GitHub
+token's lifetime, normally **eight hours**. Closing the tab usually ends its
+session storage; browser tab restoration may restore it until expiry. Sign out
+on shared devices. Sign-out clears the browser session and attempts GitHub
+token revocation; if revocation fails, the token's expiry still applies.
+
+The API checks current repository access on each read and write. Signing into
+GitHub in another tab alone does not authenticate the portal. A revoked,
+expired or unauthorized session must sign in again.
+
+Signed-in editors read fresh board state after saves, on window focus, and
+about every 30 seconds while the page is visible. Other members see that shared
+GitHub state on their next refresh; this is polling, not live chat. Signed-out
+visitors see the last published snapshot and must refresh after the private
+sync and public Pages workflows finish. If a workflow fails, the last
+successfully published snapshot remains visible.
 
 ## How the two-repository synchronization works
 
-1. A human change to a managed Issue triggers **Sync Factory Relay board to
+1. A change to a managed Issue or milestone triggers **Sync Factory Relay board to
    public portal** in the private repository. A maintainer can also run it
    manually from Actions.
 2. The workflow uses its own short-lived `GITHUB_TOKEN`, with `contents: read`
@@ -125,26 +197,82 @@ the portal's versioned planning snapshot.
 4. That push triggers **Deploy Factory Relay team portal** in the public
    repository. The workflow verifies and publishes the static website.
 
-The exported fields are managed story IDs, status, GitHub login assignees, task
-checkbox states, issue numbers/links and update timestamps. Issue bodies,
-comments, evidence attachments and emails are not exported. The portal publishes
-the selected document links; Google Drive serves the document contents.
+The exported fields include managed story IDs, status, GitHub login assignees,
+task completion and independent task fields, sprint IDs, titles, goals and dates,
+issue/milestone numbers and links, version digests and update timestamps.
+Raw issue bodies, comments, evidence attachments, unrelated milestone content
+and emails are not exported. The portal publishes the selected document links;
+Google Drive serves the document contents.
 
-This is not instant editing or live chat. If either workflow fails, the last
-successfully published snapshot remains visible. Check Actions in both
-repositories before assuming an issue edit has appeared online. Two conflicting
+Check Actions in both repositories before assuming an edit has appeared in the
+public snapshot. Two conflicting
 status labels, duplicate story markers or duplicate task IDs need correction in
 the private Issue before synchronization can succeed.
 
 ## Maintainer setup and recovery
 
-These are configuration and recovery steps for the repository owner; teammates
-do not need credentials or deployment permissions to use the board.
+These are configuration and recovery steps for the repository owner. Teammates
+need their own invited GitHub accounts to edit, but no app secrets, deployment
+permissions or personal access tokens.
+
+### Enable the authenticated editor once
+
+This revision requires the following production setup before real portal edits
+can be used. Publishing the frontend alone does not complete it.
+
+1. Register a GitHub App under the project owner's account, using a distinctive
+   Factory Relay name. Set the homepage to
+   `https://toecm.github.io/factoryrelay-team/` and the exact callback URL to
+   **`https://factoryrelay.vercel.app/api/portal/callback`**. Select public App
+   visibility (**Any account**) so teammates outside the owner's personal
+   account can authorize it. This makes the App registration public; it does
+   not change the private repository's visibility or grant outsiders access.
+2. Set repository permissions to **Issues: Read and write** and
+   **Metadata: Read-only**. No Contents, Actions, administration, organization
+   or account permissions are needed. Keep expiring user authorization tokens
+   enabled. Do not enable device flow. Webhooks may remain inactive because the
+   repository's existing Actions workflow publishes the snapshot.
+3. Install the App on the owner's account for **Only select repositories →
+   `factoryrelay`**. Members must separately accept their repository invitations
+   and authorize the App when signing in; installation does not grant them
+   access to other repositories.
+4. Generate the App's client secret and configure the existing Factory Relay
+   Vercel project with these server-only Production environment variables:
+
+   | Environment variable | Value |
+   | --- | --- |
+   | `PORTAL_GITHUB_CLIENT_ID` | GitHub App client ID, not its numeric App ID. |
+   | `PORTAL_GITHUB_CLIENT_SECRET` | App client secret. |
+   | `PORTAL_SESSION_SECRET` | A cryptographically random secret generated from at least 32 random bytes; base64 encoding is suitable. The server requires at least 32 UTF-8 bytes and derives its encryption key with SHA-256. |
+
+5. Keep those values out of Git, browser code, screenshots, terminal output and
+   chat. Do not add a `VITE_` prefix or expose them as frontend variables. No
+   App private key or shared personal access token is required for this user
+   authorization flow. Use the owner's local setup helper or Vercel's
+   environment-variable settings to enter secrets.
+6. Redeploy the Vercel project from the updated private repository so it includes
+   `/api/portal/` functions and the new environment settings. Confirm the
+   `/api/portal/config` endpoint reports `configured: true`. Then sign in through
+   the portal using an invited account, verify a deliberate team-approved
+   edit on GitHub, and verify the public snapshot after its workflows finish.
+
+The Vercel handler accepts the exact portal/API origins, restricts writes to
+`toecm/factoryrelay`, checks repository access every time and disables response
+caching. The callback sends only a sealed session to the matching popup origin;
+the client verifies its source window and fresh nonce. GitHub login is a
+separate window, not an embedded password form. Rotating the session secret
+invalidates existing portal sessions. GitHub App authorization can also be
+revoked in GitHub settings.
+
+See [registering a GitHub App](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app),
+[App visibility and authorization](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/making-a-github-app-public-or-private),
+[user authorization and PKCE](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app),
+and [expiring user tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/refreshing-user-access-tokens).
 
 ### Public repository: `toecm/factoryrelay-team`
 
-1. Keep `index.html`, `app.js`, `styles.css`, `README.md`, `.nojekyll`, `assets/`,
-   and `data/` at the repository root. Keep the provided
+1. Keep `index.html`, `app.js`, `github-client.js`, `board-model.js`, `styles.css`,
+   `README.md`, `.nojekyll`, `assets/`, and `data/` at the repository root. Keep the provided
    `scripts/verify-static.mjs` and Pages workflow in their respective folders.
 2. In **Settings → Pages**, select **GitHub Actions** as the publishing source.
 3. Under **Settings → Secrets and variables → Actions → Variables**, set
@@ -215,6 +343,10 @@ share the GitHub Pages URL for team access. Do not double-click `index.html`:
 the browser needs HTTP to load the JSON files. Relative asset paths support the
 `/factoryrelay-team/` project-site address.
 
+This static server does not host the editor API. Production authentication
+accepts the published portal origin; it does not authorize arbitrary localhost
+pages. Automated editor tests use a mocked API and make no real GitHub changes.
+
 ## Maintain documents and website content
 
 Update the canonical source under the private project's `team-portal/` folder.
@@ -265,6 +397,8 @@ In the public repository, run:
 node scripts/verify-static.mjs
 ```
 
+Checks cover the board contract, authorized write mapping, stale revisions,
+OAuth state integrity, session expiry, origin checks and request limits.
 Browser checks cover desktop/mobile layouts, navigation, board filters,
 story/task details, search, Google Drive link destinations, on-demand preview
 loading, close/focus behavior and the project-site path. Local iframe tests use

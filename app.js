@@ -1,6 +1,8 @@
 'use strict';
 
-// A static, credential-free view. GitHub is the shared editing surface.
+import { createPortalClient } from './github-client.js';
+
+// Public snapshots remain readable; authenticated edits are saved to GitHub.
 const REPO = 'https://github.com/toecm/factoryrelay';
 const PORTAL_REPO = 'https://github.com/toecm/factoryrelay-team';
 const STATUSES = ['Backlog', 'Ready', 'In progress', 'Review', 'Done', 'Blocked', 'Deferred'];
@@ -36,6 +38,8 @@ function safeUrl(value) {
   return ['http:', 'https:'].includes(url.protocol) ? esc(url.href) : '#';
 }
 let data, snapshot = {enabled:false, items:[]};
+let client = null, boardFit = true, saving = false, loginPending = false, draggedItem = null, editorContext = null;
+let boardMessage = '', boardError = false;
 let route = 'overview', boardKind = 'stories', boardSearch = '', sprintFilter = '', priorityFilter = '', statusFilter = '', docCategory = '', docSearch = '', globalQuery = '';
 const main = document.getElementById('main-content');
 const dialog = document.getElementById('detail-dialog');
@@ -45,21 +49,30 @@ let previewTrigger = null;
 function githubRecord(id) { return snapshot.items.find(item => item.id === id); }
 function storyState(story) {
   const live = githubRecord(story.id);
-  return {...story, status:live?.status || story.status, owner:live?.assignees?.join(', ') || story.owner || '', github:live};
+  return {...story, status:live?.status || story.status, sprint:live?.sprint ?? story.sprint, owner:live ? (live.assignees || []).join(', ') : story.owner || '', github:live};
 }
 function taskState(task) {
   const parent = storyState(data.stories.find(s => s.id === task.storyId));
+  const live = parent.github?.tasks?.[task.id];
   const checked = parent.github?.taskStatus?.[task.id];
   // A closed parent does not fabricate completion for an unchecked task.
-  const status = checked === true ? 'Done' : checked === false ? (parent.status === 'Done' ? 'Backlog' : parent.status) : task.status;
-  return {...task, status, owner:parent.github ? parent.owner : task.owner, parent, sprint:parent.sprint, priority:parent.priority};
+  const status = live?.status || (checked === true ? 'Done' : checked === false ? (parent.status === 'Done' ? 'Backlog' : parent.status) : task.status);
+  return {...task, status, owner:live ? (live.assignees || []).join(', ') : parent.github ? parent.owner : task.owner, parent, sprint:live?.sprint ?? parent.sprint, priority:parent.priority, completed:status === 'Done', live};
 }
+function allSprints() {
+  const merged = new Map((data.sprints || []).map(sprint => [sprint.id, {...sprint}]));
+  for (const sprint of snapshot.sprints || []) merged.set(sprint.id, {...merged.get(sprint.id), ...sprint});
+  return [...merged.values()];
+}
+function sprintNames() { return [...new Set([...allSprints().map(s => s.id), ...data.stories.map(s => storyState(s).sprint), ...data.tasks.map(t => taskState(t).sprint), 'Unscheduled'])].filter(Boolean); }
+function canEdit() { return Boolean(client?.session); }
 function heading(eyebrow, title, text, action='') {
   return `<div class="page-heading"><div><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${text}</p></div>${action}</div>`;
 }
 function boardNotice() {
   const connected = snapshot.enabled && snapshot.items.length > 0;
-  return `<div class="notice board-notice">${icon(connected ? 'check' : 'link')}<div><strong>${connected ? 'Shared work, updated through GitHub' : 'The plan is ready. GitHub linking is next.'}</strong><span>${connected ? `Snapshot updated ${esc(prettyDate(snapshot.syncedAt))}. Open a story on GitHub to assign it, update its status or check off tasks. Changes appear after the next deployment.` : 'These are the existing 22 stories and 83 tasks. They are not yet linked to shared GitHub Issues. Setup creates one issue per story with its task checklist.'}</span></div><button class="btn ghost small" data-action="guide">How it works ${icon('arrow')}</button></div>`;
+  const note = canEdit() ? `Signed in as ${client.session.login}. Changes save to GitHub. The team view refreshes automatically while signed in.` : connected ? `Public snapshot updated ${prettyDate(snapshot.syncedAt)}. Sign in with your invited GitHub account to plan sprints and update work here.` : 'The planning baseline is available. Sign in with your invited GitHub account to load shared work.';
+  return `<div class="notice board-notice">${icon(canEdit() ? 'check' : 'github')}<div><strong>${canEdit() ? 'Shared work, saved to GitHub' : 'Plan together. Keep GitHub in sync.'}</strong><span>${esc(note)}</span>${client?.configured === false ? '<span class="configuration-note">Portal editing needs the project owner’s one-time GitHub connection setup. You can still read the board and use the GitHub links.</span>' : ''}</div><div class="board-auth-actions">${canEdit() ? `<button class="btn secondary small" data-action="refresh" ${saving ? 'disabled' : ''}>Refresh</button><button class="btn secondary small" data-action="logout" ${saving ? 'disabled' : ''}>Sign out</button>` : `<button class="btn primary small" data-action="login" ${loginPending ? 'disabled' : ''}>${icon('github')} ${loginPending ? 'Signing in…' : 'Sign in with GitHub'}</button>`}<button class="btn ghost small" data-action="guide">How it works ${icon('arrow')}</button></div></div><p class="board-message ${boardError ? 'form-error' : ''}" role="status" aria-live="polite">${esc(boardMessage || (saving ? 'Saving to GitHub…' : ''))}</p>`;
 }
 function resourceCard(resource) {
   const key = /dataset/i.test(resource.id + resource.title) ? 'database' : /space/i.test(resource.id + resource.title) ? 'cloud' : /guide/i.test(resource.id + resource.title) ? 'document' : /github|repo|issues|actions/i.test(resource.id + resource.title) ? 'github' : 'play';
@@ -68,8 +81,8 @@ function resourceCard(resource) {
 function storyCard(raw, compact=false) {
   const story = storyState(raw);
   const taskTotal = story.taskIds.length;
-  const taskDone = story.taskIds.filter(id => story.github?.taskStatus?.[id] === true).length;
-  return `<button class="${compact ? 'ready-card' : 'story-card'}" data-story="${esc(story.id)}"><div class="card-tags"><span class="item-id">${esc(story.id)}</span>${tag(story.priority, story.priority === 'Core' ? 'teal' : story.priority === 'Stretch' ? 'amber' : 'neutral')}</div><h3>${esc(story.title)}</h3>${compact ? `<p>${esc(story.deliverable.split('\n')[0])}</p>` : ''}<div class="card-meta"><span>${esc(story.sprint)} · ${taskDone}/${taskTotal} tasks</span><span>${esc(story.points)} pts</span></div><div class="card-owner"><span class="avatar-small">${story.owner ? esc(story.owner.slice(0,1).toUpperCase()) : '+'}</span><span>${esc(story.owner || 'Choose this work')}</span>${compact ? icon('arrow') : ''}</div></button>`;
+  const taskDone = story.taskIds.filter(id => story.github?.tasks?.[id] ? story.github.tasks[id].status === 'Done' : story.github?.taskStatus?.[id] === true).length;
+  return `<button class="${compact ? 'ready-card' : 'story-card'}" data-story="${esc(story.id)}" data-card-kind="story" data-card-id="${esc(story.id)}" draggable="${canEdit() && !compact && !saving}" aria-label="${esc(story.id)}: ${esc(story.title)}. Open details${canEdit() ? ' to edit or move' : ''}."><div class="card-tags"><span class="item-id">${esc(story.id)}</span>${tag(story.priority, story.priority === 'Core' ? 'teal' : story.priority === 'Stretch' ? 'amber' : 'neutral')}</div><h3>${esc(story.title)}</h3>${compact ? `<p>${esc(story.deliverable.split('\n')[0])}</p>` : ''}<div class="card-meta"><span>${esc(story.sprint)} · ${taskDone}/${taskTotal} tasks</span><span>${esc(story.points)} pts</span></div><div class="card-owner"><span class="avatar-small">${story.owner ? esc(story.owner.slice(0,1).toUpperCase()) : '+'}</span><span>${esc(story.owner || 'Choose this work')}</span>${compact ? icon('arrow') : ''}</div></button>`;
 }
 function renderOverview() {
   const ready = data.stories.filter(s => storyState(s).status === 'Ready').slice(0,3);
@@ -86,18 +99,28 @@ function courseItems(compact=false) {
   return data.courseCriteria.map((item,i) => `<div class="course-item"><span class="step-dot ${i === 0 ? 'complete' : ''}">${i === 0 ? '✓' : String(i+1).padStart(2,'0')}</span><div><strong>${esc(item.title)}</strong>${!compact ? `<p>${esc(item.status)}</p>` : ''}</div>${compact ? tag(i === 0 ? 'Complete' : 'Next work', i === 0 ? 'green' : 'neutral') : ''}</div>`).join('');
 }
 function options(values, selected, allLabel) { return `<option value="">${esc(allLabel)}</option>${values.map(v => `<option value="${esc(v)}" ${selected === v ? 'selected' : ''}>${esc(v)}</option>`).join('')}`; }
+function boardDocumentActions() {
+  const doc = data.documents.find(item => item.id === 'implementation-plan') || data.documents.find(item => item.link?.href?.includes('1KwRlp7MBw390ATHdlGqkU0L454Nrg9ME'));
+  return doc ? `<div class="board-document-actions">${documentLink({...doc.link, label:'Open in Google Docs'})}<button class="btn secondary small" data-preview="${esc(doc.id)}" aria-label="Preview Team implementation plan" aria-haspopup="dialog">Preview ${icon('document')}</button></div>` : '';
+}
+function taskCard(item) {
+  return `<button class="task-card" data-task="${esc(item.id)}" data-card-kind="task" data-card-id="${esc(item.id)}" draggable="${canEdit() && !saving}" aria-label="${esc(item.id)}: ${esc(item.title)}. Open task details."><div class="card-tags"><span class="item-id">${esc(item.id)}</span>${tag(item.priority,'neutral')}</div><h3>${esc(item.title)}</h3><div class="card-meta"><span>${esc(item.sprint)} · ${esc(item.storyId)}</span></div><div class="card-owner"><span class="avatar-small">${item.owner ? esc(item.owner[0].toUpperCase()) : '+'}</span><span>${esc(item.owner || 'Unassigned')}</span></div></button>`;
+}
 function renderBoard() {
   const items = boardKind === 'stories' ? data.stories.map(storyState) : data.tasks.map(taskState);
   const q = boardSearch.toLowerCase().trim();
   const filtered = items.filter(item => (!q || `${item.id} ${item.title} ${item.owner} ${item.story || ''}`.toLowerCase().includes(q)) && (!sprintFilter || item.sprint === sprintFilter) && (!priorityFilter || item.priority === priorityFilter) && (!statusFilter || item.status === statusFilter));
-  main.innerHTML = heading('THE SHARED PLAN', 'Make the next move.', 'Pick work that supports the Sprint Goal. Keep ownership visible and ask another member to review.', `<button class="btn secondary" data-action="export">Export board CSV ${icon('document')}</button>`) + boardNotice() +
-    `<div class="toolbar"><div class="tabs" role="group" aria-label="Board item type"><button class="tab ${boardKind === 'stories' ? 'active' : ''}" data-kind="stories" aria-pressed="${boardKind === 'stories'}">Stories <span>${data.stories.length}</span></button><button class="tab ${boardKind === 'tasks' ? 'active' : ''}" data-kind="tasks" aria-pressed="${boardKind === 'tasks'}">Tasks <span>${data.tasks.length}</span></button></div><div class="filter-group"><label class="sr-only" for="board-search">Search board</label><input id="board-search" type="search" placeholder="Find a task or story…" value="${esc(boardSearch)}"><label class="sr-only" for="sprint-filter">Sprint</label><select id="sprint-filter">${options(['S1','S2','S3','S4','S5','S6','Stretch'],sprintFilter,'All sprints')}</select><label class="sr-only" for="priority-filter">Priority</label><select id="priority-filter">${options(['Core','Conditional','Stretch'],priorityFilter,'All priorities')}</select><label class="sr-only" for="status-filter">Status</label><select id="status-filter">${options(STATUSES,statusFilter,'All statuses')}</select></div></div><div class="board-summary"><span>${filtered.length} ${boardKind} shown</span><span>Forecast sprints are adjustable · task completion does not automatically close a story</span></div>
-    <div class="board-scroll" tabindex="0" aria-label="Scrum board, scroll horizontally for more columns"><div class="kanban-board">${(statusFilter ? [statusFilter] : STATUSES).map(status => {
+  main.innerHTML = heading('THE SHARED PLAN', 'Make the next move.', 'Pick work that supports the Sprint Goal. Keep ownership visible and ask another member to review.', boardDocumentActions()) + boardNotice() +
+    `<div class="toolbar"><div class="tabs" role="group" aria-label="Board item type"><button class="tab ${boardKind === 'stories' ? 'active' : ''}" data-kind="stories" aria-pressed="${boardKind === 'stories'}">Stories <span>${data.stories.length}</span></button><button class="tab ${boardKind === 'tasks' ? 'active' : ''}" data-kind="tasks" aria-pressed="${boardKind === 'tasks'}">Tasks <span>${data.tasks.length}</span></button></div><div class="filter-group"><label class="sr-only" for="board-search">Search board</label><input id="board-search" type="search" placeholder="Find a task or story..." value="${esc(boardSearch)}"><label class="sr-only" for="sprint-filter">Sprint</label><select id="sprint-filter">${options(sprintNames(),sprintFilter,'All sprints')}</select><label class="sr-only" for="priority-filter">Priority</label><select id="priority-filter">${options(['Core','Conditional','Stretch'],priorityFilter,'All priorities')}</select><label class="sr-only" for="status-filter">Status</label><select id="status-filter">${options(STATUSES,statusFilter,'All statuses')}</select></div></div>
+    <div class="board-controls"><label class="fit-board-control"><input id="fit-columns" type="checkbox" ${boardFit ? 'checked' : ''}>Fit all columns to screen</label><span class="muted">Narrow screens wrap columns into readable rows.</span><a class="btn secondary small" href="#sprints">Plan sprints ${icon('route')}</a><button class="btn secondary small" data-action="new-sprint" ${canEdit() ? '' : 'disabled'}>Create sprint</button></div>
+    <div class="board-summary"><span>${filtered.length} ${boardKind} shown</span><span>${canEdit() ? 'Drag a ticket to a status column, or open it to change status, sprint and assignments.' : 'Sign in to edit. Open any ticket to inspect its details.'}</span></div>
+    <div class="board-scroll ${boardFit ? 'fit-columns' : ''}" tabindex="0" aria-label="${boardFit ? 'Scrum board with columns fitted to screen' : 'Scrum board, scroll horizontally for more columns'}"><div class="kanban-board ${statusFilter ? 'single-column' : ''}">${(statusFilter ? [statusFilter] : STATUSES).map(status => {
       const group = filtered.filter(item => item.status === status);
-      return `<section class="board-column" aria-label="${esc(status)}"><div class="column-head"><h2><span class="column-dot ${statusColor(status)}"></span>${esc(status)}</h2><span class="column-count">${group.length}</span></div>${group.map(item => boardKind === 'stories' ? storyCard(item) : `<button class="task-card" data-task="${esc(item.id)}"><div class="card-tags"><span class="item-id">${esc(item.id)}</span>${tag(item.priority,'neutral')}</div><h3>${esc(item.title)}</h3><div class="card-meta"><span>${esc(item.sprint)} · ${esc(item.storyId)}</span></div><div class="card-owner"><span class="avatar-small">${item.owner ? esc(item.owner[0].toUpperCase()) : '+'}</span><span>${esc(item.owner || 'Unassigned story')}</span></div></button>`).join('') || '<div class="column-empty">No work here yet.</div>'}</section>`;
-    }).join('')}</div></div>${boardKind==='tasks' ? '<p class="muted">Task lanes follow their parent story until a task is checked off in GitHub. Names shown are story assignees; individual task owners and reviewers are agreed in the issue discussion.</p>' : ''}`;
+      return `<section class="board-column" data-drop-status="${esc(status)}" aria-label="${esc(status)}"><div class="column-head"><h2><span class="column-dot ${statusColor(status)}"></span>${esc(status)}</h2><span class="column-count">${group.length}</span></div>${group.map(item => boardKind === 'stories' ? storyCard(item) : taskCard(item)).join('') || '<div class="column-empty">No work here yet.</div>'}</section>`;
+    }).join('')}</div></div>${boardKind==='tasks' ? '<p class="muted">Tasks can have their own status, sprint and assignees. Completing tasks does not automatically close the story. Legacy tasks follow their story until individually updated.</p>' : ''}`;
   bindTextFilter('board-search', value => {boardSearch=value; renderBoard();});
   for (const [id, setter] of [['sprint-filter',v=>sprintFilter=v],['priority-filter',v=>priorityFilter=v],['status-filter',v=>statusFilter=v]]) document.getElementById(id).addEventListener('change', event=>{setter(event.target.value);renderBoard();});
+  document.getElementById('fit-columns').addEventListener('change', event => {boardFit=event.target.checked;renderBoard();document.getElementById('fit-columns').focus();});
 }
 function documentLink(link) {
   return `<a class="btn secondary small" href="${safeUrl(link.href)}" target="_blank" rel="noopener">${esc(link.label)}${icon('external')}</a>`;
@@ -153,8 +176,11 @@ function renderResources() {
   main.innerHTML = heading('PROJECT RESOURCES', 'Everything has a home.', 'Go directly to the game, source code, Space, dataset and the team’s shared work.') + `<div class="resource-grid">${data.resources.map(resourceCard).join('')}</div><section class="panel"><div class="section-head"><h2>Access follows the resource</h2>${tag('Individual accounts','teal')}</div><p>Use your own GitHub account for the private repository and its Issues. Hugging Face Space access is separate. The game and fictional scenario dataset are public.</p><p class="muted">The dataset contains six authored fictional English scenarios with answer keys. It is a teaching fixture, not a dialect corpus or an independent evaluation benchmark.</p></section>`;
 }
 function renderSprints() {
-  main.innerHTML = heading('SPRINT ROADMAP', 'A direction, not a fixed contract.', 'Six proposed two-week sprints. Agree actual dates, capacity and scope at Sprint Planning.') +
-    `<div class="notice">${icon('route')}<div><strong>Start with feasibility and evidence.</strong><span>All three members choose work. The draft capacity is about 28 team delivery hours per sprint; replace it with your actual availability in the workbook.</span></div><a class="btn secondary small" href="#documents">Open the plan</a></div><div class="timeline">${data.sprints.map((sprint,i)=>`<section class="sprint-card ${i===0 ? 'current' : ''}"><div class="sprint-marker">${esc(sprint.id)}</div><div class="sprint-body"><div class="card-tags">${tag(`Weeks ${i*2+1}–${i*2+2}`,i===0?'teal':'neutral')}${i===0 ? tag('Next planning meeting','green') : ''}</div><h2>${esc(sprint.title || sprint.goal)}</h2><p>${esc(sprint.goal)}</p><div class="sprint-stories">${(sprint.storyIds||[]).map(id=>`<button class="story-chip" data-story="${esc(id)}">${esc(id)} ${icon('arrow')}</button>`).join('')}</div>${sprint.demo ? `<p class="muted"><strong>Review evidence:</strong> ${esc(sprint.demo)}</p>` : ''}</div></section>`).join('')}</div>`;
+  main.innerHTML = heading('SPRINT ROADMAP', 'Plan the next shared goal.', 'Set sprint dates and goals, then move stories and tasks into the sprint from their detail windows.', `<button class="btn primary" data-action="new-sprint" ${canEdit() ? '' : 'disabled'}>Create sprint ${icon('route')}</button>`) + boardNotice() +
+    `<div class="notice">${icon('route')}<div><strong>Start with feasibility and evidence.</strong><span>All three members choose work. Forecast sprints become shared GitHub milestones when saved. Agree capacity together before taking on work.</span></div><a class="btn secondary small" href="#board">Open the board</a></div><div class="timeline">${allSprints().map((sprint,i)=>{
+      const stories = data.stories.filter(story=>storyState(story).sprint===sprint.id);
+      return `<section class="sprint-card ${i===0 ? 'current' : ''}"><div class="sprint-marker">${esc(sprint.id)}</div><div class="sprint-body"><div class="card-tags">${tag(sprint.number ? 'GitHub milestone' : 'Forecast',sprint.number?'teal':'neutral')}${sprint.state === 'closed' ? tag('Closed','green') : ''}</div><h2>${esc(sprint.title || sprint.goal)}</h2><p>${esc(sprint.goal || 'Set a goal at Sprint Planning.')}</p><p class="sprint-dates">${sprint.startDate ? esc(prettyDate(sprint.startDate)) : 'Start date not set'} · ${sprint.endDate ? esc(prettyDate(sprint.endDate)) : 'End date not set'}</p><div class="sprint-stories">${stories.map(story=>`<button class="story-chip" data-story="${esc(story.id)}">${esc(story.id)} ${icon('arrow')}</button>`).join('') || '<span class="muted">No stories assigned yet.</span>'}</div>${sprint.demo ? `<p class="muted"><strong>Review evidence:</strong> ${esc(sprint.demo)}</p>` : ''}<button class="btn secondary small sprint-edit" data-edit-sprint="${esc(sprint.id)}" ${canEdit() ? '' : 'disabled'}>Edit dates and goal</button></div></section>`;
+    }).join('')}</div>`;
 }
 function renderResearch() {
   main.innerHTML = heading('COURSE & EVIDENCE', 'Turn the rubric into evidence.', 'Problem establishment is complete. The remaining course work connects the literature, contribution and evaluation.') +
@@ -182,15 +208,78 @@ function githubAction(story) {
   const live = githubRecord(story.id);
   return live?.url ? external(live.url,`${icon('github')} Open / update on GitHub ${icon('external')}`,'btn primary') : '<button class="btn primary" data-action="guide">Connect the shared board '+icon('arrow')+'</button>';
 }
+function assigneeFields(selected) {
+  const names = [...new Set([...(client?.assignees || []).map(member=>typeof member === 'string' ? member : member.login), ...selected])].filter(Boolean).sort();
+  return `<fieldset class="assignee-field"><legend>Assignees</legend><p class="field-help">Leave all names unchecked to unassign.</p><div class="assignee-options">${names.map(login=>`<label><input type="checkbox" name="assignees" value="${esc(login)}" ${selected.includes(login) ? 'checked' : ''}>${esc(login)}</label>`).join('') || '<span class="muted">No assignable members were returned. Refresh the board to try again.</span>'}</div></fieldset>`;
+}
+function editFields(item, kind) {
+  if(!canEdit()) return '<div class="notice"><div><strong>Sign in to edit this work.</strong><span>Your invited GitHub account is required to change assignments, status or sprint.</span></div><button class="btn primary small" data-action="login">Sign in with GitHub</button></div>';
+  const selected = kind==='task' ? item.live?.assignees ?? item.parent.github?.assignees ?? [] : item.github?.assignees ?? [];
+  return `<form id="ticket-edit-form" data-edit-kind="${kind}" data-edit-id="${esc(item.id)}" class="ticket-edit-form"><h3>Move and assign ${kind}</h3><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="edit-status"><span>Status</span><select name="status" id="edit-status">${STATUSES.map(value=>`<option ${item.status===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label><label class="form-field" for="edit-sprint"><span>Sprint</span><select name="sprint" id="edit-sprint">${sprintNames().map(value=>`<option ${item.sprint===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label></div>${assigneeFields(selected)}${kind==='task' ? `<label class="completion-control"><input type="checkbox" id="edit-completed" name="completed" ${item.status==='Done'?'checked':''}>Task complete</label><p class="field-help">Checking complete sets Done. Unchecking a completed task returns it to Backlog.</p>` : '<p class="field-help">Done closes the GitHub story. Other statuses reopen it if needed.</p>'}<div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-ticket">Save to GitHub</button><button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button></div></fieldset></form>`;
+}
+function showTask(id) {
+  const raw = data.tasks.find(task=>task.id===id);
+  if(!raw) return toast('That task is not part of this plan.');
+  const task = taskState(raw);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">TASK ${esc(task.id)} · ${esc(task.sprint)}</span><h2 id="dialog-title">${esc(task.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close task">&times;</button></div><div class="dialog-body"><div class="card-tags">${tag(task.status,statusColor(task.status))}${tag(task.priority)}</div><p class="lead-text">Part of <button class="story-chip" data-story="${esc(task.storyId)}">${esc(task.storyId)}: ${esc(task.parent.title)}</button></p><div class="detail-grid"><div><span class="detail-label">Assignees</span><span class="detail-value">${esc(task.owner || 'Unassigned')}</span></div><div><span class="detail-label">Sprint</span><span class="detail-value">${esc(task.sprint)}</span></div></div>${editFields(task,'task')}</div><div class="dialog-actions">${githubAction(task.parent)}</div>`);
+  editorContext={kind:'task',id,version:task.parent.github?.version || task.parent.github?.updatedAt};
+}
+function showSprintEditor(id=null) {
+  if(!canEdit()) return beginLogin();
+  const current = id ? allSprints().find(sprint=>sprint.id===id) : null;
+  const next = Math.max(0,...allSprints().map(sprint=>Number(sprint.id.match(/^S(\d+)$/)?.[1])||0))+1;
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">SPRINT PLANNING</span><h2 id="dialog-title">${current ? 'Edit sprint' : 'Create sprint'}</h2></div><button class="icon-button" data-action="close" aria-label="Close sprint editor">&times;</button></div><div class="dialog-body"><form id="sprint-edit-form"><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="sprint-id"><span>Sprint ID</span><input id="sprint-id" name="id" value="${esc(current?.id || `S${next}`)}" pattern="S[1-9][0-9]*" required maxlength="12" ${current ? 'readonly' : ''}><small>For example, S1 or S7.</small></label><label class="form-field" for="sprint-title"><span>Title</span><input id="sprint-title" name="title" value="${esc(current?.title || '')}" required maxlength="120"></label></div><label class="form-field" for="sprint-goal"><span>Sprint goal</span><textarea id="sprint-goal" name="goal" rows="4" maxlength="2000" required>${esc(current?.goal || '')}</textarea></label><div class="edit-grid"><label class="form-field" for="sprint-start"><span>Start date</span><input type="date" id="sprint-start" name="startDate" value="${esc(current?.startDate || '')}"></label><label class="form-field" for="sprint-end"><span>End date</span><input type="date" id="sprint-end" name="endDate" value="${esc(current?.endDate || '')}"></label></div><p class="field-help">Dates are optional. Saving creates or updates a shared GitHub milestone. Move work into it from the story or task editor.</p><div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-sprint">Save sprint to GitHub</button>${current ? '<button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button>' : ''}</div></fieldset></form></div>`);
+  editorContext={kind:'sprint',id:current?.id || null,number:current?.number,version:current?.version};
+}
+async function saveEditor(form) {
+  if(saving) return;
+  if(!canEdit()){const feedback=form.querySelector('.save-feedback');feedback.className='save-feedback form-error';feedback.textContent='Your sign-in has expired. Copy any unsaved edits, then sign in with GitHub again.';return;}
+  const context={...editorContext}, fields=new FormData(form), feedback=form.querySelector('.save-feedback');
+  const fieldset=form.querySelector('.edit-fieldset');
+  const patch=context.kind==='sprint' ? {id:fields.get('id').trim(),title:fields.get('title').trim(),goal:fields.get('goal').trim(),startDate:fields.get('startDate') || null,endDate:fields.get('endDate') || null,...(context.number ? {number:context.number} : {}),...(context.version ? {version:context.version} : {})} : {status:fields.get('status'),sprint:fields.get('sprint'),assignees:fields.getAll('assignees')};
+  if(context.kind==='sprint' && patch.startDate && patch.endDate && patch.endDate < patch.startDate) {feedback.className='save-feedback form-error';feedback.textContent='End date must be on or after the start date.';return;}
+  if(context.kind==='task') patch.completed=fields.has('completed');
+  saving=true;fieldset.disabled=true;feedback.className='save-feedback';feedback.textContent='Saving to GitHub...';boardMessage='Saving to GitHub...';boardError=false;
+  try {
+    if(context.kind==='sprint') await client.saveSprint(patch);
+    else if(context.kind==='story') await client.saveStory(context.id,patch,context.version);
+    else await client.saveTask(data.tasks.find(task=>task.id===context.id).storyId,context.id,patch,context.version);
+    boardMessage=`${context.kind==='sprint' ? patch.id : context.id} saved to GitHub.`;
+    dialog.close();toast(boardMessage);
+  } catch(error) {
+    feedback.className='save-feedback form-error';feedback.textContent=`Not saved. ${error.message || 'Please try again.'} Your edits are still here. Use Reload latest to review newer changes before retrying.`;
+    boardMessage='The update was not saved. Review the message in the editor.';boardError=true;
+  } finally {saving=false;fieldset.disabled=false;render();}
+}
+async function beginLogin() {
+  if(loginPending || saving) return;
+  loginPending=true;boardMessage='Complete sign-in in the GitHub window. Return here when finished.';boardError=false;
+  try {
+    const signingIn=client.startLogin(); // Open the secure popup during the click gesture.
+    render();
+    if(dialog.open) dialog.close();
+    await signingIn;
+    boardMessage=`Connected as ${client.session?.login || 'your GitHub account'}. You can now edit shared work.`;toast(boardMessage);
+  } catch(error) {boardMessage=error.message || 'Sign-in did not finish. Please try again.';boardError=true;}
+  finally {loginPending=false;render();}
+}
+async function reloadEditor() {
+  if(saving || !editorContext) return;
+  const previous={...editorContext};
+  try {await client.refresh();if(previous.kind==='story')showStory(previous.id);else if(previous.kind==='task')showTask(previous.id);else showSprintEditor(previous.id);}
+  catch(error){const feedback=dialog.querySelector('.save-feedback');if(feedback){feedback.textContent=`Could not refresh. ${error.message}`;feedback.classList.add('form-error');}}
+}
 function showStory(id, focusTask=null) {
   const raw = data.stories.find(s=>s.id===id);
   if (!raw) return toast('That story is not part of this plan.');
   const s = storyState(raw);
   const tasks = data.tasks.filter(t=>t.storyId===id).map(taskState);
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p><div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer||'Choose a different teammate')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted">${tasks.filter(t=>t.status==='Done').length}/${tasks.length}</span></h3><p class="muted">Update the task checkboxes in the linked GitHub story. Agree who takes each task and who reviews it there.</p><div class="task-list">${tasks.map(t=>`<div class="task-row ${focusTask===t.id?'task-highlight':''}" id="task-${esc(t.id)}"><span class="task-check ${t.status==='Done'?'checked':''}" aria-label="${t.status==='Done'?'Completed':'Not complete'}">${t.status==='Done'?'✓':'○'}</span><div><span class="item-id">${esc(t.id)}</span><p>${esc(t.title)}</p></div></div>`).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer||'Choose a different teammate')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted">${tasks.filter(t=>t.status==='Done').length}/${tasks.length}</span></h3><p class="muted">Open a task to update its own assignees, status and sprint. Review evidence with another team member before marking work complete.</p><div class="task-list">${tasks.map(t=>`<div class="task-row ${focusTask===t.id?'task-highlight':''}" id="task-${esc(t.id)}"><span class="task-check ${t.status==='Done'?'checked':''}" aria-label="${t.status==='Done'?'Completed':'Not complete'}">${t.status==='Done'?'✓':'○'}</span><div><span class="item-id">${esc(t.id)}</span><p>${esc(t.title)}</p><span class="muted">${esc(t.owner || 'Unassigned')} · ${esc(t.sprint)}</span></div><button class="btn secondary small" data-edit-task="${esc(t.id)}">${canEdit() ? 'Edit task' : 'View task'}</button></div>`).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
+  editorContext={kind:'story',id,version:s.github?.version || s.github?.updatedAt};
   if (focusTask) setTimeout(()=>document.getElementById(`task-${focusTask}`)?.scrollIntoView({block:'center'}),50);
 }
 function showDialog(html) {
+  editorContext=null;
   const wasOpen=dialog.open;
   document.getElementById('dialog-content').innerHTML=html;
   if (!dialog.open) dialog.showModal();
@@ -198,30 +287,7 @@ function showDialog(html) {
   dialog.querySelector('.dialog-body')?.scrollTo(0,0);
 }
 function showGuide() {
-  showDialog(`<div class="dialog-head">
-    <div><span class="eyebrow">WORKSPACE GUIDE</span><h2 id="dialog-title">One plan. Shared through GitHub.</h2></div>
-    <button class="icon-button" data-action="close" aria-label="Close guide">×</button>
-  </div><div class="dialog-body">
-    <h3>Choose work and keep it moving</h3>
-    <ol class="checklist">
-      <li>Filter the Scrum board by sprint, priority or Ready status, then open a story.</li>
-      <li>Choose <strong>Open / update on GitHub</strong>. Sign in with your own account invited to the private <strong>factoryrelay</strong> repository, then assign yourself after agreeing capacity.</li>
-      <li>Record each task’s owner and a different reviewer in the issue discussion. Tick task checkboxes when the evidence is complete; keep the task IDs.</li>
-      <li>Keep one status label: Backlog, Ready, In progress, Review, Blocked or Deferred. Close the story after its acceptance criteria and review are complete.</li>
-      <li>Refresh the portal after synchronization and deployment finish. The board is a published snapshot, so changes are not instant.</li>
-    </ol>
-    <p>The portal is public. Use <strong>Preview</strong> to read a document in an embedded Google viewer, or open it in Google Drive. Previews load only when selected and follow the file’s sharing settings; use the Google button if sign-in or browser restrictions prevent the preview. Updating private Issues requires your team invitation; a private link may show 404 if you are signed out or lack access. Individual task owners and reviewers stay in the issue discussion.</p>
-    <h3>For the project owner</h3>
-    <p>The shared board has <strong>22 story issues and 83 task checkboxes</strong>. Members choose their work; creating the board did not assign anyone.</p>
-    <p>Issue changes run <strong>Sync Factory Relay board to public portal</strong> in the ${external(`${REPO}/actions`, 'private repository')}. The resulting board snapshot triggers <strong>Deploy Factory Relay team portal</strong> in the public <strong>factoryrelay-team</strong> repository. If updates stop appearing, check both workflow runs.</p>
-    <p>Only story status, assignee logins, task completion, issue links and timestamps synchronize. Private discussions and evidence attachments stay in GitHub. Document and plan changes are published separately.</p>
-    <div class="notice"><div><strong>Current connection</strong><span>${snapshot.enabled&&snapshot.items.length ? `${snapshot.items.length} linked stories; last snapshot ${esc(prettyDate(snapshot.syncedAt))}.` : 'This copy is showing the planning baseline. Open the private Issues for current progress and check the latest synchronization run.'}</span></div></div>
-    <p>Setup and maintenance details are in <a href="./README.md" target="_blank" rel="noopener">the portal README</a>. No GitHub token is requested or stored in this browser.</p>
-  </div><div class="dialog-actions">
-    ${external(`${REPO}/issues`, 'Open team Issues '+icon('external'),'btn secondary')}
-    ${external(`${PORTAL_REPO}/actions`, 'Public deployments '+icon('external'),'btn secondary')}
-    <button class="btn primary" data-action="close">Got it</button>
-  </div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">WORKSPACE GUIDE</span><h2 id="dialog-title">One plan. Shared through GitHub.</h2></div><button class="icon-button" data-action="close" aria-label="Close guide">&times;</button></div><div class="dialog-body"><h3>Plan, assign and move work</h3><ol class="checklist"><li>Use <strong>Sign in with GitHub</strong> and complete sign-in in GitHub's separate window. Use your account invited to the private Factory Relay repository.</li><li>Open <strong>Sprint roadmap</strong> to create a sprint or edit its dates and goal. Sprints save as GitHub milestones.</li><li>Open a story or task to choose assignees, a sprint and a status. Clear the assignee choices to unassign. Use <strong>Save to GitHub</strong> and wait for confirmation.</li><li>On the board, drag a ticket into a status column, or use its editor to move it with a keyboard or touch screen. Task completion and assignment can be managed independently of the parent story.</li><li>Use <strong>Fit all columns to screen</strong> to remove horizontal board scrolling. Smaller screens wrap columns into rows.</li></ol><h3>Shared saving and access</h3><p>Signed-in views refresh periodically. Signed-out visitors see the published snapshot, which updates after GitHub synchronization and deployment. Private issue comments and attachments remain in GitHub.</p><p>The browser retains a protected portal session for up to a day, limited by GitHub's authorization expiry. Your GitHub password and GitHub access token are not stored by this page. Sign out on a shared device. Editing requires the owner's one-time GitHub application setup and repository access.</p><p>If someone changes a record while you edit, the save is rejected instead of overwriting their work. Your form stays open; use <strong>Reload latest</strong> to inspect the current record before applying your change again.</p><h3>Documents</h3><p>The board's <strong>Open in Google Docs</strong> and <strong>Preview</strong> buttons open the shared team implementation plan. The Document library also includes the Scrum workbook. Google previews load only when selected and follow each file's sharing settings.</p><p>More setup and maintenance details are in <a href="./README.md" target="_blank" rel="noopener">the portal README</a>.</p></div><div class="dialog-actions">${external(`${REPO}/issues`,'Open team Issues '+icon('external'),'btn secondary')}${external(`${PORTAL_REPO}/actions`,'Public deployments '+icon('external'),'btn secondary')}<button class="btn primary" data-action="close">Got it</button></div>`);
 }
 function bindTextFilter(id, onChange) {
   const input=document.getElementById(id);
@@ -229,14 +295,6 @@ function bindTextFilter(id, onChange) {
 }
 function toast(message) {
   const box=document.getElementById('toast');box.textContent=message;box.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>box.hidden=true,3500);
-}
-function exportBoard() {
-  const rows=[['ID','Type','Title','Status','Sprint','Priority','Story owner','GitHub URL']];
-  data.stories.map(storyState).forEach(s=>rows.push([s.id,'Story',s.title,s.status,s.sprint,s.priority,s.owner,s.github?.url||'']));
-  data.tasks.map(taskState).forEach(t=>rows.push([t.id,'Task',t.title,t.status,t.sprint,t.priority,t.owner,t.parent.github?.url||'']));
-  const cell=v=>'"'+String(v??'').replace(/^[=+@\-\t\r]/,"'$&").replaceAll('"','""')+'"';
-  const blob=new Blob(['\ufeff'+rows.map(row=>row.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Factory_Relay_Portal_Board.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Board snapshot exported. Shared updates stay in GitHub.');
 }
 function updateRoute() {
   if(previewDialog.open)previewDialog.close();
@@ -255,20 +313,71 @@ function render() {
   if(globalQuery) return renderSearch();
   ({overview:renderOverview,board:renderBoard,documents:renderDocuments,resources:renderResources,sprints:renderSprints,research:renderResearch,status:renderStatus}[route])();
 }
+function renderSharedUpdate() {
+  // Keep the open Google viewer, draft editor and filter position intact during polling.
+  if(previewDialog.open)return;
+  const active=document.activeElement;
+  const focusId=main.contains(active) ? active.id : '';
+  const selection=focusId && /INPUT|TEXTAREA/.test(active.tagName) ? [active.selectionStart,active.selectionEnd] : null;
+  const scrollLeft=main.querySelector('.board-scroll')?.scrollLeft || 0;
+  const columns=[...main.querySelectorAll('[data-drop-status]')].map(column=>[column.dataset.dropStatus,column.scrollTop]);
+  render();
+  if(main.querySelector('.board-scroll'))main.querySelector('.board-scroll').scrollLeft=scrollLeft;
+  for(const [status,scrollTop] of columns){const column=[...main.querySelectorAll('[data-drop-status]')].find(item=>item.dataset.dropStatus===status);if(column)column.scrollTop=scrollTop;}
+  if(focusId){const next=document.getElementById(focusId);next?.focus({preventScroll:true});if(next&&selection)try{next.setSelectionRange(...selection);}catch{/* Select inputs have no text caret. */}}
+}
 document.addEventListener('click', async event=>{
   const sidebar=document.getElementById('sidebar');
   if(sidebar.classList.contains('open')&&!event.target.closest('#sidebar')&&!event.target.closest('#menu-toggle')){
     sidebar.classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');event.preventDefault();return;
   }
+  if(saving && event.target.closest('[data-story], [data-task], [data-edit-task], [data-edit-sprint], [data-action="guide"]'))return toast('Please wait for the save to finish.');
   const story=event.target.closest('[data-story]');if(story) return showStory(story.dataset.story);
   const preview=event.target.closest('[data-preview]');if(preview) return showDocumentPreview(preview.dataset.preview,preview);
-  const task=event.target.closest('[data-task]');if(task){const t=data.tasks.find(t=>t.id===task.dataset.task);return showStory(t.storyId,t.id);}
+  const task=event.target.closest('[data-task], [data-edit-task]');if(task)return showTask(task.dataset.task || task.dataset.editTask);
+  const sprint=event.target.closest('[data-edit-sprint]');if(sprint)return showSprintEditor(sprint.dataset.editSprint);
   const kind=event.target.closest('[data-kind]');if(kind){boardKind=kind.dataset.kind;return renderBoard();}
   const copy=event.target.closest('[data-copy]');if(copy){const url=new URL(location.href);url.hash=`story/${copy.dataset.copy}`;try{await navigator.clipboard.writeText(url.href);toast('Story link copied.');}catch{toast('Copy the story ID: '+copy.dataset.copy);}return;}
   const action=event.target.closest('[data-action]')?.dataset.action;
-  if(action==='guide')showGuide();if(action==='close')dialog.close();if(action==='close-preview')previewDialog.close();if(action==='export')exportBoard();
+  if(action==='guide')showGuide();
+  if(action==='close'){if(saving)toast('Please wait for the save to finish.');else dialog.close();}
+  if(action==='close-preview')previewDialog.close();
+  if(action==='login')return beginLogin();
+  if(action==='new-sprint')return showSprintEditor();
+  if(action==='reload-editor')return reloadEditor();
+  if(action==='logout'){try{await client.logout();boardMessage='Signed out. The board is read-only.';boardError=false;}catch(error){boardMessage=`Signed out in this browser. ${error.message}`;boardError=true;}render();if(dialog.open)dialog.close();}
+  if(action==='refresh'){try{await client.refresh();boardMessage='Latest GitHub changes loaded.';boardError=false;}catch(error){boardMessage=error.message;boardError=true;}render();}
 });
-dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+document.addEventListener('submit',event=>{if(event.target.matches('#ticket-edit-form, #sprint-edit-form')){event.preventDefault();saveEditor(event.target);}});
+document.addEventListener('change',event=>{
+  if(event.target.id==='edit-completed'){const select=document.getElementById('edit-status');if(event.target.checked)select.value='Done';else if(select.value==='Done')select.value='Backlog';}
+  if(event.target.id==='edit-status'){const complete=document.getElementById('edit-completed');if(complete)complete.checked=event.target.value==='Done';}
+});
+document.addEventListener('dragstart',event=>{
+  const card=event.target.closest('[data-card-id]');
+  if(!card || !canEdit() || saving){event.preventDefault();return;}
+  const item=card.dataset.cardKind==='story' ? storyState(data.stories.find(item=>item.id===card.dataset.cardId)) : taskState(data.tasks.find(item=>item.id===card.dataset.cardId));
+  draggedItem={kind:card.dataset.cardKind,id:item.id,status:item.status,storyId:item.storyId,version:item.github?.version || item.parent?.github?.version || item.github?.updatedAt || item.parent?.github?.updatedAt};
+  event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',item.id);card.classList.add('dragging');
+});
+document.addEventListener('dragover',event=>{const column=event.target.closest('[data-drop-status]');if(column && draggedItem && canEdit() && !saving){event.preventDefault();event.dataTransfer.dropEffect='move';document.querySelectorAll('.drop-target').forEach(item=>item.classList.remove('drop-target'));column.classList.add('drop-target');}});
+document.addEventListener('dragleave',event=>{const column=event.target.closest('[data-drop-status]');if(column && !column.contains(event.relatedTarget))column.classList.remove('drop-target');});
+document.addEventListener('dragend',()=>{draggedItem=null;document.querySelectorAll('.drop-target, .dragging').forEach(item=>item.classList.remove('drop-target','dragging'));});
+document.addEventListener('drop',async event=>{
+  const column=event.target.closest('[data-drop-status]');
+  if(!column || !draggedItem || !canEdit() || saving)return;
+  event.preventDefault();
+  const move={...draggedItem},status=column.dataset.dropStatus;draggedItem=null;
+  document.querySelectorAll('.drop-target, .dragging').forEach(item=>item.classList.remove('drop-target','dragging'));
+  if(status===move.status)return;
+  saving=true;boardMessage=`Moving ${move.id} to ${status}…`;boardError=false;renderBoard();
+  try{if(move.kind==='story')await client.saveStory(move.id,{status},move.version);else await client.saveTask(move.storyId,move.id,{status,completed:status==='Done'},move.version);boardMessage=`${move.id} moved to ${status} and saved to GitHub.`;toast(boardMessage);}
+  catch(error){boardMessage=`Move not saved. ${error.message} Refresh the board to review the latest changes.`;boardError=true;}
+  finally{saving=false;render();}
+});
+dialog.addEventListener('cancel',event=>{if(saving){event.preventDefault();toast('Please wait for the save to finish.');}});
+dialog.addEventListener('close',()=>{editorContext=null;});
+dialog.addEventListener('click',e=>{if(e.target===dialog&&!saving){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 previewDialog.addEventListener('click',event=>{if(event.target===previewDialog){const bounds=previewDialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)previewDialog.close();}});
 previewDialog.addEventListener('close',()=>{
   document.getElementById('document-preview-frame').replaceChildren();
@@ -293,6 +402,11 @@ async function start(){
     if(board.ok)snapshot=await board.json();
     document.getElementById('snapshot-label').textContent=`Baseline · ${prettyDate(data.asOf)}${snapshot.syncedAt?' / board · '+prettyDate(snapshot.syncedAt):''}`;
     updateRoute();
+    client=createPortalClient({data,onChange(next){snapshot=next;renderSharedUpdate();},onAuthChange(){renderSharedUpdate();},onError(error){boardMessage=`Could not refresh shared work. ${error.message}`;boardError=true;renderSharedUpdate();}});
+    await client.initialize();
+    if(client.snapshot?.items)snapshot=client.snapshot;
+    if(client.authError){boardMessage=client.authError;boardError=true;}
+    render();
   }catch(error){main.innerHTML=`<div class="empty-state"><h1>The workspace could not load.</h1><p>${esc(error.message)}</p><p>Serve this folder over HTTP using <code>npm run portal:dev</code>, or deploy the complete static folder. Opening index.html directly from disk does not support the data requests.</p><button class="btn primary" id="retry-load">Try again</button></div>`;document.getElementById('retry-load').addEventListener('click',start);}
 }
 start();

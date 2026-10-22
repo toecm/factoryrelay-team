@@ -27,7 +27,9 @@ jobs:
         with:
           node-version: '22'
       - name: Verify and stage the curated static website
-        run: node scripts/verify-static.mjs --stage
+        run: |
+          node --test scripts/verify-static.test.mjs
+          node scripts/verify-static.mjs --stage
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:

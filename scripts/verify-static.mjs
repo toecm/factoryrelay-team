@@ -16,7 +16,7 @@ const DOCUMENT_LINKS = Object.freeze({
   'user-manual': 'https://docs.google.com/document/d/1sQNovE9HbFqJwqayxxJbug-Owsx_9v51/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
 });
 export const WEBSITE_FILES = Object.freeze([
-  '.nojekyll', 'README.md', 'index.html', 'app.js', 'styles.css', 'assets/logo.svg',
+  '.nojekyll', 'README.md', 'index.html', 'app.js', 'styles.css', 'board-model.js', 'github-client.js', 'assets/logo.svg',
   'data/documents-manifest.json', 'data/portal-data.json', 'data/github-board.json',
 ]);
 
@@ -28,30 +28,62 @@ function exactKeys(object, keys) {
   assert.deepEqual(Object.keys(object).sort(), [...keys].sort(), 'Unexpected public board fields');
 }
 
-function validateBoard(board, stories) {
-  exactKeys(board, ['enabled', 'syncedAt', 'repo', 'items']);
+export function validateBoard(board, stories, forecastSprints = []) {
+  const extended = Object.hasOwn(board || {}, 'sprints');
+  exactKeys(board, ['enabled', 'syncedAt', 'repo', 'items', ...(extended ? ['sprints'] : [])]);
   assert.equal(typeof board.enabled, 'boolean');
   assert.equal(board.repo, 'toecm/factoryrelay');
   assert(Array.isArray(board.items));
   if (!board.enabled) {
     assert.equal(board.syncedAt, null);
     assert.equal(board.items.length, 0);
+    if (extended) assert.deepEqual(board.sprints, []);
     return;
   }
   assert(isoDate(board.syncedAt), 'Invalid board timestamp');
   const knownStories = new Map(stories.map(story => [story.id, story]));
+  const knownSprints = new Set(['Unscheduled', ...forecastSprints.map(sprint => sprint.id), ...stories.map(story => story.sprint).filter(Boolean)]);
+  const statuses = ['Backlog', 'Ready', 'In progress', 'Review', 'Blocked', 'Deferred', 'Done'];
+  const version = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+  const calendarDate = value => value === null || (typeof value === 'string' && /^\d{4}-\d\d-\d\d$/.test(value) && Number.isFinite(Date.parse(`${value}T00:00:00Z`)) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value);
+  if (extended) {
+    assert(Array.isArray(board.sprints), 'Sprints must be an array');
+    const ids = new Set(), numbers = new Set();
+    for (const sprint of board.sprints) {
+      exactKeys(sprint, ['id', 'title', 'goal', 'startDate', 'endDate', 'number', 'version', 'state']);
+      assert(typeof sprint.id === 'string' && /^[A-Za-z][A-Za-z0-9_-]{0,23}$/.test(sprint.id) && sprint.id !== 'Unscheduled');
+      assert(typeof sprint.title === 'string' && sprint.title.trim() && sprint.title.length <= 120 && !/[\r\n\x00-\x1f]/.test(sprint.title));
+      assert(typeof sprint.goal === 'string' && sprint.goal.length <= 2000 && !/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(sprint.goal));
+      assert(calendarDate(sprint.startDate) && calendarDate(sprint.endDate));
+      assert(!sprint.startDate || !sprint.endDate || sprint.startDate <= sprint.endDate);
+      assert(Number.isSafeInteger(sprint.number) && sprint.number > 0 && version(sprint.version));
+      assert(['open', 'closed'].includes(sprint.state) && !ids.has(sprint.id) && !numbers.has(sprint.number));
+      ids.add(sprint.id); numbers.add(sprint.number); knownSprints.add(sprint.id);
+    }
+  }
   const seen = new Set();
   for (const item of board.items) {
-    exactKeys(item, ['id', 'number', 'url', 'status', 'assignees', 'updatedAt', 'taskStatus']);
+    exactKeys(item, ['id', 'number', 'url', 'status', 'assignees', 'updatedAt', 'taskStatus', ...(extended ? ['version', 'sprint', 'milestoneNumber', 'tasks'] : [])]);
     assert(knownStories.has(item.id) && !seen.has(item.id), 'Unknown or duplicate board story');
     assert(Number.isSafeInteger(item.number) && item.number > 0);
     assert.equal(item.url, `https://github.com/toecm/factoryrelay/issues/${item.number}`);
-    assert(['Backlog', 'Ready', 'In progress', 'Review', 'Blocked', 'Deferred', 'Done'].includes(item.status));
+    assert(statuses.includes(item.status));
     assert(Array.isArray(item.assignees) && item.assignees.every(login => typeof login === 'string' && /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(login)));
     assert.equal(new Set(item.assignees).size, item.assignees.length);
     assert(item.updatedAt === null || isoDate(item.updatedAt));
     exactKeys(item.taskStatus, knownStories.get(item.id).taskIds);
     assert(Object.values(item.taskStatus).every(value => typeof value === 'boolean'));
+    if (extended) {
+      assert(version(item.version) && knownSprints.has(item.sprint));
+      assert(item.milestoneNumber === null || (Number.isSafeInteger(item.milestoneNumber) && item.milestoneNumber > 0));
+      exactKeys(item.tasks, knownStories.get(item.id).taskIds);
+      for (const [id, task] of Object.entries(item.tasks)) {
+        exactKeys(task, ['status', 'assignees', 'sprint']);
+        assert(statuses.includes(task.status) && knownSprints.has(task.sprint) && (task.status === 'Done') === item.taskStatus[id]);
+        assert(Array.isArray(task.assignees) && task.assignees.length <= 10 && task.assignees.every(login => typeof login === 'string' && /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(login)));
+        assert.equal(new Set(task.assignees.map(login => login.toLowerCase())).size, task.assignees.length);
+      }
+    }
     seen.add(item.id);
   }
 }
@@ -103,7 +135,7 @@ export async function verify(rootPath = ROOT) {
   for (const group of [...data.sprints, ...data.courseCriteria]) assert(group.storyIds.every(id => ids.has(id)));
   for (const resource of data.resources) assert.equal(new URL(resource.url).protocol, 'https:');
   assert(!/\b[A-Z]:[\\/]|\.release[\\/]/i.test(JSON.stringify(data)), 'Local/private evidence path in public data');
-  validateBoard(board, data.stories);
+  validateBoard(board, data.stories, data.sprints);
   assert.equal(manifest.schemaVersion, 2);
   assert.equal(manifest.mode, 'external-links');
   assert.equal(Object.hasOwn(manifest, 'files'), false, 'Manifest retains downloadable files');
