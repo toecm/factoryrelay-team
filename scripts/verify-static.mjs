@@ -22,6 +22,7 @@ export const WEBSITE_FILES = Object.freeze([
 
 const readJson = async file => JSON.parse((await readFile(file, 'utf8')).replace(/^\uFEFF/, ''));
 const isoDate = value => typeof value === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(value) && !Number.isNaN(Date.parse(value));
+const reviewerLogin = value => value === null || (typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(value));
 
 function exactKeys(object, keys) {
   assert(object && typeof object === 'object' && !Array.isArray(object), 'Expected an object');
@@ -63,13 +64,15 @@ export function validateBoard(board, stories, forecastSprints = []) {
   }
   const seen = new Set();
   for (const item of board.items) {
-    exactKeys(item, ['id', 'number', 'url', 'status', 'assignees', 'updatedAt', 'taskStatus', ...(extended ? ['version', 'sprint', 'milestoneNumber', 'tasks'] : [])]);
+    exactKeys(item, ['id', 'number', 'url', 'status', 'assignees', 'updatedAt', 'taskStatus', ...(extended ? ['version', 'sprint', 'milestoneNumber', 'tasks'] : []), ...(Object.hasOwn(item || {}, 'reviewer') ? ['reviewer'] : [])]);
     assert(knownStories.has(item.id) && !seen.has(item.id), 'Unknown or duplicate board story');
     assert(Number.isSafeInteger(item.number) && item.number > 0);
     assert.equal(item.url, `https://github.com/toecm/factoryrelay/issues/${item.number}`);
     assert(statuses.includes(item.status));
     assert(Array.isArray(item.assignees) && item.assignees.every(login => typeof login === 'string' && /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(login)));
     assert.equal(new Set(item.assignees).size, item.assignees.length);
+    // Reviewer fields are optional during rollout; only a login or null is public.
+    if (Object.hasOwn(item, 'reviewer')) assert(reviewerLogin(item.reviewer), 'Invalid story reviewer');
     assert(item.updatedAt === null || isoDate(item.updatedAt));
     exactKeys(item.taskStatus, knownStories.get(item.id).taskIds);
     assert(Object.values(item.taskStatus).every(value => typeof value === 'boolean'));
@@ -78,7 +81,8 @@ export function validateBoard(board, stories, forecastSprints = []) {
       assert(item.milestoneNumber === null || (Number.isSafeInteger(item.milestoneNumber) && item.milestoneNumber > 0));
       exactKeys(item.tasks, knownStories.get(item.id).taskIds);
       for (const [id, task] of Object.entries(item.tasks)) {
-        exactKeys(task, ['status', 'assignees', 'sprint']);
+        exactKeys(task, ['status', 'assignees', 'sprint', ...(Object.hasOwn(task || {}, 'reviewer') ? ['reviewer'] : [])]);
+        if (Object.hasOwn(task, 'reviewer')) assert(reviewerLogin(task.reviewer), 'Invalid task reviewer');
         assert(statuses.includes(task.status) && knownSprints.has(task.sprint) && (task.status === 'Done') === item.taskStatus[id]);
         assert(Array.isArray(task.assignees) && task.assignees.length <= 10 && task.assignees.every(login => typeof login === 'string' && /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(login)));
         assert.equal(new Set(task.assignees.map(login => login.toLowerCase())).size, task.assignees.length);
