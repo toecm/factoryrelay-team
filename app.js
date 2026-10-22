@@ -39,7 +39,8 @@ function safeUrl(value) {
 }
 let data, snapshot = {enabled:false, items:[]};
 let client = null, boardFit = true, saving = false, loginPending = false, draggedItem = null, editorContext = null;
-let boardMessage = '', boardError = false, loginFailure = '';
+let boardMessage = '', boardError = false, loginFailure = '', boardNeedsRefresh = false;
+const reviewResults = new Map();
 let route = 'overview', boardKind = 'stories', boardSearch = '', sprintFilter = '', priorityFilter = '', statusFilter = '', docCategory = '', docSearch = '', globalQuery = '';
 const main = document.getElementById('main-content');
 const dialog = document.getElementById('detail-dialog');
@@ -49,7 +50,7 @@ let previewTrigger = null;
 function githubRecord(id) { return snapshot.items.find(item => item.id === id); }
 function storyState(story) {
   const live = githubRecord(story.id);
-  return {...story, status:live?.status || story.status, sprint:live?.sprint ?? story.sprint, owner:live ? (live.assignees || []).join(', ') : story.owner || '', reviewer:live?.reviewer ?? null, github:live};
+  return {...story, status:live?.status || story.status, sprint:live?.sprint ?? story.sprint, owner:live ? (live.assignees || []).join(', ') : story.owner || '', reviewer:live?.reviewer ?? null, workBranch:live?.workBranch ?? null, reviewRequest:live?.reviewRequest ?? null, github:live};
 }
 function taskState(task) {
   const parent = storyState(data.stories.find(s => s.id === task.storyId));
@@ -57,7 +58,7 @@ function taskState(task) {
   const checked = parent.github?.taskStatus?.[task.id];
   // A closed parent does not fabricate completion for an unchecked task.
   const status = live?.status || (checked === true ? 'Done' : checked === false ? (parent.status === 'Done' ? 'Backlog' : parent.status) : task.status);
-  return {...task, status, owner:live ? (live.assignees || []).join(', ') : parent.github ? parent.owner : task.owner, reviewer:live?.reviewer ?? null, parent, sprint:live?.sprint ?? parent.sprint, priority:parent.priority, completed:status === 'Done', live};
+  return {...task, status, owner:live ? (live.assignees || []).join(', ') : parent.github ? parent.owner : task.owner, reviewer:live?.reviewer ?? null, workBranch:live?.workBranch ?? null, reviewRequest:live?.reviewRequest ?? null, parent, sprint:live?.sprint ?? parent.sprint, priority:parent.priority, completed:status === 'Done', live};
 }
 function allSprints() {
   const merged = new Map((data.sprints || []).map(sprint => [sprint.id, {...sprint}]));
@@ -217,16 +218,76 @@ function reviewerField(selected) {
   const names=[...new Set([...(client?.assignees || []).map(member=>typeof member==='string' ? member : member.login),selected])].filter(Boolean).sort();
   return `<label class="form-field reviewer-field" for="edit-reviewer"><span>Reviewer</span><select id="edit-reviewer" name="reviewer" aria-describedby="reviewer-help"><option value="">None / unassigned</option>${names.map(login=>`<option value="${esc(login)}" ${login===selected?'selected':''}>${esc(login)}</option>`).join('')}</select><small id="reviewer-help">Choose a teammate to check the work, ideally someone other than its assignees. Task reviewers are chosen separately from the story reviewer.</small></label>`;
 }
+function workBranchField(item) {
+  return `<label class="form-field" for="edit-work-branch"><span>Work branch (optional)</span><input id="edit-work-branch" name="workBranch" value="${esc(item.workBranch || '')}" placeholder="e.g. eng0-t3-workflow" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="work-branch-help"><small id="work-branch-help">Use a branch in toecm/factoryrelay with your pushed changes. When an assignee moves this ticket to Review, the portal creates or reuses a pull request and notifies teammates. Without a branch, it requests review on the issue instead. Each task has its own branch.</small></label>`;
+}
+function ticketFor(kind, id) {
+  const raw=(kind==='task' ? data.tasks : data.stories).find(item=>item.id===id);
+  return raw ? (kind==='task' ? taskState(raw) : storyState(raw)) : null;
+}
+function ticketVersion(item) { return item.github?.version || item.parent?.github?.version || item.github?.updatedAt || item.parent?.github?.updatedAt; }
+function canRequestReview(item, kind) {
+  const assigned=kind==='task' ? item.live?.assignees ?? item.parent?.github?.assignees ?? [] : item.github?.assignees ?? [];
+  return canEdit() && item.status==='Review' && assigned.some(login=>login.toLowerCase()===client.session.login.toLowerCase());
+}
+function reviewLink(value) {
+  try {
+    const url=new URL(value);
+    return url.origin==='https://github.com' && !url.username && !url.password && /^\/toecm\/factoryrelay\/pull\/[1-9][0-9]*$/.test(url.pathname) && !url.search && !url.hash ? url.href : null;
+  } catch { return null; }
+}
+function handoffContent(item, kind, result) {
+  const link=reviewLink(result?.prUrl);
+  return `${result ? `<p id="review-handoff-message" role="status">${esc(result.message || 'Review handoff returned no details. Open the issue to check its status.')}</p>${link ? external(link,`Open pull request${result.prNumber ? ' #'+esc(result.prNumber) : ''} ${icon('external')}`,'btn secondary small') : ''}` : '<p>Moving to Review as an assignee requests review from your teammates. A work branch with pushed changes enables a pull request; otherwise the request is posted on the issue.</p>'}${canRequestReview(item,kind) ? `<p class="field-help">Retry uses the saved branch and reviewer, without saving any edits in this form. Existing requests are reused.</p><button type="button" class="btn secondary small" data-action="retry-review" data-review-kind="${kind}" data-review-id="${esc(item.id)}" >Retry review handoff</button>` : item.status==='Review' && canEdit() ? '<p class="field-help">An assigned teammate can request or retry this handoff. Assign yourself and save first if you are responsible for this work.</p>' : ''}<p class="review-retry-feedback" role="status" aria-live="polite"></p>`;
+}
+function reviewSection(item, kind) {
+  if(!canEdit())return '';
+  const saved=reviewResults.get(`${kind}:${item.id}`);
+  const result=item.status==='Review' && saved?.requestId===item.reviewRequest?.id && saved?.workBranch===item.workBranch && saved?.reviewer===item.reviewer ? saved.result : null;
+  return `<section class="review-handoff" id="ticket-review-handoff" aria-label="Review handoff"><h3>Review handoff</h3><p><strong>Saved work branch:</strong> <span class="branch-value">${esc(item.workBranch || 'None / issue review')}</span></p>${handoffContent(item,kind,result)}</section>`;
+}
+function showReviewResult(context, result) {
+  const item=ticketFor(context.kind,context.id);
+  if(!item)return;
+  reviewResults.set(`${context.kind}:${context.id}`,{result,requestId:item.reviewRequest?.id,workBranch:item.workBranch,reviewer:item.reviewer});
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">${esc(item.id)} / REVIEW HANDOFF</span><h2 id="dialog-title">${result.status==='complete' ? 'Ticket saved. Review requested.' : result.status==='pending' ? 'Ticket saved. Review handoff pending.' : 'Ticket saved. Review handoff skipped.'}</h2></div><button class="icon-button" data-action="close" aria-label="Close review result">&times;</button></div><div class="dialog-body"><section class="review-handoff" id="review-result" data-result-status="${esc(result.status)}">${handoffContent(item,context.kind,result)}</section><p class="field-help">This result stays open until you close it. The ticket change is saved to GitHub even if the handoff needs another attempt.</p></div><div class="dialog-actions"><button class="btn secondary" ${context.kind==='task' ? 'data-task' : 'data-story'}="${esc(item.id)}">Open ticket</button><button class="btn primary" data-action="close">Close</button></div>`);
+}
+async function retryReview(button) {
+  if(saving)return;
+  const kind=button.dataset.reviewKind,id=button.dataset.reviewId,item=ticketFor(kind,id);
+  if(!item || !canRequestReview(item,kind))return toast('An assigned teammate must request review while the ticket is in Review.');
+  const section=button.closest('.review-handoff'),feedback=section.querySelector('.review-retry-feedback');
+  if(boardNeedsRefresh || editorContext?.requiresReload){feedback.textContent='Saved on GitHub, but the latest state has not loaded. Refresh the board or use Reload latest before retrying.';return;}
+  const openEditor=editorContext && editorContext.kind===kind && editorContext.id===id;
+  const version=openEditor ? editorContext.version : ticketVersion(item);
+  saving=true;button.disabled=true;feedback.textContent='Retrying the saved review handoff...';
+  try {
+    await client.retryReview(kind==='task' ? item.storyId : id,kind==='task' ? id : null,version);
+    const result=client.reviewResult || {status:'pending',message:'The service returned no handoff details. Open the issue to check the request before retrying.'};
+    boardMessage=`${id}: ${result.message}`;boardError=false;
+    const latest=ticketFor(kind,id);
+    reviewResults.set(`${kind}:${id}`,{result,requestId:latest.reviewRequest?.id,workBranch:latest.workBranch,reviewer:latest.reviewer});
+    if(openEditor){editorContext.version=ticketVersion(latest);section.outerHTML=reviewSection(latest,kind);}
+    else showReviewResult({kind,id},result);
+  } catch(error) {
+    feedback.classList.add('form-error');
+    if(error.code==='saved_refresh_failed'){
+      boardNeedsRefresh=true;if(openEditor)editorContext.requiresReload=true;
+      feedback.textContent='Saved on GitHub, but the latest state could not load. Close this result and refresh the board, or use Reload latest, before further edits or retries.';
+      boardMessage=feedback.textContent;boardError=true;
+    }else feedback.textContent=`Review handoff could not finish. ${error.message} The ticket's saved status has not been undone.`;
+  } finally {saving=false;dialog.querySelectorAll('[data-action="retry-review"]').forEach(control=>{control.disabled=false;});render();}
+}
 function editFields(item, kind) {
   if(!canEdit()) return '<div class="notice"><div><strong>Sign in to edit this work.</strong><span>Your invited GitHub account is required to change assignments, status or sprint.</span></div><button class="btn primary small" data-action="login">Sign in with GitHub</button></div>';
   const selected = kind==='task' ? item.live?.assignees ?? item.parent.github?.assignees ?? [] : item.github?.assignees ?? [];
-  return `<form id="ticket-edit-form" data-edit-kind="${kind}" data-edit-id="${esc(item.id)}" class="ticket-edit-form"><h3>Move and assign ${kind}</h3><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="edit-status"><span>Status</span><select name="status" id="edit-status">${STATUSES.map(value=>`<option ${item.status===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label><label class="form-field" for="edit-sprint"><span>Sprint</span><select name="sprint" id="edit-sprint">${sprintNames().map(value=>`<option ${item.sprint===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label></div>${assigneeFields(selected)}${reviewerField(item.reviewer)}${kind==='task' ? `<label class="completion-control"><input type="checkbox" id="edit-completed" name="completed" ${item.status==='Done'?'checked':''}>Task complete</label><p class="field-help">Checking complete sets Done. Unchecking a completed task returns it to Backlog.</p>` : '<p class="field-help">Done closes the GitHub story. Other statuses reopen it if needed.</p>'}<div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-ticket">Save to GitHub</button><button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button></div></fieldset></form>`;
+  return `<form id="ticket-edit-form" data-edit-kind="${kind}" data-edit-id="${esc(item.id)}" class="ticket-edit-form"><h3>Move and assign ${kind}</h3><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="edit-status"><span>Status</span><select name="status" id="edit-status">${STATUSES.map(value=>`<option ${item.status===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label><label class="form-field" for="edit-sprint"><span>Sprint</span><select name="sprint" id="edit-sprint">${sprintNames().map(value=>`<option ${item.sprint===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label></div>${assigneeFields(selected)}${reviewerField(item.reviewer)}${workBranchField(item)}${kind==='task' ? `<label class="completion-control"><input type="checkbox" id="edit-completed" name="completed" ${item.status==='Done'?'checked':''}>Task complete</label><p class="field-help">Checking complete sets Done. Unchecking a completed task returns it to Backlog.</p>` : '<p class="field-help">Done closes the GitHub story. Other statuses reopen it if needed.</p>'}<div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-ticket">Save to GitHub</button><button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button></div></fieldset></form>`;
 }
 function showTask(id) {
   const raw = data.tasks.find(task=>task.id===id);
   if(!raw) return toast('That task is not part of this plan.');
   const task = taskState(raw);
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">TASK ${esc(task.id)} · ${esc(task.sprint)}</span><h2 id="dialog-title">${esc(task.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close task">&times;</button></div><div class="dialog-body"><div class="card-tags">${tag(task.status,statusColor(task.status))}${tag(task.priority)}</div><p class="lead-text">Part of <button class="story-chip" data-story="${esc(task.storyId)}">${esc(task.storyId)}: ${esc(task.parent.title)}</button></p><div class="detail-grid"><div><span class="detail-label">Assignees</span><span class="detail-value">${esc(task.owner || 'Unassigned')}</span></div><div><span class="detail-label">Sprint</span><span class="detail-value">${esc(task.sprint)}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(task.reviewer || 'Unassigned')}</span></div></div>${editFields(task,'task')}</div><div class="dialog-actions">${githubAction(task.parent)}</div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">TASK ${esc(task.id)} · ${esc(task.sprint)}</span><h2 id="dialog-title">${esc(task.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close task">&times;</button></div><div class="dialog-body"><div class="card-tags">${tag(task.status,statusColor(task.status))}${tag(task.priority)}</div><p class="lead-text">Part of <button class="story-chip" data-story="${esc(task.storyId)}">${esc(task.storyId)}: ${esc(task.parent.title)}</button></p><div class="detail-grid"><div><span class="detail-label">Assignees</span><span class="detail-value">${esc(task.owner || 'Unassigned')}</span></div><div><span class="detail-label">Sprint</span><span class="detail-value">${esc(task.sprint)}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(task.reviewer || 'Unassigned')}</span></div></div>${editFields(task,'task')}${reviewSection(task,'task')}</div><div class="dialog-actions">${githubAction(task.parent)}</div>`);
   editorContext={kind:'task',id,version:task.parent.github?.version || task.parent.github?.updatedAt};
 }
 function showSprintEditor(id=null) {
@@ -240,8 +301,9 @@ async function saveEditor(form) {
   if(saving) return;
   if(!canEdit()){const feedback=form.querySelector('.save-feedback');feedback.className='save-feedback form-error';feedback.textContent='Your sign-in has expired. Copy any unsaved edits, then sign in with GitHub again.';return;}
   const context={...editorContext}, fields=new FormData(form), feedback=form.querySelector('.save-feedback');
+  if(boardNeedsRefresh || context.requiresReload){feedback.className='save-feedback form-error';feedback.textContent='Saved on GitHub, but the latest state has not loaded. Use Reload latest before saving again.';return;}
   const fieldset=form.querySelector('.edit-fieldset');
-  const patch=context.kind==='sprint' ? {id:fields.get('id').trim(),title:fields.get('title').trim(),goal:fields.get('goal').trim(),startDate:fields.get('startDate') || null,endDate:fields.get('endDate') || null,...(context.number ? {number:context.number} : {}),...(context.version ? {version:context.version} : {})} : {status:fields.get('status'),sprint:fields.get('sprint'),assignees:fields.getAll('assignees'),reviewer:fields.get('reviewer') || null};
+  const patch=context.kind==='sprint' ? {id:fields.get('id').trim(),title:fields.get('title').trim(),goal:fields.get('goal').trim(),startDate:fields.get('startDate') || null,endDate:fields.get('endDate') || null,...(context.number ? {number:context.number} : {}),...(context.version ? {version:context.version} : {})} : {status:fields.get('status'),sprint:fields.get('sprint'),assignees:fields.getAll('assignees'),reviewer:fields.get('reviewer') || null,workBranch:fields.get('workBranch').trim() || null};
   if(context.kind==='sprint' && patch.startDate && patch.endDate && patch.endDate < patch.startDate) {feedback.className='save-feedback form-error';feedback.textContent='End date must be on or after the start date.';return;}
   if(context.kind==='task') patch.completed=fields.has('completed');
   saving=true;fieldset.disabled=true;feedback.className='save-feedback';feedback.textContent='Saving to GitHub...';boardMessage='Saving to GitHub...';boardError=false;
@@ -250,10 +312,21 @@ async function saveEditor(form) {
     else if(context.kind==='story') await client.saveStory(context.id,patch,context.version);
     else await client.saveTask(data.tasks.find(task=>task.id===context.id).storyId,context.id,patch,context.version);
     boardMessage=`${context.kind==='sprint' ? patch.id : context.id} saved to GitHub.`;
-    dialog.close();toast(boardMessage);
+    if(context.kind!=='sprint' && client.reviewResult){
+      boardMessage+=` ${client.reviewResult.message}`;
+      showReviewResult(context,client.reviewResult);
+    } else {dialog.close();toast(boardMessage);}
   } catch(error) {
-    feedback.className='save-feedback form-error';feedback.textContent=`Not saved. ${error.message || 'Please try again.'} Your edits are still here. Use Reload latest to review newer changes before retrying.`;
-    boardMessage='The update was not saved. Review the message in the editor.';boardError=true;
+    feedback.className='save-feedback form-error';
+    if(error.code==='saved_refresh_failed'){
+      boardNeedsRefresh=true;editorContext.requiresReload=true;
+      feedback.textContent='Saved on GitHub, but the latest state could not load. Your form is still here; use Reload latest before making more changes. Do not submit it again.';
+      boardMessage='Saved on GitHub. Reload the latest state before making further changes.';
+    }else{
+      feedback.textContent=`Not saved. ${error.message || 'Please try again.'} Your edits are still here. Use Reload latest to review newer changes before retrying.`;
+      boardMessage='The update was not saved. Review the message in the editor.';
+    }
+    boardError=true;
   } finally {saving=false;fieldset.disabled=false;render();}
 }
 async function beginLogin() {
@@ -280,7 +353,7 @@ function showStory(id, focusTask=null) {
   if (!raw) return toast('That story is not part of this plan.');
   const s = storyState(raw);
   const tasks = data.tasks.filter(t=>t.storyId===id).map(taskState);
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted">${tasks.filter(t=>t.status==='Done').length}/${tasks.length}</span></h3><p class="muted">Open a task to update its own assignees, status and sprint. Review evidence with another team member before marking work complete.</p><div class="task-list">${tasks.map(t=>`<div class="task-row ${focusTask===t.id?'task-highlight':''}" id="task-${esc(t.id)}"><span class="task-check ${t.status==='Done'?'checked':''}" aria-label="${t.status==='Done'?'Completed':'Not complete'}">${t.status==='Done'?'✓':'○'}</span><div><span class="item-id">${esc(t.id)}</span><p>${esc(t.title)}</p><span class="muted">${esc(t.owner || 'Unassigned')} · ${esc(t.sprint)}</span>${reviewerLabel(t.reviewer)}</div><button class="btn secondary small" data-edit-task="${esc(t.id)}">${canEdit() ? 'Edit task' : 'View task'}</button></div>`).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}${reviewSection(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted">${tasks.filter(t=>t.status==='Done').length}/${tasks.length}</span></h3><p class="muted">Open a task to update its own assignees, status and sprint. Review evidence with another team member before marking work complete.</p><div class="task-list">${tasks.map(t=>`<div class="task-row ${focusTask===t.id?'task-highlight':''}" id="task-${esc(t.id)}"><span class="task-check ${t.status==='Done'?'checked':''}" aria-label="${t.status==='Done'?'Completed':'Not complete'}">${t.status==='Done'?'✓':'○'}</span><div><span class="item-id">${esc(t.id)}</span><p>${esc(t.title)}</p><span class="muted">${esc(t.owner || 'Unassigned')} · ${esc(t.sprint)}</span>${reviewerLabel(t.reviewer)}</div><button class="btn secondary small" data-edit-task="${esc(t.id)}">${canEdit() ? 'Edit task' : 'View task'}</button></div>`).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
   editorContext={kind:'story',id,version:s.github?.version || s.github?.updatedAt};
   if (focusTask) setTimeout(()=>document.getElementById(`task-${focusTask}`)?.scrollIntoView({block:'center'}),50);
 }
@@ -309,7 +382,7 @@ async function copyLoginError() {
   }
 }
 function showGuide() {
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">WORKSPACE GUIDE</span><h2 id="dialog-title">One plan. Shared through GitHub.</h2></div><button class="icon-button" data-action="close" aria-label="Close guide">&times;</button></div><div class="dialog-body"><h3>Plan, assign and move work</h3><ol class="checklist"><li>Use <strong>Sign in with GitHub</strong> and complete sign-in in GitHub's separate window. Use your account invited to the private Factory Relay repository.</li><li>Open <strong>Sprint roadmap</strong> to create a sprint or edit its dates and goal. Sprints save as GitHub milestones.</li><li>Open a story or task to choose assignees, a reviewer, a sprint and a status. Clear the assignee choices to unassign; choose None / unassigned to clear its reviewer. Use <strong>Save to GitHub</strong> and wait for confirmation.</li><li>On the board, drag a ticket into a status column, or use its editor to move it with a keyboard or touch screen. Task completion and assignment can be managed independently of the parent story.</li><li>Use <strong>Fit all columns to screen</strong> to remove horizontal board scrolling. Smaller screens wrap columns into rows.</li></ol><h3>Choose a reviewer</h3><p>A reviewer checks the work and its evidence before completion. Choose another teammate where practical. Each story and task has its own reviewer; assigning the story reviewer does not assign task reviewers. This records responsibility in the shared board. Send actual pull request review requests in GitHub.</p><h3>Shared saving and access</h3><p>Signed-in views refresh periodically. Signed-out visitors see the published snapshot, which updates after GitHub synchronization and deployment. Private issue comments and attachments remain in GitHub.</p><p>The browser retains a protected portal session for up to a day, limited by GitHub's authorization expiry. Your GitHub password and GitHub access token are not stored by this page. Sign out on a shared device. Editing requires the owner's one-time GitHub application setup and repository access.</p><p>If someone changes a record while you edit, the save is rejected instead of overwriting their work. Your form stays open; use <strong>Reload latest</strong> to inspect the current record before applying your change again.</p><h3>Documents</h3><p>The board's <strong>Open in Google Docs</strong> and <strong>Preview</strong> buttons open the shared team implementation plan. The Document library also includes the Scrum workbook. Google previews load only when selected and follow each file's sharing settings.</p><p>More setup and maintenance details are in <a href="./README.md" target="_blank" rel="noopener">the portal README</a>.</p></div><div class="dialog-actions">${external(`${REPO}/issues`,'Open team Issues '+icon('external'),'btn secondary')}${external(`${PORTAL_REPO}/actions`,'Public deployments '+icon('external'),'btn secondary')}<button class="btn primary" data-action="close">Got it</button></div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">WORKSPACE GUIDE</span><h2 id="dialog-title">One plan. Shared through GitHub.</h2></div><button class="icon-button" data-action="close" aria-label="Close guide">&times;</button></div><div class="dialog-body"><h3>Plan, assign and move work</h3><ol class="checklist"><li>Use <strong>Sign in with GitHub</strong> and complete sign-in in GitHub's separate window. Use your account invited to the private Factory Relay repository.</li><li>Open <strong>Sprint roadmap</strong> to create a sprint or edit its dates and goal. Sprints save as GitHub milestones.</li><li>Open a story or task to choose assignees, a reviewer, a sprint and a status. Clear the assignee choices to unassign; choose None / unassigned to clear its reviewer. Use <strong>Save to GitHub</strong> and wait for confirmation.</li><li>On the board, drag a ticket into a status column, or use its editor to move it with a keyboard or touch screen. Task completion and assignment can be managed independently of the parent story.</li><li>Use <strong>Fit all columns to screen</strong> to remove horizontal board scrolling. Smaller screens wrap columns into rows.</li></ol><h3>Choose a reviewer</h3><p>A reviewer checks the work and its evidence before completion. Choose another teammate where practical. Each story and task has its own reviewer; assigning the story reviewer does not assign task reviewers. When an assigned teammate moves a ticket to Review, the portal posts a review request mentioning the other teammates. Add an optional work branch with pushed changes to create or reuse a pull request; the chosen reviewer receives a GitHub review request when eligible. Without a work branch, the review request stays on the issue. Review results remain visible after saving, with a retry action if GitHub cannot finish. Notification delivery follows each teammate's GitHub settings.</p><h3>Shared saving and access</h3><p>Signed-in views refresh periodically. Signed-out visitors see the published snapshot, which updates after GitHub synchronization and deployment. Private issue comments and attachments remain in GitHub.</p><p>The browser retains a protected portal session for up to a day, limited by GitHub's authorization expiry. Your GitHub password and GitHub access token are not stored by this page. Sign out on a shared device. Editing requires the owner's one-time GitHub application setup and repository access.</p><p>If someone changes a record while you edit, the save is rejected instead of overwriting their work. Your form stays open; use <strong>Reload latest</strong> to inspect the current record before applying your change again.</p><h3>Documents</h3><p>The board's <strong>Open in Google Docs</strong> and <strong>Preview</strong> buttons open the shared team implementation plan. The Document library also includes the Scrum workbook. Google previews load only when selected and follow each file's sharing settings.</p><p>More setup and maintenance details are in <a href="./README.md" target="_blank" rel="noopener">the portal README</a>.</p></div><div class="dialog-actions">${external(`${REPO}/issues`,'Open team Issues '+icon('external'),'btn secondary')}${external(`${PORTAL_REPO}/actions`,'Public deployments '+icon('external'),'btn secondary')}<button class="btn primary" data-action="close">Got it</button></div>`);
 }
 function bindTextFilter(id, onChange) {
   const input=document.getElementById(id);
@@ -369,7 +442,8 @@ document.addEventListener('click', async event=>{
   if(action==='copy-login-error')return copyLoginError();
   if(action==='new-sprint')return showSprintEditor();
   if(action==='reload-editor')return reloadEditor();
-  if(action==='logout'){try{await client.logout();boardMessage='Signed out. The board is read-only.';boardError=false;}catch(error){boardMessage=`Signed out in this browser. ${error.message}`;boardError=true;}render();if(dialog.open)dialog.close();}
+  if(action==='retry-review')return retryReview(event.target.closest('[data-action="retry-review"]'));
+  if(action==='logout'){try{await client.logout();reviewResults.clear();boardMessage='Signed out. The board is read-only.';boardError=false;}catch(error){boardMessage=`Signed out in this browser. ${error.message}`;boardError=true;}render();if(dialog.open)dialog.close();}
   if(action==='refresh'){try{await client.refresh();boardMessage='Latest GitHub changes loaded.';boardError=false;}catch(error){boardMessage=error.message;boardError=true;}render();}
 });
 document.addEventListener('submit',event=>{if(event.target.matches('#ticket-edit-form, #sprint-edit-form')){event.preventDefault();saveEditor(event.target);}});
@@ -379,7 +453,7 @@ document.addEventListener('change',event=>{
 });
 document.addEventListener('dragstart',event=>{
   const card=event.target.closest('[data-card-id]');
-  if(!card || !canEdit() || saving){event.preventDefault();return;}
+  if(!card || !canEdit() || saving || boardNeedsRefresh){event.preventDefault();return;}
   const item=card.dataset.cardKind==='story' ? storyState(data.stories.find(item=>item.id===card.dataset.cardId)) : taskState(data.tasks.find(item=>item.id===card.dataset.cardId));
   draggedItem={kind:card.dataset.cardKind,id:item.id,status:item.status,storyId:item.storyId,version:item.github?.version || item.parent?.github?.version || item.github?.updatedAt || item.parent?.github?.updatedAt};
   event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',item.id);card.classList.add('dragging');
@@ -389,14 +463,22 @@ document.addEventListener('dragleave',event=>{const column=event.target.closest(
 document.addEventListener('dragend',()=>{draggedItem=null;document.querySelectorAll('.drop-target, .dragging').forEach(item=>item.classList.remove('drop-target','dragging'));});
 document.addEventListener('drop',async event=>{
   const column=event.target.closest('[data-drop-status]');
-  if(!column || !draggedItem || !canEdit() || saving)return;
+  if(!column || !draggedItem || !canEdit() || saving || boardNeedsRefresh)return;
   event.preventDefault();
   const move={...draggedItem},status=column.dataset.dropStatus;draggedItem=null;
   document.querySelectorAll('.drop-target, .dragging').forEach(item=>item.classList.remove('drop-target','dragging'));
   if(status===move.status)return;
   saving=true;boardMessage=`Moving ${move.id} to ${status}…`;boardError=false;renderBoard();
-  try{if(move.kind==='story')await client.saveStory(move.id,{status},move.version);else await client.saveTask(move.storyId,move.id,{status,completed:status==='Done'},move.version);boardMessage=`${move.id} moved to ${status} and saved to GitHub.`;toast(boardMessage);}
-  catch(error){boardMessage=`Move not saved. ${error.message} Refresh the board to review the latest changes.`;boardError=true;}
+  try{
+    if(move.kind==='story')await client.saveStory(move.id,{status},move.version);else await client.saveTask(move.storyId,move.id,{status,completed:status==='Done'},move.version);
+    boardMessage=`${move.id} moved to ${status} and saved to GitHub.`;
+    if(client.reviewResult){boardMessage+=` ${client.reviewResult.message}`;showReviewResult(move,client.reviewResult);}else toast(boardMessage);
+  }
+  catch(error){
+    if(error.code==='saved_refresh_failed'){boardNeedsRefresh=true;boardMessage=`${move.id} was saved on GitHub, but the latest state could not load. Refresh the board before moving more tickets.`;}
+    else boardMessage=`Move not saved. ${error.message} Refresh the board to review the latest changes.`;
+    boardError=true;
+  }
   finally{saving=false;render();}
 });
 dialog.addEventListener('cancel',event=>{if(saving){event.preventDefault();toast('Please wait for the save to finish.');}});
@@ -426,7 +508,7 @@ async function start(){
     if(board.ok)snapshot=await board.json();
     document.getElementById('snapshot-label').textContent=`Baseline · ${prettyDate(data.asOf)}${snapshot.syncedAt?' / board · '+prettyDate(snapshot.syncedAt):''}`;
     updateRoute();
-    client=createPortalClient({data,onChange(next){snapshot=next;renderSharedUpdate();},onAuthChange(){renderSharedUpdate();},onError(error){boardMessage=`Could not refresh shared work. ${error.message}`;boardError=true;renderSharedUpdate();}});
+    client=createPortalClient({data,onChange(next){snapshot=next;boardNeedsRefresh=false;renderSharedUpdate();},onAuthChange(session){if(!session){reviewResults.clear();boardNeedsRefresh=false;}renderSharedUpdate();},onError(error){boardMessage=`Could not refresh shared work. ${error.message}`;boardError=true;renderSharedUpdate();}});
     await client.initialize();
     if(client.snapshot?.items)snapshot=client.snapshot;
     if(client.authError){boardMessage=client.authError;boardError=true;}

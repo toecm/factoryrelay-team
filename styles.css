@@ -640,6 +640,14 @@ a.resource-card { color: inherit; text-decoration: none; }
 .card-reviewer { display: block; margin-top: 7px; color: #54694b; font-size: 11px; line-height: 1.5; text-align: left; overflow-wrap: anywhere; }
 .reviewer-field select { min-height: 42px; }
 .reviewer-field small { max-width: 65ch; }
+.review-handoff { margin: 18px 0; padding: 16px; border: 1px solid #d4dfc9; border-radius: 9px; background: #f8faf4; min-width: 0; overflow-wrap: anywhere; }
+.review-handoff h3 { margin-top: 0; }
+.review-handoff p { line-height: 1.6; }
+.review-handoff .btn { max-width: 100%; white-space: normal; text-align: center; margin-top: 8px; }
+.review-handoff[data-result-status="pending"] { border-color: #c4a363; background: #fff9ed; }
+.review-retry-feedback:empty { display: none; }
+.branch-value { overflow-wrap: anywhere; font-family: ui-monospace, monospace; font-size: 12px; }
+#edit-work-branch { min-width: 0; width: 100%; }
 .save-feedback { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
 .save-feedback:empty { display: none; }
 .form-error { color: #9b302c !important; }

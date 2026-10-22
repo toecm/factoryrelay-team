@@ -103,6 +103,8 @@ capacity; the portal does not allocate work automatically.
    Choose a teammate in the reviewer selector, or **None / unassigned** to clear it.
    Reviewers check the work; assignees perform it. Each story and task has its
    own reviewer, and changing one does not change the others or their assignees.
+   For code changes, enter the existing pushed **Work branch** before requesting
+   review. Keep research evidence in the private issue or its linked document.
 3. Move a ticket between status columns by dragging it onto the destination
    column. Keyboard and touch users can make the same change through the
    ticket's status selector. Wait for confirmation: a failed request does not
@@ -142,11 +144,50 @@ the versioned plan.
 
 Reviewer choices start unassigned, including tasks under a story with a reviewer.
 Choose another teammate where possible. The selection appears on the ticket
-and in shared board updates. It records review responsibility; it does not send
-a GitHub pull-request review request, grant approval, or automatically move the
-ticket to Review or Done. Request code reviews separately on the pull request.
+and in shared board updates. Choosing a reviewer records responsibility; that
+selection does not change the ticket's status. Before the ticket reaches Review,
+it does not send a review request either. An assignee changing the reviewer or
+work branch while the ticket is already in Review starts a new handoff.
 Free-text reviewer notes in issue descriptions or comments are not imported
 into the selector; use the portal selector for the shared reviewer field.
+
+### Hand work to teammates for review
+
+An assignee can move their story or task into **Review** to start a GitHub review
+handoff. This extension requires the owner to approve the additional GitHub App
+permissions below; ordinary board editing and a successful sign-in do not prove
+that pull-request creation is configured.
+Another member can still save a board change, but the handoff is skipped when
+that member is not an assignee. A current assignee can retry it from the ticket.
+
+For code work, first push a branch with actual changes to the private
+`toecm/factoryrelay` repository and save that branch on the ticket. The portal
+uses the repository's default branch as the review base, opens or reuses the
+matching pull request marked for that ticket, and requests review from the
+selected reviewer when eligible. An unassigned reviewer produces no formal
+pull-request review request. An unrelated existing pull request on that branch
+requires a separate work branch; an existing draft must be marked ready on
+GitHub before retrying. The portal does not create commits,
+push branches, invent an empty pull request, merge changes or mark work Done.
+The pull-request author cannot review their own pull request.
+
+For research or document tasks without a work branch, the handoff uses the
+private parent issue to ask teammates to review the evidence. No pull request
+is created for that handoff. Both handoff types add an issue comment mentioning
+all other eligible repository teammates, excluding the initiating assignee.
+GitHub review requests and comment mentions can
+generate notifications; inbox, email and mobile delivery follow each member's
+[GitHub notification settings](https://docs.github.com/en/subscriptions-and-notifications/concepts/about-notifications).
+
+If the board save succeeds but part of the handoff fails, the ticket stays in
+Review and the portal reports the pending work. Fix the reported problem,
+reload the current ticket if needed, and retry the handoff. Existing pull
+requests and recorded handoff progress are reused where possible. This spans
+several GitHub requests and is not an atomic or exactly-once transaction;
+inspect an uncertain outcome before manually duplicating a request. A Review
+status means the work is ready for review; check the handoff result to confirm
+that a request was sent. Status alone does not prove a completed handoff or
+reviewer approval.
 
 The editor re-reads GitHub before saving and rejects a stale version. If a
 conflict is reported, choose **Reload latest**, review the new values, and save
@@ -161,6 +202,7 @@ an external edit in the final read/write interval can still race with the save.
 | Story status and owners | Issue state, one `factory:*` label, native assignees. |
 | Story sprint | Issue milestone; explicit Unscheduled state is recorded in managed metadata. |
 | Story and task reviewer | One GitHub login or null in validated `factory-relay-board:v1` metadata in the parent issue body; independent of native assignees and pull-request review requests. |
+| Work branch and review handoff progress | Per-ticket managed metadata in the private parent issue. The authenticated editor can read these fields; the public snapshot excludes them. |
 | Sprint | Managed milestone; title and due date are native fields, start date and goal are in its marked description block. |
 | Task completion | Original checkbox in the parent issue. |
 | Independent task status, owners and sprint | Validated `factory-relay-board:v1` metadata in the parent issue body. These are task-level records, not separate GitHub issues or native task assignees. |
@@ -212,7 +254,8 @@ The exported fields include managed story IDs, status, GitHub login assignees an
 task completion and independent task fields, sprint IDs, titles, goals and dates,
 issue/milestone numbers and links, version digests and update timestamps.
 Raw issue bodies, comments, evidence attachments, unrelated milestone content
-and emails are not exported. The portal publishes the selected document links;
+and emails are not exported. Work branches and review-handoff records are also
+excluded from the public snapshot. The portal publishes the selected document links;
 Google Drive serves the document contents.
 
 Check Actions in both repositories before assuming an edit has appeared in the
@@ -239,9 +282,17 @@ can be used. Publishing the frontend alone does not complete it.
    visibility (**Any account**) so teammates outside the owner's personal
    account can authorize it. This makes the App registration public; it does
    not change the private repository's visibility or grant outsiders access.
-2. Set repository permissions to **Issues: Read and write** and
-   **Metadata: Read-only**. No Contents, Actions, administration, organization
-   or account permissions are needed. Keep expiring user authorization tokens
+2. Set these repository permissions:
+
+   | Permission | Level | Purpose |
+   | --- | --- | --- |
+   | Issues | Read and write | Shared board, milestones and research-review comments. |
+   | Metadata | Read-only | Repository and access checks. |
+   | Contents | Read-only | Check existing work branches and compare changes. |
+   | Pull requests | Read and write | Open or reuse pull requests and request teammate reviews. |
+
+   No Contents write, Actions, administration, organization or account
+   permissions are needed. Keep expiring user authorization tokens
    enabled. Do not enable device flow. Webhooks may remain inactive because the
    repository's existing Actions workflow publishes the snapshot.
 3. If GitHub displays a banner requiring a key before installation, open
@@ -303,6 +354,29 @@ the client verifies its source window and fresh nonce. GitHub login is a
 separate window, not an embedded password form. Rotating the session secret
 invalidates existing portal sessions. GitHub App authorization can also be
 revoked in GitHub settings.
+
+### Upgrade an existing App for review handoffs
+
+An existing working editor needs a permission update, not a replacement App or
+new Vercel credentials:
+
+1. In GitHub, open **Settings → Developer settings → GitHub Apps**, select the
+   existing Factory Relay App, then open **Permissions & events**.
+2. Add **Contents: Read-only** and **Pull requests: Read and write**. Retain
+   **Issues: Read and write** and **Metadata: Read-only**, then save the change.
+3. Open the owner's **Installed GitHub Apps** settings and review/approve the
+   installation's new permissions. Keep its repository selection limited to
+   `factoryrelay`. Editing the App registration alone does not approve the
+   installation's additional access.
+4. Sign out of the portal and sign in again. Validate a deliberate review
+   handoff on an assigned ticket with a real work branch, or a research ticket
+   with evidence, and check the resulting private GitHub record.
+
+Keep the existing callback URL, Client ID, client secret and session secret.
+This permission-only update needs no Vercel environment-variable change.
+The updated portal code must still be deployed before the new controls work.
+GitHub documents the installation approval step in
+[changing a GitHub App's permissions](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration#changing-the-permissions-of-a-github-app).
 
 See [registering a GitHub App](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app),
 [App visibility and authorization](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/making-a-github-app-public-or-private),

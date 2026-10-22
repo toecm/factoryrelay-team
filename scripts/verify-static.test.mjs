@@ -66,6 +66,15 @@ test('public board rejects private fields, unsupported task fields and inconsist
     const value = current(); mutate(value); assert.throws(() => validateBoard(value, stories));
   }
 });
+test('authenticated review branches and handoff requests cannot enter the static site', () => {
+  for (const location of ['story', 'task']) {
+    for (const [field, content] of Object.entries({ workBranch: 'private/research-draft', reviewRequest: { id: 'a'.repeat(32), actor: 'teammate' } })) {
+      const value = current();
+      (location === 'story' ? value.items[0] : value.items[0].tasks['ENG0-T1'])[field] = content;
+      assert.throws(() => validateBoard(value, stories), /Unexpected public board fields/, `${location}.${field} must remain authenticated-only`);
+    }
+  }
+});
 test('managed sprint snapshots reject invalid calendars, duplicate identifiers and unexpected fields', () => {
   for (const mutate of [s => { s.sprints[0].startDate = '2026-02-30'; }, s => { s.sprints[0].endDate = '2026-10-31'; }, s => { s.sprints[0].body = 'PRIVATE'; }, s => { s.sprints.push(s.sprints[0]); }, s => { s.sprints[0].id = '../S7'; }]) {
     const value = current(); mutate(value); assert.throws(() => validateBoard(value, stories));

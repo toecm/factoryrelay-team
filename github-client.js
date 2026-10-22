@@ -6,11 +6,11 @@ const MAX_SESSION_MS = 24 * 60 * 60 * 1000;
 
 export function createPortalClient({data, onChange = () => {}, onAuthChange = () => {}, onError = () => {}, fetchImpl = fetch} = {}) {
   let sealed = '', session = null, popup = null, failedPopup = null, cancelPending = null, timer = null, refreshing = null;
-  let configured = false, authError = '', snapshot = null, assignees = [], generation = 0, mutation = null;
+  let configured = false, authError = '', snapshot = null, assignees = [], generation = 0, mutation = null, reviewResult = null;
   const storage = () => { try { return window.sessionStorage; } catch { return null; } };
   function clear() {
     generation++;
-    sealed = ''; session = null; assignees = [];
+    sealed = ''; session = null; assignees = []; reviewResult = null;
     try { storage()?.removeItem(SESSION_KEY); } catch { /* Memory-only remains usable. */ }
     onAuthChange(null);
   }
@@ -51,9 +51,15 @@ export function createPortalClient({data, onChange = () => {}, onAuthChange = ()
   }
   async function save(body) {
     if (mutation) throw new Error('Wait for the current change to finish saving.');
+    reviewResult = null;
     generation++;
     const before = generation;
-    mutation = request('mutate', body).then(result => before === generation && session ? accept(result) : snapshot).finally(() => {mutation = null;});
+    mutation = request('mutate', body).then(result => {
+      if (before !== generation || !session) return snapshot;
+      // Capture the handoff before notifying views; a pending handoff does not undo a saved ticket.
+      reviewResult = result.handoff || null;
+      return accept(result);
+    }).finally(() => {mutation = null;});
     return mutation;
   }
   function cancelLogin() {
@@ -124,8 +130,9 @@ export function createPortalClient({data, onChange = () => {}, onAuthChange = ()
     saveStory:(id, changes, version) => save({type:'story', id, changes, version}),
     saveTask:(storyId, id, changes, version) => save({type:'task', storyId, id, changes, version}),
     saveSprint:sprint => save({type:'sprint', sprint}),
+    retryReview:(storyId, id, version) => save({type:'review', storyId, id:id || null, version}),
     dispose() { cancelLogin(); clearInterval(timer); window.removeEventListener('focus', focusRefresh); },
     get session() { return session; }, get snapshot() { return snapshot; }, get assignees() { return assignees; },
-    get configured() { return configured; }, get authError() { return authError; },
+    get configured() { return configured; }, get authError() { return authError; }, get reviewResult() { return reviewResult; },
   };
 }
