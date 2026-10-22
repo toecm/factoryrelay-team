@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-21T06:37:40.221Z",
+  "syncedAt": "2026-10-22T05:43:23.083Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -8,8 +8,10 @@
       "number": 1,
       "url": "https://github.com/toecm/factoryrelay/issues/1",
       "status": "Ready",
-      "assignees": [],
-      "updatedAt": "2026-10-21T06:32:28Z",
+      "assignees": [
+        "toecm"
+      ],
+      "updatedAt": "2026-10-22T05:43:12Z",
       "taskStatus": {
         "ENG0-T1": false,
         "ENG0-T2": false,
