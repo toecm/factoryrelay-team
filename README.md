@@ -246,6 +246,13 @@ can be used. Publishing the frontend alone does not complete it.
    | `PORTAL_GITHUB_CLIENT_SECRET` | App client secret. |
    | `PORTAL_SESSION_SECRET` | A cryptographically random secret generated from at least 32 random bytes; base64 encoding is suitable. The server requires at least 32 UTF-8 bytes and derives its encryption key with SHA-256. |
 
+   On the owner's Windows computer, this PowerShell command creates a session
+   secret and copies it directly to the clipboard for the Vercel field:
+
+   ```powershell
+   node -e "process.stdout.write(require('node:crypto').randomBytes(48).toString('base64url'))" | Set-Clipboard
+   ```
+
 5. Keep those values out of Git, browser code, screenshots, terminal output and
    chat. Do not add a `VITE_` prefix or expose them as frontend variables. No
    App private key or shared personal access token is required for this user
