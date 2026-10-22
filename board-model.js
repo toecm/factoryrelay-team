@@ -26,6 +26,10 @@ export function validateAssignees(value) {
   }
   return value;
 }
+export function validateReviewer(value) {
+  if (value !== null && (typeof value !== 'string' || !LOGIN_PATTERN.test(value))) throw boardError('Reviewer must be one GitHub login or null.');
+  return value;
+}
 export function validateSprintFields(value) {
   if (!isSprintId(value.id) || typeof value.title !== 'string' || !value.title.trim() || value.title.length > 120 || /[\r\n\x00-\x1f]/.test(value.title) ||
       typeof value.goal !== 'string' || value.goal.length > 2000 || /[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(value.goal)) throw boardError('A sprint needs a safe ID, a title (120 characters maximum), and a goal (2,000 characters maximum).');
@@ -52,15 +56,17 @@ function replaceBlock(body, start, end, value) {
   return found ? body.slice(0, found.start) + block + body.slice(found.end) : `${body}${body.endsWith('\n') ? '\n' : '\n\n'}${block}`;
 }
 export function validateTaskOverrides(story, value) {
-  keys(value, ['tasks', 'sprintUnscheduled']);
+  keys(value, ['tasks', 'sprintUnscheduled', 'reviewer']);
   if (!record(value.tasks)) throw boardError('Managed task metadata must contain a task map.');
   if (Object.hasOwn(value, 'sprintUnscheduled') && value.sprintUnscheduled !== true) throw boardError('Unsupported story sprint override.');
+  if (Object.hasOwn(value, 'reviewer')) validateReviewer(value.reviewer);
   for (const [id, entry] of Object.entries(value.tasks)) {
     if (!story.taskIds.includes(id)) throw boardError('Managed metadata contains an unknown task.');
-    keys(entry, ['status', 'assignees', 'sprint']);
+    keys(entry, ['status', 'assignees', 'sprint', 'reviewer']);
     if (Object.hasOwn(entry, 'status') && !BOARD_STATUSES.includes(entry.status)) throw boardError('Unsupported task status.');
     if (Object.hasOwn(entry, 'assignees')) validateAssignees(entry.assignees);
     if (Object.hasOwn(entry, 'sprint') && entry.sprint !== 'Unscheduled' && !isSprintId(entry.sprint)) throw boardError('Unsupported task sprint.');
+    if (Object.hasOwn(entry, 'reviewer')) validateReviewer(entry.reviewer);
   }
   return value;
 }
@@ -79,6 +85,8 @@ export function resolveTaskState(storyState, taskId, overrides, completed) {
     status: completed ? 'Done' : (own.status && own.status !== 'Done' ? own.status : inheritedStatus),
     assignees: [...(own.assignees ?? storyState.assignees ?? [])],
     sprint: own.sprint ?? storyState.sprint ?? 'Unscheduled',
+    // Review responsibility is independent: a task never inherits its story's reviewer.
+    reviewer: own.reviewer ?? null,
   };
 }
 export function parseSprintMarker(description = '') {

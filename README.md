@@ -99,9 +99,10 @@ capacity; the portal does not allocate work automatically.
    the portal. If sign-in says owner setup is required, use the GitHub issue
    links until that setup is complete.
 2. On **Scrum board**, choose **Stories** or **Tasks**, then open a ticket. Set
-   its status, sprint and assignees, and select **Save to GitHub**. Task owners
-   can differ from their story's owners. Agree a different reviewer in the
-   issue discussion; the portal does not parse reviewer assignments from comments.
+   its status, sprint, assignees and **Reviewer**, then select **Save to GitHub**.
+   Choose a teammate in the reviewer selector, or **None / unassigned** to clear it.
+   Reviewers check the work; assignees perform it. Each story and task has its
+   own reviewer, and changing one does not change the others or their assignees.
 3. Move a ticket between status columns by dragging it onto the destination
    column. Keyboard and touch users can make the same change through the
    ticket's status selector. Wait for confirmation: a failed request does not
@@ -139,6 +140,14 @@ task displays Done; an unchecked task without its own status displays Backlog
 when its parent is closed. Priority and acceptance criteria still come from
 the versioned plan.
 
+Reviewer choices start unassigned, including tasks under a story with a reviewer.
+Choose another teammate where possible. The selection appears on the ticket
+and in shared board updates. It records review responsibility; it does not send
+a GitHub pull-request review request, grant approval, or automatically move the
+ticket to Review or Done. Request code reviews separately on the pull request.
+Free-text reviewer notes in issue descriptions or comments are not imported
+into the selector; use the portal selector for the shared reviewer field.
+
 The editor re-reads GitHub before saving and rejects a stale version. If a
 conflict is reported, choose **Reload latest**, review the new values, and save
 again. This is a best-effort conflict check, **not an atomic transaction**:
@@ -151,6 +160,7 @@ an external edit in the final read/write interval can still race with the save.
 | Story | Existing managed Issue with its story marker. |
 | Story status and owners | Issue state, one `factory:*` label, native assignees. |
 | Story sprint | Issue milestone; explicit Unscheduled state is recorded in managed metadata. |
+| Story and task reviewer | One GitHub login or null in validated `factory-relay-board:v1` metadata in the parent issue body; independent of native assignees and pull-request review requests. |
 | Sprint | Managed milestone; title and due date are native fields, start date and goal are in its marked description block. |
 | Task completion | Original checkbox in the parent issue. |
 | Independent task status, owners and sprint | Validated `factory-relay-board:v1` metadata in the parent issue body. These are task-level records, not separate GitHub issues or native task assignees. |
@@ -198,7 +208,7 @@ successfully published snapshot remains visible.
 4. That push triggers **Deploy Factory Relay team portal** in the public
    repository. The workflow verifies and publishes the static website.
 
-The exported fields include managed story IDs, status, GitHub login assignees,
+The exported fields include managed story IDs, status, GitHub login assignees and reviewers,
 task completion and independent task fields, sprint IDs, titles, goals and dates,
 issue/milestone numbers and links, version digests and update timestamps.
 Raw issue bodies, comments, evidence attachments, unrelated milestone content

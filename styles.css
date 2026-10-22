@@ -637,6 +637,9 @@ a.resource-card { color: inherit; text-decoration: none; }
 .assignee-field legend { padding-inline: 4px; font-size: 12px; font-weight: 650; }
 .assignee-options { display: flex; flex-wrap: wrap; column-gap: 18px; }
 .assignee-options label { overflow-wrap: anywhere; }
+.card-reviewer { display: block; margin-top: 7px; color: #54694b; font-size: 11px; line-height: 1.5; text-align: left; overflow-wrap: anywhere; }
+.reviewer-field select { min-height: 42px; }
+.reviewer-field small { max-width: 65ch; }
 .save-feedback { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
 .save-feedback:empty { display: none; }
 .form-error { color: #9b302c !important; }
