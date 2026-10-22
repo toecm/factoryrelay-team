@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-22T08:44:21.909Z",
+  "syncedAt": "2026-10-22T08:48:07.403Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -11,6 +11,7 @@
       "assignees": [
         "toecm"
       ],
+      "reviewer": null,
       "updatedAt": "2026-10-22T08:44:10Z",
       "taskStatus": {
         "ENG0-T1": false,
@@ -27,28 +28,32 @@
           "assignees": [
             "toecm"
           ],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG0-T2": {
           "status": "Review",
           "assignees": [
             "toecm"
           ],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG0-T3": {
           "status": "Review",
           "assignees": [
             "toecm"
           ],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG0-T4": {
           "status": "Review",
           "assignees": [
             "toecm"
           ],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         }
       }
     },
@@ -58,6 +63,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/2",
       "status": "Ready",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:29Z",
       "taskStatus": {
         "R01-T1": false,
@@ -73,27 +79,32 @@
         "R01-T1": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "R01-T2": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "R01-T3": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "R01-T4": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "R01-T5": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         }
       }
     },
@@ -103,6 +114,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/3",
       "status": "Ready",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:30Z",
       "taskStatus": {
         "ENG1-T1": false,
@@ -116,17 +128,20 @@
         "ENG1-T1": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG1-T2": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG1-T3": {
           "status": "Ready",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         }
       }
     },
@@ -136,6 +151,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/4",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:30Z",
       "taskStatus": {
         "ENG2-T1": false,
@@ -149,17 +165,20 @@
         "ENG2-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG2-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         },
         "ENG2-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S1"
+          "sprint": "S1",
+          "reviewer": null
         }
       }
     },
@@ -169,6 +188,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/5",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:31Z",
       "taskStatus": {
         "R02-T1": false,
@@ -184,27 +204,32 @@
         "R02-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R02-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R02-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R02-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R02-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         }
       }
     },
@@ -214,6 +239,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/6",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:32Z",
       "taskStatus": {
         "R03-T1": false,
@@ -229,27 +255,32 @@
         "R03-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R03-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R03-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R03-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R03-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         }
       }
     },
@@ -259,6 +290,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/7",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:32Z",
       "taskStatus": {
         "ENG4-T1": false,
@@ -272,17 +304,20 @@
         "ENG4-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "ENG4-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "ENG4-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         }
       }
     },
@@ -292,6 +327,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/8",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:33Z",
       "taskStatus": {
         "ENG3-T1": false,
@@ -305,17 +341,20 @@
         "ENG3-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "ENG3-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "ENG3-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         }
       }
     },
@@ -325,6 +364,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/9",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:34Z",
       "taskStatus": {
         "R04-T1": false,
@@ -340,27 +380,32 @@
         "R04-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "R04-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "R04-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "R04-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "R04-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         }
       }
     },
@@ -370,6 +415,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/10",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:34Z",
       "taskStatus": {
         "ENG5-T1": false,
@@ -383,17 +429,20 @@
         "ENG5-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "ENG5-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "ENG5-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         }
       }
     },
@@ -403,6 +452,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/11",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:35Z",
       "taskStatus": {
         "ENG9-T1": false,
@@ -416,17 +466,20 @@
         "ENG9-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "ENG9-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         },
         "ENG9-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S3"
+          "sprint": "S3",
+          "reviewer": null
         }
       }
     },
@@ -436,6 +489,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/12",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:35Z",
       "taskStatus": {
         "ENG6-T1": false,
@@ -449,17 +503,20 @@
         "ENG6-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         },
         "ENG6-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         },
         "ENG6-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         }
       }
     },
@@ -469,6 +526,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/13",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:36Z",
       "taskStatus": {
         "ENG7-T1": false,
@@ -482,17 +540,20 @@
         "ENG7-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         },
         "ENG7-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         },
         "ENG7-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S4"
+          "sprint": "S4",
+          "reviewer": null
         }
       }
     },
@@ -502,6 +563,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/14",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:37Z",
       "taskStatus": {
         "ENG8-T1": false,
@@ -515,17 +577,20 @@
         "ENG8-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "ENG8-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "ENG8-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         }
       }
     },
@@ -535,6 +600,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/15",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:37Z",
       "taskStatus": {
         "R06-T1": false,
@@ -550,27 +616,32 @@
         "R06-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R06-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R06-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R06-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R06-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         }
       }
     },
@@ -580,6 +651,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/16",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:38Z",
       "taskStatus": {
         "R08-T1": false,
@@ -595,27 +667,32 @@
         "R08-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R08-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R08-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R08-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         },
         "R08-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S5"
+          "sprint": "S5",
+          "reviewer": null
         }
       }
     },
@@ -625,6 +702,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/17",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:38Z",
       "taskStatus": {
         "R09-T1": false,
@@ -640,27 +718,32 @@
         "R09-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R09-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R09-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R09-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R09-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         }
       }
     },
@@ -670,6 +753,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/18",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:39Z",
       "taskStatus": {
         "ENG10-T1": false,
@@ -683,17 +767,20 @@
         "ENG10-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "ENG10-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "ENG10-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         }
       }
     },
@@ -703,6 +790,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/19",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:40Z",
       "taskStatus": {
         "R10-T1": false,
@@ -718,27 +806,32 @@
         "R10-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R10-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R10-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R10-T4": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         },
         "R10-T5": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S6"
+          "sprint": "S6",
+          "reviewer": null
         }
       }
     },
@@ -748,6 +841,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/20",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:40Z",
       "taskStatus": {
         "R11-T1": false,
@@ -761,17 +855,20 @@
         "R11-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R11-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         },
         "R11-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "S2"
+          "sprint": "S2",
+          "reviewer": null
         }
       }
     },
@@ -781,6 +878,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/21",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:41Z",
       "taskStatus": {
         "ENG11-T1": false,
@@ -794,17 +892,20 @@
         "ENG11-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         },
         "ENG11-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         },
         "ENG11-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         }
       }
     },
@@ -814,6 +915,7 @@
       "url": "https://github.com/toecm/factoryrelay/issues/22",
       "status": "Backlog",
       "assignees": [],
+      "reviewer": null,
       "updatedAt": "2026-10-21T06:32:41Z",
       "taskStatus": {
         "ENG12-T1": false,
@@ -827,17 +929,20 @@
         "ENG12-T1": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         },
         "ENG12-T2": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         },
         "ENG12-T3": {
           "status": "Backlog",
           "assignees": [],
-          "sprint": "Stretch"
+          "sprint": "Stretch",
+          "reviewer": null
         }
       }
     }
