@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-22T05:43:23.083Z",
+  "syncedAt": "2026-10-22T06:09:46.460Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -17,6 +17,39 @@
         "ENG0-T2": false,
         "ENG0-T3": false,
         "ENG0-T4": false
+      },
+      "version": "87d1641b4887dea10451ceb094cc659ca069ee65f555b9b5143d2c0b7ceb04d0",
+      "sprint": "S1",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG0-T1": {
+          "status": "Ready",
+          "assignees": [
+            "toecm"
+          ],
+          "sprint": "S1"
+        },
+        "ENG0-T2": {
+          "status": "Ready",
+          "assignees": [
+            "toecm"
+          ],
+          "sprint": "S1"
+        },
+        "ENG0-T3": {
+          "status": "Ready",
+          "assignees": [
+            "toecm"
+          ],
+          "sprint": "S1"
+        },
+        "ENG0-T4": {
+          "status": "Ready",
+          "assignees": [
+            "toecm"
+          ],
+          "sprint": "S1"
+        }
       }
     },
     {
@@ -32,6 +65,36 @@
         "R01-T3": false,
         "R01-T4": false,
         "R01-T5": false
+      },
+      "version": "eb0f51b72b6684bf5aa9415512aba81925c81b669c735698979bde968c0026c4",
+      "sprint": "S1",
+      "milestoneNumber": null,
+      "tasks": {
+        "R01-T1": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "R01-T2": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "R01-T3": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "R01-T4": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "R01-T5": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        }
       }
     },
     {
@@ -45,6 +108,26 @@
         "ENG1-T1": false,
         "ENG1-T2": false,
         "ENG1-T3": false
+      },
+      "version": "ce594be5acf1b8c9491cb2b9fc9808899464ba7adfbdfb0130c6575855a6e731",
+      "sprint": "S1",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG1-T1": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "ENG1-T2": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "ENG1-T3": {
+          "status": "Ready",
+          "assignees": [],
+          "sprint": "S1"
+        }
       }
     },
     {
@@ -58,6 +141,26 @@
         "ENG2-T1": false,
         "ENG2-T2": false,
         "ENG2-T3": false
+      },
+      "version": "62b733e802e4444caaffc84e6fb1e61b06bb428c2aa9de38cf37f1c5d40f9cae",
+      "sprint": "S1",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG2-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "ENG2-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S1"
+        },
+        "ENG2-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S1"
+        }
       }
     },
     {
@@ -73,6 +176,36 @@
         "R02-T3": false,
         "R02-T4": false,
         "R02-T5": false
+      },
+      "version": "d2f19b0a3c976706060c01aa5b76ae501c2d6140766cecc42073e374fbe73567",
+      "sprint": "S2",
+      "milestoneNumber": null,
+      "tasks": {
+        "R02-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R02-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R02-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R02-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R02-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        }
       }
     },
     {
@@ -88,6 +221,36 @@
         "R03-T3": false,
         "R03-T4": false,
         "R03-T5": false
+      },
+      "version": "860af0feeff55fa48693e4fccb03430d100e26e20beb1db4cb6c2386f79c9d19",
+      "sprint": "S2",
+      "milestoneNumber": null,
+      "tasks": {
+        "R03-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R03-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R03-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R03-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R03-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        }
       }
     },
     {
@@ -101,6 +264,26 @@
         "ENG4-T1": false,
         "ENG4-T2": false,
         "ENG4-T3": false
+      },
+      "version": "1a4580aed2fcbf45d5d25ccf8bbdc9956b897554b8b7a1497aa6a2779a1809fd",
+      "sprint": "S2",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG4-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "ENG4-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "ENG4-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        }
       }
     },
     {
@@ -114,6 +297,26 @@
         "ENG3-T1": false,
         "ENG3-T2": false,
         "ENG3-T3": false
+      },
+      "version": "a18cca1382593bc6b05e0d78fe35769a0f04f71b032c5bad4fbf834cdba18008",
+      "sprint": "S2",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG3-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "ENG3-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "ENG3-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        }
       }
     },
     {
@@ -129,6 +332,36 @@
         "R04-T3": false,
         "R04-T4": false,
         "R04-T5": false
+      },
+      "version": "ebc48bc5b3ee1e9441ec31abd2975a65529ca7392a4c706e9ce341b6bc54ccf8",
+      "sprint": "S3",
+      "milestoneNumber": null,
+      "tasks": {
+        "R04-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "R04-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "R04-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "R04-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "R04-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        }
       }
     },
     {
@@ -142,6 +375,26 @@
         "ENG5-T1": false,
         "ENG5-T2": false,
         "ENG5-T3": false
+      },
+      "version": "03d9fa3249f449809986624af2fd80f1d7e71c70d5db0904c10f07fac0baa569",
+      "sprint": "S3",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG5-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "ENG5-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "ENG5-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        }
       }
     },
     {
@@ -155,6 +408,26 @@
         "ENG9-T1": false,
         "ENG9-T2": false,
         "ENG9-T3": false
+      },
+      "version": "067326d0ade0e58ecae4584bf2bf7aa85576eac08354053ffc1ede9b605d6bfc",
+      "sprint": "S3",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG9-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "ENG9-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        },
+        "ENG9-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S3"
+        }
       }
     },
     {
@@ -168,6 +441,26 @@
         "ENG6-T1": false,
         "ENG6-T2": false,
         "ENG6-T3": false
+      },
+      "version": "4ebd310635057e58445851bdc7d9efd1e518f99b4e1b6f09c432a0f0141236fd",
+      "sprint": "S4",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG6-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        },
+        "ENG6-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        },
+        "ENG6-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        }
       }
     },
     {
@@ -181,6 +474,26 @@
         "ENG7-T1": false,
         "ENG7-T2": false,
         "ENG7-T3": false
+      },
+      "version": "d402cbb87d345ea0db97a29b8d047471d26bd69905bb6d5a84be368b9d6c5e84",
+      "sprint": "S4",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG7-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        },
+        "ENG7-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        },
+        "ENG7-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S4"
+        }
       }
     },
     {
@@ -194,6 +507,26 @@
         "ENG8-T1": false,
         "ENG8-T2": false,
         "ENG8-T3": false
+      },
+      "version": "b2936ffd201aabef49630c91bc470ce741fea6d8c23f56f38521f90b642b8ab7",
+      "sprint": "S5",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG8-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "ENG8-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "ENG8-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        }
       }
     },
     {
@@ -209,6 +542,36 @@
         "R06-T3": false,
         "R06-T4": false,
         "R06-T5": false
+      },
+      "version": "3f55a15d97d65c28dd4147d8ba91bdaa0af8ad36860fbb91b747162467902675",
+      "sprint": "S5",
+      "milestoneNumber": null,
+      "tasks": {
+        "R06-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R06-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R06-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R06-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R06-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        }
       }
     },
     {
@@ -224,6 +587,36 @@
         "R08-T3": false,
         "R08-T4": false,
         "R08-T5": false
+      },
+      "version": "9f8fcd5e53c2f2f63934278b69786e9d37207d3db98b6d7689c9636151def2bc",
+      "sprint": "S5",
+      "milestoneNumber": null,
+      "tasks": {
+        "R08-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R08-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R08-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R08-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        },
+        "R08-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S5"
+        }
       }
     },
     {
@@ -239,6 +632,36 @@
         "R09-T3": false,
         "R09-T4": false,
         "R09-T5": false
+      },
+      "version": "e797aedbe193be094551c0064e50236ab6756c1971ae032d466d386bf643a831",
+      "sprint": "S6",
+      "milestoneNumber": null,
+      "tasks": {
+        "R09-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R09-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R09-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R09-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R09-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        }
       }
     },
     {
@@ -252,6 +675,26 @@
         "ENG10-T1": false,
         "ENG10-T2": false,
         "ENG10-T3": false
+      },
+      "version": "9cc9d64f77ec21d5f2422ad34644d4a584616518f25c1113d00252643332cbc5",
+      "sprint": "S6",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG10-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "ENG10-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "ENG10-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        }
       }
     },
     {
@@ -267,6 +710,36 @@
         "R10-T3": false,
         "R10-T4": false,
         "R10-T5": false
+      },
+      "version": "56bdd92e25b942b54147b3afcce067c0e4bfc6836730481c0f6326ebeba518ce",
+      "sprint": "S6",
+      "milestoneNumber": null,
+      "tasks": {
+        "R10-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R10-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R10-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R10-T4": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        },
+        "R10-T5": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S6"
+        }
       }
     },
     {
@@ -280,6 +753,26 @@
         "R11-T1": false,
         "R11-T2": false,
         "R11-T3": false
+      },
+      "version": "e3aac1e56137e2fb6284735760a4d3ae388e084e31dbd901df4df4e8300743db",
+      "sprint": "S2",
+      "milestoneNumber": null,
+      "tasks": {
+        "R11-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R11-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        },
+        "R11-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "S2"
+        }
       }
     },
     {
@@ -293,6 +786,26 @@
         "ENG11-T1": false,
         "ENG11-T2": false,
         "ENG11-T3": false
+      },
+      "version": "739e4607fbcbbe3eecaec3d7530fd2d725c7852ef87d42a133a8e0df3162f794",
+      "sprint": "Stretch",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG11-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        },
+        "ENG11-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        },
+        "ENG11-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        }
       }
     },
     {
@@ -306,7 +819,28 @@
         "ENG12-T1": false,
         "ENG12-T2": false,
         "ENG12-T3": false
+      },
+      "version": "5b478d011b26777d733fbbf9295997b5c7f4e558ce72be371f8a75a762811198",
+      "sprint": "Stretch",
+      "milestoneNumber": null,
+      "tasks": {
+        "ENG12-T1": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        },
+        "ENG12-T2": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        },
+        "ENG12-T3": {
+          "status": "Backlog",
+          "assignees": [],
+          "sprint": "Stretch"
+        }
       }
     }
-  ]
+  ],
+  "sprints": []
 }
