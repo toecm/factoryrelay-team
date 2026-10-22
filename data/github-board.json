@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-22T08:08:05.603Z",
+  "syncedAt": "2026-10-22T08:10:15.951Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -842,5 +842,16 @@
       }
     }
   ],
-  "sprints": []
+  "sprints": [
+    {
+      "id": "S1",
+      "startDate": null,
+      "goal": "Confirm team access, language/device feasibility and physical acceptance of the existing LAN host.",
+      "title": "Access, literature and feasibility",
+      "endDate": null,
+      "number": 1,
+      "version": "ccbfda7f91653d5f3857d4893b84af74bf12ebde78a9ee4d35b10b77ce6b6209",
+      "state": "open"
+    }
+  ]
 }
