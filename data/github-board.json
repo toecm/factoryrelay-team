@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-22T08:27:29.172Z",
+  "syncedAt": "2026-10-22T08:28:29.631Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -11,20 +11,21 @@
       "assignees": [
         "toecm"
       ],
-      "updatedAt": "2026-10-22T08:27:17Z",
+      "updatedAt": "2026-10-22T08:28:18Z",
       "taskStatus": {
-        "ENG0-T1": false,
+        "ENG0-T1": true,
         "ENG0-T2": false,
         "ENG0-T3": false,
         "ENG0-T4": false
       },
-      "version": "d8e2c9a07cbb7df12745cf02ef04a6642534d63ea554dc861494791831393fee",
+      "version": "3091e13cd42fecf9896b2ddbb0edb05cfda809f5e82efae71c9db5cfccfb06c7",
       "sprint": "S1",
       "milestoneNumber": null,
       "tasks": {
         "ENG0-T1": {
-          "status": "In progress",
+          "status": "Done",
           "assignees": [
+            "isongjosiah",
             "toecm"
           ],
           "sprint": "S1"
