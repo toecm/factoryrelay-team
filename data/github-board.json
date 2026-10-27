@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-27T06:34:41.603Z",
+  "syncedAt": "2026-10-27T06:37:18.003Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -199,10 +199,10 @@
       "id": "R02",
       "number": 5,
       "url": "https://github.com/toecm/factoryrelay/issues/5",
-      "status": "Backlog",
+      "status": "In progress",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:31Z",
+      "updatedAt": "2026-10-27T06:37:06Z",
       "taskStatus": {
         "R02-T1": false,
         "R02-T2": false,
@@ -210,36 +210,36 @@
         "R02-T4": false,
         "R02-T5": false
       },
-      "version": "d2f19b0a3c976706060c01aa5b76ae501c2d6140766cecc42073e374fbe73567",
+      "version": "0a3394eb4bb8f0494c89d2fd41d1fafd33650989285fb8f19a933872ba364539",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "R02-T1": {
-          "status": "Backlog",
+          "status": "In progress",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T2": {
-          "status": "Backlog",
+          "status": "In progress",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T3": {
-          "status": "Backlog",
+          "status": "In progress",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T4": {
-          "status": "Backlog",
+          "status": "In progress",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T5": {
-          "status": "Backlog",
+          "status": "In progress",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
