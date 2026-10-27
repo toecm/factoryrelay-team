@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-27T06:37:30.293Z",
+  "syncedAt": "2026-10-27T06:38:09.917Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -313,33 +313,33 @@
       "id": "ENG4",
       "number": 7,
       "url": "https://github.com/toecm/factoryrelay/issues/7",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:32Z",
+      "updatedAt": "2026-10-27T06:38:00Z",
       "taskStatus": {
         "ENG4-T1": false,
         "ENG4-T2": false,
         "ENG4-T3": false
       },
-      "version": "1a4580aed2fcbf45d5d25ccf8bbdc9956b897554b8b7a1497aa6a2779a1809fd",
+      "version": "9e5be4da3a0a18f4c9de60c1c4964c6d730458af1911e1f37dba304192f347a4",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "ENG4-T1": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T2": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
