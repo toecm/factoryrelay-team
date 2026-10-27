@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-27T06:27:58.564Z",
+  "syncedAt": "2026-10-27T06:28:23.286Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -63,9 +63,11 @@
       "number": 2,
       "url": "https://github.com/toecm/factoryrelay/issues/2",
       "status": "In progress",
-      "assignees": [],
+      "assignees": [
+        "isongjosiah"
+      ],
       "reviewer": null,
-      "updatedAt": "2026-10-27T06:27:49Z",
+      "updatedAt": "2026-10-27T06:28:14Z",
       "taskStatus": {
         "R01-T1": false,
         "R01-T2": false,
@@ -73,37 +75,47 @@
         "R01-T4": false,
         "R01-T5": false
       },
-      "version": "1156bfdb2df2779a4e85f3eab16ab7c69369e7dcc0f27cd4f480255d2f6e5572",
+      "version": "a8438f9cec8b6c42240bbdbfb15cdab6ca0a6b3d5d1324c0ecb34548751cad1e",
       "sprint": "S1",
-      "milestoneNumber": null,
+      "milestoneNumber": 1,
       "tasks": {
         "R01-T1": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S1",
           "reviewer": null
         },
         "R01-T2": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S1",
           "reviewer": null
         },
         "R01-T3": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S1",
           "reviewer": null
         },
         "R01-T4": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S1",
           "reviewer": null
         },
         "R01-T5": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S1",
           "reviewer": null
         }
@@ -956,7 +968,7 @@
       "title": "Access, literature and feasibility",
       "endDate": null,
       "number": 1,
-      "version": "ccbfda7f91653d5f3857d4893b84af74bf12ebde78a9ee4d35b10b77ce6b6209",
+      "version": "efee71d21e8c5d89c1309af8e1e5aefd5ab7bd524621a93a242445ae918bbb4e",
       "state": "open"
     }
   ]
