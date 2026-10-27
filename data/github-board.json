@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-27T06:37:18.003Z",
+  "syncedAt": "2026-10-27T06:37:30.293Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -200,9 +200,11 @@
       "number": 5,
       "url": "https://github.com/toecm/factoryrelay/issues/5",
       "status": "In progress",
-      "assignees": [],
+      "assignees": [
+        "isongjosiah"
+      ],
       "reviewer": null,
-      "updatedAt": "2026-10-27T06:37:06Z",
+      "updatedAt": "2026-10-27T06:37:20Z",
       "taskStatus": {
         "R02-T1": false,
         "R02-T2": false,
@@ -210,37 +212,47 @@
         "R02-T4": false,
         "R02-T5": false
       },
-      "version": "0a3394eb4bb8f0494c89d2fd41d1fafd33650989285fb8f19a933872ba364539",
+      "version": "37e0d0594ea5487ec484ccdbd8494d230f2fc22ffbd09fe9f7a9800653c7586e",
       "sprint": "S2",
-      "milestoneNumber": null,
+      "milestoneNumber": 2,
       "tasks": {
         "R02-T1": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T2": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T3": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T4": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "R02-T5": {
           "status": "In progress",
-          "assignees": [],
+          "assignees": [
+            "isongjosiah"
+          ],
           "sprint": "S2",
           "reviewer": null
         }
@@ -969,6 +981,16 @@
       "endDate": null,
       "number": 1,
       "version": "efee71d21e8c5d89c1309af8e1e5aefd5ab7bd524621a93a242445ae918bbb4e",
+      "state": "open"
+    },
+    {
+      "id": "S2",
+      "startDate": null,
+      "goal": "Deliver one locally provisioned translation preview with consent and a frozen study design.",
+      "title": "Translation preview and study design",
+      "endDate": null,
+      "number": 2,
+      "version": "92bf11b50614a1063014a3a73a50fd508bfe4ca0cf4e2880e33bdb7a646d3660",
       "state": "open"
     }
   ]
