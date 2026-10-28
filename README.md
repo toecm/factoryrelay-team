@@ -113,9 +113,16 @@ capacity; the portal does not allocate work automatically.
    the sprint ID, title, goal and optional dates, then save. Move a ticket into
    that sprint using its detail window. Moving a task can give it a different
    sprint from its parent story.
-5. Mark **Task complete** only when its evidence is ready. Completing a task
-   updates its original GitHub checklist. It does not close the story. Setting
-   a story to Done closes its issue; other statuses reopen it if necessary.
+5. In a story's **Tasks** list, select the circle beside a task to mark it Done.
+   Clear that circle to reopen the task in Backlog. These are independent
+   checkboxes: several tasks can be complete at once. Each click saves directly
+   to GitHub; it does not require **Save to GitHub** in the story editor.
+   Keyboard users can focus a circle with Tab and toggle it with Space.
+   The task's own **Task complete** editor checkbox remains available.
+   Complete work only when its evidence is ready. This updates the original
+   GitHub checklist without closing the story or changing task assignments,
+   reviewer, sprint or work branch. Setting a story to Done closes its issue;
+   other story statuses reopen it if necessary.
 6. Enable **Fit all columns to screen** to remove horizontal board scrolling.
    Columns use the available width and wrap into readable rows on narrow
    screens. This does not eliminate vertical scrolling through all tickets.
@@ -123,6 +130,21 @@ capacity; the portal does not allocate work automatically.
    implementation plan. The Scrum workbook remains in the Document library.
    These are separate planning documents: edits there are not imported into
    GitHub automatically.
+
+The task circles require sign-in and are disabled during a save. Wait for the
+confirmation beside **Refresh tasks**: the circles and completed count display
+confirmed GitHub state. Completing or reopening a task does not request another
+review or send review-handoff notifications. Task updates and background refreshes
+preserve the open story's unsaved form values and scroll position.
+
+If a task change conflicts with a newer GitHub edit, its circle keeps the last
+confirmed state. Select **Refresh tasks**, check the new state, then retry.
+This refresh updates the rows and count without replacing story form edits.
+If a change was saved but the following refresh failed, the message says so;
+refresh the tasks before making another change instead of submitting it again.
+An older story draft can still require **Reload latest** before its separate
+story save. That editor action replaces form values, so retain any draft values
+you want to reapply.
 
 Open story statuses map to one controlled GitHub label:
 

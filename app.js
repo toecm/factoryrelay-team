@@ -40,6 +40,7 @@ function safeUrl(value) {
 let data, snapshot = {enabled:false, items:[]};
 let client = null, boardFit = true, saving = false, loginPending = false, draggedItem = null, editorContext = null;
 let boardMessage = '', boardError = false, loginFailure = '', boardNeedsRefresh = false;
+let inlineTaskPending = null;
 const reviewResults = new Map();
 let route = 'overview', boardKind = 'stories', boardSearch = '', sprintFilter = '', priorityFilter = '', statusFilter = '', docCategory = '', docSearch = '', globalQuery = '';
 const main = document.getElementById('main-content');
@@ -260,7 +261,7 @@ async function retryReview(button) {
   if(boardNeedsRefresh || editorContext?.requiresReload){feedback.textContent='Saved on GitHub, but the latest state has not loaded. Refresh the board or use Reload latest before retrying.';return;}
   const openEditor=editorContext && editorContext.kind===kind && editorContext.id===id;
   const version=openEditor ? editorContext.version : ticketVersion(item);
-  saving=true;button.disabled=true;feedback.textContent='Retrying the saved review handoff...';
+  saving=true;button.disabled=true;refreshStoryTaskRows();feedback.textContent='Retrying the saved review handoff...';
   try {
     await client.retryReview(kind==='task' ? item.storyId : id,kind==='task' ? id : null,version);
     const result=client.reviewResult || {status:'pending',message:'The service returned no handoff details. Open the issue to check the request before retrying.'};
@@ -276,7 +277,7 @@ async function retryReview(button) {
       feedback.textContent='Saved on GitHub, but the latest state could not load. Close this result and refresh the board, or use Reload latest, before further edits or retries.';
       boardMessage=feedback.textContent;boardError=true;
     }else feedback.textContent=`Review handoff could not finish. ${error.message} The ticket's saved status has not been undone.`;
-  } finally {saving=false;dialog.querySelectorAll('[data-action="retry-review"]').forEach(control=>{control.disabled=false;});render();}
+  } finally {saving=false;dialog.querySelectorAll('[data-action="retry-review"]').forEach(control=>{control.disabled=false;});refreshStoryTaskRows();render();}
 }
 function editFields(item, kind) {
   if(!canEdit()) return '<div class="notice"><div><strong>Sign in to edit this work.</strong><span>Your invited GitHub account is required to change assignments, status or sprint.</span></div><button class="btn primary small" data-action="login">Sign in with GitHub</button></div>';
@@ -306,7 +307,7 @@ async function saveEditor(form) {
   const patch=context.kind==='sprint' ? {id:fields.get('id').trim(),title:fields.get('title').trim(),goal:fields.get('goal').trim(),startDate:fields.get('startDate') || null,endDate:fields.get('endDate') || null,...(context.number ? {number:context.number} : {}),...(context.version ? {version:context.version} : {})} : {status:fields.get('status'),sprint:fields.get('sprint'),assignees:fields.getAll('assignees'),reviewer:fields.get('reviewer') || null,workBranch:fields.get('workBranch').trim() || null};
   if(context.kind==='sprint' && patch.startDate && patch.endDate && patch.endDate < patch.startDate) {feedback.className='save-feedback form-error';feedback.textContent='End date must be on or after the start date.';return;}
   if(context.kind==='task') patch.completed=fields.has('completed');
-  saving=true;fieldset.disabled=true;feedback.className='save-feedback';feedback.textContent='Saving to GitHub...';boardMessage='Saving to GitHub...';boardError=false;
+  saving=true;fieldset.disabled=true;refreshStoryTaskRows();feedback.className='save-feedback';feedback.textContent='Saving to GitHub...';boardMessage='Saving to GitHub...';boardError=false;
   try {
     if(context.kind==='sprint') await client.saveSprint(patch);
     else if(context.kind==='story') await client.saveStory(context.id,patch,context.version);
@@ -327,7 +328,7 @@ async function saveEditor(form) {
       boardMessage='The update was not saved. Review the message in the editor.';
     }
     boardError=true;
-  } finally {saving=false;fieldset.disabled=false;render();}
+  } finally {saving=false;fieldset.disabled=false;refreshStoryTaskRows();render();}
 }
 async function beginLogin() {
   if(loginPending || saving) return;
@@ -348,12 +349,85 @@ async function reloadEditor() {
   try {await client.refresh();if(previous.kind==='story')showStory(previous.id);else if(previous.kind==='task')showTask(previous.id);else showSprintEditor(previous.id);}
   catch(error){const feedback=dialog.querySelector('.save-feedback');if(feedback){feedback.textContent=`Could not refresh. ${error.message}`;feedback.classList.add('form-error');}}
 }
+function storyTaskRow(task, focusTask) {
+  return `<div class="task-row ${focusTask===task.id?'task-highlight':''}" id="task-${esc(task.id)}"><label class="task-completion-control"><input type="checkbox" class="task-completion-input" data-complete-task="${esc(task.id)}" aria-label="${task.completed?'Reopen':'Mark'} ${esc(task.id)}${task.completed?'':' complete'}" aria-describedby="task-completion-help" ${task.completed?'checked':''} ${!canEdit() || saving || boardNeedsRefresh?'disabled':''}><span class="task-check" aria-hidden="true"></span></label><div class="task-row-content"><span class="item-id">${esc(task.id)}</span><p>${esc(task.title)}</p><span class="muted" data-task-summary>${esc(task.owner || 'Unassigned')} · ${esc(task.sprint)} · ${esc(task.status)}</span><span class="card-reviewer" data-task-reviewer ${task.reviewer?'':'hidden'}>${task.reviewer ? `Reviewer: ${esc(task.reviewer)}` : ''}</span></div><button class="btn secondary small" data-edit-task="${esc(task.id)}">${canEdit() ? 'Edit task' : 'View task'}</button></div>`;
+}
+function refreshStoryTaskRows() {
+  const list=dialog.querySelector('#story-task-list');
+  if(!dialog.open || editorContext?.kind!=='story' || !list || list.dataset.storyId!==editorContext.id)return;
+  const scroll=dialog.querySelector('.dialog-body'),scrollTop=scroll?.scrollTop;
+  const tasks=data.tasks.filter(task=>task.storyId===editorContext.id).map(taskState);
+  list.dataset.version=ticketVersion(storyState(data.stories.find(story=>story.id===editorContext.id))) || '';
+  for(const task of tasks){
+    const row=document.getElementById(`task-${task.id}`),control=row?.querySelector('[data-complete-task]');
+    if(!control)continue;
+    control.checked=task.completed;
+    control.disabled=!canEdit() || saving || boardNeedsRefresh || Boolean(editorContext.taskRequiresRefresh);
+    control.setAttribute('aria-label',task.completed ? `Reopen ${task.id}` : `Mark ${task.id} complete`);
+    row.setAttribute('aria-busy',String(inlineTaskPending===task.id));
+    row.querySelector('[data-task-summary]').textContent=`${task.owner || 'Unassigned'} · ${task.sprint} · ${task.status}`;
+    const reviewer=row.querySelector('[data-task-reviewer]');
+    reviewer.hidden=!task.reviewer;reviewer.textContent=task.reviewer ? `Reviewer: ${task.reviewer}` : '';
+    row.querySelector('[data-edit-task]').disabled=saving;
+    row.querySelector('[data-edit-task]').textContent=canEdit() ? 'Edit task' : 'View task';
+  }
+  const count=dialog.querySelector('#story-task-count');
+  if(count)count.textContent=`${tasks.filter(task=>task.completed).length}/${tasks.length}`;
+  const refresh=dialog.querySelector('[data-action="refresh-story-tasks"]');
+  if(refresh)refresh.disabled=!canEdit() || saving;
+  if(scroll)scroll.scrollTop=scrollTop;
+}
+async function toggleStoryTask(control) {
+  const list=control.closest('#story-task-list'),task=ticketFor('task',control.dataset.completeTask),context=editorContext;
+  const desired=control.checked;
+  if(!task || context?.kind!=='story' || task.storyId!==context.id || !list)return;
+  control.checked=task.completed; // Show confirmed state until GitHub accepts the change.
+  const feedback=dialog.querySelector('#task-completion-feedback');
+  if(!canEdit()){feedback.textContent='Sign in with GitHub to update task completion.';refreshStoryTaskRows();return;}
+  if(saving)return;
+  if(boardNeedsRefresh || context.taskRequiresRefresh || context.requiresReload){feedback.textContent='Refresh tasks before another completion change. If the story was already saved, use Reload latest for its editor.';return;}
+  const version=list.dataset.version,advanceEditor=context.version===version,wasFocused=document.activeElement===control;
+  saving=true;inlineTaskPending=task.id;feedback.className='task-completion-feedback';
+  feedback.textContent=`Saving ${task.id} as ${desired?'Done':'Backlog'} to GitHub...`;
+  refreshStoryTaskRows();
+  try{
+    await client.saveTask(task.storyId,task.id,{status:desired?'Done':'Backlog',completed:desired},version);
+    if(editorContext===context && advanceEditor)context.version=ticketVersion(ticketFor('story',task.storyId));
+    feedback.textContent=`${task.id} ${desired?'completed':'reopened in Backlog'} and saved to GitHub. Your story edits are unchanged.`;
+    boardMessage=`${task.id} saved to GitHub.`;boardError=false;
+  }catch(error){
+    feedback.className='task-completion-feedback form-error';
+    if(error.code==='saved_refresh_failed'){
+      boardNeedsRefresh=true;context.taskRequiresRefresh=true;
+      feedback.textContent=`${task.id} was saved on GitHub, but the latest state could not load. The circle shows the last confirmed state. Use Refresh tasks before making another change.`;
+    }else{
+      if(error.code==='conflict')context.taskRequiresRefresh=true;
+      feedback.textContent=`Task not changed. ${error.message || 'Please try again.'} ${error.code==='conflict'?'Use Refresh tasks before retrying. ':''}Your story edits are still here.`;
+    }
+    boardMessage=feedback.textContent;boardError=true;
+  }finally{
+    saving=false;inlineTaskPending=null;refreshStoryTaskRows();renderSharedUpdate();
+    if(wasFocused && !control.disabled && [document.body,dialog].includes(document.activeElement))control.focus({preventScroll:true});
+  }
+}
+async function refreshStoryTasks() {
+  if(saving || !canEdit() || editorContext?.kind!=='story')return;
+  const context=editorContext,feedback=dialog.querySelector('#task-completion-feedback');
+  if(!feedback)return;
+  saving=true;feedback.className='task-completion-feedback';feedback.textContent='Refreshing task completion from GitHub...';refreshStoryTaskRows();
+  try{
+    await client.refresh();
+    if(editorContext===context)context.taskRequiresRefresh=false;
+    feedback.textContent='Latest task states loaded. Your unsaved story edits are unchanged.';
+  }catch(error){feedback.className='task-completion-feedback form-error';feedback.textContent=`Could not refresh tasks. ${error.message} Your story edits are still here.`;}
+  finally{saving=false;refreshStoryTaskRows();renderSharedUpdate();}
+}
 function showStory(id, focusTask=null) {
   const raw = data.stories.find(s=>s.id===id);
   if (!raw) return toast('That story is not part of this plan.');
   const s = storyState(raw);
   const tasks = data.tasks.filter(t=>t.storyId===id).map(taskState);
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}${reviewSection(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted">${tasks.filter(t=>t.status==='Done').length}/${tasks.length}</span></h3><p class="muted">Open a task to update its own assignees, status and sprint. Review evidence with another team member before marking work complete.</p><div class="task-list">${tasks.map(t=>`<div class="task-row ${focusTask===t.id?'task-highlight':''}" id="task-${esc(t.id)}"><span class="task-check ${t.status==='Done'?'checked':''}" aria-label="${t.status==='Done'?'Completed':'Not complete'}">${t.status==='Done'?'✓':'○'}</span><div><span class="item-id">${esc(t.id)}</span><p>${esc(t.title)}</p><span class="muted">${esc(t.owner || 'Unassigned')} · ${esc(t.sprint)}</span>${reviewerLabel(t.reviewer)}</div><button class="btn secondary small" data-edit-task="${esc(t.id)}">${canEdit() ? 'Edit task' : 'View task'}</button></div>`).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}${reviewSection(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted" id="story-task-count" aria-live="polite">${tasks.filter(t=>t.completed).length}/${tasks.length}</span></h3><p class="muted" id="task-completion-help">${canEdit() ? 'Select a circle to complete that task; clear it to reopen in Backlog. Each task saves separately to GitHub.' : 'Sign in with GitHub to change task completion.'} Open a task to update its assignments or sprint.</p><div class="task-completion-toolbar"><p id="task-completion-feedback" class="task-completion-feedback" role="status" aria-live="polite"></p><button class="btn secondary small" type="button" data-action="refresh-story-tasks" ${canEdit()?'':'disabled'}>Refresh tasks</button></div><div class="task-list" id="story-task-list" data-story-id="${esc(id)}" data-version="${esc(s.github?.version || s.github?.updatedAt || '')}">${tasks.map(task=>storyTaskRow(task,focusTask)).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
   editorContext={kind:'story',id,version:s.github?.version || s.github?.updatedAt};
   if (focusTask) setTimeout(()=>document.getElementById(`task-${focusTask}`)?.scrollIntoView({block:'center'}),50);
 }
@@ -409,6 +483,7 @@ function render() {
   ({overview:renderOverview,board:renderBoard,documents:renderDocuments,resources:renderResources,sprints:renderSprints,research:renderResearch,status:renderStatus}[route])();
 }
 function renderSharedUpdate() {
+  refreshStoryTaskRows();
   // Keep the open Google viewer, draft editor and filter position intact during polling.
   if(previewDialog.open)return;
   const active=document.activeElement;
@@ -442,12 +517,14 @@ document.addEventListener('click', async event=>{
   if(action==='copy-login-error')return copyLoginError();
   if(action==='new-sprint')return showSprintEditor();
   if(action==='reload-editor')return reloadEditor();
+  if(action==='refresh-story-tasks')return refreshStoryTasks();
   if(action==='retry-review')return retryReview(event.target.closest('[data-action="retry-review"]'));
   if(action==='logout'){try{await client.logout();reviewResults.clear();boardMessage='Signed out. The board is read-only.';boardError=false;}catch(error){boardMessage=`Signed out in this browser. ${error.message}`;boardError=true;}render();if(dialog.open)dialog.close();}
   if(action==='refresh'){try{await client.refresh();boardMessage='Latest GitHub changes loaded.';boardError=false;}catch(error){boardMessage=error.message;boardError=true;}render();}
 });
 document.addEventListener('submit',event=>{if(event.target.matches('#ticket-edit-form, #sprint-edit-form')){event.preventDefault();saveEditor(event.target);}});
 document.addEventListener('change',event=>{
+  if(event.target.matches('[data-complete-task]'))return toggleStoryTask(event.target);
   if(event.target.id==='edit-completed'){const select=document.getElementById('edit-status');if(event.target.checked)select.value='Done';else if(select.value==='Done')select.value='Backlog';}
   if(event.target.id==='edit-status'){const complete=document.getElementById('edit-completed');if(complete)complete.checked=event.target.value==='Done';}
 });
