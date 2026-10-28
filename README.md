@@ -114,7 +114,8 @@ capacity; the portal does not allocate work automatically.
    that sprint using its detail window. Moving a task can give it a different
    sprint from its parent story.
 5. In a story's **Tasks** list, select the circle beside a task to mark it Done.
-   Clear that circle to reopen the task in Backlog. These are independent
+   Clear that circle to restore the task's status from before completion
+   (for example, Review → Done → Review). These are independent
    checkboxes: several tasks can be complete at once. Each click saves directly
    to GitHub; it does not require **Save to GitHub** in the story editor.
    Keyboard users can focus a circle with Tab and toggle it with Space.
@@ -133,9 +134,16 @@ capacity; the portal does not allocate work automatically.
 
 The task circles require sign-in and are disabled during a save. Wait for the
 confirmation beside **Refresh tasks**: the circles and completed count display
-confirmed GitHub state. Completing or reopening a task does not request another
-review or send review-handoff notifications. Task updates and background refreshes
+confirmed GitHub state. The previous status is saved on GitHub, so it survives
+reloads and another teammate can restore it. The task editor's **Task complete**
+checkbox follows the same rule. Restoring Review reuses an existing matching
+review handoff rather than sending a duplicate notification. Task updates and background refreshes
 preserve the open story's unsaved form values and scroll position.
+
+For older completed tasks whose previous status was not saved, reopening uses
+the parent story's current non-Done status (Backlog when the story is Done).
+Choose the correct status in **Edit task** if that fallback does not match the
+task's history. Each subsequent completion remembers the task's own status.
 
 If a task change conflicts with a newer GitHub edit, its circle keeps the last
 confirmed state. Select **Refresh tasks**, check the new state, then retry.

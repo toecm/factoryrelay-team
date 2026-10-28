@@ -59,7 +59,8 @@ function taskState(task) {
   const checked = parent.github?.taskStatus?.[task.id];
   // A closed parent does not fabricate completion for an unchecked task.
   const status = live?.status || (checked === true ? 'Done' : checked === false ? (parent.status === 'Done' ? 'Backlog' : parent.status) : task.status);
-  return {...task, status, owner:live ? (live.assignees || []).join(', ') : parent.github ? parent.owner : task.owner, reviewer:live?.reviewer ?? null, workBranch:live?.workBranch ?? null, reviewRequest:live?.reviewRequest ?? null, parent, sprint:live?.sprint ?? parent.sprint, priority:parent.priority, completed:status === 'Done', live};
+  const reopenStatus = STATUSES.includes(live?.reopenStatus) && live.reopenStatus !== 'Done' ? live.reopenStatus : status !== 'Done' ? status : parent.status === 'Done' ? 'Backlog' : parent.status;
+  return {...task, status, reopenStatus, owner:live ? (live.assignees || []).join(', ') : parent.github ? parent.owner : task.owner, reviewer:live?.reviewer ?? null, workBranch:live?.workBranch ?? null, reviewRequest:live?.reviewRequest ?? null, parent, sprint:live?.sprint ?? parent.sprint, priority:parent.priority, completed:status === 'Done', live};
 }
 function allSprints() {
   const merged = new Map((data.sprints || []).map(sprint => [sprint.id, {...sprint}]));
@@ -282,13 +283,15 @@ async function retryReview(button) {
 function editFields(item, kind) {
   if(!canEdit()) return '<div class="notice"><div><strong>Sign in to edit this work.</strong><span>Your invited GitHub account is required to change assignments, status or sprint.</span></div><button class="btn primary small" data-action="login">Sign in with GitHub</button></div>';
   const selected = kind==='task' ? item.live?.assignees ?? item.parent.github?.assignees ?? [] : item.github?.assignees ?? [];
-  return `<form id="ticket-edit-form" data-edit-kind="${kind}" data-edit-id="${esc(item.id)}" class="ticket-edit-form"><h3>Move and assign ${kind}</h3><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="edit-status"><span>Status</span><select name="status" id="edit-status">${STATUSES.map(value=>`<option ${item.status===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label><label class="form-field" for="edit-sprint"><span>Sprint</span><select name="sprint" id="edit-sprint">${sprintNames().map(value=>`<option ${item.sprint===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label></div>${assigneeFields(selected)}${reviewerField(item.reviewer)}${workBranchField(item)}${kind==='task' ? `<label class="completion-control"><input type="checkbox" id="edit-completed" name="completed" ${item.status==='Done'?'checked':''}>Task complete</label><p class="field-help">Checking complete sets Done. Unchecking a completed task returns it to Backlog.</p>` : '<p class="field-help">Done closes the GitHub story. Other statuses reopen it if needed.</p>'}<div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-ticket">Save to GitHub</button><button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button></div></fieldset></form>`;
+  return `<form id="ticket-edit-form" data-edit-kind="${kind}" data-edit-id="${esc(item.id)}" class="ticket-edit-form"><h3>Move and assign ${kind}</h3><fieldset class="edit-fieldset"><div class="edit-grid"><label class="form-field" for="edit-status"><span>Status</span><select name="status" id="edit-status">${STATUSES.map(value=>`<option ${item.status===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label><label class="form-field" for="edit-sprint"><span>Sprint</span><select name="sprint" id="edit-sprint">${sprintNames().map(value=>`<option ${item.sprint===value?'selected':''}>${esc(value)}</option>`).join('')}</select></label></div>${assigneeFields(selected)}${reviewerField(item.reviewer)}${workBranchField(item)}${kind==='task' ? `<label class="completion-control"><input type="checkbox" id="edit-completed" name="completed" ${item.status==='Done'?'checked':''}>Task complete</label><p class="field-help">Checking complete sets Done. Unchecking restores its previous status.</p>` : '<p class="field-help">Done closes the GitHub story. Other statuses reopen it if needed.</p>'}<div class="save-feedback" role="status" aria-live="polite"></div><div class="edit-actions"><button type="submit" class="btn primary" id="save-ticket">Save to GitHub</button><button type="button" class="btn secondary" data-action="reload-editor">Reload latest</button></div></fieldset></form>`;
 }
 function showTask(id) {
   const raw = data.tasks.find(task=>task.id===id);
   if(!raw) return toast('That task is not part of this plan.');
   const task = taskState(raw);
   showDialog(`<div class="dialog-head"><div><span class="eyebrow">TASK ${esc(task.id)} · ${esc(task.sprint)}</span><h2 id="dialog-title">${esc(task.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close task">&times;</button></div><div class="dialog-body"><div class="card-tags">${tag(task.status,statusColor(task.status))}${tag(task.priority)}</div><p class="lead-text">Part of <button class="story-chip" data-story="${esc(task.storyId)}">${esc(task.storyId)}: ${esc(task.parent.title)}</button></p><div class="detail-grid"><div><span class="detail-label">Assignees</span><span class="detail-value">${esc(task.owner || 'Unassigned')}</span></div><div><span class="detail-label">Sprint</span><span class="detail-value">${esc(task.sprint)}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(task.reviewer || 'Unassigned')}</span></div></div>${editFields(task,'task')}${reviewSection(task,'task')}</div><div class="dialog-actions">${githubAction(task.parent)}</div>`);
+  const form=dialog.querySelector('#ticket-edit-form');
+  if(form){form.dataset.reopenStatus=task.reopenStatus;form.dataset.currentStatus=task.status;}
   editorContext={kind:'task',id,version:task.parent.github?.version || task.parent.github?.updatedAt};
 }
 function showSprintEditor(id=null) {
@@ -388,12 +391,14 @@ async function toggleStoryTask(control) {
   if(boardNeedsRefresh || context.taskRequiresRefresh || context.requiresReload){feedback.textContent='Refresh tasks before another completion change. If the story was already saved, use Reload latest for its editor.';return;}
   const version=list.dataset.version,advanceEditor=context.version===version,wasFocused=document.activeElement===control;
   saving=true;inlineTaskPending=task.id;feedback.className='task-completion-feedback';
-  feedback.textContent=`Saving ${task.id} as ${desired?'Done':'Backlog'} to GitHub...`;
+  feedback.textContent=`Saving ${task.id} ${desired?'as Done':'back to its previous status'} on GitHub...`;
   refreshStoryTaskRows();
   try{
-    await client.saveTask(task.storyId,task.id,{status:desired?'Done':'Backlog',completed:desired},version);
+    // GitHub retains the pre-completion status; do not replace it with a client default.
+    await client.saveTask(task.storyId,task.id,{completed:desired},version);
     if(editorContext===context && advanceEditor)context.version=ticketVersion(ticketFor('story',task.storyId));
-    feedback.textContent=`${task.id} ${desired?'completed':'reopened in Backlog'} and saved to GitHub. Your story edits are unchanged.`;
+    const savedStatus=ticketFor('task',task.id).status;
+    feedback.textContent=`${task.id} ${desired?'completed':`returned to ${savedStatus}`} and saved to GitHub. Your story edits are unchanged.`;
     boardMessage=`${task.id} saved to GitHub.`;boardError=false;
   }catch(error){
     feedback.className='task-completion-feedback form-error';
@@ -427,7 +432,7 @@ function showStory(id, focusTask=null) {
   if (!raw) return toast('That story is not part of this plan.');
   const s = storyState(raw);
   const tasks = data.tasks.filter(t=>t.storyId===id).map(taskState);
-  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}${reviewSection(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted" id="story-task-count" aria-live="polite">${tasks.filter(t=>t.completed).length}/${tasks.length}</span></h3><p class="muted" id="task-completion-help">${canEdit() ? 'Select a circle to complete that task; clear it to reopen in Backlog. Each task saves separately to GitHub.' : 'Sign in with GitHub to change task completion.'} Open a task to update its assignments or sprint.</p><div class="task-completion-toolbar"><p id="task-completion-feedback" class="task-completion-feedback" role="status" aria-live="polite"></p><button class="btn secondary small" type="button" data-action="refresh-story-tasks" ${canEdit()?'':'disabled'}>Refresh tasks</button></div><div class="task-list" id="story-task-list" data-story-id="${esc(id)}" data-version="${esc(s.github?.version || s.github?.updatedAt || '')}">${tasks.map(task=>storyTaskRow(task,focusTask)).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
+  showDialog(`<div class="dialog-head"><div><span class="eyebrow">STORY ${esc(s.id)} · ${esc(s.sprint)}</span><h2 id="dialog-title">${esc(s.title)}</h2></div><button class="icon-button" data-action="close" aria-label="Close story">×</button></div><div class="dialog-body"><div class="card-tags">${tag(s.status,statusColor(s.status))}${tag(s.priority)}${tag(`${s.points} draft points`)}</div><p class="lead-text">${esc(s.story)}</p>${editFields(s,'story')}${reviewSection(s,'story')}<div class="detail-grid"><div><span class="detail-label">Owner</span><span class="detail-value">${esc(s.owner||'Unassigned · volunteer at planning')}</span></div><div><span class="detail-label">Reviewer</span><span class="detail-value">${esc(s.reviewer || 'Unassigned')}</span></div><div><span class="detail-label">Dependencies</span><span class="detail-value">${s.dependencies.length ? s.dependencies.map(dep=>`<button class="story-chip" data-story="${esc(dep)}">${esc(dep)}</button>`).join(' ') : 'None'}</span></div><div><span class="detail-label">Course criteria</span><span class="detail-value">${esc(s.criteria.join(' · '))}</span></div></div><h3>Acceptance criteria</h3><ol class="checklist">${s.acceptance.map(text=>`<li>${esc(text)}</li>`).join('')}</ol><h3>Tasks <span class="muted" id="story-task-count" aria-live="polite">${tasks.filter(t=>t.completed).length}/${tasks.length}</span></h3><p class="muted" id="task-completion-help">${canEdit() ? 'Select a circle to complete that task; clear it to restore its previous status. Each task saves separately to GitHub.' : 'Sign in with GitHub to change task completion.'} Open a task to update its assignments or sprint.</p><div class="task-completion-toolbar"><p id="task-completion-feedback" class="task-completion-feedback" role="status" aria-live="polite"></p><button class="btn secondary small" type="button" data-action="refresh-story-tasks" ${canEdit()?'':'disabled'}>Refresh tasks</button></div><div class="task-list" id="story-task-list" data-story-id="${esc(id)}" data-version="${esc(s.github?.version || s.github?.updatedAt || '')}">${tasks.map(task=>storyTaskRow(task,focusTask)).join('')}</div><h3>Deliverable</h3><p class="pre-line">${esc(s.deliverable)}</p><h3>Ready when</h3><p>${esc(s.gate)}</p><h3>Risk / boundary</h3><p>${esc(s.risk)}</p></div><div class="dialog-actions"><button class="btn secondary" data-copy="${esc(s.id)}">Copy story link</button>${githubAction(s)}</div>`);
   editorContext={kind:'story',id,version:s.github?.version || s.github?.updatedAt};
   if (focusTask) setTimeout(()=>document.getElementById(`task-${focusTask}`)?.scrollIntoView({block:'center'}),50);
 }
@@ -525,8 +530,24 @@ document.addEventListener('click', async event=>{
 document.addEventListener('submit',event=>{if(event.target.matches('#ticket-edit-form, #sprint-edit-form')){event.preventDefault();saveEditor(event.target);}});
 document.addEventListener('change',event=>{
   if(event.target.matches('[data-complete-task]'))return toggleStoryTask(event.target);
-  if(event.target.id==='edit-completed'){const select=document.getElementById('edit-status');if(event.target.checked)select.value='Done';else if(select.value==='Done')select.value='Backlog';}
-  if(event.target.id==='edit-status'){const complete=document.getElementById('edit-completed');if(complete)complete.checked=event.target.value==='Done';}
+  if(event.target.id==='edit-completed'){
+    const form=event.target.form,select=document.getElementById('edit-status');
+    if(event.target.checked){
+      if(select.value!=='Done')form.dataset.reopenStatus=select.value;
+      select.value='Done';
+    }else if(select.value==='Done')select.value=form.dataset.reopenStatus;
+    form.dataset.currentStatus=select.value;
+  }
+  if(event.target.id==='edit-status'){
+    const complete=document.getElementById('edit-completed');
+    if(complete){
+      const form=event.target.form;
+      if(event.target.value!=='Done')form.dataset.reopenStatus=event.target.value;
+      else if(form.dataset.currentStatus!=='Done')form.dataset.reopenStatus=form.dataset.currentStatus;
+      form.dataset.currentStatus=event.target.value;
+      complete.checked=event.target.value==='Done';
+    }
+  }
 });
 document.addEventListener('dragstart',event=>{
   const card=event.target.closest('[data-card-id]');

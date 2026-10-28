@@ -104,13 +104,17 @@ export function writeTaskOverrides(story, body, value) {
 export function resolveTaskState(storyState, taskId, overrides, completed, { includeReviewDetails = false } = {}) {
   const own = overrides.tasks[taskId] || {};
   const inheritedStatus = storyState.status === 'Done' ? 'Backlog' : storyState.status;
+  // The checklist owns completion. A non-Done override is retained while checked
+  // so reopening on another device restores the task's actual previous state.
+  // Old `status: Done` records have no recoverable history and inherit instead.
+  const reopenStatus = own.status && own.status !== 'Done' ? own.status : inheritedStatus;
   return {
-    status: completed ? 'Done' : (own.status && own.status !== 'Done' ? own.status : inheritedStatus),
+    status: completed ? 'Done' : reopenStatus,
     assignees: [...(own.assignees ?? storyState.assignees ?? [])],
     sprint: own.sprint ?? storyState.sprint ?? 'Unscheduled',
     // Review responsibility is independent: a task never inherits its story's reviewer.
     reviewer: own.reviewer ?? null,
-    ...(includeReviewDetails ? { workBranch: own.workBranch ?? null, reviewRequest: own.reviewRequest ?? null } : {}),
+    ...(includeReviewDetails ? { workBranch: own.workBranch ?? null, reviewRequest: own.reviewRequest ?? null, reopenStatus } : {}),
   };
 }
 export function parseSprintMarker(description = '') {
