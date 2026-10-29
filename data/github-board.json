@@ -1,25 +1,25 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-29T04:43:32.157Z",
+  "syncedAt": "2026-10-29T04:47:02.863Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
       "id": "ENG0",
       "number": 1,
       "url": "https://github.com/toecm/factoryrelay/issues/1",
-      "status": "Review",
+      "status": "Done",
       "assignees": [
         "toecm"
       ],
       "reviewer": null,
-      "updatedAt": "2026-10-29T04:43:20Z",
+      "updatedAt": "2026-10-29T04:47:02Z",
       "taskStatus": {
         "ENG0-T1": true,
         "ENG0-T2": true,
         "ENG0-T3": true,
-        "ENG0-T4": false
+        "ENG0-T4": true
       },
-      "version": "a9ea2e437aa9ce3787fe10496c15bb509fbe015be86447828208e6db093d5d8e",
+      "version": "99860d263e97988e29b141090866f9f16c1cdf24dd859acc0b4c0cec7b3a42b2",
       "sprint": "S1",
       "milestoneNumber": null,
       "tasks": {
@@ -49,7 +49,7 @@
           "reviewer": null
         },
         "ENG0-T4": {
-          "status": "Review",
+          "status": "Done",
           "assignees": [
             "toecm"
           ],
