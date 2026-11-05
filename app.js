@@ -104,7 +104,7 @@ function courseItems(compact=false) {
 }
 function options(values, selected, allLabel) { return `<option value="">${esc(allLabel)}</option>${values.map(v => `<option value="${esc(v)}" ${selected === v ? 'selected' : ''}>${esc(v)}</option>`).join('')}`; }
 function boardDocumentActions() {
-  const doc = data.documents.find(item => item.id === 'implementation-plan') || data.documents.find(item => item.link?.href?.includes('1KwRlp7MBw390ATHdlGqkU0L454Nrg9ME'));
+  const doc = data.documents.find(item => item.id === 'implementation-plan');
   return doc ? `<div class="board-document-actions">${documentLink({...doc.link, label:'Open in Google Docs'})}<button class="btn secondary small" data-preview="${esc(doc.id)}" aria-label="Preview Team implementation plan" aria-haspopup="dialog">Preview ${icon('document')}</button></div>` : '';
 }
 function taskCard(item) {

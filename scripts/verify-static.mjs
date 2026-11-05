@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DOCUMENT_LINKS = Object.freeze({
-  'implementation-plan': 'https://docs.google.com/document/d/1KwRlp7MBw390ATHdlGqkU0L454Nrg9ME/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
+  'implementation-plan': 'https://docs.google.com/document/d/1TLWkFOJfz3CfyZZoBoxkvw1lwHkq-6g18nrg43NqLe0/edit?usp=sharing',
   'scrum-workbook': 'https://docs.google.com/spreadsheets/d/1Aq7vdfQrljMN5djOaWuvP0G82mTyYGhX/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
   'backlog-csv': 'https://drive.google.com/file/d/1KFUzt4Qjd6RabX3z2ZMUJ-Cek3ydfWZ9/view?usp=sharing',
   'tasks-csv': 'https://drive.google.com/file/d/12TvNuVaHL7pKnKosOFWgexfls0sLnFcs/view?usp=sharing',
