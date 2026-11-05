@@ -2412,6 +2412,20 @@
       }
     },
     {
+      "id": "initial-proposal",
+      "title": "Initial Proposal",
+      "category": "Proposal",
+      "date": null,
+      "dateLabel": "Initial proposal",
+      "status": "Earlier proposal",
+      "description": "Initial Factory Relay research proposal, retained as the starting point for the team’s smart-factory study. Use the current team plan for implementation status.",
+      "link": {
+        "href": "https://docs.google.com/document/d/1BkyUaLte4_pqU0rHvnWjapGhWb8iwpx8/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+        "label": "Open in Google Docs",
+        "provider": "Google Docs"
+      }
+    },
+    {
       "id": "proposal",
       "title": "Smart-factory proposal: two-device offline extension",
       "category": "Proposal",
@@ -2426,12 +2440,12 @@
     },
     {
       "id": "presentation",
-      "title": "Adaptive-edge research presentation",
+      "title": "Initial Problem Establishment Presentation",
       "category": "Presentation",
       "date": null,
-      "dateLabel": "Earlier proposal deck",
+      "dateLabel": "Initial presentation",
       "status": "Earlier proposal",
-      "description": "Eight-slide proposal deck. It describes planned research, not delivered translation or learning. Its milestone schedule predates the current six-sprint forecast; the document itself has no verified date.",
+      "description": "Initial presentation for the problem establishment stage of the smart-factory research. Retained as the team’s starting presentation; implementation status is tracked separately.",
       "link": {
         "href": "https://docs.google.com/presentation/d/16UotXSiFlptzerqvwhXhckyWHuJqB04CMS5qMHlZi1g/edit?usp=sharing",
         "label": "Open in Google Slides",

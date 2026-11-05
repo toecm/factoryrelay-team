@@ -10,6 +10,7 @@ const DOCUMENT_LINKS = Object.freeze({
   'backlog-csv': 'https://drive.google.com/file/d/1KFUzt4Qjd6RabX3z2ZMUJ-Cek3ydfWZ9/view?usp=sharing',
   'tasks-csv': 'https://drive.google.com/file/d/12TvNuVaHL7pKnKosOFWgexfls0sLnFcs/view?usp=sharing',
   'status-csv': 'https://drive.google.com/file/d/1Ri-SIZiMs7aDuOwmDziDRtsfMPQbv7zf/view?usp=sharing',
+  'initial-proposal': 'https://docs.google.com/document/d/1BkyUaLte4_pqU0rHvnWjapGhWb8iwpx8/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
   proposal: 'https://docs.google.com/document/d/1aJPB2wxe3SFyAleRqN7H5LlV0ds-lD6x/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
   presentation: 'https://docs.google.com/presentation/d/16UotXSiFlptzerqvwhXhckyWHuJqB04CMS5qMHlZi1g/edit?usp=sharing',
   'technical-report': 'https://docs.google.com/document/d/1Oa0uHe8665uH8g95tJ9dXdCLFuepzDeH/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
@@ -143,8 +144,8 @@ export async function verify(rootPath = ROOT) {
   assert.equal(manifest.schemaVersion, 2);
   assert.equal(manifest.mode, 'external-links');
   assert.equal(Object.hasOwn(manifest, 'files'), false, 'Manifest retains downloadable files');
-  assert.equal(manifest.documents.length, 9);
-  assert.equal(data.documents.length, 9);
+  assert.equal(manifest.documents.length, Object.keys(DOCUMENT_LINKS).length);
+  assert.equal(data.documents.length, Object.keys(DOCUMENT_LINKS).length);
   assert.deepEqual(data.documents.map(document => document.id).sort(), Object.keys(DOCUMENT_LINKS).sort());
   const declared = [];
   for (const document of data.documents) {

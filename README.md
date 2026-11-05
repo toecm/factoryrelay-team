@@ -3,7 +3,8 @@
 The three-member PBL team's document library, Scrum board, project links,
 adjustable sprint roadmap and course-evidence dashboard. The planning baseline is
 **21 October 2026: 22 stories, 83 tasks and 8 baseline records**. The document
-library links to nine shared Google Drive files. Earlier proposals are labeled
+library links to ten shared Google Drive files, including the initial proposal
+and problem establishment presentation. Earlier proposals are labeled
 with their historical scope. The report and manual include a 21 October preview
 update and retain their original 13 October game documentation as an appendix.
 
@@ -84,7 +85,7 @@ can affect embedded viewing. A frame load event does not prove that its contents
 are accessible. Preview does not change sharing permissions or enable offline
 document viewing. The game's local LAN mode is a separate feature.
 
-Viewer URLs are derived from the nine allowlisted file IDs, using Drive's
+Viewer URLs are derived from the ten allowlisted file IDs, using Drive's
 `/file/d/ID/preview` viewer for uploaded files and the Slides `/preview` endpoint
 for the presentation. The page CSP permits frames only from `drive.google.com`
 and `docs.google.com`. Editing uses the original Google button.
@@ -540,7 +541,7 @@ npm run portal:verify
 ```
 
 `research/` remains ignored by Git and retains the original local research files.
-The prepare script reads the planning records and writes the nine explicit
+The prepare script reads the planning records and writes the ten explicit
 Google Drive links in `scripts/prepare-team-portal.mjs`. Verification compares
 each link, label and provider with `data/documents-manifest.json` (schema 2,
 `external-links`). It does not fetch document contents or change Drive sharing.

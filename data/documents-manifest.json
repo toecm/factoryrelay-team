@@ -36,6 +36,12 @@
       "provider": "Google Drive"
     },
     {
+      "id": "initial-proposal",
+      "href": "https://docs.google.com/document/d/1BkyUaLte4_pqU0rHvnWjapGhWb8iwpx8/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
+      "label": "Open in Google Docs",
+      "provider": "Google Docs"
+    },
+    {
       "id": "proposal",
       "href": "https://docs.google.com/document/d/1aJPB2wxe3SFyAleRqN7H5LlV0ds-lD6x/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true",
       "label": "Open in Google Docs",
