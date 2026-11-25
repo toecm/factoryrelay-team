@@ -592,3 +592,12 @@ results or machine-control capability to the game.
 The project owner has not yet selected a distribution license. This README does
 not grant a software or document license. Public visibility is not a substitute
 for an explicit license.
+
+## Start or continue research from a ticket
+
+Eligible study/practice stories and tasks include Start / continue links to the
+Factory Relay game. The links carry the work ID but do not create trials or
+complete Scrum work. Google/email researcher continuity is separate from the
+GitHub board editor; automatic local checkpoints work without cloud sign-in.
+Encrypted online continuity requires the owner setup described in the
+[continuity guide](https://github.com/toecm/factoryrelay/blob/main/CONTINUITY_SETUP.md).

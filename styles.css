@@ -687,3 +687,6 @@ a.resource-card { color: inherit; text-decoration: none; }
   .task-row > .btn { grid-column: 2; justify-self: start; margin: 0; }
   .board-controls > .muted { width: 100%; }
 }
+
+.task-row-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:220px}.task-row-actions .btn{white-space:normal;text-align:left}.dialog-actions .game-launch{white-space:normal}
+@media(max-width:479px){.task-row-actions{grid-column:2;max-width:100%}}

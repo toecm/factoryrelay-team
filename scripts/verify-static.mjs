@@ -17,7 +17,7 @@ const DOCUMENT_LINKS = Object.freeze({
   'user-manual': 'https://docs.google.com/document/d/1sQNovE9HbFqJwqayxxJbug-Owsx_9v51/edit?usp=sharing&ouid=110221377619081609877&rtpof=true&sd=true',
 });
 export const WEBSITE_FILES = Object.freeze([
-  '.nojekyll', 'README.md', 'index.html', 'app.js', 'styles.css', 'board-model.js', 'github-client.js', 'assets/logo.svg',
+  '.nojekyll', 'README.md', 'index.html', 'app.js', 'styles.css', 'board-model.js', 'github-client.js', 'game-launch.js', 'assets/logo.svg',
   'data/documents-manifest.json', 'data/portal-data.json', 'data/github-board.json',
 ]);
 
