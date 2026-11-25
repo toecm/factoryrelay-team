@@ -17,7 +17,7 @@ test('legacy and extended board contracts remain accepted during gradual deploym
   validateBoard(legacy(), stories);
   validateBoard(current(), stories);
   validateBoard({ enabled: false, syncedAt: null, repo: 'toecm/factoryrelay', items: [] }, stories);
-  assert.equal(WEBSITE_FILES.length, 11);
+  assert.equal(WEBSITE_FILES.length, 12);
   assert(WEBSITE_FILES.includes('board-model.js') && WEBSITE_FILES.includes('github-client.js'));
 });
 
