@@ -689,4 +689,5 @@ a.resource-card { color: inherit; text-decoration: none; }
 }
 
 .task-row-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:220px}.task-row-actions .btn{white-space:normal;text-align:left}.dialog-actions .game-launch{white-space:normal}
+.recent-updates{margin:24px 0}.recent-updates ul{padding-left:22px;margin:14px 0 22px}.recent-updates li{margin:10px 0;line-height:1.65;overflow-wrap:anywhere}.recent-updates h3{margin-top:24px}.recent-update-links{display:flex;flex-wrap:wrap;gap:10px}.recent-update-links .btn{white-space:normal}.recent-updates .section-head{flex-wrap:wrap;gap:12px}
 @media(max-width:479px){.task-row-actions{grid-column:2;max-width:100%}}
