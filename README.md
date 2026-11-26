@@ -601,3 +601,13 @@ complete Scrum work. Google/email researcher continuity is separate from the
 GitHub board editor; automatic local checkpoints work without cloud sign-in.
 Encrypted online continuity requires the owner setup described in the
 [continuity guide](https://github.com/toecm/factoryrelay/blob/main/CONTINUITY_SETUP.md).
+
+## Backlog refresh — 26 November 2026
+
+The existing 22 stories and 83 task IDs now reflect individual-English
+personalization, frozen evaluation, phones/PWA use and optional private
+continuity. Implemented increments await team Review; live cloud setup is
+blocked on the owner prerequisite. Weight training, adapters, physical machine
+control and invention review are deferred. Assignments, reviewers, native
+milestones and checked tasks are retained.
+See the [refresh record](https://github.com/toecm/factoryrelay/blob/main/BACKLOG_REFRESH.md).

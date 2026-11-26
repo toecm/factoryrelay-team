@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-11-26T02:20:07.929Z",
+  "syncedAt": "2026-11-26T02:20:02.094Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -567,25 +567,25 @@
         "ENG7-T3": false
       },
       "version": "3aeefe250ef3cffffa0784b511414608dcaf105ed173206f9db0bff159a51356",
-      "sprint": "S4",
+      "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
         "ENG7-T1": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S4",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG7-T2": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S4",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG7-T3": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S4",
+          "sprint": "Unscheduled",
           "reviewer": null
         }
       }
@@ -604,25 +604,25 @@
         "ENG8-T3": false
       },
       "version": "39ec8fa5a16eef9d6a32e9c5dc859d5563594b2556e6a6f641d6ebcc0f599891",
-      "sprint": "S5",
+      "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
         "ENG8-T1": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S5",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG8-T2": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S5",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG8-T3": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S5",
+          "sprint": "Unscheduled",
           "reviewer": null
         }
       }
@@ -882,25 +882,25 @@
         "R11-T3": false
       },
       "version": "b7bd3eba6011c151b4ac45d963cf3f941573c55215d9611e17836f882780f71b",
-      "sprint": "S2",
+      "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
         "R11-T1": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S2",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "R11-T2": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S2",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "R11-T3": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "S2",
+          "sprint": "Unscheduled",
           "reviewer": null
         }
       }
@@ -956,25 +956,25 @@
         "ENG12-T3": false
       },
       "version": "eee89c19c6aa3c7c4fa274056429286f8db507453f914e9a5f18691cbb9791c2",
-      "sprint": "Stretch",
+      "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
         "ENG12-T1": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "Stretch",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG12-T2": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "Stretch",
+          "sprint": "Unscheduled",
           "reviewer": null
         },
         "ENG12-T3": {
           "status": "Deferred",
           "assignees": [],
-          "sprint": "Stretch",
+          "sprint": "Unscheduled",
           "reviewer": null
         }
       }
