@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-10-29T04:47:02.863Z",
+  "syncedAt": "2026-11-26T02:20:07.929Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -67,7 +67,7 @@
         "isongjosiah"
       ],
       "reviewer": "toecm",
-      "updatedAt": "2026-10-27T06:33:14Z",
+      "updatedAt": "2026-11-26T02:19:58Z",
       "taskStatus": {
         "R01-T1": false,
         "R01-T2": false,
@@ -75,12 +75,12 @@
         "R01-T4": false,
         "R01-T5": false
       },
-      "version": "3688d695254835ebe2311920be2c277575569ec3686b910494d5b93966a0691e",
+      "version": "0cc70b16b3f86490773f9c949554c9863b6c501d1fabdb0918cdcaf7f898fea9",
       "sprint": "S1",
       "milestoneNumber": 1,
       "tasks": {
         "R01-T1": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -88,7 +88,7 @@
           "reviewer": null
         },
         "R01-T2": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -96,7 +96,7 @@
           "reviewer": null
         },
         "R01-T3": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -104,7 +104,7 @@
           "reviewer": null
         },
         "R01-T4": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -112,7 +112,7 @@
           "reviewer": null
         },
         "R01-T5": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -130,18 +130,18 @@
         "toecm"
       ],
       "reviewer": null,
-      "updatedAt": "2026-10-28T07:42:06Z",
+      "updatedAt": "2026-11-26T02:19:56Z",
       "taskStatus": {
         "ENG1-T1": false,
         "ENG1-T2": false,
         "ENG1-T3": false
       },
-      "version": "02139de4ee2fb3bdcdb8b750e715aa874826512fa77cb302416b12f4312348a1",
+      "version": "96095c975bac92fa643c5870fddce60f03dc70933f9c34e6206721562155146c",
       "sprint": "S1",
       "milestoneNumber": 1,
       "tasks": {
         "ENG1-T1": {
-          "status": "In progress",
+          "status": "Review",
           "assignees": [
             "toecm"
           ],
@@ -149,7 +149,7 @@
           "reviewer": null
         },
         "ENG1-T2": {
-          "status": "In progress",
+          "status": "Review",
           "assignees": [
             "toecm"
           ],
@@ -157,7 +157,7 @@
           "reviewer": null
         },
         "ENG1-T3": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "toecm"
           ],
@@ -173,13 +173,13 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-28T11:06:06Z",
+      "updatedAt": "2026-11-26T02:19:54Z",
       "taskStatus": {
         "ENG2-T1": true,
         "ENG2-T2": false,
         "ENG2-T3": false
       },
-      "version": "ff1d2983e62cfd2185d13a95217ddedb8d299e51c9e6db69dc56e2a622e6ee55",
+      "version": "d0234d6eeebb25ff97b679e553fda94d6682392c3b00d07865ceae43917751f5",
       "sprint": "S1",
       "milestoneNumber": null,
       "tasks": {
@@ -196,7 +196,7 @@
           "reviewer": null
         },
         "ENG2-T3": {
-          "status": "Ready",
+          "status": "Backlog",
           "assignees": [],
           "sprint": "S1",
           "reviewer": null
@@ -212,7 +212,7 @@
         "isongjosiah"
       ],
       "reviewer": null,
-      "updatedAt": "2026-10-27T06:37:20Z",
+      "updatedAt": "2026-11-26T02:19:53Z",
       "taskStatus": {
         "R02-T1": false,
         "R02-T2": false,
@@ -220,12 +220,12 @@
         "R02-T4": false,
         "R02-T5": false
       },
-      "version": "37e0d0594ea5487ec484ccdbd8494d230f2fc22ffbd09fe9f7a9800653c7586e",
+      "version": "2a5e68a0726c20d8c7a870ec8eae2e4f16293aeb34c81f64116b942c919cfb6c",
       "sprint": "S2",
       "milestoneNumber": 2,
       "tasks": {
         "R02-T1": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -233,7 +233,7 @@
           "reviewer": null
         },
         "R02-T2": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -241,7 +241,7 @@
           "reviewer": null
         },
         "R02-T3": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -249,7 +249,7 @@
           "reviewer": null
         },
         "R02-T4": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -257,7 +257,7 @@
           "reviewer": null
         },
         "R02-T5": {
-          "status": "In progress",
+          "status": "Ready",
           "assignees": [
             "isongjosiah"
           ],
@@ -270,10 +270,10 @@
       "id": "R03",
       "number": 6,
       "url": "https://github.com/toecm/factoryrelay/issues/6",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:32Z",
+      "updatedAt": "2026-11-26T02:19:50Z",
       "taskStatus": {
         "R03-T1": false,
         "R03-T2": false,
@@ -281,30 +281,30 @@
         "R03-T4": false,
         "R03-T5": false
       },
-      "version": "860af0feeff55fa48693e4fccb03430d100e26e20beb1db4cb6c2386f79c9d19",
+      "version": "dda47e168d850de7d08487678880477f0736e4785c132d44b0d88fa25c7d5a0f",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "R03-T1": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R03-T2": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R03-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R03-T4": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
@@ -321,33 +321,33 @@
       "id": "ENG4",
       "number": 7,
       "url": "https://github.com/toecm/factoryrelay/issues/7",
-      "status": "Ready",
+      "status": "Review",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-27T06:38:00Z",
+      "updatedAt": "2026-11-26T02:19:48Z",
       "taskStatus": {
         "ENG4-T1": false,
         "ENG4-T2": false,
         "ENG4-T3": false
       },
-      "version": "9e5be4da3a0a18f4c9de60c1c4964c6d730458af1911e1f37dba304192f347a4",
+      "version": "84b1d22980de8d0a3ef6908fa3eabd4e8d7018a1aea1ad13c2fe6b344952d197",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "ENG4-T1": {
-          "status": "Ready",
+          "status": "Review",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T2": {
-          "status": "Ready",
+          "status": "Review",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T3": {
-          "status": "Ready",
+          "status": "Review",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
@@ -358,33 +358,33 @@
       "id": "ENG3",
       "number": 8,
       "url": "https://github.com/toecm/factoryrelay/issues/8",
-      "status": "Backlog",
+      "status": "Blocked",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:33Z",
+      "updatedAt": "2026-11-26T02:19:45Z",
       "taskStatus": {
         "ENG3-T1": false,
         "ENG3-T2": false,
         "ENG3-T3": false
       },
-      "version": "a18cca1382593bc6b05e0d78fe35769a0f04f71b032c5bad4fbf834cdba18008",
+      "version": "43f727291adcad125e68f45dc5d88ff817069a1169ca552e9add3be79ac14736",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "ENG3-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG3-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG3-T3": {
-          "status": "Backlog",
+          "status": "Blocked",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
@@ -395,10 +395,10 @@
       "id": "R04",
       "number": 9,
       "url": "https://github.com/toecm/factoryrelay/issues/9",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:34Z",
+      "updatedAt": "2026-11-26T02:19:43Z",
       "taskStatus": {
         "R04-T1": false,
         "R04-T2": false,
@@ -406,30 +406,30 @@
         "R04-T4": false,
         "R04-T5": false
       },
-      "version": "ebc48bc5b3ee1e9441ec31abd2975a65529ca7392a4c706e9ce341b6bc54ccf8",
+      "version": "66ad04348045771950327272ae87390d320e39964fcb1d82bbbd133a7ddedd98",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
         "R04-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "R04-T2": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "R04-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "R04-T4": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
@@ -446,33 +446,33 @@
       "id": "ENG5",
       "number": 10,
       "url": "https://github.com/toecm/factoryrelay/issues/10",
-      "status": "Backlog",
+      "status": "Review",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:34Z",
+      "updatedAt": "2026-11-26T02:19:41Z",
       "taskStatus": {
         "ENG5-T1": false,
         "ENG5-T2": false,
         "ENG5-T3": false
       },
-      "version": "03d9fa3249f449809986624af2fd80f1d7e71c70d5db0904c10f07fac0baa569",
+      "version": "900ee100bd3365e44300b09a676fba04d95d2c35724599e529b6777ac53fa4b1",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
         "ENG5-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "ENG5-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "ENG5-T3": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
@@ -483,33 +483,33 @@
       "id": "ENG9",
       "number": 11,
       "url": "https://github.com/toecm/factoryrelay/issues/11",
-      "status": "Backlog",
+      "status": "In progress",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:35Z",
+      "updatedAt": "2026-11-26T02:19:38Z",
       "taskStatus": {
         "ENG9-T1": false,
         "ENG9-T2": false,
         "ENG9-T3": false
       },
-      "version": "067326d0ade0e58ecae4584bf2bf7aa85576eac08354053ffc1ede9b605d6bfc",
+      "version": "9f5dfa061a5e038bd9de696df869f44d974dcb03c15a8ebf1cbfc4cc3797f199",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
         "ENG9-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "ENG9-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
         },
         "ENG9-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S3",
           "reviewer": null
@@ -520,33 +520,33 @@
       "id": "ENG6",
       "number": 12,
       "url": "https://github.com/toecm/factoryrelay/issues/12",
-      "status": "Backlog",
+      "status": "Review",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:35Z",
+      "updatedAt": "2026-11-26T02:19:36Z",
       "taskStatus": {
         "ENG6-T1": false,
         "ENG6-T2": false,
         "ENG6-T3": false
       },
-      "version": "4ebd310635057e58445851bdc7d9efd1e518f99b4e1b6f09c432a0f0141236fd",
+      "version": "3390f1a5ef19aac3d3a70eb7b52096f9c4828daab33f65e3970ad91bad616957",
       "sprint": "S4",
       "milestoneNumber": null,
       "tasks": {
         "ENG6-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
         },
         "ENG6-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
         },
         "ENG6-T3": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
@@ -557,33 +557,33 @@
       "id": "ENG7",
       "number": 13,
       "url": "https://github.com/toecm/factoryrelay/issues/13",
-      "status": "Backlog",
+      "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:36Z",
+      "updatedAt": "2026-11-26T02:19:34Z",
       "taskStatus": {
         "ENG7-T1": false,
         "ENG7-T2": false,
         "ENG7-T3": false
       },
-      "version": "d402cbb87d345ea0db97a29b8d047471d26bd69905bb6d5a84be368b9d6c5e84",
+      "version": "3aeefe250ef3cffffa0784b511414608dcaf105ed173206f9db0bff159a51356",
       "sprint": "S4",
       "milestoneNumber": null,
       "tasks": {
         "ENG7-T1": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
         },
         "ENG7-T2": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
         },
         "ENG7-T3": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S4",
           "reviewer": null
@@ -594,33 +594,33 @@
       "id": "ENG8",
       "number": 14,
       "url": "https://github.com/toecm/factoryrelay/issues/14",
-      "status": "Backlog",
+      "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:37Z",
+      "updatedAt": "2026-11-26T02:19:32Z",
       "taskStatus": {
         "ENG8-T1": false,
         "ENG8-T2": false,
         "ENG8-T3": false
       },
-      "version": "b2936ffd201aabef49630c91bc470ce741fea6d8c23f56f38521f90b642b8ab7",
+      "version": "39ec8fa5a16eef9d6a32e9c5dc859d5563594b2556e6a6f641d6ebcc0f599891",
       "sprint": "S5",
       "milestoneNumber": null,
       "tasks": {
         "ENG8-T1": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "ENG8-T2": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "ENG8-T3": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
@@ -631,10 +631,10 @@
       "id": "R06",
       "number": 15,
       "url": "https://github.com/toecm/factoryrelay/issues/15",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:37Z",
+      "updatedAt": "2026-11-26T02:19:29Z",
       "taskStatus": {
         "R06-T1": false,
         "R06-T2": false,
@@ -642,24 +642,24 @@
         "R06-T4": false,
         "R06-T5": false
       },
-      "version": "3f55a15d97d65c28dd4147d8ba91bdaa0af8ad36860fbb91b747162467902675",
+      "version": "bd3e9d3bdc1ef7c5b60b3c9a4213c1188195a45422123884226b002d71e6aafa",
       "sprint": "S5",
       "milestoneNumber": null,
       "tasks": {
         "R06-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "R06-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "R06-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
@@ -682,10 +682,10 @@
       "id": "R08",
       "number": 16,
       "url": "https://github.com/toecm/factoryrelay/issues/16",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:38Z",
+      "updatedAt": "2026-11-26T02:19:27Z",
       "taskStatus": {
         "R08-T1": false,
         "R08-T2": false,
@@ -693,24 +693,24 @@
         "R08-T4": false,
         "R08-T5": false
       },
-      "version": "9f8fcd5e53c2f2f63934278b69786e9d37207d3db98b6d7689c9636151def2bc",
+      "version": "3694f0f87e13ad3f5dd172539a6e05a7302647754821edf6b3df5acd8cfe1d28",
       "sprint": "S5",
       "milestoneNumber": null,
       "tasks": {
         "R08-T1": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "R08-T2": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
         },
         "R08-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S5",
           "reviewer": null
@@ -736,7 +736,7 @@
       "status": "Backlog",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:38Z",
+      "updatedAt": "2026-11-26T02:19:25Z",
       "taskStatus": {
         "R09-T1": false,
         "R09-T2": false,
@@ -744,7 +744,7 @@
         "R09-T4": false,
         "R09-T5": false
       },
-      "version": "e797aedbe193be094551c0064e50236ab6756c1971ae032d466d386bf643a831",
+      "version": "1357b3e1935d6a6669e3de8bcd52c3224788b3744a2e9784af25903437ff1cbd",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
@@ -784,21 +784,21 @@
       "id": "ENG10",
       "number": 18,
       "url": "https://github.com/toecm/factoryrelay/issues/18",
-      "status": "Backlog",
+      "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:39Z",
+      "updatedAt": "2026-11-26T02:19:23Z",
       "taskStatus": {
         "ENG10-T1": false,
         "ENG10-T2": false,
         "ENG10-T3": false
       },
-      "version": "9cc9d64f77ec21d5f2422ad34644d4a584616518f25c1113d00252643332cbc5",
+      "version": "cb7ec025d6cf4df72beb9b527e8561de3d4948bf9c1d2d330b61f0cf505110ff",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
         "ENG10-T1": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "S6",
           "reviewer": null
@@ -824,7 +824,7 @@
       "status": "Backlog",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:40Z",
+      "updatedAt": "2026-11-26T02:19:21Z",
       "taskStatus": {
         "R10-T1": false,
         "R10-T2": false,
@@ -832,7 +832,7 @@
         "R10-T4": false,
         "R10-T5": false
       },
-      "version": "56bdd92e25b942b54147b3afcce067c0e4bfc6836730481c0f6326ebeba518ce",
+      "version": "5c7838a87223a477a4ed920b836a479e3ad8122b92a56f15f26e29ba6fcba13d",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
@@ -872,33 +872,33 @@
       "id": "R11",
       "number": 20,
       "url": "https://github.com/toecm/factoryrelay/issues/20",
-      "status": "Backlog",
+      "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:40Z",
+      "updatedAt": "2026-11-26T02:19:19Z",
       "taskStatus": {
         "R11-T1": false,
         "R11-T2": false,
         "R11-T3": false
       },
-      "version": "e3aac1e56137e2fb6284735760a4d3ae388e084e31dbd901df4df4e8300743db",
+      "version": "b7bd3eba6011c151b4ac45d963cf3f941573c55215d9611e17836f882780f71b",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
         "R11-T1": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R11-T2": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
         },
         "R11-T3": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "S2",
           "reviewer": null
@@ -909,33 +909,33 @@
       "id": "ENG11",
       "number": 21,
       "url": "https://github.com/toecm/factoryrelay/issues/21",
-      "status": "Backlog",
+      "status": "In progress",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:41Z",
+      "updatedAt": "2026-11-26T02:19:17Z",
       "taskStatus": {
         "ENG11-T1": false,
         "ENG11-T2": false,
         "ENG11-T3": false
       },
-      "version": "739e4607fbcbbe3eecaec3d7530fd2d725c7852ef87d42a133a8e0df3162f794",
+      "version": "5b96784e90b44956155ed309c30783fba68271bfef6f6c8fe0aca9414fe68af6",
       "sprint": "Stretch",
       "milestoneNumber": null,
       "tasks": {
         "ENG11-T1": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
         },
         "ENG11-T2": {
-          "status": "Backlog",
+          "status": "Review",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
         },
         "ENG11-T3": {
-          "status": "Backlog",
+          "status": "Ready",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
@@ -946,33 +946,33 @@
       "id": "ENG12",
       "number": 22,
       "url": "https://github.com/toecm/factoryrelay/issues/22",
-      "status": "Backlog",
+      "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-10-21T06:32:41Z",
+      "updatedAt": "2026-11-26T02:19:14Z",
       "taskStatus": {
         "ENG12-T1": false,
         "ENG12-T2": false,
         "ENG12-T3": false
       },
-      "version": "5b478d011b26777d733fbbf9295997b5c7f4e558ce72be371f8a75a762811198",
+      "version": "eee89c19c6aa3c7c4fa274056429286f8db507453f914e9a5f18691cbb9791c2",
       "sprint": "Stretch",
       "milestoneNumber": null,
       "tasks": {
         "ENG12-T1": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
         },
         "ENG12-T2": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
         },
         "ENG12-T3": {
-          "status": "Backlog",
+          "status": "Deferred",
           "assignees": [],
           "sprint": "Stretch",
           "reviewer": null
