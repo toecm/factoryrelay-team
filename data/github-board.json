@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-11-26T02:20:02.094Z",
+  "syncedAt": "2026-11-26T02:31:56.653Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -322,33 +322,41 @@
       "number": 7,
       "url": "https://github.com/toecm/factoryrelay/issues/7",
       "status": "Review",
-      "assignees": [],
+      "assignees": [
+        "toecm"
+      ],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:48Z",
+      "updatedAt": "2026-11-26T02:31:46Z",
       "taskStatus": {
         "ENG4-T1": false,
         "ENG4-T2": false,
         "ENG4-T3": false
       },
-      "version": "84b1d22980de8d0a3ef6908fa3eabd4e8d7018a1aea1ad13c2fe6b344952d197",
+      "version": "7491913be5f36a6adaea71f93e258a4350f1dd706056afa54ba6401188f78f58",
       "sprint": "S2",
-      "milestoneNumber": null,
+      "milestoneNumber": 2,
       "tasks": {
         "ENG4-T1": {
           "status": "Review",
-          "assignees": [],
+          "assignees": [
+            "toecm"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T2": {
           "status": "Review",
-          "assignees": [],
+          "assignees": [
+            "toecm"
+          ],
           "sprint": "S2",
           "reviewer": null
         },
         "ENG4-T3": {
           "status": "Review",
-          "assignees": [],
+          "assignees": [
+            "toecm"
+          ],
           "sprint": "S2",
           "reviewer": null
         }
@@ -998,7 +1006,7 @@
       "title": "Translation preview and study design",
       "endDate": null,
       "number": 2,
-      "version": "92bf11b50614a1063014a3a73a50fd508bfe4ca0cf4e2880e33bdb7a646d3660",
+      "version": "2191e7b0cb98e17749f40aa979bec5dd55ca414a1bf5cc7fb1124f8560980f51",
       "state": "open"
     }
   ]
