@@ -81,7 +81,7 @@ function recentUpdates(compact=false) {
     ['Simple participation','Six prepared scenarios with an illustration, one text box and messages with Reply buttons. No operator/private brief, study selector or model download is required on the main page.'],
     ['Three researchers','Any teammate can describe a scenario or reply asynchronously. Shared records are implemented; actual three-account delivery awaits workshop.sql/team activation.'],
     ['Separate evaluation','Settings > Research evaluation records independent without-AI, with-AI and exact-output sender-corrected responses. These are ordered repeated-exposure stages, not an independent randomized ablation.'],
-    ['Individual memory','Only the same sender?s earlier approved practice examples can enter a frozen interpretation context. Current/evaluation meanings are excluded. Retrieval changes context, not model weights.'],
+    ['Individual memory','Only the same earlier sender-approved approved practice examples can enter a frozen interpretation context. Current/evaluation meanings are excluded. Retrieval changes context, not model weights.'],
     ['PWA updater fixed','Installed apps check on launch, reconnect/resume and while visible. Update app appears on the main screen, saves a checkpoint before reload and preserves model storage. A recovery link bypasses older stuck caches.'],
     ['Private continuity','Google owner sign-in is configured. Your encrypted drafts/checkpoints are separate from submitted team records; actual device switching still needs team acceptance.'],
     ['Engineering evidence','136 core checks, real PostgreSQL policies, three-browser flows and PWA upgrade/offline tests pass. Live recovery and offline draft retention were verified. These are not human effectiveness results.'],
@@ -89,12 +89,12 @@ function recentUpdates(compact=false) {
   ];
   const bullets=items=>`<ul>${items.map(([title,text])=>`<li><strong>${esc(title)}:</strong> ${esc(text)}</li>`).join('')}</ul>`;
   const preview=[available[0],available[1],available[4],available[7]];
-  return `<section class="panel recent-updates" aria-labelledby="recent-updates-title" data-testid="recent-updates"><div class="section-head"><div><span class="eyebrow">TEAM BRIEFING ? <time datetime="2026-11-27">27 NOVEMBER 2026</time></span><h2 id="recent-updates-title">Recent upgrades and changes</h2></div>${tag('Engineering progress','teal')}</div>
+  return `<section class="panel recent-updates" aria-labelledby="recent-updates-title" data-testid="recent-updates"><div class="section-head"><div><span class="eyebrow">TEAM BRIEFING - <time datetime="2026-11-27">27 NOVEMBER 2026</time></span><h2 id="recent-updates-title">Recent upgrades and changes</h2></div>${tag('Engineering progress','teal')}</div>
     ${compact?bullets(preview)+`<p class="muted">Next: activate shared replies, accept the installed app on actual devices, and review the scenarios/protocol.</p><a class="text-link" href="#status">Read the full update and next steps ${icon('arrow')}</a>`:
     `<h3>Implemented and verified in software</h3>${bullets(available)}
     <h3>Remaining setup and research gates</h3>${bullets([
       ['Shared-team activation','Run the additive workshop.sql in the existing Supabase project. One person creates the team and the other two join. Existing Google configuration does not need recreating.'],
-      ['Actual device acceptance','Check the installed PWA, recovery/update notice, offline retention, team delivery and private resume on the researchers? real phones/computers. Browser-sized fixtures are not physical-device acceptance.'],
+      ['Actual device acceptance','Check the installed PWA, recovery/update notice, offline retention, team delivery and private resume on the actual researcher phones/computers. Browser-sized fixtures are not physical-device acceptance.'],
       ['Reviewed study','Approve the six descriptions/illustrations, feasible workload, consent and human meaning rubric, then run a short three-person pilot before the agreed held-out set. Earlier paired 18-variant plans are not mandatory current workload.'],
       ['Deferred or optional','Weight training, adapter promotion, physical machine control and invention review remain later-phase work. Voice stays outside the typed main flow and need not block that pilot.'],
       ['Documents','The portal, canonical local plan exports and GitHub stories are refreshed. Linked Google Drive files retain their contents until separately reviewed; an old proposal is not current implementation evidence.'],
