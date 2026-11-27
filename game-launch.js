@@ -2,7 +2,7 @@ const activities={ENG1:'development',ENG2:'practice',ENG3:'development',ENG4:'pr
 export function gameLaunchFor(id) {
   if(typeof id!=='string'||!/^(ENG\d+|R\d+)(-T\d+)?$/.test(id))return null;
   const story=id.split('-T')[0],activity=activities[story];if(!activity)return null;
-  const url=new URL('https://factoryrelay.vercel.app/');url.searchParams.set('work',id);url.searchParams.set('activity',activity);if(activity!=='practice')url.hash='inbox';
+  const url=new URL('https://factoryrelay.vercel.app/');url.searchParams.set('work',id);url.searchParams.set('activity',activity);
   return {url:url.href,activity,label:activity==='practice'?'Start / continue practice':'Start / continue study',story,id};
 }
 export function launchContext(search) {

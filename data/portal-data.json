@@ -862,7 +862,7 @@
         "Have another team member reproduce summaries and resolve discrepancies."
       ],
       "deliverable": "Reproducible analysis, participant-specific figures/tables, error cases and limitations.",
-      "risk": "Do not treat 18 scenarios as 18 participants or generalize to Nigerian/Pakistani English populations.",
+      "risk": "Do not treat scenario counts as participant counts or generalize individual findings to dialect populations.",
       "order": 17,
       "sprint": "S6",
       "status": "Backlog",
