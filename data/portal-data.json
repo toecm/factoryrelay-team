@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "project": "Factory Relay",
-  "asOf": "2026-11-26",
+  "asOf": "2026-11-27",
   "snapshot": {
-    "title": "26 November 2026 individual-personalization backlog refresh",
-    "sourceRevision": "aab8859",
-    "applicationRevision": "aab8859",
-    "note": "Current planning scope: two individual English-speaking researchers; six development handovers, 18 evaluation variants, optional reviewed voice, phones/computers and local-first continuity. Stable story/task IDs retain GitHub history. Engineering implementation and human acceptance are tracked separately.",
+    "title": "27 November 2026 simple handover and PWA status refresh",
+    "sourceRevision": "017149f",
+    "applicationRevision": "017149f",
+    "note": "Three individual researchers; six illustrated scenarios; simple typed descriptions and replies. Account/team tools and optional staged assessment are off the main screen. Preserve stable task IDs and actual acceptance history.",
     "forecastNote": "Sprint forecasts are reorderable planning aids, not new calendar commitments. Native GitHub milestones, their dates and existing assignments are preserved. Members self-select work against a single Sprint Goal. Deferred weight training, adapter activation, hardware and invention review are outside the current core study.",
-    "documentNote": "Preview selected course documents here or open them in Google Drive. Access follows each file's Google sharing settings. Earlier proposals are dated; the updated report and manual retain historical game appendices. Document files are not bundled with this website."
+    "documentNote": "Google Drive links and previews retain each file's sharing rules and contents. The portal/current board and local CSV/workbook exports are refreshed separately; compare older proposals with the dated Current status before using them as implementation evidence."
   },
   "summary": {
     "stories": 22,
@@ -18,8 +18,32 @@
     "proposedSprints": 6,
     "readyStories": 6
   },
-  "productGoal": "Evaluate whether a frozen profile of an individual sender's approved examples helps the receiver interpret new smart-factory support handovers and choose the correct next action, compared with no AI and the same base AI. Preserve natural originals and separate later human clarification; support phones/computers with local-first checkpoints and optional encrypted continuity after owner setup.",
+  "productGoal": "Study how three individual English-speaking researchers describe and understand smart-factory shift handovers through a simple scenario, explanation and reply flow. Keep optional without-AI, with-AI and exact-output sender-corrected assessment separate; treat it as ordered repeated exposure. Preserve natural originals, private drafts and explicit shared-team boundaries; support reliable PWA updates and offline continuity.",
   "resources": [
+    {
+      "id": "workshop-guide",
+      "title": "Current workflow and three-member setup",
+      "url": "https://github.com/toecm/factoryrelay/blob/main/WORKSHOP_GUIDE.md",
+      "kind": "Guide",
+      "visibility": "Private",
+      "note": "Simple participation, separate research evaluation, shared versus private data and the additive SQL setup."
+    },
+    {
+      "id": "pwa-recovery",
+      "title": "Refresh an older installed Factory Relay app",
+      "url": "https://factoryrelay.vercel.app/?update=latest",
+      "kind": "Recovery",
+      "visibility": "Public",
+      "note": "One-time cache-bypassing recovery in the same browser/profile. Preserve drafts and model files; reopen the installed app afterward."
+    },
+    {
+      "id": "current-evidence",
+      "title": "Current status and next team actions",
+      "url": "https://github.com/toecm/factoryrelay/blob/main/CURRENT_STATUS.md",
+      "kind": "Guide",
+      "visibility": "Private",
+      "note": "Released build evidence, actual pending gates and immediate self-selected work."
+    },
     {
       "id": "portal",
       "title": "Team website repository",
@@ -34,7 +58,7 @@
       "url": "https://factoryrelay.vercel.app/",
       "kind": "Game",
       "visibility": "Public",
-      "note": "Published individual-personalization simulator and installable PWA. Local automatic checkpoints work; Google/email cloud continuity awaits owner configuration."
+      "note": "Simple scenario/illustration, typed explanation and messages. Google sign-in is configured; real three-account sharing needs the additive workshop SQL and team acceptance. PWA updater fix is published."
     },
     {
       "id": "github",
@@ -82,7 +106,7 @@
       "url": "https://github.com/toecm/factoryrelay/blob/main/FACTORY_LAN.md",
       "kind": "Guide",
       "visibility": "Private",
-      "note": "Optional live LAN rooms need a prepared trusted-HTTPS host and shared network; asynchronous study uses explicit file exchange."
+      "note": "Optional earlier LAN exercises need a host and shared network. The current simple app uses authenticated team records after workshop.sql activation; offline submissions wait locally."
     },
     {
       "id": "deployment-guide",
@@ -103,62 +127,61 @@
     },
     {
       "id": "BASE02",
-      "item": "Simulator and individual-personalization workflow",
-      "status": "Implemented and checked",
-      "evidence": "Published short/full handover and asynchronous individual study: six development cases, 18 evaluation variants, no-AI/base/personalized conditions, private reference sealing, locked responses, frozen approved sender memory and JSON/CSV export.",
-      "limit": "Engineering checks do not establish scenario realism, interpretation quality or participant benefit. Team review and physical/user evaluation remain pending."
+      "item": "Simple scenario, explanation and reply screen",
+      "status": "Implemented; team acceptance pending",
+      "evidence": "Source 5ab49ad: six illustrated scenario families, a natural-language composer, three-member reply schema and separate optional research evaluation page. Typed main participation requires no model download or private operator brief.",
+      "limit": "Three-browser fixtures and layouts pass; natural-user usability, industrial realism and participant benefit remain unmeasured."
     },
     {
       "id": "BASE03",
-      "item": "Offline PWA and optional live local-network rooms",
-      "status": "Implemented; physical acceptance pending",
-      "evidence": "Installable PWA, explicit optional model cache, task-linked offline reopening, real local model initialization tests and existing LAN room guards.",
-      "limit": "Local Chromium/automated evidence is distinct from physical phone/computer acceptance. Live rooms still need the LAN host; offline self-checkpoints are not automatic partner delivery."
+      "item": "Offline installation and reliable PWA updates",
+      "status": "Implemented and live-verified",
+      "evidence": "Source 017149f: fresh online navigation, automatic update checks, visible Update app notice, checkpoint-before-reload and legacy recovery URL. Upgrade, offline reopening and actual cached model initialization were checked.",
+      "limit": "Desktop Chromium checks do not establish every physical phone/OS installation. The team must verify its actual installed app and same browser/profile."
     },
     {
       "id": "BASE04",
-      "item": "Independent GitHub source and CI",
-      "status": "Published; private",
-      "evidence": "https://github.com/toecm/factoryrelay ; standalone source, tests, guides and passing GitHub checks.",
-      "limit": "One teammate invitation was reported completed. Acceptance and all three members' access/environment setup remain unverified (ENG0)."
+      "item": "GitHub source, Scrum and CI",
+      "status": "Published; private source",
+      "evidence": "Private source and GitHub checks are published. ENG0 is closed with four checked tasks; existing assignments/reviewers/milestones are retained.",
+      "limit": "Closed/checkmarked work is preserved as team-reported completion; this does not assert independent acceptance of later increments."
     },
     {
       "id": "BASE05",
-      "item": "Hugging Face Static Space",
-      "status": "Published; private",
-      "evidence": "https://huggingface.co/spaces/toecm/FactoryRelay ; runtime RUNNING and deployed assets verified on 21 October.",
-      "limit": "Personal-account private Space access is separate from GitHub access. Owner handles Space publication; no model runtime or internet room server is hosted."
+      "item": "Hugging Face static app",
+      "status": "Published; private Space",
+      "evidence": "Static copy updated with the simple screen and PWA updater; optional model/runtime assets are served for browser-local inference.",
+      "limit": "The Space has no Google/team backend endpoint. Use the Vercel origin for shared accounts/messages; browser storage is separate across origins."
     },
     {
       "id": "BASE06",
-      "item": "Companion scenario dataset",
-      "status": "Published; public",
-      "evidence": "https://huggingface.co/datasets/toecm/factoryrelay ; six authored fictional English scenarios with schema, manifest and verified file hashes.",
-      "limit": "Contains answer keys and both roles' facts. Not a dialect corpus, participant dataset or independent benchmark; no automatic conversation upload."
+      "item": "Fictional scenario dataset",
+      "status": "Published; public; unchanged",
+      "evidence": "Existing public dataset remains six authored fictional records. Publication checks preserved its revision; no participant conversation was added.",
+      "limit": "It is not a participant or dialect corpus, independent benchmark or proof that every current workshop description has received industrial review."
     },
     {
       "id": "BASE07",
-      "item": "Vercel game and private researcher continuity",
-      "status": "Live; public",
-      "evidence": "Published local checkpoint/recovery, private backups, encrypted account-checkpoint implementation, SQL access/version/lease tests and ticket-linked entry.",
-      "limit": "On 26 November the production config reports configured=false. Google/email sign-in and actual cross-device cloud handoff require owner setup and physical verification."
+      "item": "Google continuity and three-account sharing",
+      "status": "Sign-in configured; team activation pending",
+      "evidence": "Owner Google sign-in succeeded. Private encrypted checkpoint/device-lease and three-member shared-record code, SQL and browser fixtures are implemented.",
+      "limit": "Do not repeat the obsolete configured=false claim. Installing workshop.sql and proving live delivery with three real accounts, plus physical cross-device resume, still require team evidence."
     },
     {
       "id": "BASE08",
-      "item": "Research files and team portal",
-      "status": "Organized locally",
-      "evidence": "Dedicated FactoryRelay research folder and public portal with Google Drive documents, native GitHub-backed tasks/reviewers/sprints and eligible story/task game links.",
-      "limit": "This refreshed backlog does not rewrite historical Drive documents or imply human acceptance. Keep private references, participant files and credentials out of public repositories."
+      "item": "Team portal and research planning",
+      "status": "Updated for current scope",
+      "evidence": "Current status, stable story/task definitions, course criteria and priority gates reflect the simple three-person workflow and separate staged evaluation.",
+      "limit": "Linked Google Drive documents are not silently rewritten by this refresh; earlier two-person, 18-variant and training-heavy proposals are historical until reviewed."
     }
   ],
   "remainingCapabilities": [
-    "R01/R02: verified literature and a qualified contribution statement",
-    "R03/R04: reviewed protocol, coding rubric and scenario validation",
-    "ENG2/ENG11: actual phone/computer and input-modality acceptance",
-    "ENG3: owner cloud setup and real authenticated continuity verification",
-    "ENG9: independent analysis/schema summary validation",
-    "R08: two-person development pilot and go/no-go review",
-    "R06/R09/R10: frozen evaluation, individual analysis and course/paper artifacts"
+    "ENG3-T3: install the additive workshop SQL, join the three accounts and verify real team replies/device continuity.",
+    "ENG2-T2 / ENG4: accept the simple UI, installed-PWA recovery/update and offline retention on actual devices.",
+    "R01 / R02: verify the literature and bound the individual-personalization contribution.",
+    "R03 / R04: approve the staged protocol, coding rubric and six scenario/illustration families.",
+    "ENG9 / R08: validate analysis inputs and complete a feasible three-person asynchronous pilot.",
+    "R06 / R09 / R10: collect the agreed held-out set, analyse individual outcomes and prepare course/paper artifacts."
   ],
   "stories": [
     {
@@ -173,7 +196,7 @@
       "type": "User story",
       "points": 3,
       "dependencies": [],
-      "gate": "One GitHub invitation was reported completed; invitation acceptance and all three local environments still need evidence.",
+      "gate": "Closed by the team with four checked tasks. Preserve the recorded completion; independently accepting later increments is separate work.",
       "acceptance": [
         "Each member confirms access to toecm/factoryrelay through their own GitHub account and records a successful clone/install/test/build on their computer.",
         "Use FactoryRelay as the project root. Confirm the research folder is local-only and agree an approved sharing location for course documents without participant data or credentials.",
@@ -191,7 +214,7 @@
       "order": 1,
       "sprint": "S1",
       "status": "Done",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "",
       "taskIds": [
@@ -203,8 +226,8 @@
     },
     {
       "id": "R01",
-      "title": "Review literature on handover, individual personalization and offline communication",
-      "story": "As a researcher, I want a traceable primary-source literature matrix so the smart-factory problem and individual-personalization hypothesis have a defensible academic basis.",
+      "title": "Verify literature for industrial handover and individual communication repair",
+      "story": "As a researcher, I want a traceable primary-source review so the factory handover problem, individual personalization and staged evaluation have a defensible basis.",
       "priority": "Core",
       "criteria": [
         "Literature"
@@ -214,24 +237,24 @@
       "dependencies": [],
       "gate": "Continue current assigned literature work; self-select tasks and obtain a different reviewer.",
       "acceptance": [
-        "Cover manufacturing/industrial-support handover, communication repair, individual example-based personalization and local/offline deployment; distinguish evidence in each domain.",
-        "Record queries, inclusion/exclusion decisions, citations and page/section evidence. Do not treat AI search summaries as verified sources.",
-        "Compare operational-meaning measures and participant/device designs; do not transfer group-dialect or ASR results to this two-person study without qualification."
+        "Use primary evidence for handover relevance and consequences; do not invent a monetary loss estimate for this simulator.",
+        "Distinguish individual personalization from demographic dialect classification, and typed comprehension from ASR/WER.",
+        "Record source locations and applicability; synthetic engineering checks are not human-effectiveness studies."
       ],
       "tasks": [
-        "Agree query families for industrial handover, individual personalization, clarification and offline deployment.",
-        "Retrieve primary papers and source records, deduplicate them, and save a reproducible search log.",
-        "Screen candidate sources and record exclusions and applicability to the current study.",
-        "Extract methods, datasets, participants, operational outcomes and limitations into the matrix.",
-        "Have another member verify a sample of claims and citations, then resolve discrepancies."
+        "Agree query families for industrial shift handover, individual language personalization, clarification and offline/PWA continuity.",
+        "Retrieve primary studies and record reproducible searches, citations and duplicates; separate AI search suggestions from verified sources.",
+        "Screen sources and record exclusions, manufacturing relevance and differences from the current three-person typed task.",
+        "Extract actual participants, data, mechanisms, semantic/operational outcomes and limits into a traceable comparison matrix.",
+        "Have another member verify a sample of claims and citations and resolve disagreements."
       ],
-      "deliverable": "Verified literature matrix, search/exclusion log and a short synthesis linked to the current research question.",
-      "risk": "Synthetic examples and generic collaboration studies do not establish benefits in a real factory.",
+      "deliverable": "Reviewed literature matrix and search/exclusion log.",
+      "risk": "Findings from group-dialect, ASR or real-machine studies may not transfer to this small typed-message workshop.",
       "order": 2,
       "sprint": "S1",
       "status": "In progress",
       "owner": "isongjosiah",
-      "reviewer": "",
+      "reviewer": "toecm",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
         "R01-T1",
@@ -243,8 +266,8 @@
     },
     {
       "id": "ENG1",
-      "title": "Confirm individual-English scope and the supported local runtime",
-      "story": "As a researcher, I want a documented individual-English scope and measured runtime capability so computers and phones use a comparable, explicit assistance configuration.",
+      "title": "Confirm individual-English scope and local AI feasibility",
+      "story": "As a researcher, I want the model and device limits recorded without requiring AI or a dialect label just to describe a scenario.",
       "priority": "Core",
       "criteria": [
         "Literature",
@@ -256,17 +279,18 @@
       "dependencies": [],
       "gate": "Use INDIVIDUAL_STUDY.md, PWA.md and the current build as implementation evidence; physical devices still need measurement.",
       "acceptance": [
-        "Scope is two individual researchers exchanging English operational messages. No dialect classification, Korean translation or population-level dialect claim is required.",
-        "Document Qwen3-0.6B ONNX q8 for controlled interpretation and optional Whisper tiny.en q8 for reviewed voice input, including pinned revisions/licenses and no silent cloud/model substitution.",
-        "Distinguish automated browser/CPU smoke evidence from physical-device acceptance. A phone may be unsupported for assistance; record the gate/deviation rather than changing its assigned condition."
+        "Main participation needs only typed text and does not require a model download.",
+        "Document Qwen3-0.6B ONNX q8 and its pinned revision; the desktop smoke test is execution evidence, not meaning-quality evidence.",
+        "Record that one real interpretation took about 61 seconds; do not promise real-time or universal phone support.",
+        "Any optional reviewed voice remains on the research page and outside the basic typed pilot unless separately approved."
       ],
       "tasks": [
-        "Review the documented individual-English scope and pinned model/runtime decision against the implemented study.",
-        "Review local interpretation/transcription engineering traces and repeat a small synthetic feasibility check.",
-        "Record actual researcher device/browser capabilities, preparation time and inference failures; agree supported study configurations."
+        "Review the three-individual English scope and the current simple-main/separate-evaluation model decision.",
+        "Review the real pinned Qwen runtime trace and repeat a small authored feasibility check; record speed, unsupported details and failures.",
+        "Record the actual researchers' device/browser, memory, download and inference limits; decide which configurations can run optional AI."
       ],
-      "deliverable": "Reviewed model/scope decision, device capability matrix and reproducible development-only runtime traces.",
-      "risk": "Local execution is demonstrated, but unsupported wording was observed. Model quality and phone feasibility remain empirical questions.",
+      "deliverable": "Reviewed scope/runtime decision and measured device capability matrix.",
+      "risk": "A small local model may add unsupported details or run slowly. A working desktop trace does not validate individual or phone accuracy.",
       "order": 3,
       "sprint": "S1",
       "status": "In progress",
@@ -281,8 +305,8 @@
     },
     {
       "id": "ENG2",
-      "title": "Validate phone and computer workflows on physical devices",
-      "story": "As a participant, I want a tested device/browser configuration so I can play on a phone or computer and know which offline and live-network functions actually work.",
+      "title": "Accept the simple app and installed PWA on real devices",
+      "story": "As a researcher, I want to read, explain, send and reply on my own phone or computer without navigating research controls.",
       "priority": "Core",
       "criteria": [
         "Effectiveness"
@@ -295,21 +319,22 @@
       ],
       "gate": "Use available researcher devices; no fixed ASUS/desktop restriction. All real-device results remain to be recorded.",
       "acceptance": [
-        "Retain the completed rehearsal-checklist task and its earlier certificate/address evidence; extend the remaining execution matrix to the real phones/computers researchers choose.",
-        "Physically test PWA installation, offline reopening, optional model readiness, queue/profile exchange and private backup restore. Record OS/browser, device class, failures and actual supported input methods.",
-        "For live LAN use, separately test the trusted-certificate/router/hotspot workflow and host-stop behavior. Browser-context simulations do not substitute for physical acceptance."
+        "Preserve the checked earlier checklist as historical evidence; it does not prove the new simple screen has passed physical acceptance.",
+        "Verify six scenarios, readable illustrations, one composer and messages; account/model/evaluation panels must not clutter the default page.",
+        "Test a previously installed PWA: use the recovery URL if needed, then verify a later visible update, local save and offline reopening.",
+        "Record OS, browser/profile and device for each real run. LAN certificates are optional earlier-exercise evidence, not a prerequisite for normal cloud team messages."
       ],
       "tasks": [
         "Prepare a one-page physical rehearsal checklist and test the certificate/address workflow without automation trust bypasses.",
-        "Execute the physical phone/computer matrix, including offline PWA/file exchange and any planned router/hotspot live-room runs.",
-        "Fix observed device/certificate/storage/compatibility defects and rerun only affected acceptance checks."
+        "Run a real-device matrix for scenario reading, natural explanation, team Send/Reply, installed-PWA update/recovery and offline draft retention.",
+        "Fix observed readability, focus, storage, permissions or compatibility failures and rerun the affected acceptance checks."
       ],
-      "deliverable": "Physical-device matrix, completed rehearsal checklist, screenshots/export evidence and defect/retest notes.",
-      "risk": "Mobile suspension, storage eviction, limited RAM, microphone permissions and network isolation can differ from desktop emulation.",
+      "deliverable": "Physical-device acceptance matrix, short user rehearsal checklist and defect evidence.",
+      "risk": "Automated 320/390 px viewports are not physical-phone or OS-install acceptance.",
       "order": 4,
       "sprint": "S1",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -320,8 +345,8 @@
     },
     {
       "id": "R02",
-      "title": "Test the individual-personalization contribution against closest work",
-      "story": "As a coauthor, I want an evidence-based closest-work comparison so our claimed contribution is specific to the implemented mechanism and evaluation.",
+      "title": "Bound the contribution of individual repair in factory handovers",
+      "story": "As a researcher, I want an evidence-based contribution statement that matches the simple app and does not treat integration alone as proven novelty.",
       "priority": "Core",
       "criteria": [
         "Literature",
@@ -335,19 +360,19 @@
       ],
       "gate": "Continue the assigned work using the refreshed implementation scope.",
       "acceptance": [
-        "Compare sender-specific approved memory, frozen snapshots, staged interpretation/clarification, asynchronous industrial handover and optional encrypted local-first continuity.",
-        "Separate standard components such as PWA, RAG, OAuth and encryption from the research hypothesis; their combination alone is not evidence of novelty.",
-        "State falsifiable expectations and unresolved prior-art overlap. Any patent-oriented activity is a separate deferred institutional review, not a promised outcome."
+        "Focus on individual usage and operational understanding, not national dialect identification.",
+        "Separate implemented mechanisms, proposed research hypotheses and measured participant results.",
+        "Do not claim the three successive views are independent randomized ablations or that the system controls real machines."
       ],
       "tasks": [
-        "Rank closest primary studies and extract verifiable mechanism/evaluation evidence with page or section locations.",
-        "Compare our actual frozen-memory and clarification workflow against those studies, including privacy and device boundaries.",
-        "Record a bounded prior-art overlap screen and distinguish research comparison from a patentability opinion.",
-        "Draft a testable contribution statement and explicit conditions under which the study would not support it.",
-        "Obtain supervisor/coauthor feedback on the contribution, industrial link and remaining uncertainties."
+        "Rank closest primary works on handover, personalized interpretation and communication repair and record evidence locations.",
+        "Compare the actual typed-message, exact-output correction, frozen-example and offline/private-versus-shared mechanisms.",
+        "Record a bounded prior-art overlap screen and distinguish a research comparison from patentability advice.",
+        "Draft a testable contribution and specify findings that would fail to support it.",
+        "Seek supervisor/coauthor feedback on the manufacturing link, evaluation limits and claimed contribution."
       ],
-      "deliverable": "Closest-work table and reviewed contribution statement supported by exact source evidence.",
-      "risk": "No exhaustive patent search, industrial-effectiveness result or novelty guarantee is established.",
+      "deliverable": "Closest-work comparison, qualified contribution statement and supervisor feedback log.",
+      "risk": "Personalization, edge inference and asynchronous chat already exist; novelty and benefit require a specific verified comparison.",
       "order": 5,
       "sprint": "S2",
       "status": "In progress",
@@ -364,8 +389,8 @@
     },
     {
       "id": "R03",
-      "title": "Freeze the two-person personalization and clarification protocol",
-      "story": "As a researcher, I want a reviewed, versioned protocol before evaluation so initial understanding and later communication repair are measured consistently.",
+      "title": "Approve the three-researcher typed handover protocol",
+      "story": "As a team, we want a short reviewed protocol that separates natural conversation from later research assessment.",
       "priority": "Core",
       "criteria": [
         "Effectiveness",
@@ -379,24 +404,25 @@
       ],
       "gate": "Start now; do not treat the implemented software protocol as prior human approval.",
       "acceptance": [
-        "Specify no AI, base AI and personalized AI using the same pinned model with a frozen sender profile. Initial-to-final repair is a separate comparison after additional human information.",
-        "Define five meaning fields, action scoring, missing data, exclusions, assistance-unavailable events and self/peer coding. Analyse two individuals rather than dialect groups.",
-        "Predefine six development cases and 18 new evaluation variants, profile freeze rules, exposure/order reporting, typed/reviewed-voice modality handling and device-switch provenance.",
-        "Document private-reference sealing/release, consent, local/cloud retention, backup recovery, idle cutoff and asynchronous waiting before the first evaluation trial."
+        "Use three consenting individuals and asynchronous availability; no nationality/dialect label is required.",
+        "Main participation is scenario -> natural explanation -> teammate reply. Staged assessment is a separate Research evaluation page.",
+        "Each reviewer locks their own responses. A correction must link to that reviewer's actual AI output; absent AI is missing exposure.",
+        "Acknowledge repetition, visible scenario facts, team-accessible records and lack of cryptographic blinding; do not call this an independent randomized ablation.",
+        "Approve development/held-out separation and human coding before interpreting action matches as meaning accuracy."
       ],
       "tasks": [
-        "Agree the individual-level research questions, primary outcomes and failure interpretations.",
-        "Review and calibrate the five-field meaning rubric and action scoring using development-only examples.",
-        "Specify development/evaluation separation, sender-profile freeze, counterbalancing and prohibited prompt leakage.",
-        "Approve consent, account/private-data handling, device switching, timing and exclusion procedures.",
-        "Version-lock the reviewed protocol and obtain a go/no-go decision before evaluation."
+        "Agree the three-individual research questions, planned scenario coverage and primary meaning/action outcomes.",
+        "Calibrate a human meaning-preservation rubric and authored action/clarification coding using practice-only messages.",
+        "Specify ordered without-AI, with-AI and exact-output sender-corrected stages; freeze model/example settings and prevent evaluation-memory leakage.",
+        "Approve consent and the distinct shared-team versus encrypted-private data boundaries, device switching and missing-data rules.",
+        "Version-lock the reviewed protocol and obtain a go/no-go decision before collecting the evaluation set."
       ],
-      "deliverable": "Reviewed protocol, provisional coding sheet, consent/retention plan and a versioned study-freeze record.",
-      "risk": "Repeated scenarios do not create independent participants; self/peer coding is not independent validation.",
+      "deliverable": "Versioned protocol, consent/data-boundary sheet, coding rubric and go/no-go record.",
+      "risk": "Three people and repeated messages cannot support population-dialect claims; practice and human feedback confound later stages.",
       "order": 6,
       "sprint": "S2",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -409,8 +435,8 @@
     },
     {
       "id": "ENG4",
-      "title": "Review the PWA and optional offline model preparation",
-      "story": "As a participant, I want an installable game and explicit offline AI preparation so I can reopen prepared scenarios without internet access.",
+      "title": "Review installed-app updates and offline readiness",
+      "story": "As a researcher, I want the installed PWA to update reliably and retain my draft and optional model files.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -419,26 +445,26 @@
       "type": "User story",
       "points": 8,
       "dependencies": [
-        "ENG1"
+        "ENG0"
       ],
       "gate": "Implementation is published and engineering checks pass; a different member must review before Done.",
       "acceptance": [
-        "Review the implemented manifest/icons, service worker, offline task-link reopening and recovery of the last checkpointed inbox.",
-        "Verify explicit separate interpretation/voice downloads, bounded large-model cache parts, interrupted-download retry, missing-file detection and persistent-storage messaging.",
-        "Updates require an explicit reload and retain local research data. Offline cache excludes APIs/auth callbacks; installation alone does not synchronize devices.",
-        "Review automated offline model initialization evidence; physical phone/browser acceptance belongs to ENG2 and ENG10."
+        "The updater is implemented and published at source 017149f; main-screen notices do not force a reload during typing.",
+        "The recovery URL bypasses the original cache-first worker in the same origin/browser profile without uninstalling or clearing data.",
+        "Verify local checkpoint persistence before reload and keep optional model storage. Automatic checks occur on launch, reconnect/resume and while visible.",
+        "Attach engineering evidence and a separate real-installed-device acceptance result; do not mark this story Done solely from automated checks."
       ],
       "tasks": [
-        "Review the implemented PWA install/update flow and pinned model/runtime preparation manifests.",
-        "Review optional model caching, chunked large-file storage, interruption/retry and cache readiness controls.",
-        "Reproduce the offline task-link, cold-loading, real model initialization and data-retention engineering checks."
+        "Review online fresh-page loading, automatic update checks, the visible Update app notice and the one-time legacy recovery URL.",
+        "Review save-before-reload, completed worker activation, retained model caches and download interruption/retry behavior.",
+        "Reproduce migration from the original cache-first worker, a later update, offline reopening and actual cached model initialization; obtain a teammate acceptance record."
       ],
-      "deliverable": "Independent team acceptance of PWA.md, prepared manifests and test:browser:pwa evidence.",
-      "risk": "Browser storage may be evicted and phone RAM varies; prepared inference is not demonstrated semantic accuracy.",
+      "deliverable": "Reviewed PWA lifecycle evidence and actual-device update/offline acceptance.",
+      "risk": "Old installations need the initial recovery/open cycle. Different browsers, profiles and origins have separate storage.",
       "order": 7,
       "sprint": "S2",
       "status": "Review",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -449,8 +475,8 @@
     },
     {
       "id": "ENG3",
-      "title": "Activate private researcher continuity across devices",
-      "story": "As a researcher, I want automatic private checkpoints and optional account-based resume so I can continue on another device without manually saving before leaving.",
+      "title": "Activate three-member sharing and verify private continuity",
+      "story": "As a researcher, I want submitted messages delivered to my team and my own private drafts recoverable on another device, with clear separate boundaries.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -459,28 +485,27 @@
       "type": "User story",
       "points": 5,
       "dependencies": [
-        "ENG1",
-        "ENG4",
-        "R03"
+        "ENG0",
+        "ENG4"
       ],
-      "gate": "Blocked prerequisite: the live configuration endpoint reports configured=false on 26 November 2026.",
+      "gate": "Blocked only on unverified workshop.sql/team activation and actual three-account acceptance; code and Google sign-in already exist.",
       "acceptance": [
-        "Review local automatic checkpoints, paused timing, unsent drafts, private references, frozen profiles and supported solo/inbox recovery; autosave must never send, reveal or lock responses.",
-        "Review encrypted account checkpoints, stable account identity, separate Google/email versus GitHub roles, explicit consent/key handling, version checks and fenced device takeover.",
-        "Owner must create/configure Supabase, apply the SQL policies, enable Google/email, add Vercel public project settings and redeploy. Verify actual sign-in and handoff on physical devices afterward.",
-        "Other devices see only acknowledged server checkpoints. Offline conflicts retain backups; partner messages still use explicit exchange and live-room credentials are not migrated."
+        "Existing Google sign-in and the private continuity configuration are established; do not describe all cloud setup as absent.",
+        "The additive workshop.sql migration and an actual joined three-account team remain unverified until the owner/team supply evidence.",
+        "Shared submitted records use team access rules and are not encrypted with the private sync passphrase. Private drafts/checkpoints remain separate.",
+        "Verify actual team Send/Reply, no duplicate offline submissions, correct account authorship and private device takeover/conflict handling."
       ],
       "tasks": [
-        "Review the local/private-versus-partner data schema, consent boundary and two-minute idle/timing rules.",
-        "Review and reproduce automatic local checkpoint, encrypted handoff, version/lease fencing and backup restoration checks.",
-        "Complete owner Supabase/Google/Vercel setup and verify real authenticated phone/computer resume, including conflict and offline cases."
+        "Review the three-member authenticated team schema, exact author/correction permissions and private encrypted checkpoint boundary.",
+        "Reproduce team-event immutability, independent reviewer stages, offline queueing, checkpoint/lease fencing and backup restoration checks.",
+        "Run workshop.sql in the existing Supabase project, create one team and invite the other two accounts; verify real shared replies and cross-device resume."
       ],
-      "deliverable": "CONTINUITY_SETUP.md, reviewed SQL/access-control tests, signed data-flow review and a real configured account-handoff acceptance record.",
-      "risk": "Mocked authentication transport and PostgreSQL tests do not prove Google consent, email delivery or production configuration.",
+      "deliverable": "Reviewed data-boundary checklist, installed team migration and real three-account/device acceptance evidence.",
+      "risk": "Workshop sharing is blocked on the additive team setup; successful owner sign-in alone does not demonstrate delivery to teammates.",
       "order": 8,
       "sprint": "S2",
       "status": "Blocked",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -491,8 +516,8 @@
     },
     {
       "id": "R04",
-      "title": "Review six development handovers and 18 evaluation variants",
-      "story": "As a researcher, I want realistic, reviewed handovers and protected splits so outcomes reflect communication about operational work.",
+      "title": "Review the six illustrated handover scenarios",
+      "story": "As a researcher, I want short plausible scenario descriptions and illustrations that let any teammate explain the same incident in their own words.",
       "priority": "Core",
       "criteria": [
         "Literature",
@@ -506,24 +531,24 @@
       ],
       "gate": "Start content review now; human wording collection follows consent and the pilot plan.",
       "acceptance": [
-        "Review the six incident families and 18 authored evaluation variants for manufacturing-support realism, role information, outstanding work, correct actions and consequences.",
-        "Collect each participant's natural wording without assigning a dialect identity. Synthetic engineering fixtures remain separate from participant evidence.",
-        "Document related scenario families, repeated wording and difficulty differences. New facts do not guarantee unseen utterances or equivalent difficulty.",
-        "Exclude evaluation examples/current private meanings from profile construction and initial prompts; retain provenance and consent records."
+        "Use printer recovery, diagnostic-versus-production quantity, template version, unfinished inspection, asset reference and unaccepted quality ownership cases.",
+        "Local/regional wording is authored context, not evidence that regional differences were measured. No private operator brief is required in the main task.",
+        "Keep generated/authored fixtures separate from actual researcher messages and do not treat scenario count as participant count.",
+        "The number of repeated evaluation messages is agreed in R03; 18 earlier variants are not a mandatory participant workload."
       ],
       "tasks": [
-        "Review and revise the implemented six development cases and 18 evaluation variants for industrial plausibility.",
-        "Collect and review the two researchers' natural development messages and their intended meanings.",
-        "Agree the family/variant manifest, repeated-wording checks and protected evaluation split.",
-        "Calibrate the five operational-meaning fields and authored action/consequence keys with another reviewer.",
-        "Publish an approved local study manifest with version, access, consent and unresolved scenario limitations."
+        "Review all six current paragraph descriptions and matching illustrations for industrial plausibility and consistent operational facts.",
+        "Collect natural practice explanations/replies from the three individuals and record sender-reviewed meanings.",
+        "Agree a feasible frozen evaluation subset and coverage manifest; retain the 18 earlier paired-study variants as optional historical material.",
+        "Calibrate the meaning rubric and scenario action/consequence keys with another reviewer.",
+        "Version and approve the scenario manifest, access/consent decisions and remaining realism limits."
       ],
-      "deliverable": "Scenario validation matrix, approved development records, protected variant manifest and coding/key review notes.",
-      "risk": "Scenario keys are authored rules, not physical predictions or independent industrial validation.",
+      "deliverable": "Reviewed six-family scenario/illustration manifest and approved practice/held-out allocation.",
+      "risk": "Shared facts may make answers easier; engineering-authored consequence keys still need industrial review.",
       "order": 9,
       "sprint": "S3",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -536,8 +561,8 @@
     },
     {
       "id": "ENG5",
-      "title": "Review original, unconfirmed AI and sender-confirmed meaning stages",
-      "story": "As a receiver, I want original messages, AI suggestions and sender clarification kept separate so I can inspect understanding before acting.",
+      "title": "Review the simple conversation screen and separate evaluation",
+      "story": "As a researcher, I want only a scenario, its illustration, one composer and messages on the main page, with optional assessment elsewhere.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -550,21 +575,22 @@
       ],
       "gate": "Published implementation is ready for another member's acceptance review.",
       "acceptance": [
-        "Original wording remains unchanged. The assigned interpretation is explicitly unconfirmed and uses only receiver-permitted context and approved historical examples.",
-        "Private intended meaning is sealed before sending, withheld until the locked initial response, then released separately with natural check-back and sender confirmation.",
-        "Final responses lock separately before authored consequences. Failure/deviation paths are explicit; AI never controls real machines or authorizes an operational release."
+        "The main screen has no study-set selector, operator/private brief, AI form, export panel or earlier-exercise accordion.",
+        "Any of the three team members can reply to any contribution; drafts remain separate when changing scenarios or reply targets.",
+        "Research evaluation preserves original wording, actual unconfirmed AI and sender corrections as separate immutable events. A correction for one reviewer cannot unlock another reviewer's final response.",
+        "Use human beginner acceptance in addition to the passing browser workflow and layout checks."
       ],
       "tasks": [
-        "Review the implemented immutable source, interpretation trace, private-reference and locked-response schemas.",
-        "Review local inference integration and the separated original/unconfirmed/confirmed UI, including phone layouts.",
-        "Reproduce staged file exchange, role checks, missing-assistance handling and initial/final response-lock regressions."
+        "Review immutable original messages, reply references, authenticated authorship and each reviewer's independent stage records.",
+        "Accept the default Read -> explain -> Send/Reply flow at phone/computer sizes; keep setup, models and evaluation inside Settings or the separate research page.",
+        "Reproduce exact-output sender corrections, response locks, third-person replies, unavailable-AI handling and old-screen recovery regressions."
       ],
-      "deliverable": "Reviewed INDIVIDUAL_STUDY.md and staged end-to-end engineering evidence.",
-      "risk": "Heuristic checks can flag unsupported wording but do not establish semantic correctness; human error assessment remains required.",
+      "deliverable": "Teammate-reviewed simple-screen acceptance and staged-record regression evidence.",
+      "risk": "A hidden settings panel should not become a prerequisite for merely reading or describing a scenario; actual shared delivery still requires team activation.",
       "order": 10,
       "sprint": "S3",
       "status": "Review",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -575,8 +601,8 @@
     },
     {
       "id": "ENG9",
-      "title": "Validate study exports and build the analysis-ready summary",
-      "story": "As an analyst, I want validated case records and reproducible summaries so conditions, missing data and device changes are not misinterpreted.",
+      "title": "Validate workshop exports and human-coded analysis inputs",
+      "story": "As an analyst, I want source-linked per-reviewer records so missing AI, practice exposure and human clarification are not misreported as model benefit.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -592,21 +618,22 @@
       ],
       "gate": "Export implementation exists; the independent analysis/validation deliverable is still open.",
       "acceptance": [
-        "Review implemented JSON/CSV export of assignments, profile/prompt hashes, initial/final action outcomes, coding, assistance failures, overlap flags and private device segments.",
-        "Distinguish completed-record summaries from the full queue containing incomplete/excluded cases; blank coding is not zero and asynchronous wall time is not active assessment time.",
-        "Add a reproducible analysis/schema check verified against manually calculated fixtures; never publish private references or account credentials in the portal/dataset."
+        "Current workshop JSON supports the staged protocol; legacy paired-study CSV/JSON is separate and must not be pooled silently.",
+        "Missing assistance and clarification/abstention must be explicit in denominators; an unavailable-AI record is not a completed AI condition.",
+        "Exported action matches are authored rules, not semantic accuracy. Define and independently check any human meaning score rather than inventing SAER/WER results.",
+        "Protect participant text and private checkpoints; the public dataset remains authored fictional records only."
       ],
       "tasks": [
-        "Review the current export schemas, provenance and consent/privacy boundaries.",
-        "Review family/variant/condition identifiers, frozen-profile traces, missing-data fields and device-segment export.",
-        "Build and independently check a reproducible validation/summary script or workbook against manually worked examples."
+        "Review workshop JSON and earlier-study export schemas, source/reviewer/AI/correction links and consent/privacy fields.",
+        "Check phase, scenario, actor, model/prompt/example snapshots, missing-AI markers and private-versus-shared exclusions.",
+        "Build and cross-check a reproducible validator and human-coding worksheet with manually worked examples before analysing participant results."
       ],
-      "deliverable": "Validated data dictionary and analysis smoke script/workbook with checked expected outputs.",
-      "risk": "Completed-only CSVs can hide attrition. Device and modality changes may confound apparent timing/assistance effects.",
+      "deliverable": "Schema/data dictionary, checked analysis validator and human coding workbook.",
+      "risk": "Repeated observations from one sender/reviewer are dependent; missingness or action-only scoring can overstate benefit.",
       "order": 11,
       "sprint": "S3",
       "status": "In progress",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -617,8 +644,8 @@
     },
     {
       "id": "ENG6",
-      "title": "Review approved sender memory and frozen profile isolation",
-      "story": "As a researcher, I want only approved development examples from the actual sender used for personalization so the controlled comparison is auditable.",
+      "title": "Review sender-approved memory and frozen interpretation context",
+      "story": "As a sender, I want only my earlier approved practice examples to inform interpretation, without overwriting my original wording or training on evaluation answers.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -632,21 +659,22 @@
       ],
       "gate": "Engineering implementation is ready for independent team review before study freeze.",
       "acceptance": [
-        "Only completed, consented development examples enter a speaker-specific versioned profile; preserve original wording, intended meaning, family and provenance.",
-        "Evaluation assignments embed immutable, hashed snapshots. Retrieval selects bounded historical examples from that sender; it never substitutes the receiver's memory or current private reference.",
-        "Review tests for tampering, role mismatch and evaluation leakage. Removing an example from a later working profile does not silently rewrite an existing evaluation snapshot; consent withdrawal needs a recorded study-data decision."
+        "Only explicit earlier development approvals from the same sender/team may be retrieved; current-source and evaluation corrections are excluded.",
+        "Record the actual examples, model revision and prompt used. Optional retrieved examples change context, not model weights.",
+        "Sender review references the exact AI event/reviewer; historical frozen records are immutable and withdrawal handling must be documented.",
+        "A working retrieval mechanism is not proof that personalization improves understanding."
       ],
       "tasks": [
-        "Review speaker approval and development-only profile creation/versioning.",
-        "Review deterministic bounded example retrieval, recorded example IDs and the base-versus-personalized prompt difference.",
-        "Reproduce snapshot isolation, sender identity, tamper/leakage checks and document withdrawal handling for already-frozen trials."
+        "Review sender consent and practice-only meaning approval, including conflicting or withdrawn examples.",
+        "Review bounded same-sender/same-team retrieval and the exact prompt/example snapshot used for each interpretation.",
+        "Reproduce exclusion of current/later/evaluation meanings, other people's examples and conflicting approved wording; document frozen-record withdrawal handling."
       ],
-      "deliverable": "Approved profile cards, immutable snapshot/prompt traces and a reviewed memory/withdrawal boundary.",
-      "risk": "Retrieval can propagate a mistaken historical meaning. This is example-memory personalization, not changed model weights.",
+      "deliverable": "Approved-memory/privacy review and reproducible frozen-context isolation tests.",
+      "risk": "Small approved histories may be empty or conflicting, and retained prior snapshots need an agreed withdrawal policy.",
       "order": 12,
       "sprint": "S4",
       "status": "Review",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -686,7 +714,7 @@
       "order": 13,
       "sprint": "Unscheduled",
       "status": "Deferred",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Deferred scope; no present-study dependency on completion.",
       "taskIds": [
@@ -725,7 +753,7 @@
       "order": 14,
       "sprint": "Unscheduled",
       "status": "Deferred",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Deferred scope; no present-study dependency on completion.",
       "taskIds": [
@@ -736,8 +764,8 @@
     },
     {
       "id": "R06",
-      "title": "Compare no AI, base AI and frozen personalized AI",
-      "story": "As a researcher, I want a frozen three-condition evaluation so we can explore individual personalization separately from later human clarification.",
+      "title": "Evaluate without AI, with AI and sender-corrected AI",
+      "story": "As a researcher, I want to compare an individual's recorded understanding before AI, after AI and after the sender reviews that exact AI interpretation.",
       "priority": "Core",
       "criteria": [
         "Effectiveness",
@@ -751,28 +779,29 @@
         "R04",
         "R08",
         "ENG6",
-        "ENG9"
+        "ENG9",
+        "ENG3"
       ],
       "gate": "Software conditions exist; final evaluation waits for R03, R04, R08 and device readiness.",
       "acceptance": [
-        "Use the implemented 18 new variants: six per condition, nine outgoing turns per participant and both role directions; report actual asynchronous order and related scenario families.",
-        "Freeze prompts, model revision, retrieval settings and both sender profiles after development/pilot review and before evaluation. Do not feed evaluation corrections back into those snapshots.",
-        "Compare locked initial outcomes across conditions; analyse initial-to-final repair after sender information separately. Preserve failures, missingness and protocol deviations.",
-        "Report participant-specific exploratory evidence from one pair, not dialect-group or population effectiveness."
+        "Each of the three individuals can send and review; record the sender-reviewer pairing for every result.",
+        "These are ordered repeated-exposure stages, not independently randomized no-AI/base/personalized conditions. Separate any earlier paired-study results.",
+        "Use the same fixed AI setting for the reviewed comparison; record whether historical examples were actually available/used.",
+        "Do not count missing AI as successful exposure or action-key agreement as proof of intended meaning."
       ],
       "tasks": [
-        "Review the implemented allocation, no-AI gate and separate initial/final assessment workflow.",
-        "Audit identical base context and personalized example provenance, excluding current meanings and scorer keys.",
-        "Freeze development-selected model/prompt/retrieval/profile settings and the reviewed evaluation plan.",
-        "Run the 18 assigned evaluation handovers after protocol, scenario, device and pilot gates pass.",
-        "Summarize participant-specific condition outcomes and communication-repair examples with recorded deviations."
+        "Review the separate research page and the required independent response locks for each reviewer.",
+        "Audit source context and the exact model/prompt/approved-example snapshot; confirm current answers are absent from AI inputs.",
+        "Freeze the reviewed model/retrieval settings, scenario allocation, human-coding and missing-data plan.",
+        "Run the agreed held-out messages asynchronously after protocol, scenario, device, sharing and pilot gates pass.",
+        "Summarize individual staged changes and repair examples with explicit exposure, failures and deviations."
       ],
-      "deliverable": "Frozen configuration manifest, 18 evaluation records and a traceable preliminary comparison.",
-      "risk": "Participants are unblinded coauthors, cases are related, and human clarification adds information; these constrain causal claims.",
+      "deliverable": "Frozen evaluation manifest and per-individual staged records with human coding.",
+      "risk": "Repetition, shared scenario facts and human correction contribute to later scores; the design cannot isolate a pure causal model effect.",
       "order": 15,
       "sprint": "S5",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -785,8 +814,8 @@
     },
     {
       "id": "R08",
-      "title": "Pilot the two-researcher workflow before evaluation",
-      "story": "As a participant, I want an understandable rehearsal so usability or data-transfer failures do not invalidate the evaluation.",
+      "title": "Pilot the simple handover flow with three researchers",
+      "story": "As a team, we want a short asynchronous rehearsal that checks whether beginners can describe and reply without research-control overhead.",
       "priority": "Core",
       "criteria": [
         "Effectiveness",
@@ -798,30 +827,30 @@
         "R03",
         "R04",
         "ENG2",
+        "ENG3",
         "ENG5",
-        "ENG6",
         "ENG9"
       ],
       "gate": "Begin after consent/protocol draft and scenario review; evaluation cases remain unused.",
       "acceptance": [
-        "Use the two participating researchers with agreed consent, pseudonyms and self/peer reviewer roles; do not imply a larger recruited sample.",
-        "Complete practice/development cases outside the 18 evaluation trials; check natural messaging, meaning sealing, clarification, profile permission and export recovery.",
-        "Exercise phones/computers and optional reviewed voice according to the approved modality plan. Cloud tests require ENG3 activation; local/manual exchange can be piloted separately.",
-        "Resolve blocking usability issues and record a readiness decision before the final profile/protocol freeze."
+        "No researcher must wait synchronously for another; they can move to another scenario.",
+        "The core rehearsal is read -> describe -> send -> reply, not completion of every optional mode or all 22 stories.",
+        "Record observed beginner difficulty and actual device/model failures; synthetic browser fixtures do not count as this pilot.",
+        "Agree the feasible number of messages and review burden rather than imposing the earlier 18-variant plan."
       ],
       "tasks": [
-        "Confirm the two researchers' consent, account/pseudonym mapping and reviewer responsibilities.",
-        "Prepare a development-only rehearsal schedule and check role/condition instructions for clarity.",
-        "Rehearse selected devices, offline preparation, file exchange and any configured account resume.",
-        "Run the six development handovers with natural wording and agreed capture/approval controls.",
-        "Record usability failures, interpretation errors and fixes, then make the evaluation go/no-go decision."
+        "Confirm all three individuals' consent, Google account/pseudonym mapping and review responsibilities.",
+        "Agree a short development-only workload and asynchronous response expectations; check the simple main instructions.",
+        "Rehearse actual team Send/Reply, installed-app update, offline draft return and private cross-device resume.",
+        "Collect agreed practice descriptions/replies and sender reviews; use the separate evaluation page only for the planned assessment.",
+        "Record confusion, interpretation failures and fixes and make the held-out evaluation go/no-go decision."
       ],
-      "deliverable": "Two-person development/pilot record, issue log and reviewed study-readiness checklist.",
-      "risk": "Coauthor familiarity and self/peer review limit generalizability and independence.",
+      "deliverable": "Three-researcher pilot notes, usability defects, approved practice examples and go/no-go record.",
+      "risk": "Researchers are also evaluators; convenience sampling, shared expectations and small sample size limit inference.",
       "order": 16,
       "sprint": "S5",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -834,8 +863,8 @@
     },
     {
       "id": "R09",
-      "title": "Analyse individual outcomes, errors and study limitations",
-      "story": "As a coauthor, I want reproducible participant-level analysis so claims match the actual sample, conditions and operational consequences.",
+      "title": "Analyse individual staged understanding and repair",
+      "story": "As an analyst, I want reproducible individual-level findings with limitations that match the actual conversation and assessment process.",
       "priority": "Core",
       "criteria": [
         "Effectiveness",
@@ -849,24 +878,24 @@
       ],
       "gate": "Requires the approved evaluation records; no participant effectiveness result exists yet.",
       "acceptance": [
-        "Validate completed, incomplete, excluded and failed trials using the frozen data dictionary; report denominators and missing coding.",
-        "Present each participant's initial condition outcomes and separate initial-to-final repair, with scenario family/order, input modality and device-switch context.",
-        "Explain unsupported interpretations, historical-context leakage, quantity/negation/ownership errors and relevant action consequences.",
-        "Disclose one pair, coauthor participation, non-independent coding, authored scenarios, idle-time instrumentation and lack of real-factory effectiveness evidence."
+        "Treat repeated messages as nested/dependent observations, not additional independent participants.",
+        "Interpret later-stage changes with practice and human-feedback confounds; do not report an independent randomized ablation.",
+        "Separate missing AI, held-out data and optional voice/legacy sessions from the agreed typed core.",
+        "Report individual variation and operational examples without national-dialect or real-production-effectiveness generalization."
       ],
       "tasks": [
-        "Validate the collected participant exports and finalize the analysis data dictionary and exclusion log.",
-        "Compute per-participant condition and initial-to-final summaries with explicit denominators.",
-        "Review operationally important errors and scenario/order/device/modality patterns.",
-        "Write threats to validity and distinguish engineering checks from participant results.",
-        "Have another team member reproduce summaries and resolve discrepancies."
+        "Validate participant records and finalize the data dictionary, human coding and exclusion/missingness log.",
+        "Compute per-person and sender-reviewer staged summaries with explicit denominators and clarification/abstention handling.",
+        "Review consequential meaning/action errors alongside repetition, scenario familiarity, device and optional-input patterns.",
+        "Write threats to validity, separating authored simulation, engineering checks and actual participant findings.",
+        "Have another member reproduce a sample of scores/summaries and resolve disagreements."
       ],
-      "deliverable": "Reproducible analysis, participant-specific figures/tables, error cases and limitations.",
-      "risk": "Do not treat scenario counts as participant counts or generalize individual findings to dialect populations.",
+      "deliverable": "Reproducible individual-level summaries, reviewed error cases and limitations.",
+      "risk": "Three convenience participants and ordered feedback cannot establish population effects or causal AI superiority.",
       "order": 17,
       "sprint": "S6",
       "status": "Backlog",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -879,8 +908,8 @@
     },
     {
       "id": "ENG10",
-      "title": "Accept the integrated offline and device-continuity demonstration",
-      "story": "As a demonstrator, I want a measured end-to-end rehearsal so the final presentation accurately separates offline play, self-continuity and partner exchange.",
+      "title": "Demonstrate the simple app, sharing and safe PWA updates",
+      "story": "As a presenter, I want one short reproducible demo that shows the actual released flow and its remaining limits.",
       "priority": "Core",
       "criteria": [
         "Excellence / originality",
@@ -894,26 +923,26 @@
         "ENG3",
         "ENG4",
         "ENG5",
-        "ENG6",
         "ENG9"
       ],
       "gate": "Local/PWA engineering checks pass; physical acceptance and live account setup remain pending.",
       "acceptance": [
-        "Demonstrate prepared PWA reopening and local inference without internet on supported physical devices; keep live LAN host requirements separate.",
-        "After ENG3 setup, demonstrate auto-checkpoint and authenticated device resume, with explicit stale/unsynced/conflict cases. Offline devices cannot upload while suspended.",
-        "Verify private backups, unchanged frozen profiles and no participant data in public repositories/dataset; record achieved and unsupported configurations."
+        "Use real joined team accounts if presenting shared delivery; label a local-only or synthetic fallback clearly.",
+        "Show that updates preserve drafts and that offline messages cannot reach another device until uploaded.",
+        "Keep model/evaluation controls out of the beginner path; show optional research assessment separately.",
+        "No physical machine control, guaranteed real-time inference or participant-effectiveness claim is implied."
       ],
       "tasks": [
-        "Run a written physical offline/device-continuity rehearsal, including model readiness and data-boundary checks.",
-        "Fix observed acceptance-blocking issues and repeat the affected workflow checks.",
-        "Package the actual demo instructions, device matrix, evidence links and achieved/deferred feature table."
+        "Run a physical demo of scenario -> natural explanation -> teammate reply, plus one installed-PWA update and saved-draft device switch.",
+        "Fix acceptance-blocking defects and rerun only the affected paths.",
+        "Package a short demo script, device/account matrix and achieved-versus-pending evidence table."
       ],
-      "deliverable": "Physical integration acceptance record and a reproducible professor-demo package.",
-      "risk": "Installing the PWA does not create cloud synchronization or host-free live multiplayer.",
+      "deliverable": "Accepted physical demo and concise runbook with evidence links.",
+      "risk": "A polished scripted demo does not replace independent researcher acceptance or held-out evaluation.",
       "order": 18,
       "sprint": "S6",
       "status": "Ready",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -924,8 +953,8 @@
     },
     {
       "id": "R10",
-      "title": "Deliver the evidence-based report, presentation and manuscript draft",
-      "story": "As a team, I want a coherent final artifact mapped to the professor's rubric so implementation, evaluation and expected outcomes are clearly distinguished.",
+      "title": "Deliver reports and presentation for the released simple workflow",
+      "story": "As a team, we want course artifacts that distinguish the current app, verified evidence, human findings and future work.",
       "priority": "Core",
       "criteria": [
         "Literature",
@@ -943,23 +972,24 @@
       ],
       "gate": "After literature and exploratory evaluation analysis; no acceptance/publication outcome is assumed.",
       "acceptance": [
-        "Map problem establishment, literature, originality, effectiveness and expected outcomes to linked evidence and remaining limitations.",
-        "Describe the implemented individual-personalization and hybrid input/local-first design accurately, including configured versus unconfigured deployment features.",
-        "Provide approved reproducibility artifacts and a paper draft if justified; distinguish draft/submission/acceptance and conditional IP review from achieved outcomes."
+        "Describe three individual researchers, the simple default screen and the separate staged evaluation page.",
+        "Document shared team records versus encrypted private continuity, the PWA recovery link and safe update behavior.",
+        "Label earlier two-person/18-variant documents as historical unless independently updated and approved.",
+        "Report absent participant results as pending, not zero or simulated success."
       ],
       "tasks": [
-        "Draft the report/manuscript from verified literature and frozen participant/engineering evidence.",
-        "Package reproducibility instructions and only approved de-identified or authored artifacts.",
-        "State achieved outcomes and the conditional future invention-review decision without patent or publication guarantees.",
-        "Cross-review the report, manual, slides and demo against the actual released build.",
-        "Present the evidence and a prioritized next-phase plan to the supervisor/course."
+        "Draft the report/manuscript from verified literature, the current simple workflow and actual frozen research evidence.",
+        "Package reproduction instructions and only approved de-identified or authored artifacts; retain private team data outside public repositories.",
+        "State achieved outcomes and conditional future work without patent, publication or effectiveness guarantees.",
+        "Cross-review the report, manual, slides, portal and demo against the released build and recorded team acceptance.",
+        "Present findings and a prioritized next-phase plan mapped to the professor's course criteria."
       ],
-      "deliverable": "Updated report, user manual, presentation, reproducibility package and qualified manuscript draft.",
-      "risk": "Earlier proposals and Google Drive documents may describe historical scope; label or revise them before presentation.",
+      "deliverable": "Current technical report/manual, course slides, reproduction package and qualified manuscript draft.",
+      "risk": "Historical linked documents may retain obsolete scope; do not imply that changing portal metadata edited their Google Drive contents.",
       "order": 19,
       "sprint": "S6",
       "status": "Backlog",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Acceptance evidence remains to be attached by the self-selected task owner.",
       "taskIds": [
@@ -1001,7 +1031,7 @@
       "order": 20,
       "sprint": "Unscheduled",
       "status": "Deferred",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Deferred scope; no present-study dependency on completion.",
       "taskIds": [
@@ -1012,8 +1042,8 @@
     },
     {
       "id": "ENG11",
-      "title": "Validate optional reviewed voice input alongside typed messages",
-      "story": "As a participant, I want optional on-device voice-to-text that I can review before sending while keeping the individual-personalization comparison interpretable.",
+      "title": "Optional: review voice input outside the simple typed flow",
+      "story": "As a researcher, I may use reviewed voice input on the separate research page only if the team approves its role in the study.",
       "priority": "Stretch",
       "criteria": [
         "Excellence / originality",
@@ -1029,21 +1059,21 @@
       ],
       "gate": "Input implementation exists; human/physical validation remains open.",
       "acceptance": [
-        "Review the existing local Whisper tiny.en q8 pack and record/review/correct/insert controls; typing remains available and raw audio is excluded from continuity exports.",
-        "Only the chosen reviewed text is sent, with the recorded input method. No group-dialect identification or general low-WER claim follows from this feature.",
-        "Physically test microphone permissions and phone/browser support, and predefine how typed/voice/hybrid source messages are separated or reported in evaluation."
+        "The simple main flow is typed; voice controls are not on its default screen.",
+        "Speech remains optional on the research/earlier pages and is not a blocker to the typed pilot.",
+        "Any transcript must be reviewed before insertion; no ASR or accent-accuracy claim follows from runtime success."
       ],
       "tasks": [
-        "Review the pinned local ASR preparation/runtime and its license/resource evidence.",
-        "Review record/review/correct/insert controls, permissions, retention and input-method provenance.",
-        "Run a small physical-device transcription/meaning check and agree modality handling before evaluation."
+        "Review the optional pinned ASR runtime and its resource/license evidence without making it a requirement for basic participation.",
+        "Review record/correct/insert provenance, permissions and audio retention in the optional research tools.",
+        "If voice is included, run an actual-device transcription/meaning check and agree separate modality coding before evaluation."
       ],
-      "deliverable": "Reviewed voice workflow, device acceptance notes and a declared modality plan.",
-      "risk": "ASR transcript quality and interpretation quality are different; phone noise and typing corrections can confound comparisons.",
+      "deliverable": "Optional voice acceptance/modality decision or an explicit typed-only evaluation choice.",
+      "risk": "Adding unvalidated speech can confound a small typed comprehension study.",
       "order": 21,
       "sprint": "Stretch",
       "status": "In progress",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Implementation review links: INDIVIDUAL_STUDY.md, PWA.md, CONTINUITY_SETUP.md and relevant tests. Participant/physical acceptance remains pending.",
       "taskIds": [
@@ -1083,7 +1113,7 @@
       "order": 22,
       "sprint": "Unscheduled",
       "status": "Deferred",
-      "owner": "Unassigned - self-select at sprint planning",
+      "owner": "",
       "reviewer": "",
       "evidence": "Deferred scope; no present-study dependency on completion.",
       "taskIds": [
@@ -1101,7 +1131,7 @@
       "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
       "estimatedHours": null,
       "status": "Done",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "",
       "blocker": ""
@@ -1113,8 +1143,8 @@
       "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
       "estimatedHours": null,
       "status": "Done",
-      "owner": "",
-      "reviewer": "",
+      "owner": "isongjosiah, toecm",
+      "reviewer": "isongjosiah",
       "evidence": "",
       "blocker": ""
     },
@@ -1125,7 +1155,7 @@
       "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
       "estimatedHours": null,
       "status": "Done",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "",
       "blocker": ""
@@ -1137,7 +1167,7 @@
       "doneWhen": "Parent acceptance + specific evidence recorded at Planning",
       "estimatedHours": null,
       "status": "Done",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "",
       "blocker": ""
@@ -1145,11 +1175,11 @@
     {
       "id": "R01-T1",
       "storyId": "R01",
-      "title": "Agree query families for industrial handover, individual personalization, clarification and offline deployment.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Agree query families for industrial shift handover, individual language personalization, clarification and offline/PWA continuity.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1157,11 +1187,11 @@
     {
       "id": "R01-T2",
       "storyId": "R01",
-      "title": "Retrieve primary papers and source records, deduplicate them, and save a reproducible search log.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Retrieve primary studies and record reproducible searches, citations and duplicates; separate AI search suggestions from verified sources.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1169,11 +1199,11 @@
     {
       "id": "R01-T3",
       "storyId": "R01",
-      "title": "Screen candidate sources and record exclusions and applicability to the current study.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Screen sources and record exclusions, manufacturing relevance and differences from the current three-person typed task.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1181,11 +1211,11 @@
     {
       "id": "R01-T4",
       "storyId": "R01",
-      "title": "Extract methods, datasets, participants, operational outcomes and limitations into the matrix.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Extract actual participants, data, mechanisms, semantic/operational outcomes and limits into a traceable comparison matrix.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1193,11 +1223,11 @@
     {
       "id": "R01-T5",
       "storyId": "R01",
-      "title": "Have another member verify a sample of claims and citations, then resolve discrepancies.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Have another member verify a sample of claims and citations and resolve disagreements.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1205,11 +1235,11 @@
     {
       "id": "ENG1-T1",
       "storyId": "ENG1",
-      "title": "Review the documented individual-English scope and pinned model/runtime decision against the implemented study.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review the three-individual English scope and the current simple-main/separate-evaluation model decision.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Published implementation exists; obtain independent team review before marking Done.",
       "blocker": ""
@@ -1217,11 +1247,11 @@
     {
       "id": "ENG1-T2",
       "storyId": "ENG1",
-      "title": "Review local interpretation/transcription engineering traces and repeat a small synthetic feasibility check.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review the real pinned Qwen runtime trace and repeat a small authored feasibility check; record speed, unsupported details and failures.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Published implementation exists; obtain independent team review before marking Done.",
       "blocker": ""
@@ -1229,11 +1259,11 @@
     {
       "id": "ENG1-T3",
       "storyId": "ENG1",
-      "title": "Record actual researcher device/browser capabilities, preparation time and inference failures; agree supported study configurations.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Record the actual researchers' device/browser, memory, download and inference limits; decide which configurations can run optional AI.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1253,8 +1283,8 @@
     {
       "id": "ENG2-T2",
       "storyId": "ENG2",
-      "title": "Execute the physical phone/computer matrix, including offline PWA/file exchange and any planned router/hotspot live-room runs.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Run a real-device matrix for scenario reading, natural explanation, team Send/Reply, installed-PWA update/recovery and offline draft retention.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1265,8 +1295,8 @@
     {
       "id": "ENG2-T3",
       "storyId": "ENG2",
-      "title": "Fix observed device/certificate/storage/compatibility defects and rerun only affected acceptance checks.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Fix observed readability, focus, storage, permissions or compatibility failures and rerun the affected acceptance checks.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1277,11 +1307,11 @@
     {
       "id": "R02-T1",
       "storyId": "R02",
-      "title": "Rank closest primary studies and extract verifiable mechanism/evaluation evidence with page or section locations.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Rank closest primary works on handover, personalized interpretation and communication repair and record evidence locations.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1289,11 +1319,11 @@
     {
       "id": "R02-T2",
       "storyId": "R02",
-      "title": "Compare our actual frozen-memory and clarification workflow against those studies, including privacy and device boundaries.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Compare the actual typed-message, exact-output correction, frozen-example and offline/private-versus-shared mechanisms.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1301,11 +1331,11 @@
     {
       "id": "R02-T3",
       "storyId": "R02",
-      "title": "Record a bounded prior-art overlap screen and distinguish research comparison from a patentability opinion.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Record a bounded prior-art overlap screen and distinguish a research comparison from patentability advice.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1313,11 +1343,11 @@
     {
       "id": "R02-T4",
       "storyId": "R02",
-      "title": "Draft a testable contribution statement and explicit conditions under which the study would not support it.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Draft a testable contribution and specify findings that would fail to support it.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1325,11 +1355,11 @@
     {
       "id": "R02-T5",
       "storyId": "R02",
-      "title": "Obtain supervisor/coauthor feedback on the contribution, industrial link and remaining uncertainties.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Seek supervisor/coauthor feedback on the manufacturing link, evaluation limits and claimed contribution.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
-      "owner": "",
+      "owner": "isongjosiah",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
       "blocker": ""
@@ -1337,8 +1367,8 @@
     {
       "id": "R03-T1",
       "storyId": "R03",
-      "title": "Agree the individual-level research questions, primary outcomes and failure interpretations.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Agree the three-individual research questions, planned scenario coverage and primary meaning/action outcomes.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1349,8 +1379,8 @@
     {
       "id": "R03-T2",
       "storyId": "R03",
-      "title": "Review and calibrate the five-field meaning rubric and action scoring using development-only examples.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Calibrate a human meaning-preservation rubric and authored action/clarification coding using practice-only messages.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1361,8 +1391,8 @@
     {
       "id": "R03-T3",
       "storyId": "R03",
-      "title": "Specify development/evaluation separation, sender-profile freeze, counterbalancing and prohibited prompt leakage.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Specify ordered without-AI, with-AI and exact-output sender-corrected stages; freeze model/example settings and prevent evaluation-memory leakage.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1373,8 +1403,8 @@
     {
       "id": "R03-T4",
       "storyId": "R03",
-      "title": "Approve consent, account/private-data handling, device switching, timing and exclusion procedures.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Approve consent and the distinct shared-team versus encrypted-private data boundaries, device switching and missing-data rules.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1385,8 +1415,8 @@
     {
       "id": "R03-T5",
       "storyId": "R03",
-      "title": "Version-lock the reviewed protocol and obtain a go/no-go decision before evaluation.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Version-lock the reviewed protocol and obtain a go/no-go decision before collecting the evaluation set.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1397,11 +1427,11 @@
     {
       "id": "ENG4-T1",
       "storyId": "ENG4",
-      "title": "Review the implemented PWA install/update flow and pinned model/runtime preparation manifests.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review online fresh-page loading, automatic update checks, the visible Update app notice and the one-time legacy recovery URL.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Published implementation exists; obtain independent team review before marking Done.",
       "blocker": ""
@@ -1409,11 +1439,11 @@
     {
       "id": "ENG4-T2",
       "storyId": "ENG4",
-      "title": "Review optional model caching, chunked large-file storage, interruption/retry and cache readiness controls.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review save-before-reload, completed worker activation, retained model caches and download interruption/retry behavior.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Published implementation exists; obtain independent team review before marking Done.",
       "blocker": ""
@@ -1421,11 +1451,11 @@
     {
       "id": "ENG4-T3",
       "storyId": "ENG4",
-      "title": "Reproduce the offline task-link, cold-loading, real model initialization and data-retention engineering checks.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Reproduce migration from the original cache-first worker, a later update, offline reopening and actual cached model initialization; obtain a teammate acceptance record.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
-      "owner": "",
+      "owner": "toecm",
       "reviewer": "",
       "evidence": "Published implementation exists; obtain independent team review before marking Done.",
       "blocker": ""
@@ -1433,8 +1463,8 @@
     {
       "id": "ENG3-T1",
       "storyId": "ENG3",
-      "title": "Review the local/private-versus-partner data schema, consent boundary and two-minute idle/timing rules.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review the three-member authenticated team schema, exact author/correction permissions and private encrypted checkpoint boundary.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1445,8 +1475,8 @@
     {
       "id": "ENG3-T2",
       "storyId": "ENG3",
-      "title": "Review and reproduce automatic local checkpoint, encrypted handoff, version/lease fencing and backup restoration checks.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Reproduce team-event immutability, independent reviewer stages, offline queueing, checkpoint/lease fencing and backup restoration checks.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1457,20 +1487,20 @@
     {
       "id": "ENG3-T3",
       "storyId": "ENG3",
-      "title": "Complete owner Supabase/Google/Vercel setup and verify real authenticated phone/computer resume, including conflict and offline cases.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Run workshop.sql in the existing Supabase project, create one team and invite the other two accounts; verify real shared replies and cross-device resume.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Blocked",
       "owner": "",
       "reviewer": "",
       "evidence": "Pending the declared acceptance evidence.",
-      "blocker": "Owner Supabase/Google/Vercel activation and real sign-in are not yet configured."
+      "blocker": "workshop.sql installation, joined three-account team and physical continuity acceptance not yet confirmed."
     },
     {
       "id": "R04-T1",
       "storyId": "R04",
-      "title": "Review and revise the implemented six development cases and 18 evaluation variants for industrial plausibility.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review all six current paragraph descriptions and matching illustrations for industrial plausibility and consistent operational facts.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1481,8 +1511,8 @@
     {
       "id": "R04-T2",
       "storyId": "R04",
-      "title": "Collect and review the two researchers' natural development messages and their intended meanings.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Collect natural practice explanations/replies from the three individuals and record sender-reviewed meanings.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1493,8 +1523,8 @@
     {
       "id": "R04-T3",
       "storyId": "R04",
-      "title": "Agree the family/variant manifest, repeated-wording checks and protected evaluation split.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Agree a feasible frozen evaluation subset and coverage manifest; retain the 18 earlier paired-study variants as optional historical material.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1505,8 +1535,8 @@
     {
       "id": "R04-T4",
       "storyId": "R04",
-      "title": "Calibrate the five operational-meaning fields and authored action/consequence keys with another reviewer.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Calibrate the meaning rubric and scenario action/consequence keys with another reviewer.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1517,8 +1547,8 @@
     {
       "id": "R04-T5",
       "storyId": "R04",
-      "title": "Publish an approved local study manifest with version, access, consent and unresolved scenario limitations.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Version and approve the scenario manifest, access/consent decisions and remaining realism limits.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1529,8 +1559,8 @@
     {
       "id": "ENG5-T1",
       "storyId": "ENG5",
-      "title": "Review the implemented immutable source, interpretation trace, private-reference and locked-response schemas.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review immutable original messages, reply references, authenticated authorship and each reviewer's independent stage records.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1541,8 +1571,8 @@
     {
       "id": "ENG5-T2",
       "storyId": "ENG5",
-      "title": "Review local inference integration and the separated original/unconfirmed/confirmed UI, including phone layouts.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Accept the default Read -> explain -> Send/Reply flow at phone/computer sizes; keep setup, models and evaluation inside Settings or the separate research page.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1553,8 +1583,8 @@
     {
       "id": "ENG5-T3",
       "storyId": "ENG5",
-      "title": "Reproduce staged file exchange, role checks, missing-assistance handling and initial/final response-lock regressions.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Reproduce exact-output sender corrections, response locks, third-person replies, unavailable-AI handling and old-screen recovery regressions.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1565,8 +1595,8 @@
     {
       "id": "ENG9-T1",
       "storyId": "ENG9",
-      "title": "Review the current export schemas, provenance and consent/privacy boundaries.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review workshop JSON and earlier-study export schemas, source/reviewer/AI/correction links and consent/privacy fields.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1577,8 +1607,8 @@
     {
       "id": "ENG9-T2",
       "storyId": "ENG9",
-      "title": "Review family/variant/condition identifiers, frozen-profile traces, missing-data fields and device-segment export.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Check phase, scenario, actor, model/prompt/example snapshots, missing-AI markers and private-versus-shared exclusions.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1589,8 +1619,8 @@
     {
       "id": "ENG9-T3",
       "storyId": "ENG9",
-      "title": "Build and independently check a reproducible validation/summary script or workbook against manually worked examples.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Build and cross-check a reproducible validator and human-coding worksheet with manually worked examples before analysing participant results.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1601,8 +1631,8 @@
     {
       "id": "ENG6-T1",
       "storyId": "ENG6",
-      "title": "Review speaker approval and development-only profile creation/versioning.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review sender consent and practice-only meaning approval, including conflicting or withdrawn examples.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1613,8 +1643,8 @@
     {
       "id": "ENG6-T2",
       "storyId": "ENG6",
-      "title": "Review deterministic bounded example retrieval, recorded example IDs and the base-versus-personalized prompt difference.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review bounded same-sender/same-team retrieval and the exact prompt/example snapshot used for each interpretation.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1625,8 +1655,8 @@
     {
       "id": "ENG6-T3",
       "storyId": "ENG6",
-      "title": "Reproduce snapshot isolation, sender identity, tamper/leakage checks and document withdrawal handling for already-frozen trials.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Reproduce exclusion of current/later/evaluation meanings, other people's examples and conflicting approved wording; document frozen-record withdrawal handling.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1638,7 +1668,7 @@
       "id": "ENG7-T1",
       "storyId": "ENG7",
       "title": "In a later approved phase, define training-data, consent and hardware readiness gates.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1650,7 +1680,7 @@
       "id": "ENG7-T2",
       "storyId": "ENG7",
       "title": "In that phase, validate a reproducible local adapter job with cancellation and changed-weight provenance.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1662,7 +1692,7 @@
       "id": "ENG7-T3",
       "storyId": "ENG7",
       "title": "Measure training resource/failure behavior and determine whether an adapter study is justified.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1674,7 +1704,7 @@
       "id": "ENG8-T1",
       "storyId": "ENG8",
       "title": "For a future adapter study, define independent development/retention comparisons without final-test leakage.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1686,7 +1716,7 @@
       "id": "ENG8-T2",
       "storyId": "ENG8",
       "title": "Validate candidate/active/previous adapter states and explicit compatibility/promotion rules.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1698,7 +1728,7 @@
       "id": "ENG8-T3",
       "storyId": "ENG8",
       "title": "Demonstrate rejection, reload and rollback with measured evidence if that phase proceeds.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1709,8 +1739,8 @@
     {
       "id": "R06-T1",
       "storyId": "R06",
-      "title": "Review the implemented allocation, no-AI gate and separate initial/final assessment workflow.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review the separate research page and the required independent response locks for each reviewer.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1721,8 +1751,8 @@
     {
       "id": "R06-T2",
       "storyId": "R06",
-      "title": "Audit identical base context and personalized example provenance, excluding current meanings and scorer keys.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Audit source context and the exact model/prompt/approved-example snapshot; confirm current answers are absent from AI inputs.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -1733,8 +1763,8 @@
     {
       "id": "R06-T3",
       "storyId": "R06",
-      "title": "Freeze development-selected model/prompt/retrieval/profile settings and the reviewed evaluation plan.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Freeze the reviewed model/retrieval settings, scenario allocation, human-coding and missing-data plan.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1745,8 +1775,8 @@
     {
       "id": "R06-T4",
       "storyId": "R06",
-      "title": "Run the 18 assigned evaluation handovers after protocol, scenario, device and pilot gates pass.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Run the agreed held-out messages asynchronously after protocol, scenario, device, sharing and pilot gates pass.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1757,8 +1787,8 @@
     {
       "id": "R06-T5",
       "storyId": "R06",
-      "title": "Summarize participant-specific condition outcomes and communication-repair examples with recorded deviations.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Summarize individual staged changes and repair examples with explicit exposure, failures and deviations.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1769,8 +1799,8 @@
     {
       "id": "R08-T1",
       "storyId": "R08",
-      "title": "Confirm the two researchers' consent, account/pseudonym mapping and reviewer responsibilities.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Confirm all three individuals' consent, Google account/pseudonym mapping and review responsibilities.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1781,8 +1811,8 @@
     {
       "id": "R08-T2",
       "storyId": "R08",
-      "title": "Prepare a development-only rehearsal schedule and check role/condition instructions for clarity.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Agree a short development-only workload and asynchronous response expectations; check the simple main instructions.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1793,8 +1823,8 @@
     {
       "id": "R08-T3",
       "storyId": "R08",
-      "title": "Rehearse selected devices, offline preparation, file exchange and any configured account resume.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Rehearse actual team Send/Reply, installed-app update, offline draft return and private cross-device resume.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1805,8 +1835,8 @@
     {
       "id": "R08-T4",
       "storyId": "R08",
-      "title": "Run the six development handovers with natural wording and agreed capture/approval controls.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Collect agreed practice descriptions/replies and sender reviews; use the separate evaluation page only for the planned assessment.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1817,8 +1847,8 @@
     {
       "id": "R08-T5",
       "storyId": "R08",
-      "title": "Record usability failures, interpretation errors and fixes, then make the evaluation go/no-go decision.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Record confusion, interpretation failures and fixes and make the held-out evaluation go/no-go decision.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1829,8 +1859,8 @@
     {
       "id": "R09-T1",
       "storyId": "R09",
-      "title": "Validate the collected participant exports and finalize the analysis data dictionary and exclusion log.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Validate participant records and finalize the data dictionary, human coding and exclusion/missingness log.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1841,8 +1871,8 @@
     {
       "id": "R09-T2",
       "storyId": "R09",
-      "title": "Compute per-participant condition and initial-to-final summaries with explicit denominators.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Compute per-person and sender-reviewer staged summaries with explicit denominators and clarification/abstention handling.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1853,8 +1883,8 @@
     {
       "id": "R09-T3",
       "storyId": "R09",
-      "title": "Review operationally important errors and scenario/order/device/modality patterns.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review consequential meaning/action errors alongside repetition, scenario familiarity, device and optional-input patterns.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1865,8 +1895,8 @@
     {
       "id": "R09-T4",
       "storyId": "R09",
-      "title": "Write threats to validity and distinguish engineering checks from participant results.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Write threats to validity, separating authored simulation, engineering checks and actual participant findings.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1877,8 +1907,8 @@
     {
       "id": "R09-T5",
       "storyId": "R09",
-      "title": "Have another team member reproduce summaries and resolve discrepancies.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Have another member reproduce a sample of scores/summaries and resolve disagreements.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1889,8 +1919,8 @@
     {
       "id": "ENG10-T1",
       "storyId": "ENG10",
-      "title": "Run a written physical offline/device-continuity rehearsal, including model readiness and data-boundary checks.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Run a physical demo of scenario -> natural explanation -> teammate reply, plus one installed-PWA update and saved-draft device switch.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -1901,8 +1931,8 @@
     {
       "id": "ENG10-T2",
       "storyId": "ENG10",
-      "title": "Fix observed acceptance-blocking issues and repeat the affected workflow checks.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Fix acceptance-blocking defects and rerun only the affected paths.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1913,8 +1943,8 @@
     {
       "id": "ENG10-T3",
       "storyId": "ENG10",
-      "title": "Package the actual demo instructions, device matrix, evidence links and achieved/deferred feature table.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Package a short demo script, device/account matrix and achieved-versus-pending evidence table.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1925,8 +1955,8 @@
     {
       "id": "R10-T1",
       "storyId": "R10",
-      "title": "Draft the report/manuscript from verified literature and frozen participant/engineering evidence.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Draft the report/manuscript from verified literature, the current simple workflow and actual frozen research evidence.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1937,8 +1967,8 @@
     {
       "id": "R10-T2",
       "storyId": "R10",
-      "title": "Package reproducibility instructions and only approved de-identified or authored artifacts.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Package reproduction instructions and only approved de-identified or authored artifacts; retain private team data outside public repositories.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1949,8 +1979,8 @@
     {
       "id": "R10-T3",
       "storyId": "R10",
-      "title": "State achieved outcomes and the conditional future invention-review decision without patent or publication guarantees.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "State achieved outcomes and conditional future work without patent, publication or effectiveness guarantees.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1961,8 +1991,8 @@
     {
       "id": "R10-T4",
       "storyId": "R10",
-      "title": "Cross-review the report, manual, slides and demo against the actual released build.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Cross-review the report, manual, slides, portal and demo against the released build and recorded team acceptance.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1973,8 +2003,8 @@
     {
       "id": "R10-T5",
       "storyId": "R10",
-      "title": "Present the evidence and a prioritized next-phase plan to the supervisor/course.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Present findings and a prioritized next-phase plan mapped to the professor's course criteria.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Backlog",
       "owner": "",
@@ -1986,7 +2016,7 @@
       "id": "R11-T1",
       "storyId": "R11",
       "title": "If justified later, extract a mechanism-specific comparison from the verified closest-work review.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -1998,7 +2028,7 @@
       "id": "R11-T2",
       "storyId": "R11",
       "title": "Collect dated design/experiment and contributor records, including earlier public releases.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -2010,7 +2040,7 @@
       "id": "R11-T3",
       "storyId": "R11",
       "title": "Prepare an institutional-review brief and record the actual disclosure/filing decision if obtained.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -2021,8 +2051,8 @@
     {
       "id": "ENG11-T1",
       "storyId": "ENG11",
-      "title": "Review the pinned local ASR preparation/runtime and its license/resource evidence.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review the optional pinned ASR runtime and its resource/license evidence without making it a requirement for basic participation.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -2033,8 +2063,8 @@
     {
       "id": "ENG11-T2",
       "storyId": "ENG11",
-      "title": "Review record/review/correct/insert controls, permissions, retention and input-method provenance.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "Review record/correct/insert provenance, permissions and audio retention in the optional research tools.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Review",
       "owner": "",
@@ -2045,8 +2075,8 @@
     {
       "id": "ENG11-T3",
       "storyId": "ENG11",
-      "title": "Run a small physical-device transcription/meaning check and agree modality handling before evaluation.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "title": "If voice is included, run an actual-device transcription/meaning check and agree separate modality coding before evaluation.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Ready",
       "owner": "",
@@ -2058,7 +2088,7 @@
       "id": "ENG12-T1",
       "storyId": "ENG12",
       "title": "For a future approved phase, define the one-action boundary, lab permissions and supervision requirements.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -2070,7 +2100,7 @@
       "id": "ENG12-T2",
       "storyId": "ENG12",
       "title": "Validate a restricted mock gateway before any authorized hardware connection.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -2082,7 +2112,7 @@
       "id": "ENG12-T3",
       "storyId": "ENG12",
       "title": "Conduct only an approved supervised demonstration or document simulator-only scope.",
-      "doneWhen": "A different member reviews the linked deliverable against this story's acceptance criteria and records failures, limits and a reproducible evidence artifact.",
+      "doneWhen": "Current parent acceptance plus independent evidence; engineering implementation alone is not team acceptance.",
       "estimatedHours": null,
       "status": "Deferred",
       "owner": "",
@@ -2103,7 +2133,7 @@
         "ENG1",
         "ENG2"
       ],
-      "demo": "Demonstrate the existing game and record the remaining device/protocol gates.",
+      "demo": "Show the simple description/reply screen and installed-app update; record the remaining sharing/device/protocol gates.",
       "gate": "Replan against the actual course deadline and capacity. Keep native calendar commitments unchanged; select only reviewable tasks that fit the Sprint Goal."
     },
     {
@@ -2117,14 +2147,14 @@
         "ENG3",
         "ENG4"
       ],
-      "demo": "Show original/private boundaries, PWA readiness and the actual configured/unconfigured account state.",
+      "demo": "Show private checkpoint versus shared team boundaries, the configured Google sign-in and the remaining workshop activation gate.",
       "gate": "Replan against the actual course deadline and capacity. Keep native calendar commitments unchanged; select only reviewable tasks that fit the Sprint Goal."
     },
     {
       "id": "S3",
       "title": "Reviewed scenarios and exports",
       "weeks": "Weeks 5–6",
-      "goal": "Review the authored development/evaluation variants and independently validate export summaries.",
+      "goal": "Review six descriptions/illustrations and the agreed evaluation subset, then independently validate export summaries.",
       "storyIds": [
         "R04",
         "ENG5",
@@ -2150,11 +2180,11 @@
       "id": "S5",
       "title": "Frozen individual evaluation",
       "weeks": "Weeks 9–10",
-      "goal": "Run the three-condition evaluation only after the pilot and freeze gates.",
+      "goal": "Collect the agreed held-out staged responses only after pilot, sharing and freeze gates.",
       "storyIds": [
         "R06"
       ],
-      "demo": "Show the actual asynchronous order, failures/missingness and initial/final records.",
+      "demo": "Show per-reviewer original, without-AI, AI-assisted and sender-corrected records with order and missingness.",
       "gate": "Replan against the actual course deadline and capacity. Keep native calendar commitments unchanged; select only reviewable tasks that fit the Sprint Goal."
     },
     {
@@ -2221,7 +2251,7 @@
         "Design alternatives",
         "Qualified contribution hypothesis"
       ],
-      "note": "Test the individual frozen-memory contribution against closest work. PWA, OAuth and encryption are implementation components, not novelty evidence."
+      "note": "Test the actual individual-memory and exact-output correction contribution against closest work. PWA, OAuth and encryption are implementation components, not novelty evidence."
     },
     {
       "id": "effectiveness",
@@ -2243,11 +2273,11 @@
         "BASE03"
       ],
       "deliverables": [
-        "Controlled comparisons",
-        "Physical two-device offline evidence",
+        "Reviewed staged comparison with explicit order effects",
+        "Real-device sharing, offline and installed-update evidence",
         "Reproducible results and limitations"
       ],
-      "note": "123 core automated checks and browser/SQL checks establish software behavior. Physical device validation and two-person participant outcomes require separate evidence."
+      "note": "136 core checks, real PostgreSQL policy checks, three-browser fixtures and PWA upgrade/offline tests establish engineering behavior. Physical-device acceptance and three-person outcomes require separate evidence."
     },
     {
       "id": "outcomes",
