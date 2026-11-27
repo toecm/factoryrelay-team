@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "syncedAt": "2026-11-26T02:31:56.653Z",
+  "syncedAt": "2026-11-27T08:44:04.860Z",
   "repo": "toecm/factoryrelay",
   "items": [
     {
@@ -67,7 +67,7 @@
         "isongjosiah"
       ],
       "reviewer": "toecm",
-      "updatedAt": "2026-11-26T02:19:58Z",
+      "updatedAt": "2026-11-27T08:43:52Z",
       "taskStatus": {
         "R01-T1": false,
         "R01-T2": false,
@@ -75,7 +75,7 @@
         "R01-T4": false,
         "R01-T5": false
       },
-      "version": "0cc70b16b3f86490773f9c949554c9863b6c501d1fabdb0918cdcaf7f898fea9",
+      "version": "1eeca388f7a47a992dab9ef0d7cfc9342d621d82bee1890afc8605c86a49c1b7",
       "sprint": "S1",
       "milestoneNumber": 1,
       "tasks": {
@@ -130,13 +130,13 @@
         "toecm"
       ],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:56Z",
+      "updatedAt": "2026-11-27T08:43:50Z",
       "taskStatus": {
         "ENG1-T1": false,
         "ENG1-T2": false,
         "ENG1-T3": false
       },
-      "version": "96095c975bac92fa643c5870fddce60f03dc70933f9c34e6206721562155146c",
+      "version": "411c60a87d8fb686924f0d15da3a48f15d1f4820f03467f51a4b7ee714f7448e",
       "sprint": "S1",
       "milestoneNumber": 1,
       "tasks": {
@@ -173,13 +173,13 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:54Z",
+      "updatedAt": "2026-11-27T08:43:49Z",
       "taskStatus": {
         "ENG2-T1": true,
         "ENG2-T2": false,
         "ENG2-T3": false
       },
-      "version": "d0234d6eeebb25ff97b679e553fda94d6682392c3b00d07865ceae43917751f5",
+      "version": "c1ae69d314afb7ed6292fc48d3696ed0df3d4284c622c71215d852bc62f019ec",
       "sprint": "S1",
       "milestoneNumber": null,
       "tasks": {
@@ -212,7 +212,7 @@
         "isongjosiah"
       ],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:53Z",
+      "updatedAt": "2026-11-27T08:43:47Z",
       "taskStatus": {
         "R02-T1": false,
         "R02-T2": false,
@@ -220,7 +220,7 @@
         "R02-T4": false,
         "R02-T5": false
       },
-      "version": "2a5e68a0726c20d8c7a870ec8eae2e4f16293aeb34c81f64116b942c919cfb6c",
+      "version": "24a15b5dcd5bc5fe80cbbd00969035498f2a63665e3689d8b1a8f5b30dec8eae",
       "sprint": "S2",
       "milestoneNumber": 2,
       "tasks": {
@@ -273,7 +273,7 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:50Z",
+      "updatedAt": "2026-11-27T08:43:45Z",
       "taskStatus": {
         "R03-T1": false,
         "R03-T2": false,
@@ -281,7 +281,7 @@
         "R03-T4": false,
         "R03-T5": false
       },
-      "version": "dda47e168d850de7d08487678880477f0736e4785c132d44b0d88fa25c7d5a0f",
+      "version": "678ecce0c4b493ffd70c4910d1fea46c5b1303a204eb4028d405bb3c849bf0ce",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
@@ -326,13 +326,13 @@
         "toecm"
       ],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:31:46Z",
+      "updatedAt": "2026-11-27T08:43:43Z",
       "taskStatus": {
         "ENG4-T1": false,
         "ENG4-T2": false,
         "ENG4-T3": false
       },
-      "version": "7491913be5f36a6adaea71f93e258a4350f1dd706056afa54ba6401188f78f58",
+      "version": "843d03a8977cfff1adff8a5f38b1bc274b2ae865802cfd957ad0d91727532163",
       "sprint": "S2",
       "milestoneNumber": 2,
       "tasks": {
@@ -369,13 +369,13 @@
       "status": "Blocked",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:45Z",
+      "updatedAt": "2026-11-27T08:43:42Z",
       "taskStatus": {
         "ENG3-T1": false,
         "ENG3-T2": false,
         "ENG3-T3": false
       },
-      "version": "43f727291adcad125e68f45dc5d88ff817069a1169ca552e9add3be79ac14736",
+      "version": "26d956bc56d0afe7274a5d52b981175745d2aedd82c7d291cbbe5910205bf495",
       "sprint": "S2",
       "milestoneNumber": null,
       "tasks": {
@@ -406,7 +406,7 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:43Z",
+      "updatedAt": "2026-11-27T08:43:40Z",
       "taskStatus": {
         "R04-T1": false,
         "R04-T2": false,
@@ -414,7 +414,7 @@
         "R04-T4": false,
         "R04-T5": false
       },
-      "version": "66ad04348045771950327272ae87390d320e39964fcb1d82bbbd133a7ddedd98",
+      "version": "c3f7652b6efb336c3566d88fd7bfe7e28fd786b24f1a25caed611a49d3f9228f",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
@@ -457,13 +457,13 @@
       "status": "Review",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:41Z",
+      "updatedAt": "2026-11-27T08:43:38Z",
       "taskStatus": {
         "ENG5-T1": false,
         "ENG5-T2": false,
         "ENG5-T3": false
       },
-      "version": "900ee100bd3365e44300b09a676fba04d95d2c35724599e529b6777ac53fa4b1",
+      "version": "84f5495dac87f39822c82aa9e8a6a8f9703374a0ac4174559f81f2c5ab7ab839",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
@@ -494,13 +494,13 @@
       "status": "In progress",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:38Z",
+      "updatedAt": "2026-11-27T08:43:35Z",
       "taskStatus": {
         "ENG9-T1": false,
         "ENG9-T2": false,
         "ENG9-T3": false
       },
-      "version": "9f5dfa061a5e038bd9de696df869f44d974dcb03c15a8ebf1cbfc4cc3797f199",
+      "version": "4015c8df81172b448ea526b924a9e3aa6ef3c946302226b2db49df911ceaf2a4",
       "sprint": "S3",
       "milestoneNumber": null,
       "tasks": {
@@ -531,13 +531,13 @@
       "status": "Review",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:36Z",
+      "updatedAt": "2026-11-27T08:43:33Z",
       "taskStatus": {
         "ENG6-T1": false,
         "ENG6-T2": false,
         "ENG6-T3": false
       },
-      "version": "3390f1a5ef19aac3d3a70eb7b52096f9c4828daab33f65e3970ad91bad616957",
+      "version": "ed61e2e1fce656924c44778579534e1882751e2762e2cc131d1e673e8799bcf2",
       "sprint": "S4",
       "milestoneNumber": null,
       "tasks": {
@@ -568,13 +568,13 @@
       "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:34Z",
+      "updatedAt": "2026-11-27T08:43:31Z",
       "taskStatus": {
         "ENG7-T1": false,
         "ENG7-T2": false,
         "ENG7-T3": false
       },
-      "version": "3aeefe250ef3cffffa0784b511414608dcaf105ed173206f9db0bff159a51356",
+      "version": "eec4929fd79cbf9dbf30d1e4bb5d31dd528301833fa921b1d069c6fb30cbe7c2",
       "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
@@ -605,13 +605,13 @@
       "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:32Z",
+      "updatedAt": "2026-11-27T08:43:29Z",
       "taskStatus": {
         "ENG8-T1": false,
         "ENG8-T2": false,
         "ENG8-T3": false
       },
-      "version": "39ec8fa5a16eef9d6a32e9c5dc859d5563594b2556e6a6f641d6ebcc0f599891",
+      "version": "f7cb0b048c7b8324e8be67a205828ca64ade317e6f0d0c176bf588bc394c4999",
       "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
@@ -642,7 +642,7 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:29Z",
+      "updatedAt": "2026-11-27T08:43:27Z",
       "taskStatus": {
         "R06-T1": false,
         "R06-T2": false,
@@ -650,7 +650,7 @@
         "R06-T4": false,
         "R06-T5": false
       },
-      "version": "bd3e9d3bdc1ef7c5b60b3c9a4213c1188195a45422123884226b002d71e6aafa",
+      "version": "45b521a4bd252eafb3bd91010de0b6e06aed34831d0101515c85912a03233e83",
       "sprint": "S5",
       "milestoneNumber": null,
       "tasks": {
@@ -693,7 +693,7 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:27Z",
+      "updatedAt": "2026-11-27T08:43:26Z",
       "taskStatus": {
         "R08-T1": false,
         "R08-T2": false,
@@ -701,7 +701,7 @@
         "R08-T4": false,
         "R08-T5": false
       },
-      "version": "3694f0f87e13ad3f5dd172539a6e05a7302647754821edf6b3df5acd8cfe1d28",
+      "version": "b656d853e6c3c8f997f92651d3ba847b9151096337861b083ff2a4170c278253",
       "sprint": "S5",
       "milestoneNumber": null,
       "tasks": {
@@ -744,7 +744,7 @@
       "status": "Backlog",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:25Z",
+      "updatedAt": "2026-11-27T08:43:24Z",
       "taskStatus": {
         "R09-T1": false,
         "R09-T2": false,
@@ -752,7 +752,7 @@
         "R09-T4": false,
         "R09-T5": false
       },
-      "version": "1357b3e1935d6a6669e3de8bcd52c3224788b3744a2e9784af25903437ff1cbd",
+      "version": "1a95e54e03803bacc9de1aea359a265a189f1c68663df165b52adf3e9e05888d",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
@@ -795,13 +795,13 @@
       "status": "Ready",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:23Z",
+      "updatedAt": "2026-11-27T08:43:22Z",
       "taskStatus": {
         "ENG10-T1": false,
         "ENG10-T2": false,
         "ENG10-T3": false
       },
-      "version": "cb7ec025d6cf4df72beb9b527e8561de3d4948bf9c1d2d330b61f0cf505110ff",
+      "version": "24775a77b396366bdcd0a161bb63e79987141bd41e0dcffdce2ae439c1f2064d",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
@@ -832,7 +832,7 @@
       "status": "Backlog",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:21Z",
+      "updatedAt": "2026-11-27T08:43:21Z",
       "taskStatus": {
         "R10-T1": false,
         "R10-T2": false,
@@ -840,7 +840,7 @@
         "R10-T4": false,
         "R10-T5": false
       },
-      "version": "5c7838a87223a477a4ed920b836a479e3ad8122b92a56f15f26e29ba6fcba13d",
+      "version": "91cdb6d771113e2a9acb65305a0230b76341c46a2fed1098e9e554cc1ffdb9a7",
       "sprint": "S6",
       "milestoneNumber": null,
       "tasks": {
@@ -883,13 +883,13 @@
       "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:19Z",
+      "updatedAt": "2026-11-27T08:43:19Z",
       "taskStatus": {
         "R11-T1": false,
         "R11-T2": false,
         "R11-T3": false
       },
-      "version": "b7bd3eba6011c151b4ac45d963cf3f941573c55215d9611e17836f882780f71b",
+      "version": "b26c1682d22be03f6a52c2bcc1fb812bb24b26826cf1beb1626c87654e7f043d",
       "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
@@ -920,13 +920,13 @@
       "status": "In progress",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:17Z",
+      "updatedAt": "2026-11-27T08:43:17Z",
       "taskStatus": {
         "ENG11-T1": false,
         "ENG11-T2": false,
         "ENG11-T3": false
       },
-      "version": "5b96784e90b44956155ed309c30783fba68271bfef6f6c8fe0aca9414fe68af6",
+      "version": "1d95dbb8e673d174623d2d4f11aee2fe003f981783a451cde3e64c70a4b0c443",
       "sprint": "Stretch",
       "milestoneNumber": null,
       "tasks": {
@@ -957,13 +957,13 @@
       "status": "Deferred",
       "assignees": [],
       "reviewer": null,
-      "updatedAt": "2026-11-26T02:19:14Z",
+      "updatedAt": "2026-11-27T08:43:16Z",
       "taskStatus": {
         "ENG12-T1": false,
         "ENG12-T2": false,
         "ENG12-T3": false
       },
-      "version": "eee89c19c6aa3c7c4fa274056429286f8db507453f914e9a5f18691cbb9791c2",
+      "version": "5a084a5c0bc3f697a3b6bde933525d2dd2a539d907d86d9a268c3598ba46dbcc",
       "sprint": "Unscheduled",
       "milestoneNumber": null,
       "tasks": {
@@ -992,21 +992,21 @@
     {
       "id": "S1",
       "startDate": null,
-      "goal": "Confirm team access, language/device feasibility and physical acceptance of the existing LAN host.",
-      "title": "Access, literature and feasibility",
+      "goal": "Activate three-member sharing and verify scenario description/reply, installed-PWA updates and saved-draft continuity on actual devices.",
+      "title": "Activate team and accept the simple app",
       "endDate": null,
       "number": 1,
-      "version": "fcacb19c2c65508f81ff85cb156191a566af33caa0ec20bd05dab9889d41b98e",
+      "version": "b9153f38f9768fcb10abe6537aabc6e341e38d65eb404c37f81bfffd8526e82a",
       "state": "open"
     },
     {
       "id": "S2",
       "startDate": null,
-      "goal": "Deliver one locally provisioned translation preview with consent and a frozen study design.",
-      "title": "Translation preview and study design",
+      "goal": "Approve the six scenario families, human meaning rubric and three-person staged protocol; rehearse a feasible asynchronous pilot before held-out evaluation.",
+      "title": "Review scenarios, protocol and the short pilot",
       "endDate": null,
       "number": 2,
-      "version": "2191e7b0cb98e17749f40aa979bec5dd55ca414a1bf5cc7fb1124f8560980f51",
+      "version": "c0d25e1ff830b772b0aa529145133c28e2701bd50beb1c1009b5ecb99921baee",
       "state": "open"
     }
   ]
